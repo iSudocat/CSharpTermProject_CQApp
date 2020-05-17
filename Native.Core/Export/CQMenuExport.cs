@@ -37,11 +37,11 @@ namespace Native.App.Export
 		{	
 			/*	
 			 * Name: 设置A	
-			 * Function: _menuA	
+			 * Function: _OpenWindowA	
 			 */	
 			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("设置A"))	
 			{	
-				Menu_menuAHandler += AppData.UnityContainer.Resolve<IMenuCall> ("设置A").MenuCall;	
+				Menu_OpenWindowAHandler += AppData.UnityContainer.Resolve<IMenuCall> ("设置A").MenuCall;	
 			}	
 			
 			/*	
@@ -59,16 +59,16 @@ namespace Native.App.Export
 		#region --导出方法--	
 		/*	
 		 * Name: 设置A	
-		 * Function: _menuA	
+		 * Function: _OpenWindowA	
 		 */	
-		public static event EventHandler<CQMenuCallEventArgs> Menu_menuAHandler;	
-		[DllExport (ExportName = "_menuA", CallingConvention = CallingConvention.StdCall)]	
-		public static int Menu_menuA ()	
+		public static event EventHandler<CQMenuCallEventArgs> Menu_OpenWindowAHandler;	
+		[DllExport (ExportName = "_OpenWindowA", CallingConvention = CallingConvention.StdCall)]	
+		public static int Menu_OpenWindowA ()	
 		{	
-			if (Menu_menuAHandler != null)	
+			if (Menu_OpenWindowAHandler != null)	
 			{	
-				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "设置A", "_menuA");	
-				Menu_menuAHandler (typeof (CQMenuExport), args);	
+				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "设置A", "_OpenWindowA");	
+				Menu_OpenWindowAHandler (typeof (CQMenuExport), args);	
 			}	
 			return 0;	
 		}	

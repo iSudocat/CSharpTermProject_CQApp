@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native.Core", "Native.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cc.wnapp.test.Code", "cc.wnapp.test.Code\cc.wnapp.test.Code.csproj", "{1A356D6F-1C6E-49C2-854F-B06C5941C061}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cc.wnapp.test.UI", "cc.wnapp.test.UI\cc.wnapp.test.UI.csproj", "{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,14 @@ Global
 		{1A356D6F-1C6E-49C2-854F-B06C5941C061}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A356D6F-1C6E-49C2-854F-B06C5941C061}.Release|x86.ActiveCfg = Release|Any CPU
 		{1A356D6F-1C6E-49C2-854F-B06C5941C061}.Release|x86.Build.0 = Release|Any CPU
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Debug|x86.ActiveCfg = Debug|x86
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Debug|x86.Build.0 = Debug|x86
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

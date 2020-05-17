@@ -1,4 +1,5 @@
 ﻿using cc.wnapp.test.Code;
+using cc.wnapp.test.UI;
 using Native.Sdk.Cqp.Interface;
 using Unity;
 
@@ -15,7 +16,9 @@ namespace Native.Core
 		/// <param name="container">用于注册的 IOC 容器 </param>
 		public static void Register (IUnityContainer unityContainer)
 		{
-			unityContainer.RegisterType<IGroupMessage, Event_GroupMessage>("群消息处理");
+			unityContainer.RegisterType<IGroupMessage, event_GroupMessage>("群消息处理");
+			unityContainer.RegisterType<IMenuCall, OpenWindowA>("设置A");
+			unityContainer.RegisterType<ICQStartup, event_CQStartup>("酷Q启动事件");
 		}
 	}
 }

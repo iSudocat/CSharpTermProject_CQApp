@@ -131,6 +131,10 @@
       <Project>{1a356d6f-1c6e-49c2-854f-b06c5941c061}</Project>
       <Name>cc.wnapp.test.Code</Name>
     </ProjectReference>
+    <ProjectReference Include="..\cc.wnapp.test.UI\cc.wnapp.test.UI.csproj">
+      <Project>{a72bd0fd-b8fb-4c0e-a1ce-22dd27a8c3a4}</Project>
+      <Name>cc.wnapp.test.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
@@ -170,4 +174,9 @@ if exist "$(TargetDir)app.json" (
 move "$(TargetDir)app.json" "$(TargetDir)$(TargetName)" 
 )</PostBuildEvent>
   </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties app_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

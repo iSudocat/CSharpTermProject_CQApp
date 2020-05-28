@@ -8,10 +8,9 @@ using RestSharp;
 using RestSharp.Authenticators;
 using System.Net;
 using System.Globalization;
-using Native.Tool;
-using Native.Tool.IniConfig;
 using System.Data.Entity;
 using System.IO;
+using Tools;
 
 namespace jwxt
 {
@@ -19,8 +18,8 @@ namespace jwxt
     {
         static void Main(string[] args)
         {
-           
             
+
         }
 
     }

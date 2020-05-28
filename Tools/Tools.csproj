@@ -7,8 +7,8 @@
     <ProjectGuid>{0CA93EB9-4E25-46C6-94D2-0F97137A1606}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Native.Tool</RootNamespace>
-    <AssemblyName>Native.Tool</AssemblyName>
+    <RootNamespace>Tools</RootNamespace>
+    <AssemblyName>Tools</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -25,7 +25,7 @@
     <WarningsAsErrors>
     </WarningsAsErrors>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>bin\x86\Debug\Native.Tool.xml</DocumentationFile>
+    <DocumentationFile>bin\x86\Debug\Tools.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -77,6 +77,7 @@
     <Compile Include="IniConfig\Utilities\MiscellaneousUtils.cs" />
     <Compile Include="IniConfig\Utilities\ReflectionUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="textOperation.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

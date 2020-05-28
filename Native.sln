@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Native.Tool\Tools.csproj", "{0CA93EB9-4E25-46C6-94D2-0F97137A1606}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{0CA93EB9-4E25-46C6-94D2-0F97137A1606}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native.Sdk", "Native.Sdk\Native.Sdk.csproj", "{D7A958B3-79D9-49F8-8BB4-9619BAB6ECBA}"
 EndProject

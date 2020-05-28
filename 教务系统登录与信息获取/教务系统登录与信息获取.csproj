@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="jwOperation.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="jw_getScore.cs" />
     <Compile Include="jw_getCourse.cs" />
@@ -120,7 +121,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Native.Tool\Tools.csproj">
+    <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
     </ProjectReference>

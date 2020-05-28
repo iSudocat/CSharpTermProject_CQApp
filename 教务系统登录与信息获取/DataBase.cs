@@ -132,48 +132,5 @@ namespace jwxt
         }
     }
 
-    public static class jwDB_Operation
-    {
-        public static List<Student> GetAll(string BotQQ)
-        {
-            List<Student> re = new List<Student>();
-            using (var context = new jwContext())
-            {
-                var stu = context.Students.Where(s => s.BotQQ == BotQQ);
-                foreach (var s in stu)
-                {
-                    re.Add(s);
-                }
-                return re;
-            }
-        }
-
-        public static void DeleteStu(string StuID)
-        {
-            using (var context = new jwContext())
-            {
-                var stu = context.Students.FirstOrDefault(s => s.StuID == StuID);
-                if (stu != null)
-                {
-                    context.Students.Remove(stu);
-                    context.SaveChanges();
-                }
-
-                var scores = context.Scores.Where(s => s.StuID == StuID);
-                foreach(var s in scores)
-                {
-                    context.Scores.Remove(s);
-                    context.SaveChanges();
-                }
-
-                var course = context.Courses.Where(c => c.StuID == StuID);
-                foreach (var c in course)
-                {
-                    context.Courses.Remove(c);
-                    context.SaveChanges();
-                }
-
-            }
-        }
-    }
+    
 }

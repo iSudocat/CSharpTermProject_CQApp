@@ -50,7 +50,7 @@ namespace Native.App.Export
 		[DllExport (ExportName = "AppInfo", CallingConvention = CallingConvention.StdCall)]	
 		private static string AppInfo ()	
 		{	
-			return "9,cc.wnapp.test";	
+			return "9,cc.wnapp.whuHelper";	
 		}	
 		
 		/// <summary>	
@@ -64,12 +64,12 @@ namespace Native.App.Export
 			// 反射获取 AppData 实例	
 			Type appDataType = typeof (AppData);	
 			// 注册一个 CQApi 实例	
-			AppInfo appInfo = new AppInfo ("cc.wnapp.test", 1, 9, "酷Q样例应用 for C#", "1.0.0", 1, "***REMOVED***", "酷Q样例应用(V9应用机制)", authCode);	
+			AppInfo appInfo = new AppInfo ("cc.wnapp.whuHelper", 1, 9, "武大助手", "1.0.0", 1, "***REMOVED***", "WhuHelper", authCode);	
 			appDataType.GetRuntimeProperty ("CQApi").GetSetMethod (true).Invoke (null, new object[] { new CQApi (appInfo) });	
-			AppData.UnityContainer.RegisterInstance<CQApi> ("cc.wnapp.test", AppData.CQApi);	
+			AppData.UnityContainer.RegisterInstance<CQApi> ("cc.wnapp.whuHelper", AppData.CQApi);	
 			// 向容器注册一个 CQLog 实例	
 			appDataType.GetRuntimeProperty ("CQLog").GetSetMethod (true).Invoke (null, new object[] { new CQLog (authCode) });	
-			AppData.UnityContainer.RegisterInstance<CQLog> ("cc.wnapp.test", AppData.CQLog);	
+			AppData.UnityContainer.RegisterInstance<CQLog> ("cc.wnapp.whuHelper", AppData.CQLog);	
 			// 注册插件全局异常捕获回调, 用于捕获未处理的异常, 回弹给 酷Q 做处理	
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;	
 			// 本函数【禁止】处理其他任何代码，以免发生异常情况。如需执行初始化代码请在Startup事件中执行（Type=1001）。	

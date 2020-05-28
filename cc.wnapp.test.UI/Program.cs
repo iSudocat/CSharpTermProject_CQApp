@@ -3,11 +3,12 @@ using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace cc.wnapp.test.UI
+namespace cc.wnapp.whuHelper.UI
 {
     static class Program
     {
@@ -21,8 +22,6 @@ namespace cc.wnapp.test.UI
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-
-
     }
     
 
@@ -34,7 +33,6 @@ namespace cc.wnapp.test.UI
         public void MenuCall(object sender, CQMenuCallEventArgs e)
         {
             e.CQLog.Debug("菜单点击事件", $"打开界面-{e.Name}");
-
             if (this._mainWindow == null)
             {
                 this._mainWindow = new Form1();

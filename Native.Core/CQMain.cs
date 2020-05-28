@@ -1,5 +1,5 @@
-﻿using cc.wnapp.test.Code;
-using cc.wnapp.test.UI;
+﻿using cc.wnapp.whuHelper.Code;
+using cc.wnapp.whuHelper.UI;
 using Native.Sdk.Cqp.Interface;
 using Unity;
 
@@ -17,8 +17,10 @@ namespace Native.Core
 		public static void Register (IUnityContainer unityContainer)
 		{
 			unityContainer.RegisterType<IGroupMessage, event_GroupMessage>("群消息处理");
-			unityContainer.RegisterType<IMenuCall, OpenWindowA>("设置A");
-			unityContainer.RegisterType<ICQStartup, event_CQStartup>("酷Q启动事件");
+			unityContainer.RegisterType<IMenuCall, OpenWindowA>("设置");
+			unityContainer.RegisterType<ICQStartup, cc.wnapp.whuHelper.Code.event_CQStartup>("酷Q启动事件");
+			unityContainer.RegisterType<ICQStartup, cc.wnapp.whuHelper.UI.event_CQStartup>("酷Q启动事件");
+			unityContainer.RegisterType<IAppEnable, cc.wnapp.whuHelper.Code.event_AppStartup>("应用已被启用");
 		}
 	}
 }

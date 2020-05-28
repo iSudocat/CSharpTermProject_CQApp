@@ -35,11 +35,12 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
+            QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
-            msg = msg.Replace(" ", "");     //去除空格
+            string fromqq = e.FromQQ;
             if (msg.Contains("绑定教务系统"))
             {
-
+                msgProcess.bdjw(fromqq, msg, Convert.ToString(BotQQ.Id));
             }
         }
 

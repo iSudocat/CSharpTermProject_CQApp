@@ -8,6 +8,7 @@ using RestSharp;
 using CrOcr;
 using HtmlAgilityPack;
 using System.Globalization;
+using Tools;
 
 namespace jwxt
 {
@@ -44,7 +45,6 @@ namespace jwxt
 
         public bool LoginSys()
         {
-            urls.GetURLs();
             for (int i = 0; i <= TryNum; i++)
             {
                 try
@@ -82,6 +82,7 @@ namespace jwxt
 
         public void LoginTry()
         {
+            urls.GetURLs();
             var client = new RestClient(urls.login_url);
             var request = new RestRequest(Method.POST);
             request.AddHeader("Host", "bkjw.whu.edu.cn");
@@ -141,6 +142,7 @@ namespace jwxt
             }
         }
 
+
         public string GetStuName(string res)
         {
             var htmlDoc = new HtmlDocument();
@@ -167,7 +169,7 @@ namespace jwxt
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(res);
             string onclick = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='system']").Attributes["onclick"].Value;
-            csrftoken = GetMiddleText(onclick, "csrftoken=", "','");
+            csrftoken = textOp.GetMiddleText(onclick, "csrftoken=", "','");
 
             Console.WriteLine("成功获取了csrftoken");
         }
@@ -275,19 +277,6 @@ namespace jwxt
             return ret;
         }
 
-        private static string GetMiddleText(string t, string k, string j) //取出中间文本
-        {
-            try
-            {
-                var kn = t.IndexOf(k, StringComparison.Ordinal) + k.Length;
-                var jn = t.IndexOf(j, kn, StringComparison.Ordinal);
-                return t.Substring(kn, jn - kn);
-            }
-            catch
-            {
-                return "发现异常错误！";
-            }
-        }
 
     }
 

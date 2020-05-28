@@ -35,7 +35,12 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            
+            string msg = e.Message;
+            msg = msg.Replace(" ", "");     //去除空格
+            if (msg.Contains("绑定教务系统"))
+            {
+
+            }
         }
 
     }

@@ -14,8 +14,7 @@ namespace cc.wnapp.whuHelper.Code
     {
         public void CQStartup(object sender, CQStartupEventArgs e)
         {
-            CQ.Api = e.CQApi;
-            CQ.Log = e.CQLog;
+            
         }
     }
 
@@ -23,6 +22,8 @@ namespace cc.wnapp.whuHelper.Code
     {
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
+            CQ.Api = e.CQApi;
+            CQ.Log = e.CQLog;
 
             var CurrentDirectory = System.Environment.CurrentDirectory;
             //var missingFolder = CurrentDirectory + @"\武大助手 - 缺失组件";

@@ -164,11 +164,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cc.wnapp.test.Code\cc.wnapp.whuHelper.Code.csproj">
+    <ProjectReference Include="..\cc.wnapp.whuHelper.Code\cc.wnapp.whuHelper.Code.csproj">
       <Project>{1a356d6f-1c6e-49c2-854f-b06c5941c061}</Project>
       <Name>cc.wnapp.whuHelper.Code</Name>
     </ProjectReference>
-    <ProjectReference Include="..\cc.wnapp.test.UI\cc.wnapp.whuHelper.UI.csproj">
+    <ProjectReference Include="..\cc.wnapp.whuHelper.UI\cc.wnapp.whuHelper.UI.csproj">
       <Project>{a72bd0fd-b8fb-4c0e-a1ce-22dd27a8c3a4}</Project>
       <Name>cc.wnapp.whuHelper.UI</Name>
     </ProjectReference>
@@ -176,7 +176,7 @@
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native.Tool\Tools.csproj">
+    <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
     </ProjectReference>

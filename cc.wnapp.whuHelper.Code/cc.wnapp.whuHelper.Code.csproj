@@ -70,6 +70,7 @@
     <Compile Include="code.cs" />
     <Compile Include="Event_App.cs" />
     <Compile Include="Event_Message.cs" />
+    <Compile Include="msgProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +78,7 @@
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native.Tool\Tools.csproj">
+    <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
     </ProjectReference>

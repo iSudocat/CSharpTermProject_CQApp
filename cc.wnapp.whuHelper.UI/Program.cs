@@ -32,6 +32,8 @@ namespace cc.wnapp.whuHelper.UI
 
         public void MenuCall(object sender, CQMenuCallEventArgs e)
         {
+            CQ.Api = e.CQApi;
+            CQ.Log = e.CQLog;
             e.CQLog.Debug("菜单点击事件", $"打开界面-{e.Name}");
             if (this._mainWindow == null)
             {

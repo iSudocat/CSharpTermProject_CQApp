@@ -43,6 +43,7 @@ namespace jwxt
             htmlDoc.LoadHtml(home_result);
             string action = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='loginBox']/form").Attributes["action"].Value;
             login_url = home_url + action;
+            
             //Console.WriteLine(login_url);
             var captcha = htmlDoc.DocumentNode.SelectSingleNode("//img[@name='sleep']").Attributes["src"].Value;
             captcha_url = home_url + captcha;

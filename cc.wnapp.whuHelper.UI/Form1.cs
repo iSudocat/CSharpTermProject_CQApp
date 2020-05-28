@@ -12,8 +12,8 @@ using jwxt;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using Native.Sdk.Cqp.Model;
-using Native.Tool;
-using Native.Tool.IniConfig;
+using Tools;
+
 
 namespace cc.wnapp.whuHelper.UI
 {
@@ -39,7 +39,7 @@ namespace cc.wnapp.whuHelper.UI
         private void tab1Init()
         {
             BotQQ = CQ.Api.GetLoginQQ();
-            bindingSource_StudentDB.DataSource = jwDB_Operation.GetAll(Convert.ToString(BotQQ.Id));
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
             tb_StuID.Text= ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
@@ -82,7 +82,7 @@ namespace cc.wnapp.whuHelper.UI
                     jw_getCourse jwcourse = new jw_getCourse();
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    bindingSource_StudentDB.DataSource = jwDB_Operation.GetAll(Convert.ToString(BotQQ.Id));
+                    bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
                     dataGridView_StuList.DataSource = bindingSource_StudentDB;
                 }
             }
@@ -104,9 +104,8 @@ namespace cc.wnapp.whuHelper.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CQ.Log.Info("ceshi", CurrentStuID_jw);
-            jwDB_Operation.DeleteStu(CurrentStuID_jw);
-            bindingSource_StudentDB.DataSource = jwDB_Operation.GetAll(Convert.ToString(BotQQ.Id));
+            jwOp.DeleteStu(CurrentStuID_jw);
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
@@ -119,18 +118,4 @@ namespace cc.wnapp.whuHelper.UI
         }
     }
 
-    public class event_CQStartup : ICQStartup
-    {
-        /// <summary>
-		/// 酷Q启动事件
-		/// </summary>
-		/// <param name="sender">事件来源对象</param>
-		/// <param name="e">附加的事件参数</param>
-        /// 
-        public void CQStartup(object sender, CQStartupEventArgs e)
-        {
-            CQ.Api = e.CQApi;
-            CQ.Log = e.CQLog;
-        }
-    }
 }

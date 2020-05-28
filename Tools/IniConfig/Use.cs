@@ -1,4 +1,5 @@
-﻿using Native.Tool.IniConfig.Linq;
+﻿using Native.Tool.IniConfig;
+using Native.Tool.IniConfig.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Native.Tool.IniConfig
+namespace Tools
 {
     public static class ini
     {

@@ -20,14 +20,12 @@ namespace cc.wnapp.whuHelper.UI
 
     public partial class Form1 : Form
     {
-        string AppDirectory = CQ.Api.AppDirectory;
-        QQ BotQQ;
-        private string CurrentStuID_jw;
+        string AppDirectory = @"D:\Programming\C#大作业 - CQ插件\新建文件夹";
+        
 
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,8 +36,8 @@ namespace cc.wnapp.whuHelper.UI
 
         private void tab1Init()
         {
-            BotQQ = CQ.Api.GetLoginQQ();
-            bindingSource_StudentDB.DataSource = jwDB_Operation.GetAll(Convert.ToString(BotQQ.Id));
+           
+            bindingSource_StudentDB.DataSource = StudentOperation.GetAll("2201139814");
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
             tb_StuID.Text= ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
@@ -72,7 +70,7 @@ namespace cc.wnapp.whuHelper.UI
 
         private void btn_jwlogin_Click(object sender, EventArgs e)
         {
-            jw_login jwxt = new jw_login(Convert.ToString(BotQQ.Id), tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
+            jw_login jwxt = new jw_login("2201139814", tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
             try
             {
                 if (jwxt.LoginSys() == true)
@@ -82,7 +80,7 @@ namespace cc.wnapp.whuHelper.UI
                     jw_getCourse jwcourse = new jw_getCourse();
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    bindingSource_StudentDB.DataSource = jwDB_Operation.GetAll(Convert.ToString(BotQQ.Id));
+                    bindingSource_StudentDB.DataSource = StudentOperation.GetAll("2201139814");
                     dataGridView_StuList.DataSource = bindingSource_StudentDB;
                 }
             }
@@ -100,22 +98,8 @@ namespace cc.wnapp.whuHelper.UI
                     throw ex;
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            CQ.Log.Info("ceshi", CurrentStuID_jw);
-            jwDB_Operation.DeleteStu(CurrentStuID_jw);
-            bindingSource_StudentDB.DataSource = jwDB_Operation.GetAll(Convert.ToString(BotQQ.Id));
-            dataGridView_StuList.DataSource = bindingSource_StudentDB;
-        }
-
-        private void dataGridView_StuList_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dataGridView_StuList.CurrentRow != null)
-            {
-                CurrentStuID_jw = dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
-            }
+            
+            
         }
     }
 

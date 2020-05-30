@@ -8,12 +8,12 @@ using HtmlAgilityPack;
 
 namespace jwxt
 {
-    public class jw_getCourse
+    public class jwGetCourse
     {
         public string course_result;
         private string stuid;
 
-        public void GetCourse(jw_login jwxt)
+        public void GetCourse(jwLogin jwxt)
         {
             stuid = jwxt.StuID;
             var client = new RestClient(jwxt.urls.course_url);

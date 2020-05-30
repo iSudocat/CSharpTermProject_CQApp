@@ -105,16 +105,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Course.cs" />
     <Compile Include="jwOperation.cs" />
     <Compile Include="DataBase.cs" />
-    <Compile Include="jw_getScore.cs" />
-    <Compile Include="jw_getCourse.cs" />
-    <Compile Include="jw_login.cs" />
-    <Compile Include="Others.cs" />
+    <Compile Include="jwGetScore.cs" />
+    <Compile Include="jwGetCourse.cs" />
+    <Compile Include="jwLogin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="jw_url.cs" />
+    <Compile Include="jwUrl.cs" />
     <Compile Include="Captcha.cs" />
+    <Compile Include="Score.cs" />
+    <Compile Include="Student.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

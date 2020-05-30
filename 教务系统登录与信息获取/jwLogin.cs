@@ -12,7 +12,7 @@ using Tools;
 
 namespace jwxt
 {
-    public class jw_login
+    public class jwLogin
     {
         public string BotQQ { get; set; }
         public string QQ { get; set; }
@@ -25,7 +25,7 @@ namespace jwxt
         private string CaptchaID;    //用于上报打码平台识别错误的图片ID
 
 
-        public jw_url urls = new jw_url();
+        public jwUrl urls = new jwUrl();
 
         /// <summary>
         /// jw_login类的构造函数，对基本信息进行设置
@@ -34,7 +34,7 @@ namespace jwxt
         /// <param name="id">学号</param>
         /// <param name="pw">教务系统密码</param>
         /// <param name="num">验证码错误最大重试次数</param>
-        public jw_login(string botqq, string qq, string id, string pw, int num)
+        public jwLogin(string botqq, string qq, string id, string pw, int num)
         {
             BotQQ = botqq;
             QQ = qq;
@@ -176,7 +176,7 @@ namespace jwxt
 
         public void SetCourseUrl()
         {
-            var client = new RestClient(jw_url.course_parent_url);
+            var client = new RestClient(jwUrl.course_parent_url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Host", "bkjw.whu.edu.cn");
             request.AddHeader("Connection", "keep-alive");
@@ -190,7 +190,7 @@ namespace jwxt
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(response.Content);
             string src = htmlDoc.DocumentNode.SelectSingleNode("//iframe[@id='iframe0']").Attributes["src"].Value;
-            urls.course_url = jw_url.home_url + src;
+            urls.course_url = jwUrl.home_url + src;
             //Console.WriteLine(urls.course_url);
         }
 

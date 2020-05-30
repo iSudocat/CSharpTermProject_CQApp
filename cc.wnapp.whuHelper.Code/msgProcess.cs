@@ -15,10 +15,12 @@ namespace cc.wnapp.whuHelper.Code
     {
         public static void bdjw(string fromqq, string message, string BotQQ)
         {
+
             string msg = message.Replace(" ", "");     //去除空格
             var StuID = textOp.GetMiddleText(msg, "绑定教务系统", "|");
             var Password = textOp.GetRightText(msg, "|");
-            jw_login jwxt = new jw_login(BotQQ, fromqq, StuID, Password, 3);
+            jwLogin jwxt = new jwLogin(BotQQ, fromqq, StuID, Password, 3);
+            string AppDirectory = CQ.Api.AppDirectory;
             for (int i = 0; i <= jwxt.TryNum; i++)
             {
                 try
@@ -27,6 +29,8 @@ namespace cc.wnapp.whuHelper.Code
                     {
                         jwxt.LoginTry();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
+                        ini.Write(AppDirectory + @"\配置.ini", fromqq, "学号", StuID);
+                        ini.Write(AppDirectory + @"\配置.ini", fromqq, "密码", DESTool.Encrypt(Password, "jw*1"));
                         break;
                     }
                     else

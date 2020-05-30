@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace jwxt
 {
-    public class jw_url
+    public class jwUrl
     {
         public static string home_url = "http://bkjw.whu.edu.cn";
         public static string index_url = home_url + "/stu/stu_index.jsp";

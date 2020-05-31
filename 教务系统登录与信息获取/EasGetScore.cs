@@ -8,12 +8,12 @@ using HtmlAgilityPack;
 
 namespace jwxt
 {
-    public class jwGetScore
+    public class EasGetScore
     {
         public string score_result;
         private string stuid;
 
-        public void GetScore(jwLogin jwxt)
+        public void GetScore(EasLogin jwxt)
         {
             stuid = jwxt.StuID;
             var client = new RestClient(jwxt.urls.score_url);

@@ -106,11 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
-    <Compile Include="jwOperation.cs" />
+    <Compile Include="EasOperation.cs" />
     <Compile Include="DataBase.cs" />
-    <Compile Include="jwGetScore.cs" />
-    <Compile Include="jwGetCourse.cs" />
-    <Compile Include="jwLogin.cs" />
+    <Compile Include="EasGetScore.cs" />
+    <Compile Include="EasGetCourse.cs" />
+    <Compile Include="EasLogin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="jwUrl.cs" />

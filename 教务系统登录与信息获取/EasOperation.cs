@@ -94,5 +94,33 @@ namespace jwxt
                     return "";
             }
         }
+
+        /// <summary>
+        /// 获取指定学生的成绩信息
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回成绩列表</returns>
+        public static List<Score> GetScores(string StuID)
+        {
+            using (var context = new jwContext())
+            {
+                var Scores = context.Scores.Where(s => s.StuID == StuID);
+                return Scores.ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取指定学生的课程信息
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回课程列表</returns>
+        public static List<Course> GetCourses(string StuID)
+        {
+            using (var context = new jwContext())
+            {
+                var Courses = context.Courses.Where(s => s.StuID == StuID);
+                return Courses.ToList();
+            }
+        }
     }
 }

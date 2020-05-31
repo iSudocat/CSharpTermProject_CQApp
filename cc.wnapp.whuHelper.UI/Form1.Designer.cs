@@ -42,6 +42,11 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView_StuList = new System.Windows.Forms.DataGridView();
+            this.QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StuID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StuName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.College = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_lblogin = new System.Windows.Forms.Button();
             this.btn_jwlogin = new System.Windows.Forms.Button();
@@ -53,13 +58,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tb_QQ = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StuID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StuName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.College = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -71,8 +72,9 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -212,6 +214,45 @@
             this.dataGridView_StuList.TabIndex = 2;
             this.dataGridView_StuList.SelectionChanged += new System.EventHandler(this.dataGridView_StuList_SelectionChanged);
             // 
+            // QQ
+            // 
+            this.QQ.DataPropertyName = "QQ";
+            this.QQ.HeaderText = "QQ";
+            this.QQ.Name = "QQ";
+            this.QQ.ReadOnly = true;
+            // 
+            // StuID
+            // 
+            this.StuID.DataPropertyName = "StuID";
+            this.StuID.HeaderText = "学号";
+            this.StuID.Name = "StuID";
+            this.StuID.ReadOnly = true;
+            this.StuID.Width = 120;
+            // 
+            // StuName
+            // 
+            this.StuName.DataPropertyName = "StuName";
+            this.StuName.HeaderText = "姓名";
+            this.StuName.Name = "StuName";
+            this.StuName.ReadOnly = true;
+            this.StuName.Width = 80;
+            // 
+            // College
+            // 
+            this.College.DataPropertyName = "College";
+            this.College.HeaderText = "学院";
+            this.College.Name = "College";
+            this.College.ReadOnly = true;
+            this.College.Width = 160;
+            // 
+            // Bot
+            // 
+            this.Bot.DataPropertyName = "BotQQ";
+            this.Bot.HeaderText = "BotQQ";
+            this.Bot.Name = "Bot";
+            this.Bot.ReadOnly = true;
+            this.Bot.Visible = false;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btn_lblogin);
@@ -327,16 +368,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "本人QQ";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(837, 508);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
@@ -347,44 +378,25 @@
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // QQ
+            // tabPage4
             // 
-            this.QQ.DataPropertyName = "QQ";
-            this.QQ.HeaderText = "QQ";
-            this.QQ.Name = "QQ";
-            this.QQ.ReadOnly = true;
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(837, 508);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // StuID
+            // tabPage2
             // 
-            this.StuID.DataPropertyName = "StuID";
-            this.StuID.HeaderText = "学号";
-            this.StuID.Name = "StuID";
-            this.StuID.ReadOnly = true;
-            this.StuID.Width = 120;
-            // 
-            // StuName
-            // 
-            this.StuName.DataPropertyName = "StuName";
-            this.StuName.HeaderText = "姓名";
-            this.StuName.Name = "StuName";
-            this.StuName.ReadOnly = true;
-            this.StuName.Width = 80;
-            // 
-            // College
-            // 
-            this.College.DataPropertyName = "College";
-            this.College.HeaderText = "学院";
-            this.College.Name = "College";
-            this.College.ReadOnly = true;
-            this.College.Width = 160;
-            // 
-            // Bot
-            // 
-            this.Bot.DataPropertyName = "BotQQ";
-            this.Bot.HeaderText = "BotQQ";
-            this.Bot.Name = "Bot";
-            this.Bot.ReadOnly = true;
-            this.Bot.Visible = false;
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(837, 508);
+            this.tabPage2.TabIndex = 4;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -419,7 +431,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tb_QQ;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox tb_jwPw;
@@ -443,6 +454,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StuName;
         private System.Windows.Forms.DataGridViewTextBoxColumn College;
         private System.Windows.Forms.DataGridViewTextBoxColumn Bot;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 

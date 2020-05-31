@@ -35,15 +35,15 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            QQ BotQQ = CQ.Api.GetLoginQQ();
+            QQ Botqq = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
             if (msg.Contains("绑定教务系统"))
             {
-                msgProcess.bdjw(fromqq, msg, Convert.ToString(BotQQ.Id));
+                var mp1 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t1 = new Thread(mp1.BindEasAccount);
+                t1.Start();
             }
         }
-
     }
-
 }

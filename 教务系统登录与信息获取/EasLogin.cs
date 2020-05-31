@@ -12,7 +12,7 @@ using Tools;
 
 namespace jwxt
 {
-    public class jwLogin
+    public class EasLogin
     {
         public string BotQQ { get; set; }
         public string QQ { get; set; }
@@ -34,7 +34,7 @@ namespace jwxt
         /// <param name="id">学号</param>
         /// <param name="pw">教务系统密码</param>
         /// <param name="num">验证码错误最大重试次数</param>
-        public jwLogin(string botqq, string qq, string id, string pw, int num)
+        public EasLogin(string botqq, string qq, string id, string pw, int num)
         {
             BotQQ = botqq;
             QQ = qq;

@@ -70,7 +70,8 @@
     <Compile Include="code.cs" />
     <Compile Include="Event_App.cs" />
     <Compile Include="Event_Message.cs" />
-    <Compile Include="msgProcess.cs" />
+    <Compile Include="GroupMsgProcess.cs" />
+    <Compile Include="PrivateMsgProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

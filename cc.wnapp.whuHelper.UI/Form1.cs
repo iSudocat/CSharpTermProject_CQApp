@@ -72,14 +72,14 @@ namespace cc.wnapp.whuHelper.UI
 
         private void btn_jwlogin_Click(object sender, EventArgs e)
         {
-            jwLogin jwxt = new jwLogin(Convert.ToString(BotQQ.Id), tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
+            EasLogin jwxt = new EasLogin(Convert.ToString(BotQQ.Id), tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
             try
             {
                 if (jwxt.LoginSys() == true)
                 {
-                    jwGetScore jwscore = new jwGetScore();
+                    EasGetScore jwscore = new EasGetScore();
                     jwscore.GetScore(jwxt);
-                    jwGetCourse jwcourse = new jwGetCourse();
+                    EasGetCourse jwcourse = new EasGetCourse();
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));

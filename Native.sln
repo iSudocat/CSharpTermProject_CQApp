@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cc.wnapp.whuHelper.UI", "cc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "教务系统登录与信息获取", "教务系统登录与信息获取\教务系统登录与信息获取.csproj", "{707D635B-4512-4FD0-ABDF-D786687CE655}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedule", "Calendar\Schedule.csproj", "{DE02FB93-DA23-4D69-8CE7-85FFB929B901}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,14 @@ Global
 		{707D635B-4512-4FD0-ABDF-D786687CE655}.Release|Any CPU.Build.0 = Release|Any CPU
 		{707D635B-4512-4FD0-ABDF-D786687CE655}.Release|x86.ActiveCfg = Release|Any CPU
 		{707D635B-4512-4FD0-ABDF-D786687CE655}.Release|x86.Build.0 = Release|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

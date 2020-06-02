@@ -1,4 +1,4 @@
-using GitHubAutoresponder.Webhook;
+using GithubWatcher.Webhook;
 
 namespace GitHubAutoresponder.Responder {
     public interface IResponseFactory {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GitHubAutoresponder.Webhook {
+namespace GithubWatcher.Webhook {
     public class Sender {
         [Required]
         public string Login { get; set; }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GitHubAutoresponder.Webhook {
+namespace GithubWatcher.Webhook {
     public interface IModelStateConverter {
         string AsString(ModelStateDictionary modelState);
     }

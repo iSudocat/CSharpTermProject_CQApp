@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GitHubAutoresponder.Webhook {
+namespace GithubWatcher.Webhook {
     [CustomValidation(typeof (Payload), "HasValidCommentable")]
     public class Payload {
         [Required]

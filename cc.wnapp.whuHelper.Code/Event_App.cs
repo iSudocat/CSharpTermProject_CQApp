@@ -25,8 +25,10 @@ namespace cc.wnapp.whuHelper.Code
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
 
+            Schedule.CQ.Api = e.CQApi;
+            Schedule.CQ.Log = e.CQLog;
+
             var CurrentDirectory = System.Environment.CurrentDirectory;
-            //var missingFolder = CurrentDirectory + @"\武大助手 - 缺失组件";
 
             try
             {
@@ -61,6 +63,14 @@ namespace cc.wnapp.whuHelper.Code
                 }
 
                 jwxt.InitializeDB.Init();   //初始化数据库
+
+                #region  周起始日期文件初始化
+                var client0 = new RestClient("***REMOVED***FirstWeekDate.ini");
+                var request0 = new RestRequest(Method.GET);
+                var response0 = client0.DownloadData(request0);
+                File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", response0);
+                e.CQLog.InfoSuccess("初始化", "周起始日期文件初始化成功。");
+                #endregion
 
                 e.CQLog.InfoSuccess("初始化", "插件初始化成功。");
             }

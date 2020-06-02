@@ -4,6 +4,7 @@ using Xunit;
 using Moq;
 using GitHubAutoresponder.Responder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -15,9 +16,8 @@ using GitHubAutoresponder.Shared;
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using GithubWatcher.Controllers;
 
-namespace GithubWatcher.Webhook.Tests {
+namespace GitHubAutoresponder.Webhook.Tests {
     public class WebhookControllerTests {
         private Mock<IGitHubResponder> gitHubResponder;
         private Mock<IModelStateConverter> modelStateConverter;
@@ -25,7 +25,7 @@ namespace GithubWatcher.Webhook.Tests {
         private Mock<IRequestValidator> requestValidator;
         private Mock<IObjectModelValidator> objectValidator;
         private Mock<IEnvironment> environment;
-        private GithubWatcherController webhookController;
+        private WebhookController webhookController;
 
         public WebhookControllerTests() {
             this.gitHubResponder = new Mock<IGitHubResponder>();
@@ -35,7 +35,7 @@ namespace GithubWatcher.Webhook.Tests {
             this.objectValidator = new Mock<IObjectModelValidator>();
             this.environment = new Mock<IEnvironment>();
 
-            this.webhookController = new GithubWatcherController(
+            this.webhookController = new WebhookController(
                 this.gitHubResponder.Object,
                 this.modelStateConverter.Object,
                 this.jsonSerialiser.Object,

@@ -2,7 +2,7 @@ using Xunit;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GithubWatcher.Webhook.Tests {
+namespace GitHubAutoresponder.Webhook.Tests {
     public class PayloadTests
     {
         [Fact]

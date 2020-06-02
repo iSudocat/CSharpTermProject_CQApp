@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using GithubWatcher.Webhook;
+using GitHubAutoresponder.Webhook;
 
 namespace GitHubAutoresponder.Responder {
     public interface IGitHubResponder {

@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace GithubWatcher.Webhook {
+namespace GitHubAutoresponder.Webhook {
     public class RequestValidator : IRequestValidator {
         private bool AreEqualConstantTime(string a, string b) {
             bool areEqual = true;

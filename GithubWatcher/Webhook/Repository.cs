@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GithubWatcher.Webhook {
+namespace GitHubAutoresponder.Webhook {
     public class Repository {
         [Required]
-        public string Full_Name { get; set; }
+        public string Name { get; set; }
     }
 }

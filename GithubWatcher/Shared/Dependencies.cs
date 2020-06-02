@@ -1,5 +1,5 @@
 using GitHubAutoresponder.Responder;
-using GithubWatcher.Webhook;
+using GitHubAutoresponder.Webhook;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GitHubAutoresponder.Shared {

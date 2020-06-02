@@ -1,5 +1,5 @@
 using Xunit;
-using GithubWatcher.Webhook;
+using GitHubAutoresponder.Webhook;
 
 namespace GitHubAutoresponder.Responder.Tests {
     public class ResponseFactoryTests {
@@ -13,7 +13,7 @@ namespace GitHubAutoresponder.Responder.Tests {
                 },
 
                 Repository = new Repository {
-                    Full_Name = "some-magic-repo"
+                    Name = "some-magic-repo"
                 }
             };
 

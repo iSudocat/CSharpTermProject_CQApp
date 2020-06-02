@@ -18,14 +18,14 @@ namespace jwxt
     public class CourseService
     {
         public List<Student> StudentList = new List<Student>();
-        public jwLogin JW { get; set; }
+        public EasLogin JW { get; set; }
 
         public CourseService()
         {
 
         }
 
-        public CourseService(jwLogin jw)
+        public CourseService(EasLogin jw)
         {
             JW = jw;
         }

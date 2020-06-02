@@ -49,11 +49,13 @@ namespace cc.wnapp.whuHelper.Code
             //查询课程表模块
             if (msg.Contains("课程表"))
             {
+                //Sudocat注：按上面写法改成线程方式调用
                 msgProcess.QueryCourseTable(fromqq);
             }
 
             if (msg.Contains("查询功能菜单"))
             {
+                //Sudocat注：放入处理函数中，按上面写法改成线程方式调用
                 string menu =
                     "课程表查询菜单：\n" +
                     "1. 按课头号查询\n" +
@@ -68,6 +70,7 @@ namespace cc.wnapp.whuHelper.Code
 
             if (msg.Contains("按") && msg.Contains("查询"))
             {
+                //Sudocat注：按上面写法改成线程方式调用
                 msgProcess.QueryFunction(fromqq, msg);
             }
         }

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GithubWatcher.Webhook {
+namespace GitHubAutoresponder.Webhook {
     public class Commentable {
         [Required]
         public string CommentsUrl { get; set; }

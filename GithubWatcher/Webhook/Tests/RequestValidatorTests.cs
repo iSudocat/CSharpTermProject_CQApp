@@ -1,7 +1,7 @@
 using Xunit;
-using GithubWatcher.Webhook;
+using GitHubAutoresponder.Webhook;
 
-namespace GithubWatcher.Webhook.Tests {
+namespace GitHubAutoresponder.Webhook.Tests {
     public class RequestValidatorTests {
         [Fact]
         public void ItShouldReturnTrueWhenTheGeneratedAndExpectedSignaturesMatch() {

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using GitHubAutoresponder.Shared;
-using GithubWatcher.Webhook;
+using GitHubAutoresponder.Webhook;
 
 namespace GitHubAutoresponder.Responder {
     public class GitHubResponder : IGitHubResponder {

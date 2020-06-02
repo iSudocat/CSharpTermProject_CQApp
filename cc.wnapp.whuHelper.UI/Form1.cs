@@ -33,20 +33,33 @@ namespace cc.wnapp.whuHelper.UI
         private void Form1_Load(object sender, EventArgs e)
         {
             tab1Init();
-           
+            tab2Init();
         }
 
         private void tab1Init()
         {
             BotQQ = CQ.Api.GetLoginQQ();
+
             bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
+            stuDataGridView.DataSource = bindingSource_StudentDB;
+
+            Student student = bindingSource_StudentDB.Current as Student;
+            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+            courseDataGridView.DataSource = bindingSource_Courses;
+
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
             tb_StuID.Text= ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
             if(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "") != "")
                 tb_jwPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1");
             if (ini.Read(AppDirectory + @"\配置.ini", "主人信息", "图书馆系统密码", "") != "")
                 tb_lbPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "图书馆系统密码", ""), "lb*2");
+        }
+
+        private void tab2Init()
+        {
+
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -80,10 +93,19 @@ namespace cc.wnapp.whuHelper.UI
                     jwGetScore jwscore = new jwGetScore();
                     jwscore.GetScore(jwxt);
                     jwGetCourse jwcourse = new jwGetCourse();
+                    //将Course信息存储到数据库中
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
                     dataGridView_StuList.DataSource = bindingSource_StudentDB;
+
+                    //课程表 数据绑定
+                    stuDataGridView.DataSource = bindingSource_StudentDB;
+
+                    Student student = bindingSource_StudentDB.Current as Student;
+                    bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+                    courseDataGridView.DataSource = bindingSource_Courses;
+
                 }
             }
             catch (Exception ex)
@@ -116,6 +138,87 @@ namespace cc.wnapp.whuHelper.UI
                 CurrentStuID_jw = dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
             }
         }
+
+
+
+
+        private void QueryAllCourses()
+        {
+            Student student = bindingSource_StudentDB.Current as Student;
+            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+            bindingSource_Courses.ResetBindings(false);
+        }
+
+        private void delButton_Click(object sender, EventArgs e)
+        {
+            string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
+            if (courseID == null)
+            {
+                MessageBox.Show("请选择课程进行删除", "未选择课程", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return ;
+            }
+            MessageBox.Show($"课程号：{courseID}");
+            CourseService.RemoveCourse(courseID, getStuID());
+            QueryAllCourses();
+            courseDataGridView.DataSource = bindingSource_Courses;
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stuDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (stuDataGridView.CurrentRow != null)
+            {
+                CurrentStuID_jw = dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
+                courseDataGridView.DataSource = CourseService.GetCourses(CurrentStuID_jw);
+            }
+        }
+
+        private string getStuID()
+        {
+            return dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
+        }
+        private void queryButton_Click(object sender, EventArgs e)
+        {
+            string stuID = getStuID();
+            switch (queryComboBox.SelectedIndex)
+            {
+                case 0:
+                    QueryAllCourses(); 
+                    break;
+                case 1:
+                    bindingSource_Courses.DataSource = CourseService.QueryByLessonNum(queryTextBox.Text, stuID);
+                    break;
+                case 2:
+                    bindingSource_Courses.DataSource = CourseService.QueryByLessonName(queryTextBox.Text, stuID);
+                    break;
+                case 3:
+                    bindingSource_Courses.DataSource = CourseService.QueryByCredit(queryTextBox.Text, stuID);
+                    break;
+                case 4:
+                    bindingSource_Courses.DataSource = CourseService.QueryByTeachingCollege(queryTextBox.Text, stuID);
+                    break;
+                case 5:
+                    bindingSource_Courses.DataSource = CourseService.QueryByDept(queryTextBox.Text, stuID);
+                    break;
+                case 6:
+                    bindingSource_Courses.DataSource = CourseService.QueryByTeacher(queryTextBox.Text, stuID);
+                    break;
+            }
+        }
+
+        //测试时使用
+        //private void courseDataGridView_SelectionChanged(object sender, EventArgs e)
+        //{
+        //    if (courseDataGridView.CurrentRow != null)
+        //    {
+        //        string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
+        //        //MessageBox.Show(courseID);
+        //    }
+        //}
     }
 
 }

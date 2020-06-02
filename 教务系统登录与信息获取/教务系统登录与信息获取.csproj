@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
+    <Compile Include="CourseService.cs" />
     <Compile Include="jwOperation.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="jwGetScore.cs" />

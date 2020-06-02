@@ -42,14 +42,14 @@ namespace cc.wnapp.whuHelper.Code
                     if (jwOp.StuExist(StuID) == false)
                     {
                         jwxt.LoginTry();
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
 
-                        jwGetCourse jwcourse = new jwGetCourse();
+                        EasGetCourse jwcourse = new EasGetCourse();
                         //将Course信息存储到数据库中
                         jwcourse.GetCourse(jwxt);
 
-                        ini.Write(AppDirectory + @"\配置.ini", fromqq, "学号", StuID);
-                        ini.Write(AppDirectory + @"\配置.ini", fromqq, "密码", DESTool.Encrypt(Password, "jw*1"));
+                        ini.Write(AppDirectory + @"\配置.ini", fromQQ, "学号", StuID);
+                        ini.Write(AppDirectory + @"\配置.ini", fromQQ, "密码", DESTool.Encrypt(Password, "jw*1"));
                         break;
                     }
                     else

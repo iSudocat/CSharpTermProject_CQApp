@@ -351,3 +351,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+cc.wnapp.whuHelper.UI/Form1.resx.orig
+cc.wnapp.whuHelper.UI/Form1.Designer.cs.orig
+Native.sln.orig
+教务系统登录与信息获取/教务系统登录与信息获取.csproj.orig
+cc.wnapp.whuHelper.Code/PrivateMsgProcess.cs.orig
+cc.wnapp.whuHelper.Code/Event_Message.cs.orig
+cc.wnapp.whuHelper.UI/Form1.cs.orig

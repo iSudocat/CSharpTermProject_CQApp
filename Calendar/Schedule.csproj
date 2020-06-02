@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="PersonalUser.cs" />
+    <Compile Include="WeeklySchedule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

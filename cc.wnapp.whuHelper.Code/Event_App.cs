@@ -25,6 +25,9 @@ namespace cc.wnapp.whuHelper.Code
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
 
+            Schedule.CQ.Api = e.CQApi;
+            Schedule.CQ.Log = e.CQLog;
+
             var CurrentDirectory = System.Environment.CurrentDirectory;
 
             try

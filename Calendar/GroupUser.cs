@@ -10,7 +10,7 @@ using static Schedule.PersonalUser;
 
 namespace Schedule
 {
-    class GroupUser
+    public class GroupUser
     {
         public long GroupQQ { get; set; }//群组QQ
         public long QQ { get; set; }//群成员QQ,也就是正在操作的那个人

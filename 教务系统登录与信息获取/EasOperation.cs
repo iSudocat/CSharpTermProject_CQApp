@@ -1,8 +1,11 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tools;
 
 namespace jwxt
 {
@@ -121,6 +124,18 @@ namespace jwxt
                 var Courses = context.Courses.Where(s => s.StuID == StuID);
                 return Courses.ToList();
             }
+        }
+
+        /// <summary>
+        /// 获取当前学期起始周第一天（周一）的日期
+        /// </summary>
+        /// <returns>返回日期字符串</returns>
+        public static string GetFirstWeekDate()
+        {
+            var CurrentDirectory = System.Environment.CurrentDirectory;
+            var Year = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini" + @"\配置.ini", "Current", "Year", "2019");
+            var Term = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini" + @"\配置.ini", "Current", "Term", "2");
+            return ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini" + @"\配置.ini", Year, Term, "");
         }
     }
 }

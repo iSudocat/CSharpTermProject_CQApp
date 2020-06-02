@@ -2,7 +2,7 @@ using Xunit;
 using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GitHubAutoresponder.Webhook.Tests {
+namespace GithubWatcher.Webhook.Tests {
     public class ModelStateConverterTests {
         private ModelStateConverter stateConverter;
 

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GitHubAutoresponder.Webhook {
+namespace GithubWatcher.Webhook {
     public class ModelStateConverter : IModelStateConverter {
         const string MESSAGE_HEADER = "Malformed payload:\n";
 

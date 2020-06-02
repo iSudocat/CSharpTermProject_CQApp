@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GitHubAutoresponder.Shared;
-using GitHubAutoresponder.Webhook;
+using GithubWatcher.Webhook;
 
 namespace GitHubAutoresponder.Responder.Tests {
     public class GitHubResponderTests {

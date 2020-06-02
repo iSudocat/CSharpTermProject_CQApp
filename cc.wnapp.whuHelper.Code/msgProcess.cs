@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Tools;
 using jwxt;
 using Native.Sdk.Cqp;
+using System.Net.Http.Headers;
+using System.Web.SessionState;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -29,6 +31,11 @@ namespace cc.wnapp.whuHelper.Code
                     {
                         jwxt.LoginTry();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
+
+                        jwGetCourse jwcourse = new jwGetCourse();
+                        //将Course信息存储到数据库中
+                        jwcourse.GetCourse(jwxt);
+
                         ini.Write(AppDirectory + @"\配置.ini", fromqq, "学号", StuID);
                         ini.Write(AppDirectory + @"\配置.ini", fromqq, "密码", DESTool.Encrypt(Password, "jw*1"));
                         break;
@@ -64,6 +71,98 @@ namespace cc.wnapp.whuHelper.Code
                         CQ.Log.Error("发生未知错误", ex.ToString());
                         break;
                     }
+                }
+            }
+        }
+
+
+
+
+        //课程表模块
+
+        public static void QueryCourseTable(string fromqq)
+        {
+            using (jwContext context = new jwContext())
+            {
+                //先通过用户的QQ查找到对应的Student对象
+                Student student;
+                student = context.Students.Where(s => s.QQ == fromqq).FirstOrDefault();
+
+                if (student != null)
+                {
+                    List<Course> CourseTable = CourseService.GetCourses(student.StuID);
+                    string table = "";
+                    for (int i = 0; i < CourseTable.Count; i ++)
+                    {
+                        table += CourseTable[i].ToString();
+                    }
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), table);
+                }
+                else
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "登陆已失效！");
+                }
+                
+            }
+        }
+
+        public static void QueryFunction(string fromqq, string message)
+        {
+            using (var context = new jwContext())
+            {
+                string msg = message.Replace(" ", "");
+                try
+                {
+                    var queryModel = textOp.GetMiddleText(msg, "按", "查询");
+                    var queryValue = textOp.GetRightText(msg, "|");
+
+                    List<Course> QueryResult = new List<Course>();
+
+                    //先通过用户的QQ查找到对应的Student对象
+                    Student student;
+                    student = context.Students.Where(s => s.QQ == fromqq).FirstOrDefault();
+                    string stuID = student.StuID;
+
+                    switch (queryModel)
+                    {
+                        case "课头号":
+                            QueryResult = CourseService.QueryByLessonNum(queryValue, stuID);
+                            break;
+                        case "课程名":
+                            QueryResult = CourseService.QueryByLessonName(queryValue, stuID);
+                            break;
+                        case "学分":
+                            QueryResult = CourseService.QueryByCredit(queryValue, stuID);
+                            break;
+                        case "授课学院":
+                            QueryResult = CourseService.QueryByTeachingCollege(queryValue, stuID);
+                            break;
+                        case "专业":
+                            QueryResult = CourseService.QueryByDept(queryValue, stuID);
+                            break;
+                        case "授课教师":
+                            QueryResult = CourseService.QueryByTeacher(queryValue, stuID);
+                            break;
+                    }
+
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "查询结果如下：");
+                    string result = "";
+                    if (QueryResult.Count != 0)
+                    {
+                        for (int i = 0; i < QueryResult.Count; i++)
+                        {
+                            result += QueryResult[i].ToString();
+                        }
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), result);
+                    }
+                    else
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "未查询到记录");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "出现错误，请重新输入命令！");
                 }
             }
         }

@@ -8,12 +8,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Schedule
 {
-    class Schedule
+    class WeeklySchedule
     {
         [Required]
         public static int Num = 0;//计数器
         [Required]
-        [Key,Column(Order = 1)]
+        [Key, Column(Order = 1)]
         public long UserQQ { get; set; }//使用人或者群组qq
         [Required]
         public int UserType { get; set; }//使用者类型 0为个人 1为群组
@@ -26,7 +26,10 @@ namespace Schedule
         public string ScheduleType { get; set; }//日程类型：生日，纪念日之类的
         [Required]
         public string ScheduleContent { get; set; }//日程具体内容
-        public Schedule(long userQQ,int userType,DateTime dt,string st,string sc)
+        //日程持续周数，每进行一周，weekspan-1 datetime加一周
+        [Required]
+        public int WeekSpan { get; set; }
+        public WeeklySchedule(long userQQ, int userType, DateTime dt, string st, string sc,int weekSpan)
         {
             Num++;
             UserQQ = userQQ;
@@ -34,15 +37,18 @@ namespace Schedule
             ScheduleTime = dt;
             ScheduleType = st;
             ScheduleContent = sc;
+            WeekSpan = weekSpan;
             ScheduleID = Convert.ToString(UserQQ) + Convert.ToString(Num);
         }
         public string DisplaySchedule()
         {
-            return "使用人或群组QQ："+UserQQ+"\r\n"
-                +"日程编号："+ScheduleID+"\r\n"
-                +"日程时间："+ScheduleTime+"\r\n"
-                +"日程类型："+ScheduleType+"\r\n"
-                +"日程内容："+ScheduleContent+"\r\n";
+            return "使用人或群组QQ：" + UserQQ + "\r\n"
+                + "日程编号：" + ScheduleID + "\r\n"
+                + "日程时间：" + ScheduleTime + "\r\n"
+                + "日程类型：" + ScheduleType + "\r\n"
+                + "日程内容：" + ScheduleContent + "\r\n"
+                +"还将持续周数："+WeekSpan;
         }
     }
 }
+

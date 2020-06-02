@@ -129,13 +129,13 @@ namespace jwxt
         /// <summary>
         /// 获取当前学期起始周第一天（周一）的日期
         /// </summary>
-        /// <returns>返回日期字符串</returns>
+        /// <returns>成功返回日期字符串，失败返回空</returns>
         public static string GetFirstWeekDate()
         {
             var CurrentDirectory = System.Environment.CurrentDirectory;
-            var Year = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini" + @"\配置.ini", "Current", "Year", "2019");
-            var Term = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini" + @"\配置.ini", "Current", "Term", "2");
-            return ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini" + @"\配置.ini", Year, Term, "");
+            var Year = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", "Current", "Year", "");
+            var Term = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", "Current", "Term", "");
+            return ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", Year, Term, "");
         }
     }
 }

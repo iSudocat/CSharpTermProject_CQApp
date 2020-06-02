@@ -18,16 +18,7 @@ namespace Schedule
         public static CQLog Log { get; set; }
 
     }
-
-    public class event_AppStartup : IAppEnable
-    {
-        public void AppEnable(object sender, CQAppEnableEventArgs e)
-        {
-            CQ.Api = e.CQApi;
-            CQ.Log = e.CQLog;
-
-        }
-    }
+    
 }
 
 

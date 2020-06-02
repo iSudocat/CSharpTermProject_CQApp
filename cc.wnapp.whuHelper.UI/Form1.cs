@@ -53,8 +53,7 @@ namespace cc.wnapp.whuHelper.UI
             tb_StuID.Text= ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
             if(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "") != "")
                 tb_jwPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1");
-            if (ini.Read(AppDirectory + @"\配置.ini", "主人信息", "图书馆系统密码", "") != "")
-                tb_lbPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "图书馆系统密码", ""), "lb*2");
+            
         }
 
         private void tab2Init()
@@ -78,11 +77,6 @@ namespace cc.wnapp.whuHelper.UI
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", DESTool.Encrypt(tb_jwPw.Text, "jw*1"));
         }
 
-        private void tb_lbPw_TextChanged(object sender, EventArgs e)
-        {
-            ini.Write(AppDirectory + @"\配置.ini", "主人信息", "图书馆系统密码", DESTool.Encrypt(tb_lbPw.Text, "lb*2"));
-        }
-
         private void btn_jwlogin_Click(object sender, EventArgs e)
         {
             EasLogin jwxt = new EasLogin(Convert.ToString(BotQQ.Id), tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
@@ -90,9 +84,9 @@ namespace cc.wnapp.whuHelper.UI
             {
                 if (jwxt.LoginSys() == true)
                 {
-                    jwGetScore jwscore = new jwGetScore();
+                    EasGetScore jwscore = new EasGetScore();
                     jwscore.GetScore(jwxt);
-                    jwGetCourse jwcourse = new jwGetCourse();
+                    EasGetCourse jwcourse = new EasGetCourse();
                     //将Course信息存储到数据库中
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -208,6 +202,16 @@ namespace cc.wnapp.whuHelper.UI
                     bindingSource_Courses.DataSource = CourseService.QueryByTeacher(queryTextBox.Text, stuID);
                     break;
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         //测试时使用

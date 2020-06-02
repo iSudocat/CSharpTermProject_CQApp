@@ -14,13 +14,13 @@ using Tools;
 
 namespace jwxt
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
             
 
-        }
+    //    }
 
-    }
+    //}
 }

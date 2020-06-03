@@ -27,7 +27,7 @@ namespace GithubWatcher.Webhook.Tests {
 
             string actualMessage = this.stateConverter.AsString(state);
 
-            Assert.Equal(expectedMessage, actualMessage);
+            Assert.AreEqual(expectedMessage, actualMessage);
         }
     }
 }

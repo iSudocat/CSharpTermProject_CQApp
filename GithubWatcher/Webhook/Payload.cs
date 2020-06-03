@@ -3,33 +3,24 @@ using System.ComponentModel.DataAnnotations;
 namespace GithubWatcher.Webhook {
     [CustomValidation(typeof (Payload), "HasValidCommentable")]
     public class Payload {
-        [Required]
         public string Action { get; set; }
-
         [Required]
         public Sender Sender { get; set; }
-
         // TODO: review access modifiers
         [Required]
         public Repository Repository { get; set; }
+        public string Ref { get; set; }
+        public Issue Issue { get; set; }
+        public PullRequest PullRequest { get; set; }
+        public Commits Commits { get; set; }
 
-        public Commentable Issue { get; set; }
-        public Commentable PullRequest { get; set; }
-
-        public Commentable Commentable {
-            get {
-                return Issue != null ? Issue : PullRequest;
-            }
-        }
-
-        public static ValidationResult HasValidCommentable(Payload payload, ValidationContext context) {
-            if (payload.Issue == null && payload.PullRequest == null) {
-                return new ValidationResult(
-                    "Payload should contain either an issue or a pull_request property"
-                );
-            }
-
-            return ValidationResult.Success;
+        public Payload()
+        {
+            Sender = new Sender();
+            Repository = new Repository();
+            Issue = new Issue();
+            PullRequest = new PullRequest();
+            Commits = new Commits();
         }
     }
 }

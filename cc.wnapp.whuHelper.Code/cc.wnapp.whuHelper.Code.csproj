@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttenttionHandler.cs" />
     <Compile Include="CQ.cs" />
     <Compile Include="code.cs" />
     <Compile Include="Event_App.cs" />

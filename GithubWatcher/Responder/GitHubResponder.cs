@@ -20,10 +20,12 @@ namespace GitHubAutoresponder.Responder {
             this.responseFactory = responseFactory;
         }
 
-        async Task<bool> IGitHubResponder.RespondAsync(Payload payload) { // TODO: why is explicit impl needed?
+        async Task<bool> IGitHubResponder.RespondAsync(Payload payload)
+        { // TODO: why is explicit impl needed?
             bool shouldRespond = payload.Action == "opened";
 
-            if (!shouldRespond) {
+            if (!shouldRespond)
+            {
                 // silently bypass request
                 return true;
             }
@@ -32,7 +34,8 @@ namespace GitHubAutoresponder.Responder {
             string serializedResponse = this.jsonSerialiser.Serialise(body);
 
             return await this.httpClient.PostAsync(
-                payload.Commentable.CommentsUrl,
+                //payload.Commentable.CommentsUrl,
+                payload.Issue.Url,
                 serializedResponse
             );
         }

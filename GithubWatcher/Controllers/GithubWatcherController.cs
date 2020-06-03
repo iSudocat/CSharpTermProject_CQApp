@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Web;
-using Microsoft.Extensions.Primitives;
 using System.IO;
 using System.Text;
 using System.Security.Cryptography;
@@ -13,49 +11,49 @@ using System.Net;
 using System.Web.Http;
 using System.Net.Mime;
 using GitHubAutoresponder.Responder;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using GitHubAutoresponder.Shared;
 using GithubWatcher.Webhook;
 using System.Web.Mvc;
+using GithubWatcher.Models;
 
 namespace GithubWatcher.Controllers
 {
     public class GithubWatcherController : ApiController
     {
-
-        private IGitHubResponder gitHubResponder;
-        private IModelStateConverter modelStateConverter;
         private IJsonSerialiser jsonSerialiser;
         private IRequestValidator requestValidator;
         private IEnvironment environment;
 
         public GithubWatcherController(
-            IGitHubResponder gitHubResponder,
-            IModelStateConverter modelStateConverter,
             IJsonSerialiser jsonSerialiser,
             IRequestValidator requestValidator,
             IEnvironment environment
         ) {
-            this.gitHubResponder = gitHubResponder;
-            this.modelStateConverter = modelStateConverter;
             this.jsonSerialiser = jsonSerialiser;
             this.requestValidator = requestValidator;
             this.environment = environment;
         }
 
-        public async Task<string> Post() {
+        public GithubWatcherController() { }
+
+        // POST: api/GithubWatcher
+        public string Post() {
             /* We need the raw body to validate the request
              * by computing a HMAC hash from it based upon
              * the secret key. We then manually deserialise
              * it for validation and further manipulation.
              */
-            string body = await this.GetBody();
 
-            bool isValidRequest = this.requestValidator.IsValidRequest(
-                HttpContext.Current.Request.Headers["X-Hub-Signature"],
-                this.environment.Secret,
-                body
-            );
+            // Body
+            string body = this.GetBody();
+
+            // Head
+            string signature = HttpContext.Current.Request.Headers["X-Hub-Signature"];
+            string eventType = HttpContext.Current.Request.Headers["X-GitHub-Event"];
+
+            Console.WriteLine(body);
+
+            bool isValidRequest = this.requestValidator.IsValidRequest(signature, this.environment.Secret, body);
 
             if (!isValidRequest) {
                 return this.CreateUnauthorisedResult();
@@ -66,7 +64,7 @@ namespace GithubWatcher.Controllers
             return CreateSuccessResult();
         }
 
-        private async Task<string> GetBody() {
+        private string GetBody() {
             string content = Request.Content.ReadAsStringAsync().Result;
 
             return content;
@@ -80,6 +78,54 @@ namespace GithubWatcher.Controllers
             string result = "success";
 
             return result;
+        }
+
+        // 支持的事件
+        private bool IsSupportEvent(string eventType){
+            List<string> supportedEvents = new List<string>() { "push", "create", "issue", "issue_comment", "pull_request" };
+            if (supportedEvents.Contains(eventType))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        // 从payload中创建一条消息记录
+        public PayloadRecord GenerateRecord(Payload payload,string eventType)
+        {
+            PayloadRecord newRecord = new PayloadRecord();
+
+            newRecord.Sender = payload.Sender.Login;
+            newRecord.Repository = payload.Repository.FullName;
+            newRecord.EventType = eventType;
+
+            if (eventType == "issue" || eventType == "issue_comment") 
+            {
+                newRecord.Action = payload.Action;
+                newRecord.EventUrl = payload.Issue.Url;
+                newRecord.Title = payload.Issue.Title;
+            }
+
+            if (eventType == "pull_request")
+            {
+                newRecord.Action = payload.Action;
+                newRecord.EventUrl = payload.PullRequest.Url;
+                newRecord.Title = payload.PullRequest.Title;
+            }
+
+            if(eventType=="push")
+            {
+                newRecord.CommitsText = payload.Commits.Message;
+                newRecord.Branch = payload.Ref;
+            }
+
+            if(eventType=="create")
+            {
+                newRecord.Branch = payload.Ref;
+            }
+
+            return newRecord;
         }
     }
 }

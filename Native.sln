@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29905.134
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{0CA93EB9-4E25-46C6-94D2-0F97137A1606}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cc.wnapp.whuHelper.UI", "cc.wnapp.whuHelper.UI\cc.wnapp.whuHelper.UI.csproj", "{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "教务系统登录与信息获取", "教务系统登录与信息获取\教务系统登录与信息获取.csproj", "{707D635B-4512-4FD0-ABDF-D786687CE655}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GithubWatcher", "GithubWatcher\GithubWatcher.csproj", "{36121AD5-6EA0-42F0-81F8-F8ACB0318446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GithubWatcher.Tests", "GithubWatcher.Tests\GithubWatcher.Tests.csproj", "{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,11 +69,27 @@ Global
 		{707D635B-4512-4FD0-ABDF-D786687CE655}.Release|Any CPU.Build.0 = Release|Any CPU
 		{707D635B-4512-4FD0-ABDF-D786687CE655}.Release|x86.ActiveCfg = Release|Any CPU
 		{707D635B-4512-4FD0-ABDF-D786687CE655}.Release|x86.Build.0 = Release|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Debug|x86.Build.0 = Debug|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Release|x86.ActiveCfg = Release|Any CPU
+		{36121AD5-6EA0-42F0-81F8-F8ACB0318446}.Release|x86.Build.0 = Release|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{C253FB7E-D3E1-4AAD-A797-4062555EB6AD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {EE9D5E5A-55AA-4FD1-A2AC-7091CBED6C85}
+		SolutionGuid = {8DE40376-02CE-449B-A7A5-ED45655F19B1}
 	EndGlobalSection
 EndGlobal

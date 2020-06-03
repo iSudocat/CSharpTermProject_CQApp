@@ -40,7 +40,7 @@ namespace Attention
     public static class InitializeDB
     {
         /// <summary>
-        /// 初始化教务系统数据库信息
+        /// 初始化关注点数据库信息
         /// </summary>
         public static void Init()
         {

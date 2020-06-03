@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 namespace Attention
 {
     class AttentionService
-    {
+    {   
         //匹配方式
         public String MatchType;
 
         //关注列表
-        public List<Attention> att;
+        public List<Attention> Attentions;
 
         //添加关注
         public void Add(String SourceQQ,String Attention,String GroupNum) 
         {
             //检查是否包含，如无
             //向数据库插入一条记录
+            //用数据库来更新list
         }
 
         //删除关注
@@ -52,12 +53,14 @@ namespace Attention
 
         private Boolean AccurateMatch(String Sentence, String Attention) 
         {
-            //isContent()
+           
             return true;
         }
-        //匹配:返回关注点，用于输出
-        public String IsCare(String SourceQQ, String Attention, String GroupNum) 
+
+        //监听:返回关注点，用于输出
+        public String Listening(String SourceQQ, String Attention, String GroupNum, String MatchType) 
         {
+
             return null;
         }
     }

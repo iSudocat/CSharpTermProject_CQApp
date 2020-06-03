@@ -13,14 +13,14 @@ namespace Attention
     {
         //消息关注者
         [Key, Column(Order = 0)]
-        String noticer { get; set; }
+        String Noticer { get; set; }
 
         //消息群
         [Key, Column(Order = 1)]
-        String group { get; set; }
+        String Group { get; set; }
 
         //关注点
         [Key, Column(Order = 2)]
-        String attention { get; set; }
+        String AttentionPoint { get; set; }
     }
 }

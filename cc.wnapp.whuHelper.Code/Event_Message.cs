@@ -27,6 +27,10 @@ namespace cc.wnapp.whuHelper.Code
            // 设置该属性, 表示阻塞本条消息, 该属性会在方法结束后传递给酷Q
            e.Handler = true;
             */
+            QQ BotQQ = CQ.Api.GetLoginQQ();
+            string msg = e.Message;
+            string fromqq = e.FromQQ;
+            msgProcess.GroupAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
 
         }
 
@@ -41,6 +45,10 @@ namespace cc.wnapp.whuHelper.Code
             if (msg.Contains("绑定教务系统"))
             {
                 msgProcess.bdjw(fromqq, msg, Convert.ToString(BotQQ.Id));
+            }
+            if (msg.Contains("关注") || msg.Contains("订阅")) 
+            {
+                msgProcess.PrivateAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
             }
         }
 

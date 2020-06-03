@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Attention
+namespace AttentionSpace
 {
     //实体类
     public class Attention
@@ -22,5 +22,12 @@ namespace Attention
         //关注点
         [Key, Column(Order = 2)]
         String AttentionPoint { get; set; }
+
+        public Attention(String N,String G,String A)
+        {
+            Noticer = N;
+            Group = G;
+            AttentionPoint = A;
+        }
     }
 }

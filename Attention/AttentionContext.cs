@@ -11,7 +11,7 @@ using System.Data.Entity.Core.Common;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Mapping;
 using System.Data.Entity.Core.Metadata.Edm;
-namespace Attention
+namespace AttentionSpace
 {
     public class SQLiteConfiguration : DbConfiguration
     {

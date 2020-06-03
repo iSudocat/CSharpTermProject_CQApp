@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Attention
+namespace AttentionSpace
 {
     class AttentionService
     {   
@@ -12,11 +12,20 @@ namespace Attention
         public String MatchType;
 
         //关注列表
-        public List<Attention> Attentions;
+        public List<Attention> Attentions;//绑定UI
 
         //添加关注
         public void Add(String SourceQQ,String Attention,String GroupNum) 
         {
+            using(var dbcontext = new AttentionContext())
+            {
+                Attention newatt = new Attention(SourceQQ, GroupNum, Attention);
+                if (dbcontext.Attentions.Select(p => p.SourceQQ == SourceQQ && p.GroupNum == GroupNum && p.Attention == Attention))
+                    return; //or throw exception
+                dbcontext.Attentions.Add(newatt);
+                dbcontext.SaveChanges();
+                this.Attentions = QueryAll();
+            }
             //检查是否包含，如无
             //向数据库插入一条记录
             //用数据库来更新list
@@ -25,9 +34,19 @@ namespace Attention
         //删除关注
         public Boolean Remove(String SourceQQ,String Attention,String GroupNum) 
         {
-            //检查是否存在，如有
-            //删除一条记录
-            return true;
+            using (var dbcontext = new AttentionContext())
+            {
+                Attention temp = dbcontext.Attention.FirstOrDefault(p => p.SourceQQ == SourceQQ && p.GroupNum == GroupNum && p.Attention == Attention);
+                if (temp != null)
+                {
+                    dbcontext.Attentions.Remove(temp);
+                    dbcontext.SaveChanges();
+                    this.Attentions = QueryAll();
+                    return true;
+                }
+                else
+                    return false;
+            }
         }
 
         //更新关注
@@ -36,6 +55,17 @@ namespace Attention
             //检查是否存在，如有
             //删除之，并插入新的
             return true;
+        }
+
+        public List<Attention> QueryAll()
+        {
+            using (var dbcontext = new AttentionContext())
+            {
+                var queryall = dbcontext.Attentions;
+                if (queryall != null)
+                    return queryall.ToList();
+                else throw new Exception("没有监听事件");
+            }
         }
 
         //查询关注
@@ -49,7 +79,7 @@ namespace Attention
         private Boolean ApproximateMatch(String Sentence, String Attention) 
         {
             return true;
-        }
+        } 
 
         private Boolean AccurateMatch(String Sentence, String Attention) 
         {

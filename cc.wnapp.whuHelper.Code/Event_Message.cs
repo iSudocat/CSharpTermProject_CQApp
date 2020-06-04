@@ -24,7 +24,7 @@ namespace cc.wnapp.whuHelper.Code
             string fromgroup = e.FromGroup;
 
             //***REMOVED***注：群消息处理方法请写在GroupMsgProcess中，并请按下面私聊消息中的写法改成线程方式调用。
-            msgProcess.GroupAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
+            //msgProcess.GroupAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
 
 
             if (msg.Contains("添加群日程"))

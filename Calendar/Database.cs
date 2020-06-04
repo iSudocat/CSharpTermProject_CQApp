@@ -15,7 +15,7 @@ using static Schedule.Database;
 
 namespace Schedule
 {
-    class Database
+    public class Database
     {
         public class SQLiteConfiguration : DbConfiguration
         {

@@ -50,28 +50,25 @@ namespace cc.wnapp.whuHelper.Code
             if (msg.Contains("课程表"))
             {
                 //***REMOVED***注：按上面写法改成线程方式调用
-                msgProcess.QueryCourseTable(fromqq);
+                var mp2 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t2 = new Thread(mp2.QueryCourseTable);
+                t2.Start();
             }
 
             if (msg.Contains("查询功能菜单"))
             {
                 //***REMOVED***注：放入处理函数中，按上面写法改成线程方式调用
-                string menu =
-                    "课程表查询菜单：\n" +
-                    "1. 按课头号查询\n" +
-                    "2. 按课程名查询\n" +
-                    "3. 按学分查询\n" +
-                    "4. 按授课学院查询\n" +
-                    "5. 按专业查询\n" +
-                    "6. 按授课教师查询\n" +
-                    "请按指令格式查询：按{{查询模式}}查询 | {{查询关键字}}";
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), menu);
+                var mp3 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t3 = new Thread(mp3.FunctionMenu);
+                t3.Start();
             }
 
             if (msg.Contains("按") && msg.Contains("查询"))
             {
                 //***REMOVED***注：按上面写法改成线程方式调用
-                msgProcess.QueryFunction(fromqq, msg);
+                var mp4 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t4 = new Thread(mp4.QueryFunction);
+                t4.Start();
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AttentionSpace
 {
-    class AttentionService
+public    class AttentionService
     {   
         //匹配方式
         public String MatchType;
@@ -20,7 +20,7 @@ namespace AttentionSpace
             using(var dbcontext = new AttentionContext())
             {
                 Attention newatt = new Attention(SourceQQ, GroupNum, Attention);
-                if (dbcontext.Attentions.Select(p => p.SourceQQ == SourceQQ && p.GroupNum == GroupNum && p.Attention == Attention))
+                if (dbcontext.Attentions.FirstOrDefault(p => p.Noticer == SourceQQ && p.Group == GroupNum && p.AttentionPoint == Attention) == null)
                     return; //or throw exception
                 dbcontext.Attentions.Add(newatt);
                 dbcontext.SaveChanges();
@@ -36,7 +36,7 @@ namespace AttentionSpace
         {
             using (var dbcontext = new AttentionContext())
             {
-                Attention temp = dbcontext.Attention.FirstOrDefault(p => p.SourceQQ == SourceQQ && p.GroupNum == GroupNum && p.Attention == Attention);
+                Attention temp = dbcontext.Attentions.FirstOrDefault(p => p.Noticer == SourceQQ && p.Group == GroupNum && p.AttentionPoint == Attention);
                 if (temp != null)
                 {
                     dbcontext.Attentions.Remove(temp);

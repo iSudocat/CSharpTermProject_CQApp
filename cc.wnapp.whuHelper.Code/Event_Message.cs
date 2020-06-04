@@ -55,7 +55,7 @@ namespace cc.wnapp.whuHelper.Code
                 t2.Start();
             }
 
-            if (msg.Contains("查询功能菜单"))
+            if (msg.Contains("功能菜单"))
             {
                 //Sudocat注：放入处理函数中，按上面写法改成线程方式调用
                 var mp3 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };

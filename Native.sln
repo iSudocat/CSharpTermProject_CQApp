@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attention", "Attention\Atte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedule", "Calendar\Schedule.csproj", "{DE02FB93-DA23-4D69-8CE7-85FFB929B901}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttentionTests", "AttentionTests\AttentionTests.csproj", "{69D538B3-45AC-433F-9E05-7040F1287D7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,14 @@ Global
 		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|x86.ActiveCfg = Release|x86
 		{DE02FB93-DA23-4D69-8CE7-85FFB929B901}.Release|x86.Build.0 = Release|x86
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Debug|x86.Build.0 = Debug|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Release|x86.ActiveCfg = Release|Any CPU
+		{69D538B3-45AC-433F-9E05-7040F1287D7B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

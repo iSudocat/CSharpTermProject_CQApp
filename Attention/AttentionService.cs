@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AttentionSpace
 {
-public    class AttentionService
-    {   
+    public class AttentionService
+    {
         //匹配方式
         public String MatchType;
 
@@ -15,9 +15,9 @@ public    class AttentionService
         public List<Attention> Attentions;//绑定UI
 
         //添加关注
-        public void Add(String SourceQQ,String Attention,String GroupNum) 
+        public void Add(String SourceQQ, String Attention, String GroupNum)
         {
-            using(var dbcontext = new AttentionContext())
+            using (var dbcontext = new AttentionContext())
             {
                 Attention newatt = new Attention(SourceQQ, GroupNum, Attention);
                 if (dbcontext.Attentions.FirstOrDefault(p => p.Noticer == SourceQQ && p.Group == GroupNum && p.AttentionPoint == Attention) == null)
@@ -32,7 +32,7 @@ public    class AttentionService
         }
 
         //删除关注
-        public Boolean Remove(String SourceQQ,String Attention,String GroupNum) 
+        public Boolean Remove(String SourceQQ, String Attention, String GroupNum)
         {
             using (var dbcontext = new AttentionContext())
             {
@@ -50,10 +50,21 @@ public    class AttentionService
         }
 
         //更新关注
-        public Boolean Update(String SourceQQ,String OldAttention,String NewAttention, String GroupNum) 
+        public Boolean Update(String SourceQQ, String OldAttention, String NewAttention, String GroupNum = "")
         {
             //检查是否存在，如有
             //删除之，并插入新的
+            //允许GroupNum为空，这样就只要查询所有的Attention字段相等的部分
+            using (var dbcontext = new AttentionContext())
+            {
+                var quary = dbcontext.Attentions
+                    .Where(att => att.AttentionPoint == OldAttention && (att.Group == GroupNum || GroupNum == ""));
+                foreach (Attention att in quary)
+                {
+                    att.AttentionPoint = NewAttention;
+                }
+                dbcontext.SaveChanges();
+            }
             return true;
         }
 
@@ -69,29 +80,53 @@ public    class AttentionService
         }
 
         //查询关注
-        public List<Attention> Query(String SourceQQ,String Attention,String GroupNum) 
+        public List<Attention> Query(String SourceQQ = "", String AttentionPoint = "", String GroupNum = "")
         {
-            //可以以任意项来查询，要分类讨论
-            return null;
+            List<Attention> result = new List<Attention>();
+            foreach (Attention att in result)
+            {
+                if ((SourceQQ == "" || SourceQQ == att.Noticer)
+                    && (AttentionPoint == "" || att.AttentionPoint == AttentionPoint)
+                    && (GroupNum == "" || GroupNum == att.Group))
+                    result.Add(att);
+            }
+            return result;
         }
 
         //模糊匹配算法
-        private Boolean ApproximateMatch(String Sentence, String Attention) 
+        private Boolean ApproximateMatch(String Sentence, String AttentionPoint)
         {
-            return true;
-        } 
+            return Sentence.Contains(AttentionPoint);
+        }
 
-        private Boolean AccurateMatch(String Sentence, String Attention) 
+        private Boolean AccurateMatch(String Sentence, String AttentionPoint)
         {
-           
-            return true;
+            return Sentence.Contains(AttentionPoint);
         }
 
         //监听:返回关注点，用于输出
-        public String Listening(String SourceQQ, String Attention, String GroupNum, String MatchType) 
+        public List<String> Listening(String Message, String GroupNum)
         {
-
-            return null;
+            //创建监听者qq号列表对象
+            List<String> listeners = new List<String>();
+            //查询群号相关的项，保存在内存中
+            List<Attention> attentions = Query("", "", GroupNum);
+            //遍历所有表项，匹配到相关的关注点，就将监听者增加到列表中
+            foreach (Attention att in attentions)
+            {
+                if (MatchType == "Approximate")
+                {
+                    if (ApproximateMatch(Message, att.AttentionPoint))
+                        listeners.Add(att.Noticer);
+                }
+                else if (MatchType == "Accurate")
+                {
+                    if (AccurateMatch(Message, att.AttentionPoint))
+                        listeners.Add(att.Noticer);
+                }
+            }
+            //返回监听者的qq号的列表
+            return listeners;
         }
     }
 }

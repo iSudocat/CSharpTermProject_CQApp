@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AttentionSpace
 {
-    public class AttentionService
-    {
+public    class AttentionService
+    {   
         //匹配方式
         public String MatchType;
 

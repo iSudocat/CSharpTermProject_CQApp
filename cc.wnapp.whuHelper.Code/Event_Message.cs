@@ -27,6 +27,10 @@ namespace cc.wnapp.whuHelper.Code
            // 设置该属性, 表示阻塞本条消息, 该属性会在方法结束后传递给酷Q
            e.Handler = true;
             */
+            QQ BotQQ = CQ.Api.GetLoginQQ();
+            string msg = e.Message;
+            string fromqq = e.FromQQ;
+            msgProcess.GroupAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
 
         }
 
@@ -44,13 +48,13 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t1 = new Thread(mp1.BindEasAccount);
                 t1.Start();
             }
-
+            if (msg.Contains("关注") || msg.Contains("订阅")) 
 
             //查询课程表模块
             if (msg.Contains("课程表"))
             {
-                //***REMOVED***注：按上面写法改成线程方式调用
-                msgProcess.QueryCourseTable(fromqq);
+				//***REMOVED***注：msgProcess类已变更，私聊消息处理类现为PrivateMsgProcess,并请按上面写法改成线程方式调用自己的处理函数
+                msgProcess.PrivateAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
             }
 
             if (msg.Contains("查询功能菜单"))

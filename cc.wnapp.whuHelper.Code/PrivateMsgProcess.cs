@@ -92,13 +92,13 @@ namespace cc.wnapp.whuHelper.Code
 
         //课程表模块
 
-        public static void QueryCourseTable(string fromqq)
+        public void QueryCourseTable()
         {
             using (jwContext context = new jwContext())
             {
                 //先通过用户的QQ查找到对应的Student对象
                 Student student;
-                student = context.Students.Where(s => s.QQ == fromqq).FirstOrDefault();
+                student = context.Students.Where(s => s.QQ == fromQQ).FirstOrDefault();
 
                 if (student != null)
                 {
@@ -108,17 +108,31 @@ namespace cc.wnapp.whuHelper.Code
                     {
                         table += CourseTable[i].ToString();
                     }
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), table);
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), table);
                 }
                 else
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "登陆已失效！");
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "登陆已失效！");
                 }
                 
             }
         }
 
-        public static void QueryFunction(string fromqq, string message)
+        public void FunctionMenu()
+        {
+            string menu =
+                    "课程表查询菜单：\n" +
+                    "1. 按课头号查询\n" +
+                    "2. 按课程名查询\n" +
+                    "3. 按学分查询\n" +
+                    "4. 按授课学院查询\n" +
+                    "5. 按专业查询\n" +
+                    "6. 按授课教师查询\n" +
+                    "请按指令格式查询：按{{查询模式}}查询 | {{查询关键字}}";
+            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), menu);
+        }
+
+        public void QueryFunction()
         {
             using (var context = new jwContext())
             {
@@ -132,7 +146,7 @@ namespace cc.wnapp.whuHelper.Code
 
                     //先通过用户的QQ查找到对应的Student对象
                     Student student;
-                    student = context.Students.Where(s => s.QQ == fromqq).FirstOrDefault();
+                    student = context.Students.Where(s => s.QQ == fromQQ).FirstOrDefault();
                     string stuID = student.StuID;
 
                     switch (queryModel)
@@ -157,7 +171,7 @@ namespace cc.wnapp.whuHelper.Code
                             break;
                     }
 
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "查询结果如下：");
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "查询结果如下：");
                     string result = "";
                     if (QueryResult.Count != 0)
                     {
@@ -165,16 +179,16 @@ namespace cc.wnapp.whuHelper.Code
                         {
                             result += QueryResult[i].ToString();
                         }
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), result);
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), result);
                     }
                     else
                     {
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "未查询到记录");
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "未查询到记录");
                     }
                 }
                 catch (Exception ex)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromqq), "出现错误，请重新输入命令！");
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "出现错误，请重新输入命令！");
                 }
             }
         }

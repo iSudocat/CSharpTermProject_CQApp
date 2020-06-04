@@ -214,6 +214,7 @@ namespace cc.wnapp.whuHelper.UI
 
         }
 
+
         //测试时使用
         //private void courseDataGridView_SelectionChanged(object sender, EventArgs e)
         //{

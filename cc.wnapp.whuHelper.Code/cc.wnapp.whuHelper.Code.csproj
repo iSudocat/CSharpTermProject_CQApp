@@ -84,6 +84,7 @@
     <Compile Include="GroupMsgProcess.cs" />
     <Compile Include="PrivateMsgProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleThread.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Calendar\Schedule.csproj">

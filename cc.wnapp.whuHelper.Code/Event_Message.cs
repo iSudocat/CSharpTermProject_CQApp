@@ -27,6 +27,8 @@ namespace cc.wnapp.whuHelper.Code
            // 设置该属性, 表示阻塞本条消息, 该属性会在方法结束后传递给酷Q
            e.Handler = true;
             */
+
+            //***REMOVED***注：群消息处理方法请写在GroupMsgProcess中，并请按下面私聊消息中的写法改成线程方式调用。
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
@@ -44,34 +46,38 @@ namespace cc.wnapp.whuHelper.Code
             string fromqq = e.FromQQ;
             if (msg.Contains("绑定教务系统"))
             {
-                var mp1 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
-                Thread t1 = new Thread(mp1.BindEasAccount);
-                t1.Start();
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t = new Thread(mp.BindEasAccount);
+                t.Start();
             }
-            if (msg.Contains("关注") || msg.Contains("订阅")) 
-
+            
             //查询课程表模块
             if (msg.Contains("课程表"))
             {
-                var mp2 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
-                msgProcess.QueryCourseTable(fromqq);
-                t2.Start();
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t = new Thread(mp.QueryCourseTable);
+                t.Start();
             }
 
-            if (msg.Contains("功能菜单"))
+            if (msg.Contains("课程表菜单"))
             {
-                //***REMOVED***注：放入处理函数中，按上面写法改成线程方式调用
-                var mp3 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
-                Thread t3 = new Thread(mp3.FunctionMenu);
-                t3.Start();
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t = new Thread(mp.FunctionMenu);
+                t.Start();
             }
 
             if (msg.Contains("按") && msg.Contains("查询"))
             {
-                //***REMOVED***注：按上面写法改成线程方式调用
-                var mp4 = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
-                Thread t4 = new Thread(mp4.QueryFunction);
-                t4.Start();
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t = new Thread(mp.QueryFunction);
+                t.Start();
+            }
+
+            if (msg.Contains("关注") || msg.Contains("订阅"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(Botqq.Id) };
+                Thread t = new Thread(mp.PrivateAttentionHandler);
+                t.Start();
             }
         }
     }

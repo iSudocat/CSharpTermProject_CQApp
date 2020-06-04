@@ -194,7 +194,7 @@ namespace cc.wnapp.whuHelper.Code
         }
 
         //检测是否要注册新的关注点
-        public static void PrivateAttentionHandler(string msgSourse, string message, string BotQQ)
+        public void PrivateAttentionHandler()
         {
             //如果包含“取消关注”、“删除关注”...之类的词语，
             //      解析出群号和消息内容/只有群号/只有消息内容
@@ -215,7 +215,7 @@ namespace cc.wnapp.whuHelper.Code
         }
 
         //检测消息中是否有关注点
-        public static void GroupAttentionHandler(string msgSourse, string message, string BotQQ)
+        public void GroupAttentionHandler()
         {
             //创建Attention线程Listen,将三个参数传入
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComputeScore;
 using jwxt;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
@@ -34,6 +36,7 @@ namespace cc.wnapp.whuHelper.UI
         {
             tab1Init();
             tab2Init();
+            tab3Init();
         }
 
         private void tab1Init()
@@ -59,6 +62,24 @@ namespace cc.wnapp.whuHelper.UI
         private void tab2Init()
         {
 
+        }
+
+        private void tab3Init()
+        {
+            Student student = bindingSource_StudentDB.Current as Student;
+            bindingSource_StuScore.DataSource = jwOp.GetScores(student.StuID);
+            AllScoredataGridView.DataSource = bindingSource_StuScore;
+
+            //防止列乱序
+            AllScoredataGridView.AutoGenerateColumns = false;
+            //为DataGridView增加可选框
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "select";
+            //列名
+            checkBoxColumn.HeaderText = "选择";
+            //第一列插入checkbox
+            AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
+            AllScoredataGridView.RowHeadersVisible = false;//???
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -213,6 +234,125 @@ namespace cc.wnapp.whuHelper.UI
         {
 
         }
+
+        private void buttonSelectAll_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(AllScoredataGridView.Rows[i].Cells[0].Value) == false)
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                else
+                    continue;
+            }
+        }
+
+        private void buttonSelectNo_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(AllScoredataGridView.Rows[i].Cells[0].Value) == true)
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                else
+                    continue;
+            }
+        }
+
+        private void buttonSelectNoZB_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                //LessonType可能是第二个
+                if(AllScoredataGridView.Rows[i].Cells[2].ToString() == "专业必修")
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                else
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+            }
+        }
+
+        private void buttonSelectNoZX_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                //LessonType可能是第二个
+                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "专业选修")
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                else
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+            }
+        }
+
+        private void buttonSelectNoGB_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                //LessonType可能是第二个
+                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "公共必修")
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                else
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+            }
+        }
+
+        private void buttonSelectNoGX_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                //LessonType可能是第二个
+                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "公共选修")
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                else
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+            }
+        }
+
+        private void buttonSelectCS_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            {
+                //LessonType可能是第二个
+                if (AllScoredataGridView.Rows[i].Cells[7].ToString() == "计算机学院")
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                else
+                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+            }
+        }
+
+        private void buttonRestore_Click(object sender, EventArgs e)
+        {
+            Student student = bindingSource_StudentDB.Current as Student;
+            bindingSource_StuScore.DataSource = jwOp.GetScores(student.StuID);
+        }
+
+        private void buttonCompute_Click(object sender, EventArgs e)
+        {
+            List<miniScore> GetSelect = GetCheckBoxSelect();
+            GPAInfo StuGPA = ScoreService.ComputeUI(GetSelect);
+            labelGPA.Text = StuGPA.GPA.ToString();
+            labelAverage.Text = StuGPA.AverageScore.ToString();
+            labelCreditAll.Text = StuGPA.CreditSum.ToString();
+        }
+
+        private List<miniScore> GetCheckBoxSelect()
+        {
+            List<miniScore> GetSelect = new List<miniScore>();
+            if(AllScoredataGridView.Rows.Count > 0)
+            {
+                for(int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+                {
+                    DataGridViewCheckBoxCell checkcell = (DataGridViewCheckBoxCell)AllScoredataGridView.Rows[i].Cells[0];
+                    Boolean flag = Convert.ToBoolean(checkcell.Value);
+                    if(flag)
+                    {
+                        float score = float.Parse(AllScoredataGridView.Rows[i].Cells["Mark"].Value.ToString());
+                        float credit = float.Parse(AllScoredataGridView.Rows[i].Cells["Credit"].Value.ToString());
+                        miniScore temp = new miniScore(score, credit);
+                        GetSelect.Add(temp);
+                    }
+                }
+            }
+            return GetSelect;
+        }
+
 
         //测试时使用
         //private void courseDataGridView_SelectionChanged(object sender, EventArgs e)

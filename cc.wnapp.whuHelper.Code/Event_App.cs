@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace cc.wnapp.whuHelper.Code
@@ -63,6 +64,8 @@ namespace cc.wnapp.whuHelper.Code
                 }
 
                 jwxt.InitializeDB.Init();   //初始化数据库
+                Schedule.InitializeDB.Init();//初始化日程数据库
+
 
                 #region  周起始日期文件初始化
                 var client0 = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/FirstWeekDate.ini");
@@ -78,6 +81,12 @@ namespace cc.wnapp.whuHelper.Code
             {
                 e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.Message);
             }
+            
+            Thread GsrTh = new Thread(ScheduleThread.GroupScheduleRemind);
+            GsrTh.Start();
+
+            Thread PsrTh = new Thread(ScheduleThread.PrivateScheduleRemind);
+            PsrTh.Start();
         }
     }
 

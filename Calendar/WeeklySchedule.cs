@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Schedule
 {
-    class WeeklySchedule
+    public class WeeklySchedule
     {
         [Required]
         public static int Num = 0;//计数器

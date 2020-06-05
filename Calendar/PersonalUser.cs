@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using static Schedule.Database;
+using jwxt;
 
 namespace Schedule
 {
-    class PersonalUser
+    public class PersonalUser
     {
         public long QQ { get; set; }
         public PersonalUser(long qq)
@@ -15,7 +16,37 @@ namespace Schedule
             QQ = qq;
         }
         
-        public Boolean AddSchedule(DateTime dt,string st,string sc)
+        public bool AddCourseSchedule()  //将课程导入日程
+        {
+            string userStuID = jwOp.GetStuID((this.QQ).ToString());
+            List<Course> courses = jwOp.GetCourses(userStuID);
+            foreach(Course course in courses)
+            {
+                if (jwOp.ParseClassTime(course).Length == 2)
+                {
+                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0];
+                    string st = "每周课程提醒";
+                    string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
+                    int weekSpan = (int)jwOp.ParseClassTime(course)[1];
+                    if(!AddWeeklySchedule(dt, st, sc, weekSpan))
+                        return false;
+                }
+                else if(jwOp.ParseClassTime(course).Length == 4)
+                {
+                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0];
+                    string st = "每周课程提醒";
+                    string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
+                    int weekSpan = (int)jwOp.ParseClassTime(course)[1];
+                    ;
+                    dt = (DateTime)jwOp.ParseClassTime(course)[2];
+                    weekSpan = (int)jwOp.ParseClassTime(course)[3];
+                    if(!AddWeeklySchedule(dt, st, sc, weekSpan)||!AddWeeklySchedule(dt, st, sc, weekSpan))
+                        return false;
+                }
+            }
+            return true;
+        }
+        public bool AddSchedule(DateTime dt,string st,string sc)
         {
             using (var db = new ScheduleContext())
             {
@@ -25,7 +56,9 @@ namespace Schedule
                 return true;
             }
         }
-        public Boolean DelSchedule(string id)
+
+
+        public bool DelSchedule(string id)
         {
             using(var db=new ScheduleContext())
             {
@@ -73,7 +106,7 @@ namespace Schedule
                 }
             }
         }
-        public Boolean SetSchedule(string id,DateTime dt,string st,string sc)
+        public bool SetSchedule(string id,DateTime dt,string st,string sc)
         {
             using(var db=new ScheduleContext())
             {
@@ -90,7 +123,7 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public Boolean AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
+        public bool AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
         {
             using (var db = new ScheduleContext())
             {
@@ -100,7 +133,7 @@ namespace Schedule
                 return true;
             }
         }
-        public Boolean DelWeeklySchedule(string id)
+        public bool DelWeeklySchedule(string id)
         {
             using (var db = new ScheduleContext())
             {
@@ -148,7 +181,7 @@ namespace Schedule
                 }
             }
         }
-        public Boolean SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
+        public bool SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
         {
             using (var db = new ScheduleContext())
             {

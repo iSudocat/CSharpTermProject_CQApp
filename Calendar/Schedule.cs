@@ -26,6 +26,7 @@ namespace Schedule
         public string ScheduleType { get; set; }//日程类型：生日，纪念日之类的
         [Required]
         public string ScheduleContent { get; set; }//日程具体内容
+        public Schedule() { }
         public Schedule(long userQQ,int userType,DateTime dt,string st,string sc)
         {
             Num++;

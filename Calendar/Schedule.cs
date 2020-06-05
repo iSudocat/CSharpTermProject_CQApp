@@ -37,7 +37,10 @@ namespace Schedule
             ScheduleContent = sc;
             ScheduleID = Convert.ToString(UserQQ) + Convert.ToString(Num);
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> 804f4db1ea14bf93cdefa8d8f08527f0b8483a63
 
         public string DisplaySchedule()
         {

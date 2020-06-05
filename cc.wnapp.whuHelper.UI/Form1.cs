@@ -324,8 +324,8 @@ namespace cc.wnapp.whuHelper.UI
             {
                 if (AllScoredataGridView.CurrentRow != null)
                 {
-                    //LessonType可能是第二个
-                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == "计算机学院")
+                    String Department = jwOp.GetCollege(tb_StuID.Text);
+                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department)
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";

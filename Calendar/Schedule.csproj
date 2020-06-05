@@ -84,11 +84,12 @@
   <ItemGroup>
     <Compile Include="CQ.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="GroupUser.cs" />
+    <Compile Include="GroupUserService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs" />
-    <Compile Include="PersonalUser.cs" />
+    <Compile Include="PersonalUserService.cs" />
+    <Compile Include="ScheduleInterface.cs" />
     <Compile Include="WeeklySchedule.cs" />
   </ItemGroup>
   <ItemGroup>

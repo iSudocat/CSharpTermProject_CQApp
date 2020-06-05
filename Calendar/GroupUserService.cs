@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Native.Sdk.Cqp.Enum;
 using Native.Sdk.Cqp.Model;
-using static Schedule.PersonalUser;
+using static Schedule.PersonalUserService;
 
 namespace Schedule
 {
-    public class GroupUser
+    public class GroupUserService
     {
         public long GroupQQ { get; set; }//群组QQ
         public long QQ { get; set; }//群成员QQ,也就是正在操作的那个人
-        public GroupUser(long groupQQ,long qq)
+        public GroupUserService(long groupQQ,long qq)
         {
             GroupQQ = groupQQ;
             QQ = qq;

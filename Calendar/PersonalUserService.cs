@@ -8,10 +8,10 @@ using jwxt;
 
 namespace Schedule
 {
-    public class PersonalUser
+    public class PersonalUserService
     {
         public long QQ { get; set; }
-        public PersonalUser(long qq)
+        public PersonalUserService(long qq)
         {
             QQ = qq;
         }

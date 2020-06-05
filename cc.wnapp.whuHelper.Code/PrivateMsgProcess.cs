@@ -229,7 +229,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddCourseScheduleToDB()
         {
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.AddCourseSchedule())
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【导入成功】\n");
@@ -245,7 +245,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1];
             var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.AddSchedule(StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
@@ -263,7 +263,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1];
             var scheduleContent = textOp.GetRightText(str, ":"); ;
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.AddWeeklySchedule(StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
@@ -277,7 +277,7 @@ namespace cc.wnapp.whuHelper.Code
         public void DelScheduleFromDB()
         {
             var scheduleID = textOp.GetRightText(message, "|");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.DelSchedule(scheduleID))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
@@ -290,7 +290,7 @@ namespace cc.wnapp.whuHelper.Code
         public void DelWeeklyScheduleFromDB()
         {
             var scheduleID = textOp.GetRightText(message, "|");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.DelWeeklySchedule(scheduleID))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
@@ -307,7 +307,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1];
             var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.SetSchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
@@ -325,7 +325,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1];
             var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.SetWeeklySchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
@@ -338,7 +338,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetSchedulesFromDB()
         {
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             foreach (var schedule in personalUser.GetSchedules())
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
@@ -350,7 +350,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetWeeklySchedulesFromDB()
         {
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             foreach (WeeklySchedule weeklySchedule in personalUser.GetWeeklySchedules())
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
@@ -363,7 +363,7 @@ namespace cc.wnapp.whuHelper.Code
         public void SortScheduleFromDB()
         {
             var option = textOp.GetRightText(message, "%");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             foreach (var schedule in personalUser.SortSchedules(option))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
@@ -376,7 +376,7 @@ namespace cc.wnapp.whuHelper.Code
         public void SortWeeklyScheduleFromDB()
         {
             var option = textOp.GetRightText(message, "%");
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             foreach (WeeklySchedule weeklySchedule in personalUser.SortWeeklySchedules(option))
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
@@ -388,7 +388,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void ScheduleCommand()
         {
-            PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             String Command = "命令格式：\n" +
                 "添加日程|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "删除日程|日程号\n" +

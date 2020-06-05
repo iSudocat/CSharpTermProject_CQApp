@@ -19,12 +19,12 @@ namespace cc.wnapp.whuHelper.Code
             while (true)
             {
 
-                foreach (var schedule in ScheduleContext.GetAllSchedules())
+                foreach (var schedule in ScheduleInterface.GetGlobalSchedules())
                 {
                     if (schedule.UserType==0&&schedule.ScheduleTime == DateTime.Now)
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
                 }
-                foreach (var weeklySchedule in ScheduleContext.GetAllWeeklySchedules())
+                foreach (var weeklySchedule in ScheduleInterface.GetGlobalWeeklySchedules())
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
@@ -43,12 +43,12 @@ namespace cc.wnapp.whuHelper.Code
             
             while (true)
             {
-                foreach (var schedule in ScheduleContext.GetAllSchedules())
+                foreach (var schedule in ScheduleInterface.GetGlobalSchedules())
                 {
                     if (schedule.UserType == 1 && schedule.ScheduleTime == DateTime.Now)
                         CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
                 }
-                foreach (var weeklySchedule in ScheduleContext.GetAllWeeklySchedules())
+                foreach (var weeklySchedule in ScheduleInterface.GetGlobalWeeklySchedules())
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {

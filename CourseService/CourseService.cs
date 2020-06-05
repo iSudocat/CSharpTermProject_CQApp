@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using jwxt;
 
-namespace jwxt
+namespace CourseFunction
 {
-    class Programing
-    {
-        public static void Main()
-        {
-            //CourseService.GetCourses();
-        }
-    }
-
     public class CourseService
     {
         public List<Student> StudentList = new List<Student>();
@@ -81,8 +73,8 @@ namespace jwxt
         {
             using (var context = new jwContext())
             {
-                
-                for (int i = 0; i < context.Courses.Count(); i ++)
+
+                for (int i = 0; i < context.Courses.Count(); i++)
                 {
                     var courses = context.Courses.FirstOrDefault();
                     context.Courses.Remove(courses);

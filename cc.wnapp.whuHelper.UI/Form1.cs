@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComputeScore;
+using CourseFunction;
 using jwxt;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
@@ -48,10 +49,6 @@ namespace cc.wnapp.whuHelper.UI
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
             stuDataGridView.DataSource = bindingSource_StudentDB;
 
-            Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-            courseDataGridView.DataSource = bindingSource_Courses;
-
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
             tb_StuID.Text= ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
             if(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "") != "")
@@ -61,7 +58,9 @@ namespace cc.wnapp.whuHelper.UI
 
         private void tab2Init()
         {
-
+            Student student = bindingSource_StudentDB.Current as Student;
+            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+            courseDataGridView.DataSource = bindingSource_Courses;
         }
 
         private void tab3Init()
@@ -161,7 +160,7 @@ namespace cc.wnapp.whuHelper.UI
         {
             Student student = bindingSource_StudentDB.Current as Student;
             bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-            bindingSource_Courses.ResetBindings(false);
+            courseDataGridView.DataSource = bindingSource_Courses;
         }
 
         private void delButton_Click(object sender, EventArgs e)
@@ -175,12 +174,13 @@ namespace cc.wnapp.whuHelper.UI
             MessageBox.Show($"课程号：{courseID}");
             CourseService.RemoveCourse(courseID, getStuID());
             QueryAllCourses();
-            courseDataGridView.DataSource = bindingSource_Courses;
+            //courseDataGridView.DataSource = bindingSource_Courses;
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-
+            QueryAllCourses();
+            bindingSource_Courses.ResetBindings(false);
         }
 
         private void stuDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -198,7 +198,9 @@ namespace cc.wnapp.whuHelper.UI
         }
         private void queryButton_Click(object sender, EventArgs e)
         {
-            string stuID = getStuID();
+            //QueryAllCourses();
+            string stuID = stuDataGridView.CurrentRow.Cells[1].Value.ToString();
+            //MessageBox.Show($"StuID:{stuID}\nSelectedIndex:{queryComboBox.SelectedIndex}");
             switch (queryComboBox.SelectedIndex)
             {
                 case 0:
@@ -223,6 +225,15 @@ namespace cc.wnapp.whuHelper.UI
                     bindingSource_Courses.DataSource = CourseService.QueryByTeacher(queryTextBox.Text, stuID);
                     break;
             }
+            //StringBuilder stringBuilder = new StringBuilder();
+            //for (int i = 0; i < bindingSource_Courses.Count; i++)
+            //{
+            //    Course course = bindingSource_Courses[i] as Course;
+            //    stringBuilder.Append(course.ToString()+"\n");
+            //}
+
+            //MessageBox.Show(stringBuilder.ToString());
+            bindingSource_Courses.ResetBindings(true);
         }
 
         private void label4_Click(object sender, EventArgs e)

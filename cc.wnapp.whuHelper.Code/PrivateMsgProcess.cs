@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tools;
 using jwxt;
+using CourseFunction;
 using Native.Sdk.Cqp;
 using System.Net.Http.Headers;
 using System.Web.SessionState;

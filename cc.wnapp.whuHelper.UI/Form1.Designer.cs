@@ -103,7 +103,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSelectNoGX = new System.Windows.Forms.Button();
             this.buttonSelectNoGB = new System.Windows.Forms.Button();
-            this.buttonSelectCS = new System.Windows.Forms.Button();
+            this.buttonSelectDepart = new System.Windows.Forms.Button();
             this.buttonSelectNoZX = new System.Windows.Forms.Button();
             this.buttonSelectNoZB = new System.Windows.Forms.Button();
             this.buttonSelectNo = new System.Windows.Forms.Button();
@@ -123,6 +123,8 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -898,7 +900,9 @@
             this.Column8,
             this.Column9,
             this.Column10,
-            this.Column11});
+            this.Column11,
+            this.Column12,
+            this.Column13});
             this.AllScoredataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AllScoredataGridView.Location = new System.Drawing.Point(3, 27);
             this.AllScoredataGridView.Name = "AllScoredataGridView";
@@ -911,7 +915,7 @@
             // 
             this.groupBox4.Controls.Add(this.buttonSelectNoGX);
             this.groupBox4.Controls.Add(this.buttonSelectNoGB);
-            this.groupBox4.Controls.Add(this.buttonSelectCS);
+            this.groupBox4.Controls.Add(this.buttonSelectDepart);
             this.groupBox4.Controls.Add(this.buttonSelectNoZX);
             this.groupBox4.Controls.Add(this.buttonSelectNoZB);
             this.groupBox4.Controls.Add(this.buttonSelectNo);
@@ -943,15 +947,15 @@
             this.buttonSelectNoGB.UseVisualStyleBackColor = true;
             this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
             // 
-            // buttonSelectCS
+            // buttonSelectDepart
             // 
-            this.buttonSelectCS.Location = new System.Drawing.Point(708, 30);
-            this.buttonSelectCS.Name = "buttonSelectCS";
-            this.buttonSelectCS.Size = new System.Drawing.Size(112, 31);
-            this.buttonSelectCS.TabIndex = 13;
-            this.buttonSelectCS.Text = "去除非计院";
-            this.buttonSelectCS.UseVisualStyleBackColor = true;
-            this.buttonSelectCS.Click += new System.EventHandler(this.buttonSelectCS_Click);
+            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
+            this.buttonSelectDepart.Name = "buttonSelectDepart";
+            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
+            this.buttonSelectDepart.TabIndex = 13;
+            this.buttonSelectDepart.Text = "去除非本院";
+            this.buttonSelectDepart.UseVisualStyleBackColor = true;
+            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
             // 
             // buttonSelectNoZX
             // 
@@ -1095,6 +1099,24 @@
             this.Column11.Name = "Column11";
             this.Column11.Width = 125;
             // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "StuID";
+            this.Column12.HeaderText = "StuID";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.Visible = false;
+            this.Column12.Width = 125;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "Student";
+            this.Column13.HeaderText = "Student";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.Visible = false;
+            this.Column13.Width = 125;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -1209,7 +1231,7 @@
         private System.Windows.Forms.TextBox textBoxCourseName;
         private System.Windows.Forms.Button buttonSelectNoGX;
         private System.Windows.Forms.Button buttonSelectNoGB;
-        private System.Windows.Forms.Button buttonSelectCS;
+        private System.Windows.Forms.Button buttonSelectDepart;
         private System.Windows.Forms.Button buttonSelectNoZX;
         private System.Windows.Forms.Button buttonSelectNoZB;
         private System.Windows.Forms.Button buttonSelectNo;
@@ -1232,6 +1254,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
     }
 }
 

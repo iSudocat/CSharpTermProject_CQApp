@@ -64,8 +64,8 @@ namespace cc.wnapp.whuHelper.Code
                 }
 
                 jwxt.InitializeDB.Init();   //初始化数据库
-
                 Schedule.InitializeDB.Init();//初始化日程数据库
+
 
                 #region  周起始日期文件初始化
                 var client0 = new RestClient("***REMOVED***FirstWeekDate.ini");

@@ -166,7 +166,7 @@ namespace jwxt
         {
             using (var context = new jwContext())
             {
-                var stu = context.Students.SingleOrDefault(s => s.QQ == StuID);
+                var stu = context.Students.SingleOrDefault(s => s.StuID == StuID);
                 if (stu != null)
                     return stu.College;
                 else

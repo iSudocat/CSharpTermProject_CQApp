@@ -655,10 +655,6 @@
       <Project>{a72bd0fd-b8fb-4c0e-a1ce-22dd27a8c3a4}</Project>
       <Name>cc.wnapp.whuHelper.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Native.Core\Native.Core.csproj">
-      <Project>{c03c5bb7-91d0-4894-aaf9-127090dfad91}</Project>
-      <Name>Native.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>

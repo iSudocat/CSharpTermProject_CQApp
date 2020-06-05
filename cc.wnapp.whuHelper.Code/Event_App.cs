@@ -63,6 +63,26 @@ namespace cc.wnapp.whuHelper.Code
                     e.CQLog.InfoSuccess("初始化", "下载成功：jwxt.db");
                 }
 
+                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db") == false)
+                {
+                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：jwxt.db");
+                    var client = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/jwxt.db");
+                    var request = new RestRequest(Method.GET);
+                    var response = client.DownloadData(request);
+                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db", response);
+                    e.CQLog.InfoSuccess("初始化", "下载成功：jwxt.db");
+                }
+
+                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\ScheduleDB.db") == false)
+                {
+                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：ScheduleDB.db");
+                    var client = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/ScheduleDB.db");
+                    var request = new RestRequest(Method.GET);
+                    var response = client.DownloadData(request);
+                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\ScheduleDB.db", response);
+                    e.CQLog.InfoSuccess("初始化", "下载成功：ScheduleDB.db");
+                }
+
                 jwxt.InitializeDB.Init();   //初始化数据库
                 Schedule.InitializeDB.Init();//初始化日程数据库
 

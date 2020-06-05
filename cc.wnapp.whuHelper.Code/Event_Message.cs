@@ -17,7 +17,6 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
-
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;

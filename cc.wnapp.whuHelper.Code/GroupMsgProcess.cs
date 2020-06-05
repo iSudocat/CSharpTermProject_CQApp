@@ -27,7 +27,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1];
             var scheduleContent = textOp.GetRightText(str, ":");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
@@ -45,7 +45,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1];
             var scheduleContent = textOp.GetRightText(str, ":");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.AddWeeklySchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
@@ -59,7 +59,7 @@ namespace cc.wnapp.whuHelper.Code
         public void DelScheduleFromDB()
         {
             var scheduleID = textOp.GetRightText(message, "|");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.DelSchedule(scheduleID))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
@@ -72,7 +72,7 @@ namespace cc.wnapp.whuHelper.Code
         public void DelWeeklyScheduleFromDB()
         {
             var scheduleID = textOp.GetRightText(message, "|");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.DelWeeklySchedule(scheduleID))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
@@ -88,7 +88,7 @@ namespace cc.wnapp.whuHelper.Code
             var dateTime = textOp.GetMiddleText(message, "|", "(");
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             var scheduleContent = textOp.GetRightText(message, ":");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.SetSchedule(scheduleID, PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【修改成功】\n");
@@ -106,7 +106,7 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             string str = message.Split(')')[1]; 
             var scheduleContent = textOp.GetRightText(str, ":");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.SetWeeklySchedule(scheduleID, PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【修改成功】\n");
@@ -119,7 +119,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetSchedulesFromDB()
         {
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             foreach (var schedule in groupUser.GetSchedules())
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
@@ -131,7 +131,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetWeeklySchedulesFromDB()
         {
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             foreach (var weeklySchedule in groupUser.GetWeeklySchedules())
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
@@ -144,7 +144,7 @@ namespace cc.wnapp.whuHelper.Code
         public void SortScheduleFromDB()
         {
             var option = textOp.GetRightText(message, "%");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             foreach (var schedule in groupUser.SortSchedules(option))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
@@ -157,7 +157,7 @@ namespace cc.wnapp.whuHelper.Code
         public void SortWeeklyScheduleFromDB()
         {
             var option = textOp.GetRightText(message, "%");
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             foreach (var weeklySchedule in groupUser.SortWeeklySchedules(option))
             {
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
@@ -170,7 +170,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void ScheduleCommand()
         {
-            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             String Command = "命令格式：\n" +
                 "添加群日程|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "删除群日程|日程号\n" +

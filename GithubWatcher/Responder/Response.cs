@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace GitHubAutoresponder.Responder {
+namespace GithubWatcher.Responder {
     public class Response {
         public Response(string body) {
             Body = body;

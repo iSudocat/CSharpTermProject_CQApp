@@ -1,8 +1,8 @@
-using GitHubAutoresponder.Responder;
+using GithubWatcher.Responder;
 using GithubWatcher.Webhook;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GitHubAutoresponder.Shared {
+namespace GithubWatcher.Shared {
     public static class Dependencies {
         public static void Register(IServiceCollection services) {
             services.AddSingleton(typeof (IGitHubResponder), typeof (GitHubResponder));

@@ -17,7 +17,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GithubWatcher</RootNamespace>
     <AssemblyName>GithubWatcher</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -535,6 +535,7 @@
     </Compile>
     <Compile Include="Models\PayloadRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\CQ.cs" />
     <Compile Include="Responder\GitHubResponder.cs" />
     <Compile Include="Responder\HttpClient.cs" />
     <Compile Include="Responder\IGitHubResponder.cs" />
@@ -647,14 +648,6 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cc.wnapp.whuHelper.Code\cc.wnapp.whuHelper.Code.csproj">
-      <Project>{1a356d6f-1c6e-49c2-854f-b06c5941c061}</Project>
-      <Name>cc.wnapp.whuHelper.Code</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\cc.wnapp.whuHelper.UI\cc.wnapp.whuHelper.UI.csproj">
-      <Project>{a72bd0fd-b8fb-4c0e-a1ce-22dd27a8c3a4}</Project>
-      <Name>cc.wnapp.whuHelper.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>

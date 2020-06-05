@@ -17,7 +17,6 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
-
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
@@ -87,7 +86,12 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.SortWeeklyScheduleFromDB);
                 t.Start();
             }
-
+            if(msg.Contains("日程模块"))
+            {
+                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.ScheduleCommand);
+                t.Start();
+            }
 
         }
         /// <summary>
@@ -193,7 +197,12 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.SortWeeklyScheduleFromDB);
                 t.Start();
             }
-
+            if (msg.Contains("日程模块"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.ScheduleCommand);
+                t.Start();
+            }
             if (msg.Contains("关注") || msg.Contains("订阅"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };

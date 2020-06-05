@@ -13,7 +13,7 @@ namespace cc.wnapp.whuHelper.Code
         /// <summary>
         /// 个人日程提醒
         /// </summary>
-        public static void PrivateScheduleRemind()
+        public static void PrivateScheduleRemind()  
         {
 
             while (true)
@@ -22,14 +22,14 @@ namespace cc.wnapp.whuHelper.Code
                 foreach (var schedule in ScheduleContext.GetAllSchedules())
                 {
                     if (schedule.UserType==0&&schedule.ScheduleTime == DateTime.Now)
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ), $"【{schedule.ScheduleType}】{schedule.ScheduleContent}", "\n");
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
                 }
                 foreach (var weeklySchedule in ScheduleContext.GetAllWeeklySchedules())
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
                         if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.AddDays(7 * i) == DateTime.Now)
-                            CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ), $"【{weeklySchedule.ScheduleType}】{weeklySchedule.ScheduleContent}", "\n");
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ), $"【日程提醒】\n{weeklySchedule.ScheduleContent}", "\n");
                     }
                 }
             }
@@ -45,15 +45,15 @@ namespace cc.wnapp.whuHelper.Code
             {
                 foreach (var schedule in ScheduleContext.GetAllSchedules())
                 {
-                    if (schedule.UserType == 0 && schedule.ScheduleTime == DateTime.Now)
-                        CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ), $"【{schedule.ScheduleType}】{schedule.ScheduleContent}", "\n");
+                    if (schedule.UserType == 1 && schedule.ScheduleTime == DateTime.Now)
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
                 }
                 foreach (var weeklySchedule in ScheduleContext.GetAllWeeklySchedules())
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
-                        if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.AddDays(7 * i) == DateTime.Now)
-                            CQ.Api.SendGroupMessage(Convert.ToInt64(weeklySchedule.UserQQ), $"【{weeklySchedule.ScheduleType}】{weeklySchedule.ScheduleContent}", "\n");
+                        if (weeklySchedule.UserType == 1 && weeklySchedule.ScheduleTime.AddDays(7 * i) == DateTime.Now)
+                            CQ.Api.SendGroupMessage(Convert.ToInt64(weeklySchedule.UserQQ), $"【日程提醒】\n{weeklySchedule.ScheduleContent}", "\n");
                     }
                 }
             }

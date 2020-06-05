@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Web;
 using System.IO;
-using System.Text;
-using System.Security.Cryptography;
 using System.Net;
 using System.Web.Http;
 using System.Net.Mime;
@@ -15,6 +13,12 @@ using GitHubAutoresponder.Shared;
 using GithubWatcher.Webhook;
 using System.Web.Mvc;
 using GithubWatcher.Models;
+using Native.Sdk.Cqp;
+using Native.Sdk.Cqp.EventArgs;
+using Native.Sdk.Cqp.Interface;
+using Native.Sdk.Cqp.Model;
+using System.Threading;
+using cc.wnapp.whuHelper.Code;
 
 namespace GithubWatcher.Controllers
 {
@@ -58,13 +62,20 @@ namespace GithubWatcher.Controllers
             Console.WriteLine(eventType);
             Console.WriteLine(body);
 
-            bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
+            //bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
 
-            if (!isValidRequest) {
-                return this.CreateUnauthorisedResult();
-            }
+            //if (!isValidRequest) {
+            //    return this.CreateUnauthorisedResult();
+            //}
 
             Payload payload = this.jsonSerialiser.Deserialise<Payload>(body);
+
+            string msg = "【关注仓库更新】仓库" + payload.Repository + "更新一条来自" + payload.Sender + "的" + eventType + "事件！";
+
+            QQ BotQQ = CQ.Api.GetLoginQQ();
+            var mp = new PrivateMsgProcess() { fromQQ = "2426837192", message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+            Thread t = new Thread(mp.SendGitMessage);
+            t.Start();
 
             return CreateSuccessResult();
         }

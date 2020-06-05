@@ -42,11 +42,6 @@ namespace Schedule
             ScheduleID = Convert.ToString(UserQQ) + Convert.ToString(Num);
         }
 
-        public WeeklySchedule()
-        {
-
-        }
-
         public string DisplaySchedule()
         {
             return "使用人或群组QQ：" + UserQQ + "\r\n"

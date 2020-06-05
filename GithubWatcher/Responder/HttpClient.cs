@@ -2,9 +2,9 @@ using Microsoft.Net.Http.Headers;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GitHubAutoresponder.Shared;
+using GithubWatcher.Shared;
 
-namespace GitHubAutoresponder.Responder {
+namespace GithubWatcher.Responder {
     public class HttpClient : IHttpClient {
         const string CONTENT_TYPE_HEADER = "application/vnd.github.v3+json";
         const string USER_AGENT_HEADER = "GitHubAutoResponder";

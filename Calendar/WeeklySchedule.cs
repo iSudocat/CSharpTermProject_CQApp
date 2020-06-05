@@ -42,10 +42,6 @@ namespace Schedule
             ScheduleID = Convert.ToString(UserQQ) + Convert.ToString(Num);
         }
 
-        public WeeklySchedule()
-        {
-
-        }
 
         public string DisplaySchedule()
         {

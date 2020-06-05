@@ -204,7 +204,7 @@ namespace jwxt
             }
         }
 
-        public static Object[] ParseClassTime(Course course)
+        public static Object[] ParseClassTime(Course course)           //解析jwxt数据库的课程时间
         {
             string Time1 = "";
             string Time2 = "";

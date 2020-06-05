@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Schedule.Database;
 using Native.Sdk.Cqp.Enum;
 using Native.Sdk.Cqp.Model;
 using static Schedule.PersonalUser;

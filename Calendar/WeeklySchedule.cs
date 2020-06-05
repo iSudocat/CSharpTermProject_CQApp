@@ -29,6 +29,7 @@ namespace Schedule
         //日程持续周数，每进行一周，weekspan-1 datetime加一周
         [Required]
         public int WeekSpan { get; set; }
+        public WeeklySchedule() { }
         public WeeklySchedule(long userQQ, int userType, DateTime dt, string st, string sc,int weekSpan)
         {
             Num++;

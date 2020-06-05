@@ -54,8 +54,8 @@ namespace ComputeScore
             foreach(Score s in Slist)
             {
                 CreditAll += float.Parse(s.Credit);
-                ScoreAll += ComputeGPA(float.Parse(s.Mark)) *float.Parse(s.Credit);
-                GPAAll += float.Parse(s.Credit) * float.Parse(s.Mark);
+                GPAAll += ComputeGPA(float.Parse(s.Mark)) *float.Parse(s.Credit);
+                ScoreAll += float.Parse(s.Credit) * float.Parse(s.Mark);
             }
 
             float GPA = GPAAll / CreditAll;

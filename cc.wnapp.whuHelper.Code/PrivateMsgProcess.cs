@@ -379,5 +379,12 @@ namespace cc.wnapp.whuHelper.Code
             }
         }
 
+        /// <summary>
+        /// 向用户发送Git更新消息
+        /// </summary>
+        public void SendGitMessage()
+        {
+            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
+        }
     }
 }

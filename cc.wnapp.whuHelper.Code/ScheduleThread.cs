@@ -19,12 +19,12 @@ namespace cc.wnapp.whuHelper.Code
             while (true)
             {
 
-                foreach (Schedule.Schedule schedule in Schedule.Database.GetAllSchedules())
+                foreach (Schedule.Schedule schedule in Schedule.ScheduleContext.GetAllSchedules())
                 {
                     if (schedule.UserType==0&&schedule.ScheduleTime == DateTime.Now)
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ), $"【{schedule.ScheduleType}】{schedule.ScheduleContent}", "\n");
                 }
-                foreach (WeeklySchedule weeklySchedule in Schedule.Database.GetAllWeeklySchedules())
+                foreach (WeeklySchedule weeklySchedule in Schedule.ScheduleContext.GetAllWeeklySchedules())
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
@@ -43,12 +43,12 @@ namespace cc.wnapp.whuHelper.Code
             
             while (true)
             {
-                foreach (Schedule.Schedule schedule in Schedule.Database.GetAllSchedules())
+                foreach (Schedule.Schedule schedule in Schedule.ScheduleContext.GetAllSchedules())
                 {
                     if (schedule.UserType == 0 && schedule.ScheduleTime == DateTime.Now)
                         CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ), $"【{schedule.ScheduleType}】{schedule.ScheduleContent}", "\n");
                 }
-                foreach (WeeklySchedule weeklySchedule in Schedule.Database.GetAllWeeklySchedules())
+                foreach (WeeklySchedule weeklySchedule in Schedule.ScheduleContext.GetAllWeeklySchedules())
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {

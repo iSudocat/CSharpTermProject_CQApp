@@ -94,7 +94,7 @@ namespace cc.wnapp.whuHelper.Code
         }
         /// <summary>
         /// 修改群周日程
-        /// 命令格式：修改群周日程~9-日程编号|2020/6/2 18:30:00(日常生活):吃饭 
+        /// 命令格式：修改群周日程~周数-日程编号|2020/6/2 18:30:00(日常生活):吃饭 
         /// </summary>
         public void SetWeeklyScheduleToDB()
         {
@@ -161,5 +161,24 @@ namespace cc.wnapp.whuHelper.Code
             }
         }
 
+        /// <summary>
+        /// 查看日程模块命令格式
+        /// 命令格式：日程模块
+        /// </summary>
+        public void ScheduleCommand()
+        {
+            GroupUser groupUser = new GroupUser(long.Parse(fromGroup), long.Parse(fromQQ));
+            String Command = "命令格式：\n" +
+                "添加群日程|2020/6/2 18:30:00(日常生活):吃饭\n" +
+                "删除群日程|日程号\n" +
+                "删除群周日程|日程号\n" +
+                "修改群日程-日程编号|2020/6/2 18:30:00(日常生活):吃饭\n" +
+                "修改群周日程~周数-日程编号|2020/6/2 18:30:00(日常生活):吃饭\n" +
+                "查看群日程\n" +
+                "查看群周日程\n" +
+                "查看群日程%时间or类型\n" +
+                "查看群周日程%时间or类型";
+            CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup),Command , "\n");
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using jwxt;
@@ -9,7 +10,7 @@ namespace ComputeScore
 {
   public  class ScoreService
     {
-        public List<Score> Slist;
+        private List<Score> Slist;
         public String StuID;
         public ScoreService(String StuID)
         {
@@ -42,8 +43,10 @@ namespace ComputeScore
         /// </summary>
         /// <param name="Slist">成绩列表</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo Compute(List<Score> Slist)
+        public static GPAInfo Compute(List<Score> Slist)
         {
+            if (Slist == null)
+                return new GPAInfo(0, 0, 0);
             float CreditAll = 0; //Credit--SUM
             float ScoreAll = 0;  //Score*Credit--SUM
             float GPAAll = 0;    //GPA*Credit --SUM
@@ -137,6 +140,32 @@ namespace ComputeScore
             Slist = Slist.Where(p => p.TeachingCollege == "计算机学院").ToList();
             GPAInfo Stu = Compute(Slist);
             return Stu;
+        }
+
+        /// <summary>
+        /// 给定成绩列表算出GPA,为UI计算的时候使用
+        /// </summary>
+        /// <param name="Slist">成绩列表</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static GPAInfo ComputeUI(List<miniScore> Slist)
+        {
+            if (Slist == null)
+                return new GPAInfo(0, 0, 0);
+            float CreditAll = 0; //Credit--SUM
+            float ScoreAll = 0;  //Score*Credit--SUM
+            float GPAAll = 0;    //GPA*Credit --SUM
+
+            foreach (miniScore s in Slist)
+            {
+                CreditAll += s.Credit;
+                ScoreAll += ComputeGPA(s.Score) * s.Credit;
+                GPAAll += s.Credit * s.Score;
+            }
+
+            float GPA = GPAAll / CreditAll;
+            float AverageScore = ScoreAll / CreditAll;
+            GPAInfo Stu1 = new GPAInfo(GPA, AverageScore, CreditAll);
+            return Stu1;
         }
 
 

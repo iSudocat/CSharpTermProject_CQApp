@@ -43,11 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="miniScore.cs" />
+    <Compile Include="GPAInfo.cs" />
+    <Compile Include="ScoreService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\教务系统登录与信息获取\教务系统登录与信息获取.csproj">
+      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
+      <Name>教务系统登录与信息获取</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

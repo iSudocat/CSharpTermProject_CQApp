@@ -211,7 +211,7 @@ namespace jwxt
             string pattern = @"([a-zA-Z]{3}:.*?,.*?;.*?,.*?,[1-4]{1}-[0-9]{3})";
             MatchCollection matches = Regex.Matches(course.Time, pattern, RegexOptions.IgnoreCase);
             Time1 = matches[0].Value;
-            Time2 = matches[1].Value;
+
 
             string weekday1 = Time1.Split(':')[0];    //获取第一次的星期几
             DateTime weekDayDate1 = WeekdayDate(weekday1);
@@ -222,29 +222,33 @@ namespace jwxt
             int classStartNum1 = int.Parse(theRest.Split(',')[1].Substring(theRest.Split(',')[1].Length - 1, 1));
             int weekSpan1 = classLastWeek1 - classFirstWeek1 + 1;
 
-            string weekday2 = Time2.Split(':')[0];    //获取第二次的星期几
-            DateTime weekDayDate2 = WeekdayDate(weekday1); //星期对应第一周的日期
-            theRest = Time2.Split(':')[1];
-            int classFirstWeek2 = int.Parse(theRest.Split('-')[0]);  //获取上课起始周
-            theRest = theRest.Split('-')[1];
-            int classLastWeek2 = int.Parse(theRest.Split(',')[0].Substring(0, theRest.Split(',')[0].Length - 1)); //获取上课末周
-            int classStartNum2 = int.Parse(theRest.Split(',')[1].Substring(theRest.Split(',')[1].Length - 1, 1));
-            int weekSpan2 = classLastWeek2 - classFirstWeek2 + 1;
-
             if (matches.Count == 1)
             {
                 Object[] courseTimes ={ new DateTime(weekDayDate1.Year,weekDayDate1.Month,weekDayDate1.Day,
                 GetClassTime(classStartNum1).Hour,GetClassTime(classStartNum1).Minute,GetClassTime(classStartNum1).Second) ,weekSpan1};
                 return courseTimes;
             }
-            else 
+            else if (matches.Count == 2)
             {
+                Time2 = matches[1].Value;
+                string weekday2 = Time2.Split(':')[0];    //获取第二次的星期几
+                DateTime weekDayDate2 = WeekdayDate(weekday1); //星期对应第一周的日期
+                theRest = Time2.Split(':')[1];
+                int classFirstWeek2 = int.Parse(theRest.Split('-')[0]);  //获取上课起始周
+                theRest = theRest.Split('-')[1];
+                int classLastWeek2 = int.Parse(theRest.Split(',')[0].Substring(0, theRest.Split(',')[0].Length - 1)); //获取上课末周
+                int classStartNum2 = int.Parse(theRest.Split(',')[1].Substring(theRest.Split(',')[1].Length - 1, 1));
+                int weekSpan2 = classLastWeek2 - classFirstWeek2 + 1;
+
                 Object[] courseTimes ={ new DateTime(weekDayDate1.Year,weekDayDate1.Month,weekDayDate1.Day,
                 GetClassTime(classStartNum1).Hour,GetClassTime(classStartNum1).Minute,GetClassTime(classStartNum1).Second),weekSpan1,
                     new DateTime(weekDayDate2.Year,weekDayDate2.Month,weekDayDate2.Day,
                 GetClassTime(classStartNum2).Hour,GetClassTime(classStartNum2).Minute,GetClassTime(classStartNum2).Second),weekSpan1};
                 return courseTimes;
             }
+            else
+                return null;
         }
+
     }
 }

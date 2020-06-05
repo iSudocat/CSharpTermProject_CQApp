@@ -248,7 +248,8 @@ namespace cc.wnapp.whuHelper.Code
         {
             var dateTime = textOp.GetMiddleText(message, "|", "(");
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            var scheduleContent = textOp.GetRightText(message, ":");
+            string str = message.Split(')')[1];
+            var scheduleContent = textOp.GetRightText(str, ":");
             PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
             if (personalUser.AddSchedule(StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
@@ -265,7 +266,8 @@ namespace cc.wnapp.whuHelper.Code
             var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
             var dateTime = textOp.GetMiddleText(message, "|", "(");
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            var scheduleContent = textOp.GetRightText(message, ":");
+            string str = message.Split(')')[1];
+            var scheduleContent = textOp.GetRightText(str, ":"); ;
             PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
             if (personalUser.AddWeeklySchedule(StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
@@ -308,7 +310,8 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleID = textOp.GetMiddleText(message, "-", "|");
             var dateTime = textOp.GetMiddleText(message, "|", "(");
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            var scheduleContent = textOp.GetRightText(message, ":");
+            string str = message.Split(')')[1];
+            var scheduleContent = textOp.GetRightText(str, ":");
             PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
             if (personalUser.SetSchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
@@ -325,7 +328,8 @@ namespace cc.wnapp.whuHelper.Code
             var scheduleID = textOp.GetMiddleText(message, "-", "|");
             var dateTime = textOp.GetMiddleText(message, "|", "(");
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            var scheduleContent = textOp.GetRightText(message, ":");
+            string str = message.Split(')')[1];
+            var scheduleContent = textOp.GetRightText(str, ":");
             PersonalUser personalUser = new PersonalUser(long.Parse(fromQQ));
             if (personalUser.SetWeeklySchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {

@@ -541,8 +541,8 @@
     <Compile Include="Responder\Response.cs" />
     <Compile Include="Responder\ResponseFactory.cs" />
     <Compile Include="Shared\Dependencies.cs" />
-    <Compile Include="Shared\Environment.cs" />
-    <Compile Include="Shared\IEnvironment.cs" />
+    <Compile Include="Shared\GitEnvironment.cs" />
+    <Compile Include="Shared\IGitEnvironment.cs" />
     <Compile Include="Shared\IJsonSerialiser.cs" />
     <Compile Include="Shared\JsonContractResolver.cs" />
     <Compile Include="Shared\JsonSerialiser.cs" />

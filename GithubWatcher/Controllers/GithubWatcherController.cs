@@ -22,19 +22,23 @@ namespace GithubWatcher.Controllers
     {
         private IJsonSerialiser jsonSerialiser;
         private IRequestValidator requestValidator;
-        private IEnvironment environment;
+        private IGitEnvironment environment;
 
         public GithubWatcherController(
             IJsonSerialiser jsonSerialiser,
             IRequestValidator requestValidator,
-            IEnvironment environment
+            IGitEnvironment environment
         ) {
             this.jsonSerialiser = jsonSerialiser;
             this.requestValidator = requestValidator;
             this.environment = environment;
         }
 
-        public GithubWatcherController() { }
+        public GithubWatcherController() {
+            jsonSerialiser = new JsonSerialiser();
+            requestValidator = new RequestValidator();
+            //environment = new GitEnvironment();
+        }
 
         // POST: api/GithubWatcher
         public string Post() {
@@ -51,9 +55,10 @@ namespace GithubWatcher.Controllers
             string signature = HttpContext.Current.Request.Headers["X-Hub-Signature"];
             string eventType = HttpContext.Current.Request.Headers["X-GitHub-Event"];
 
+            Console.WriteLine(eventType);
             Console.WriteLine(body);
 
-            bool isValidRequest = this.requestValidator.IsValidRequest(signature, this.environment.Secret, body);
+            bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
 
             if (!isValidRequest) {
                 return this.CreateUnauthorisedResult();

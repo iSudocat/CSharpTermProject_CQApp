@@ -14,12 +14,8 @@ using Schedule;
 
 namespace cc.wnapp.whuHelper.Code
 {
-
-
-
     public class PrivateMsgProcess
     {
-
         public string fromQQ { get; set; }
         public string message { get; set; }
         public string botQQ { get; set; }
@@ -30,7 +26,6 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void BindEasAccount()
         {
-
             string msg = message.Replace(" ", "");     //去除空格
             var StuID = textOp.GetMiddleText(msg, "绑定教务系统", "|");
             var Password = textOp.GetRightText(msg, "|");

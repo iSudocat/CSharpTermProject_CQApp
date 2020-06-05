@@ -36,6 +36,11 @@ namespace Schedule
             ScheduleContent = sc;
             ScheduleID = Convert.ToString(UserQQ) + Convert.ToString(Num);
         }
+        public Schedule()
+        {
+            
+        }
+
         public string DisplaySchedule()
         {
             return "使用人或群组QQ："+UserQQ+"\r\n"

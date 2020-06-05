@@ -42,7 +42,7 @@ namespace Schedule
                 +"日程编号："+ScheduleID+"\r\n"
                 +"日程时间："+ScheduleTime+"\r\n"
                 +"日程类型："+ScheduleType+"\r\n"
-                +"日程内容："+ScheduleContent+"\r\n";
+                +"日程内容："+ScheduleContent+"\r";
         }
     }
 }

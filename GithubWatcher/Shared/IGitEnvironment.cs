@@ -1,5 +1,5 @@
 namespace GitHubAutoresponder.Shared {
-    public interface IEnvironment {
+    public interface IGitEnvironment {
         string EncodededCredentials { get; }
         string Secret { get; }
     }

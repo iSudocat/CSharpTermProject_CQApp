@@ -106,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
-    <Compile Include="CourseService1.cs" />
     <Compile Include="EasOperation.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="EasGetScore.cs" />

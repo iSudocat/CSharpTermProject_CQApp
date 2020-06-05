@@ -99,6 +99,12 @@ namespace jwxt
                     return "";
             }
         }
+
+        /// <summary>
+        /// 通过绑定QQ获取指定学生的学号
+        /// </summary>
+        /// <param name="StuQQ">QQ号</param>
+        /// <returns>成功返回学号，失败返回空</returns>
         public static string GetStuID(string StuQQ)
         {
             using (var context = new jwContext())
@@ -149,6 +155,23 @@ namespace jwxt
             var Year = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", "Current", "Year", "");
             var Term = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", "Current", "Term", "");
             return ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", Year, Term, "");
+        }
+
+        /// <summary>
+        /// 获取指定学生的学院信息
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>成功返回学院名，失败返回空</returns>
+        public static string GetCollege(string StuID)
+        {
+            using (var context = new jwContext())
+            {
+                var stu = context.Students.SingleOrDefault(s => s.QQ == StuID);
+                if (stu != null)
+                    return stu.College;
+                else
+                    return "";
+            }
         }
 
         public static DateTime GetClassTime(int classNum)

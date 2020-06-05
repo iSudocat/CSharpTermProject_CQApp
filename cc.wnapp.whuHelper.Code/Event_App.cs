@@ -29,6 +29,9 @@ namespace cc.wnapp.whuHelper.Code
             Schedule.CQ.Api = e.CQApi;
             Schedule.CQ.Log = e.CQLog;
 
+            GithubWatcher.Shared.CQ.Api = e.CQApi;
+            GithubWatcher.Shared.CQ.Log = e.CQLog;
+
             var CurrentDirectory = System.Environment.CurrentDirectory;
 
             try

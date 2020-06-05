@@ -8,17 +8,12 @@ using System.IO;
 using System.Net;
 using System.Web.Http;
 using System.Net.Mime;
-using GitHubAutoresponder.Responder;
-using GitHubAutoresponder.Shared;
+using GithubWatcher.Responder;
+using GithubWatcher.Shared;
 using GithubWatcher.Webhook;
 using System.Web.Mvc;
 using GithubWatcher.Models;
-using Native.Sdk.Cqp;
-using Native.Sdk.Cqp.EventArgs;
-using Native.Sdk.Cqp.Interface;
-using Native.Sdk.Cqp.Model;
 using System.Threading;
-using cc.wnapp.whuHelper.Code;
 
 namespace GithubWatcher.Controllers
 {
@@ -72,10 +67,7 @@ namespace GithubWatcher.Controllers
 
             string msg = "【关注仓库更新】仓库" + payload.Repository + "更新一条来自" + payload.Sender + "的" + eventType + "事件！";
 
-            QQ BotQQ = CQ.Api.GetLoginQQ();
-            var mp = new PrivateMsgProcess() { fromQQ = "2426837192", message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-            Thread t = new Thread(mp.SendGitMessage);
-            t.Start();
+            CQ.Api.SendPrivateMessage(Convert.ToInt64("2426837192"), msg);
 
             return CreateSuccessResult();
         }

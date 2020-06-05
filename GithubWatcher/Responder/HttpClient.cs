@@ -11,7 +11,7 @@ namespace GitHubAutoresponder.Responder {
 
         private System.Net.Http.HttpClient client;
 
-        public HttpClient(IEnvironment environment) {
+        public HttpClient(IGitEnvironment environment) {
             this.client = new System.Net.Http.HttpClient();
             this.client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, USER_AGENT_HEADER);
             this.client.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Basic {environment.EncodededCredentials}");

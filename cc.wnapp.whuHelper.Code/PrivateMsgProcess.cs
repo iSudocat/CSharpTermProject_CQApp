@@ -378,14 +378,6 @@ namespace cc.wnapp.whuHelper.Code
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
             }
         }
-        
-		/// <summary>
-        /// 向用户发送Git更新消息
-        /// </summary>
-        public void SendGitMessage()
-        {
-            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
-        }
 		/// <summary>
         /// 查看日程模块命令格式
         /// 命令格式：日程模块

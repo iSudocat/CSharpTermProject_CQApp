@@ -259,61 +259,77 @@ namespace cc.wnapp.whuHelper.UI
 
         private void buttonSelectNoZB_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 1; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if(AllScoredataGridView.Rows[i].Cells[2].ToString() == "专业必修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if(AllScoredataGridView.CurrentRow != null)
+                {
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业必修"
+                   || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业教育必修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
+               
             }
         }
 
         private void buttonSelectNoZX_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "专业选修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    //LessonType可能是第二个
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
             }
         }
 
         private void buttonSelectNoGB_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "公共必修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共必修"
+                    || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共基础必修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
             }
         }
 
         private void buttonSelectNoGX_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "公共选修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    //LessonType可能是第二个
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共选修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
             }
         }
 
         private void buttonSelectCS_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[7].ToString() == "计算机学院")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    //LessonType可能是第二个
+                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == "计算机学院")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                }
             }
         }
 
@@ -337,14 +353,14 @@ namespace cc.wnapp.whuHelper.UI
             List<miniScore> GetSelect = new List<miniScore>();
             if(AllScoredataGridView.Rows.Count > 0)
             {
-                for(int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+                for(int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
                 {
                     DataGridViewCheckBoxCell checkcell = (DataGridViewCheckBoxCell)AllScoredataGridView.Rows[i].Cells[0];
                     Boolean flag = Convert.ToBoolean(checkcell.Value);
                     if(flag)
                     {
-                        float score = float.Parse(AllScoredataGridView.Rows[i].Cells["Mark"].Value.ToString());
-                        float credit = float.Parse(AllScoredataGridView.Rows[i].Cells["Credit"].Value.ToString());
+                        float score = float.Parse(AllScoredataGridView.Rows[i].Cells["Column11"].Value.ToString());
+                        float credit = float.Parse(AllScoredataGridView.Rows[i].Cells["Column5"].Value.ToString());
                         miniScore temp = new miniScore(score, credit);
                         GetSelect.Add(temp);
                     }

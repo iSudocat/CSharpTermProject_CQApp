@@ -32,6 +32,7 @@ namespace cc.wnapp.whuHelper.Code
             GithubWatcher.Shared.CQ.Api = e.CQApi;
             GithubWatcher.Shared.CQ.Log = e.CQLog;
 
+            var d = e.CQApi.AppDirectory;   //仅用于初始化路径
             var CurrentDirectory = System.Environment.CurrentDirectory;
 
             try

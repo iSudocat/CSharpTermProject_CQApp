@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using System.Data.Entity;
-using SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,13 +21,12 @@ namespace GithubWatcher.Models
     public class GithubWatcherContext : DbContext
     {
         public static string CurrentDirectory = "";
-        public jwContext() : base(new SQLiteConnection(@"Data Source=" + CurrentDirectory + @"\jwxt.db;"), false)
+        public GithubWatcherContext() : base(new SQLiteConnection(@"Data Source=" + CurrentDirectory + @"\GitWatcher.db;"), false)
         {
 
         }
 
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<Score> Scores { get; set; }
+        public DbSet<PayloadRecord> PayloadRecords { get; set; }
+        public DbSet<RepositorySubscription> RepositorySubscriptions { get; set; }
     }
 }

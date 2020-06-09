@@ -9,6 +9,8 @@ namespace GithubWatcher.Models
 {
     public class PayloadRecord
     {
+        [Key]
+        public string DeliveryID { get; set; }
         [Required]
         public string EventType { get; set; }   // 事件类型
         [Required]

@@ -95,8 +95,19 @@ namespace cc.wnapp.whuHelper.Code
                     e.CQLog.InfoSuccess("初始化", "下载成功：ScheduleDB.db");
                 }
 
+                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWatcher.db") == false)
+                {
+                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：ScheduleDB.db");
+                    var client = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/GithubWathcer.db");
+                    var request = new RestRequest(Method.GET);
+                    var response = client.DownloadData(request);
+                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWarcher.db", response);
+                    e.CQLog.InfoSuccess("初始化", "下载成功：GithubWatcher.db");
+                }
+
                 jwxt.InitializeDB.Init();   //初始化教务系统数据库
                 Schedule.InitializeDB.Init();//初始化日程数据库
+                GithubWatcher.Models.InitializeDB.Init();   // 初始化github仓库关注数据库
 
                 // 初始化GithubWatcher Web服务
                 var githubWatcherUrl = "https://localhost:44395/";

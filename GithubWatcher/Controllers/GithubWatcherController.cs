@@ -40,7 +40,7 @@ namespace GithubWatcher.Controllers
         }
 
         // POST: api/GithubWatcher
-        public string Post() {
+        public IHttpActionResult Post() {
             /* We need the raw body to validate the request
              * by computing a HMAC hash from it based upon
              * the secret key. We then manually deserialise
@@ -48,14 +48,15 @@ namespace GithubWatcher.Controllers
              */
 
             // Body
-            string body = this.GetBody();
+            string body = Request.Content.ReadAsStringAsync().Result;
 
             // Head
-            string signature = HttpContext.Current.Request.Headers["X-Hub-Signature"];
-            string eventType = HttpContext.Current.Request.Headers["X-GitHub-Event"];
+            Request.Headers.TryGetValues("X-GitHub-Event", out var eventTypeHeader);
+            Request.Headers.TryGetValues("X-Hub-Signature", out var signatureHeader);
+            //string signature = HttpContext.Current.Request.Headers["X-Hub-Signature"];
+            //string eventType = HttpContext.Current.Request.Headers["X-GitHub-Event"];
 
-            Console.WriteLine(eventType);
-            Console.WriteLine(body);
+            string eventType = eventTypeHeader.FirstOrDefault();
 
             //bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
 
@@ -65,17 +66,11 @@ namespace GithubWatcher.Controllers
 
             Payload payload = this.jsonSerialiser.Deserialise<Payload>(body);
 
-            string msg = "【关注仓库更新】仓库" + payload.Repository + "更新一条来自" + payload.Sender + "的" + eventType + "事件！";
+            string msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "更新一条来自" + payload.Sender.Login + "的" + eventType + "事件！";
 
             CQ.Api.SendPrivateMessage(Convert.ToInt64("2426837192"), msg);
 
-            return CreateSuccessResult();
-        }
-
-        private string GetBody() {
-            string content = Request.Content.ReadAsStringAsync().Result;
-
-            return content;
+            return Ok(msg);
         }
 
         private string CreateUnauthorisedResult() {

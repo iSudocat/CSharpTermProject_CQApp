@@ -7,7 +7,7 @@ namespace GithubWatcher.Webhook
 {
     public class PullRequest
     {
-        public string Url { get; set; }
+        public string HtmlUrl { get; set; }
         public string Title { get; set; }
     }
 }

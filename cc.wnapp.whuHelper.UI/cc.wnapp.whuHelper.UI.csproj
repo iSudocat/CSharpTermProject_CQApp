@@ -137,6 +137,10 @@
       <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
       <Name>CourseFunction</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EducationalAdministrationSystem\EducationalAdministrationSystem.csproj">
+      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
+      <Name>EducationalAdministrationSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
@@ -144,10 +148,6 @@
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\教务系统登录与信息获取\EducationalAdministrationSystem.csproj">
-      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
-      <Name>EducationalAdministrationSystem</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

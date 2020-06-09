@@ -15,7 +15,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.Owin.Hosting;
 using System.Net.Http;
-
+using FluentScheduler;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -33,6 +33,9 @@ namespace cc.wnapp.whuHelper.Code
         {
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
+
+            jwxt.CQ.Api = e.CQApi;
+            jwxt.CQ.Log = e.CQLog;
 
             Schedule.CQ.Api = e.CQApi;
             Schedule.CQ.Log = e.CQLog;

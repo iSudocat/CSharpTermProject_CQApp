@@ -23,7 +23,7 @@ namespace GithubWatcher.Controllers.Tests
             testPayload.Repository.FullName = "2426837192/Structure_From_Motion";
             testPayload.Action = "created";
             testPayload.Issue.Title = "test";
-            testPayload.Issue.Url = "https://api.github.com/repos/2426837192/Structure_From_Motion/issues/1";
+            testPayload.Issue.HtmlUrl = "https://api.github.com/repos/2426837192/Structure_From_Motion/issues/1";
 
             GithubWatcherController testController = new GithubWatcherController();
 

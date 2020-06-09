@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cc.wnapp.whuHelper.Code", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cc.wnapp.whuHelper.UI", "cc.wnapp.whuHelper.UI\cc.wnapp.whuHelper.UI.csproj", "{A72BD0FD-B8FB-4C0E-A1CE-22DD27A8C3A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "教务系统登录与信息获取", "教务系统登录与信息获取\教务系统登录与信息获取.csproj", "{707D635B-4512-4FD0-ABDF-D786687CE655}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationalAdministrationSystem", "EducationalAdministrationSystem\EducationalAdministrationSystem.csproj", "{707D635B-4512-4FD0-ABDF-D786687CE655}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GithubWatcher", "GithubWatcher\GithubWatcher.csproj", "{36121AD5-6EA0-42F0-81F8-F8ACB0318446}"
 EndProject

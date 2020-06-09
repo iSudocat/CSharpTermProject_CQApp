@@ -95,7 +95,7 @@ namespace cc.wnapp.whuHelper.Code
                     e.CQLog.InfoSuccess("初始化", "下载成功：ScheduleDB.db");
                 }
 
-                jwxt.InitializeDB.Init();   //初始化数据库
+                jwxt.InitializeDB.Init();   //初始化教务系统数据库
                 Schedule.InitializeDB.Init();//初始化日程数据库
 
                 // 初始化GithubWatcher Web服务

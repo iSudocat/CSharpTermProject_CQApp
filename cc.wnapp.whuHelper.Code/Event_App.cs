@@ -100,7 +100,7 @@ namespace cc.wnapp.whuHelper.Code
 
                 if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWatcher.db") == false)
                 {
-                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：ScheduleDB.db");
+                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：GithubWatcher.db");
                     var client = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/GithubWathcer.db");
                     var request = new RestRequest(Method.GET);
                     var response = client.DownloadData(request);

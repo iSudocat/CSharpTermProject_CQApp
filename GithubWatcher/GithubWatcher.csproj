@@ -534,6 +534,7 @@
   <ItemGroup>
     <Compile Include="Controllers\GithubWatcherController.cs" />
     <Compile Include="Models\GithubWatcherContext.cs" />
+    <Compile Include="Models\InitializeDB.cs" />
     <Compile Include="Models\PayloadRecord.cs" />
     <Compile Include="Models\RepositorySubscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

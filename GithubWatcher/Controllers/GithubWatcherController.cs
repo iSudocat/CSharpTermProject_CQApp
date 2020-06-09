@@ -49,10 +49,12 @@ namespace GithubWatcher.Controllers
             // Head
             Request.Headers.TryGetValues("X-GitHub-Event", out var eventTypeHeader);
             Request.Headers.TryGetValues("X-Hub-Signature", out var signatureHeader);
+            Request.Headers.TryGetValues("X-Hub-Delivery", out var deliveryHeader);
             //string signature = HttpContext.Current.Request.Headers["X-Hub-Signature"];
             //string eventType = HttpContext.Current.Request.Headers["X-GitHub-Event"];
 
             string eventType = eventTypeHeader.FirstOrDefault();
+            string delivery = deliveryHeader.FirstOrDefault();
 
             //bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
 
@@ -62,7 +64,7 @@ namespace GithubWatcher.Controllers
 
             Payload payload = this.jsonSerialiser.Deserialise<Payload>(body);   // 将body反序列化
 
-            PayloadRecord newPayloadRecord = GenerateRecord(payload, eventType);    // 生成一条Payload Record
+            PayloadRecord newPayloadRecord = GenerateRecord(payload, eventType, delivery);    // 生成一条Payload Record
 
             string msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "更新一条来自" + payload.Sender.Login + "的" + eventType + "事件！";
 
@@ -93,10 +95,11 @@ namespace GithubWatcher.Controllers
         }
 
         // 从payload中创建一条消息记录
-        public PayloadRecord GenerateRecord(Payload payload,string eventType)
+        public PayloadRecord GenerateRecord(Payload payload, string eventType, string delivery)
         {
             PayloadRecord newRecord = new PayloadRecord();
 
+            newRecord.DeliveryID = delivery;
             newRecord.Sender = payload.Sender.Login;
             newRecord.Repository = payload.Repository.FullName;
             newRecord.EventType = eventType;

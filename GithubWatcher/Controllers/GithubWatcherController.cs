@@ -46,15 +46,31 @@ namespace GithubWatcher.Controllers
             // Body
             string body = Request.Content.ReadAsStringAsync().Result;
 
+            string eventType, signature, delivery = "";
             // Head
-            Request.Headers.TryGetValues("X-GitHub-Event", out var eventTypeHeader);
-            Request.Headers.TryGetValues("X-Hub-Signature", out var signatureHeader);
-            Request.Headers.TryGetValues("X-Hub-Delivery", out var deliveryHeader);
-            //string signature = HttpContext.Current.Request.Headers["X-Hub-Signature"];
-            //string eventType = HttpContext.Current.Request.Headers["X-GitHub-Event"];
+            if(Request.Headers.TryGetValues("X-GitHub-Event", out var eventTypeHeader))
+            {
+                eventType = eventTypeHeader.FirstOrDefault();
+            }
+            else
+            {
+                return BadRequest("Request中应附有事件类型信息！");
+            }
 
-            string eventType = eventTypeHeader.FirstOrDefault();
-            string delivery = deliveryHeader.FirstOrDefault();
+            if(Request.Headers.TryGetValues("X-Hub-Signature", out var signatureHeader))
+            {
+                signature = signatureHeader.FirstOrDefault();
+            }
+
+            if(Request.Headers.TryGetValues("X-GitHub-Delivery", out var deliveryHeader))
+            {
+                delivery = deliveryHeader.FirstOrDefault();
+            }
+            else
+            {
+                return BadRequest("Request中应附有GUID！");
+            }
+            
 
             //bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
 
@@ -62,35 +78,42 @@ namespace GithubWatcher.Controllers
             //    return this.CreateUnauthorisedResult();
             //}
 
+            if(!IsSupportEvent(eventType))
+            {
+                return BadRequest("不支持的事件类型！");
+            }
+
             Payload payload = this.jsonSerialiser.Deserialise<Payload>(body);   // 将body反序列化
-
             PayloadRecord newPayloadRecord = GenerateRecord(payload, eventType, delivery);    // 生成一条Payload Record
+            
+            using (var context = new GithubWatcherContext())
+            {
+                var payloadRecord = context.PayloadRecords.SingleOrDefault(s => s.DeliveryID == newPayloadRecord.DeliveryID);
+                if (payloadRecord == null)      //确保表中不存在此项记录
+                {
+                    context.PayloadRecords.Add(newPayloadRecord);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    return BadRequest("此记录已发送，不可重复发送！");
+                }
+            }
 
-            string msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "更新一条来自" + payload.Sender.Login + "的" + eventType + "事件！";
+            string msg = GenerateMessage(payload, eventType);
 
             CQ.Api.SendPrivateMessage(Convert.ToInt64("2426837192"), msg);
 
             return Ok(msg);
         }
 
-        private string CreateUnauthorisedResult() {
-            return "UnauthorsizedResult";
-        }
-
-        private string CreateSuccessResult() {
-            string result = "success";
-
-            return result;
-        }
-
         // 支持的事件
         private bool IsSupportEvent(string eventType){
-            List<string> supportedEvents = new List<string>() { "push", "create", "issue", "issue_comment", "pull_request" };
+            List<string> supportedEvents = new List<string>() { "push", "create", "issues", "issue_comment", "pull_request" };
             if (supportedEvents.Contains(eventType))
             {
                 return true;
             }
-
             return false;
         }
 
@@ -104,23 +127,23 @@ namespace GithubWatcher.Controllers
             newRecord.Repository = payload.Repository.FullName;
             newRecord.EventType = eventType;
 
-            if (eventType == "issue" || eventType == "issue_comment") 
+            if (eventType == "issues" || eventType == "issue_comment") 
             {
                 newRecord.Action = payload.Action;
-                newRecord.EventUrl = payload.Issue.Url;
+                newRecord.EventUrl = payload.Issue.HtmlUrl;
                 newRecord.Title = payload.Issue.Title;
             }
 
             if (eventType == "pull_request")
             {
                 newRecord.Action = payload.Action;
-                newRecord.EventUrl = payload.PullRequest.Url;
+                newRecord.EventUrl = payload.PullRequest.HtmlUrl;
                 newRecord.Title = payload.PullRequest.Title;
             }
 
             if(eventType=="push")
             {
-                newRecord.CommitsText = payload.Commits.Message;
+                newRecord.CommitsText = payload.Commits.FirstOrDefault().Message;
                 newRecord.Branch = payload.Ref;
             }
 
@@ -131,5 +154,33 @@ namespace GithubWatcher.Controllers
 
             return newRecord;
         }
+
+        public string GenerateMessage(Payload payload, string eventType)
+        {
+            string msg = "";
+
+            if (eventType == "issues" || eventType == "issue_comment") 
+            {
+                msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "更新一条来自" + payload.Sender.Login + "的" 
+                    + eventType + "事件！描述：" + payload.Issue.Title + " " + payload.Issue.HtmlUrl;
+            }
+            if(eventType== "pull_request")
+            {
+                msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "更新一条来自" + payload.Sender.Login + "的"
+                    + eventType + "事件！描述：" + payload.PullRequest.Title + " " + payload.PullRequest.HtmlUrl;
+            }
+            if (eventType=="push")
+            {
+                msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "的" +  payload.Ref + "分支"
+                    + "更新一条来自" + payload.Sender.Login + "的" + eventType + "事件！描述：" + payload.Commits.FirstOrDefault().Message;
+            }
+            if(eventType=="create")
+            {
+                msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "由" + payload.Sender.Login + "新建了" + payload.Ref + "分支。";
+            }
+
+            return msg;
+        }
+        
     }
 }

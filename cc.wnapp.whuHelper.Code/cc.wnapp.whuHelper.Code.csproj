@@ -154,6 +154,10 @@
       <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
       <Name>CourseFunction</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EducationalAdministrationSystem\EducationalAdministrationSystem.csproj">
+      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
+      <Name>EducationalAdministrationSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GithubWatcher\GithubWatcher.csproj">
       <Project>{36121ad5-6ea0-42f0-81f8-f8acb0318446}</Project>
       <Name>GithubWatcher</Name>
@@ -165,10 +169,6 @@
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\教务系统登录与信息获取\教务系统登录与信息获取.csproj">
-      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
-      <Name>教务系统登录与信息获取</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

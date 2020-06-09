@@ -21,22 +21,18 @@ namespace GithubWatcher.Controllers
     {
         private IJsonSerialiser jsonSerialiser;
         private IRequestValidator requestValidator;
-        private IGitEnvironment environment;
 
         public GithubWatcherController(
             IJsonSerialiser jsonSerialiser,
-            IRequestValidator requestValidator,
-            IGitEnvironment environment
+            IRequestValidator requestValidator
         ) {
             this.jsonSerialiser = jsonSerialiser;
             this.requestValidator = requestValidator;
-            this.environment = environment;
         }
 
         public GithubWatcherController() {
             jsonSerialiser = new JsonSerialiser();
             requestValidator = new RequestValidator();
-            //environment = new GitEnvironment();
         }
 
         // POST: api/GithubWatcher
@@ -64,7 +60,9 @@ namespace GithubWatcher.Controllers
             //    return this.CreateUnauthorisedResult();
             //}
 
-            Payload payload = this.jsonSerialiser.Deserialise<Payload>(body);
+            Payload payload = this.jsonSerialiser.Deserialise<Payload>(body);   // 将body反序列化
+
+            PayloadRecord newPayloadRecord = GenerateRecord(payload, eventType);    // 生成一条Payload Record
 
             string msg = "【关注仓库更新】仓库" + payload.Repository.FullName + "更新一条来自" + payload.Sender.Login + "的" + eventType + "事件！";
 

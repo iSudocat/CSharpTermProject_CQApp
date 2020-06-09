@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Owin;
 
 namespace GithubWatcher
 {
-    public static class WebApiConfig
+    public class Startup
     {
-        public static void Register(HttpConfiguration config)
+        /// <summary>
+        /// Configures Web API
+        /// </summary>
+        public void Configuration(IAppBuilder appBuilder)
         {
-            // Web API 配置和服务
+            HttpConfiguration config = new HttpConfiguration();
 
-            // Web API 路由
             config.MapHttpAttributeRoutes();
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+                );
+
+            appBuilder.UseWebApi(config);
         }
     }
 }

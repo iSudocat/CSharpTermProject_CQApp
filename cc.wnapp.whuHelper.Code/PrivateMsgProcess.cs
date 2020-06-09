@@ -38,7 +38,7 @@ namespace cc.wnapp.whuHelper.Code
                 {
                     if (jwOp.StuExist(StuID) == false)
                     {
-                        jwxt.LoginTry();
+                        jwxt.LoginSys();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
 
                         EasGetCourse jwcourse = new EasGetCourse();

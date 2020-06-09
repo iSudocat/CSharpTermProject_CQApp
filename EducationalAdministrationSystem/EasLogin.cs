@@ -43,13 +43,13 @@ namespace jwxt
             TryNum = num;
         }
 
-        public bool LoginSys()
+        public bool TryLogin()
         {
             for (int i = 0; i <= TryNum; i++)
             {
                 try
                 {
-                    LoginTry();
+                    LoginSys();
                     return true;
                 }
                 catch (Exception ex)
@@ -80,7 +80,7 @@ namespace jwxt
             return false;
         }
 
-        public void LoginTry()
+        public void LoginSys()
         {
             urls.GetURLs();
             var client = new RestClient(urls.login_url);

@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Data.Entity;
 using System.IO;
 using Tools;
+using FluentScheduler;
 
 namespace jwxt
 {
@@ -19,8 +20,10 @@ namespace jwxt
         static void Main(string[] args)
         {
 
-
+            Console.ReadLine();
         }
 
     }
+
+    
 }

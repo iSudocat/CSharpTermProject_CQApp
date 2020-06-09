@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComputeScore;
 using CourseFunction;
+using FluentScheduler;
 using jwxt;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
@@ -32,7 +33,7 @@ namespace cc.wnapp.whuHelper.UI
             InitializeComponent();
             
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             tab1Init();
@@ -102,12 +103,11 @@ namespace cc.wnapp.whuHelper.UI
             EasLogin jwxt = new EasLogin(Convert.ToString(BotQQ.Id), tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
             try
             {
-                if (jwxt.LoginSys() == true)
+                if (jwxt.TryLogin() == true)
                 {
                     EasGetScore jwscore = new EasGetScore();
                     jwscore.GetScore(jwxt);
                     EasGetCourse jwcourse = new EasGetCourse();
-                    //将Course信息存储到数据库中
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
@@ -378,6 +378,11 @@ namespace cc.wnapp.whuHelper.UI
                 }
             }
             return GetSelect;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            JobManager.Initialize(new ScoreReminder());
         }
 
 

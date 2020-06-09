@@ -66,6 +66,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentScheduler, Version=5.3.0.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.5.3.0\lib\net40\FluentScheduler.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -106,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Course.cs" />
+    <Compile Include="CQ.cs" />
+    <Compile Include="EasGetNewScore.cs" />
     <Compile Include="EasOperation.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="EasGetScore.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="jwUrl.cs" />
     <Compile Include="Captcha.cs" />
     <Compile Include="Score.cs" />
+    <Compile Include="ScoreReminder.cs" />
     <Compile Include="Student.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +129,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
+      <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
+      <Name>Native.Sdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>

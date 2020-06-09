@@ -105,7 +105,7 @@ namespace cc.wnapp.whuHelper.Code
                     e.CQLog.InfoSuccess("初始化", "下载成功：GithubWatcher.db");
                 }
 
-                jwxt.InitializeDB.Init();   //初始化数据库
+                jwxt.InitializeDB.Init();   //初始化教务系统数据库
                 Schedule.InitializeDB.Init();//初始化日程数据库
                 GithubWatcher.Models.InitializeDB.Init();   // 初始化github仓库关注数据库
 

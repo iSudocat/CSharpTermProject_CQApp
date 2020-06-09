@@ -21,7 +21,7 @@ namespace GithubWatcher.Models
     public class GithubWatcherContext : DbContext
     {
         public static string CurrentDirectory = "";
-        public GithubWatcherContext() : base(new SQLiteConnection(@"Data Source=" + CurrentDirectory + @"\GitWatcher.db;"), false)
+        public GithubWatcherContext() : base(new SQLiteConnection(@"Data Source=" + CurrentDirectory + @"\GithubWatcher.db;"), false)
         {
 
         }

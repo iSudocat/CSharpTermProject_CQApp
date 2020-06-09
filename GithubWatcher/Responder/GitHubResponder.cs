@@ -35,7 +35,7 @@ namespace GithubWatcher.Responder {
 
             return await this.httpClient.PostAsync(
                 //payload.Commentable.CommentsUrl,
-                payload.Issue.Url,
+                payload.Issue.HtmlUrl,
                 serializedResponse
             );
         }

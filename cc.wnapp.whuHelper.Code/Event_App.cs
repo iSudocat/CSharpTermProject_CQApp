@@ -101,10 +101,10 @@ namespace cc.wnapp.whuHelper.Code
                 if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWatcher.db") == false)
                 {
                     e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：GithubWatcher.db");
-                    var client = new RestClient("***REMOVED***GithubWathcer.db");
+                    var client = new RestClient("***REMOVED***GithubWatcher.db");
                     var request = new RestRequest(Method.GET);
                     var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWarcher.db", response);
+                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWatcher.db", response);
                     e.CQLog.InfoSuccess("初始化", "下载成功：GithubWatcher.db");
                 }
 

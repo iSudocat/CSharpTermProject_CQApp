@@ -12,6 +12,8 @@ using Native.Sdk.Cqp;
 using System.Net.Http.Headers;
 using System.Web.SessionState;
 using Schedule;
+using GithubWatcher.Models;
+using System.Text.RegularExpressions;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -401,6 +403,121 @@ namespace cc.wnapp.whuHelper.Code
                 "查看日程%时间or类型\n" +
                 "查看周日程%时间or类型";
             CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), Command, "\n");
+        }
+
+        /// <summary>
+        /// 绑定Git仓库
+        /// 命令格式：绑定仓库#仓库名称#
+        /// </summary>
+        public void SubscribeRepository()
+        {
+            string pattern = @"绑定仓库#(?<repository>[\S]+)#";
+            MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
+
+            if (matches.Count == 1) 
+            {
+                using (var context = new GithubWatcherContext())
+                {
+                    string repository = "";
+                    foreach(Match match in matches)
+                    {
+                        repository = match.Groups["repository"].Value;
+                    }
+
+                    var subscription = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == repository);
+                    if (subscription == null)      //确保表中不存在此项记录
+                    {
+                        RepositorySubscription newSubscription = new RepositorySubscription();
+                        newSubscription.QQ = fromQQ;
+                        newSubscription.RepositoryName = repository;
+
+                        context.RepositorySubscriptions.Add(newSubscription);
+                        context.SaveChanges();
+
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已成功与仓库" + repository + "完成绑定！");
+                    }
+                    else
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，此仓库已被其他用户绑定。");
+                    }
+                }
+            }
+            else if(matches.Count==0)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ),"绑定Github仓库输入错误，请输入“绑定仓库#仓库名称#”以绑定仓库！");
+            }
+            else
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "无法同时绑定多个仓库，请输入“绑定仓库#仓库名称#”以绑定仓库！");
+            }
+        }
+        /// <summary>
+        /// 查询Git仓库
+        /// </summary>
+        public void QueryRepository()
+        {
+            using (var context = new GithubWatcherContext())
+            {
+                var query = context.RepositorySubscriptions.Where(p => p.QQ == fromQQ).OrderBy(p => p.RepositoryName);
+
+                if (query.Count() == 0) 
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何仓库，输入“绑定仓库#仓库名称#”以绑定仓库！");
+                    return;
+                }
+
+                string message = "您绑定的仓库有：";
+                int i = 0;
+
+                foreach(var subscription in query)
+                {
+                    i++;
+                    message = message + $"\n{i}. " + subscription.RepositoryName;
+                }
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
+            }
+        }
+
+        /// <summary>
+        /// 取消绑定Git仓库
+        /// 命令格式：取消绑定#仓库名称#
+        /// </summary>
+        public void Unsubscribe()
+        {
+            string pattern = @"取消绑定#(?<repository>[\S]+)#";
+            MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
+
+            if (matches.Count == 1) 
+            {
+                using (var context = new GithubWatcherContext())
+                {
+                    string repository = "";
+                    foreach (Match match in matches)
+                    {
+                        repository = match.Groups["repository"].Value;
+                    }
+
+                    var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository);
+                    if (query == null) 
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您尚未绑定该仓库！");
+                    }
+                    else
+                    {
+                        context.RepositorySubscriptions.Remove(query);
+                        context.SaveChanges();
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已与仓库" + repository + "取消绑定！");
+                    }
+                }
+            }
+            else if(matches.Count==0)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个仓库呢？可以输入“查询仓库”查看您已绑定的仓库清单！然后您可以通过输入“取消绑定#仓库名称#”与您不关注的仓库取消绑定哦！");
+            }
+            else
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个仓库取消绑定！输入“取消绑定#仓库名称#”与您不关注的仓库取消绑定！");
+            }
         }
     }
 }

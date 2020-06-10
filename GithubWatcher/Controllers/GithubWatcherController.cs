@@ -154,7 +154,13 @@ namespace GithubWatcher.Controllers
 
             return newRecord;
         }
-
+        
+        /// <summary>
+        /// 创建一条机器人消息
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <param name="eventType"></param>
+        /// <returns></returns>
         public string GenerateMessage(Payload payload, string eventType)
         {
             string msg = "";

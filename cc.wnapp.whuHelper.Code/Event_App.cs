@@ -23,7 +23,7 @@ namespace cc.wnapp.whuHelper.Code
     {
         public void CQStartup(object sender, CQStartupEventArgs e)
         {
-            
+
         }
     }
 
@@ -31,97 +31,51 @@ namespace cc.wnapp.whuHelper.Code
     {
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
+            #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
-
             jwxt.CQ.Api = e.CQApi;
             jwxt.CQ.Log = e.CQLog;
-
             Schedule.CQ.Api = e.CQApi;
             Schedule.CQ.Log = e.CQLog;
-
             GithubWatcher.Shared.CQ.Api = e.CQApi;
             GithubWatcher.Shared.CQ.Log = e.CQLog;
-
-            var d = e.CQApi.AppDirectory;   //仅用于初始化路径
-            var CurrentDirectory = System.Environment.CurrentDirectory;
+            #endregion
 
             try
             {
-                if (File.Exists(CurrentDirectory + @"\dc.dll") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到验证码识别组件缺失，正在下载：dc.dll");
-                    var client = new RestClient("***REMOVED***dc.dll");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\dc.dll", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：dc.dll");
-                }
+                #region 基础文件初始化
+                InitFiles(Environment.CurrentDirectory, "dc.dll", "验证码识别组件");
+                InitFiles(Environment.CurrentDirectory, "SQLite.Interop.dll", "SQLite组件");
+                InitFiles(e.CQApi.AppDirectory, "jwxt.db", "教务系统数据库文件");
+                InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件");
+                InitFiles(e.CQApi.AppDirectory, "GithubWatcher.db", "Git数据库文件");
+                #endregion
 
-                if (File.Exists(CurrentDirectory + @"\SQLite.Interop.dll") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到SQLite组件缺失，正在下载：SQLite.Interop.dll");
-                    var client = new RestClient("***REMOVED***SQLite.Interop.dll");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\SQLite.Interop.dll", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：SQLite.Interop.dll");
-                }
+                #region 周起始日期文件初始化（每次启动需下载一次，故独立）
+                var client = new RestClient("***REMOVED***FirstWeekDate.ini");
+                var request = new RestRequest(Method.GET);
+                var response = client.DownloadData(request);
+                File.WriteAllBytes(Environment.CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", response);
+                e.CQLog.InfoSuccess("初始化", "周起始日期文件初始化成功。");
+                #endregion
 
-                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：jwxt.db");
-                    var client = new RestClient("***REMOVED***jwxt.db");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：jwxt.db");
-                }
+                #region 数据库与EF框架初始化
+                jwxt.InitializeDB.Init();
+                Schedule.InitializeDB.Init();
+                GithubWatcher.Models.InitializeDB.Init();
+                #endregion
 
-                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：jwxt.db");
-                    var client = new RestClient("***REMOVED***jwxt.db");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：jwxt.db");
-                }
-
-                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\ScheduleDB.db") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：ScheduleDB.db");
-                    var client = new RestClient("***REMOVED***ScheduleDB.db");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\ScheduleDB.db", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：ScheduleDB.db");
-                }
-
-                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWatcher.db") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：GithubWatcher.db");
-                    var client = new RestClient("***REMOVED***GithubWatcher.db");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\GithubWatcher.db", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：GithubWatcher.db");
-                }
-
-                jwxt.InitializeDB.Init();   //初始化教务系统数据库
-                Schedule.InitializeDB.Init();//初始化日程数据库
-                GithubWatcher.Models.InitializeDB.Init();   // 初始化github仓库关注数据库
-
-                // 初始化GithubWatcher Web服务
+                #region 启动GithubWatcher Web服务
                 var githubWatcherUrl = "https://localhost:44395/";
                 WebApp.Start<Startup>(url: githubWatcherUrl);
+                #endregion
 
-                #region  周起始日期文件初始化
-                var client0 = new RestClient("***REMOVED***FirstWeekDate.ini");
-                var request0 = new RestRequest(Method.GET);
-                var response0 = client0.DownloadData(request0);
-                File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", response0);
-                e.CQLog.InfoSuccess("初始化", "周起始日期文件初始化成功。");
+                #region 启动Schedule线程
+                Thread GsrTh = new Thread(ScheduleThread.GroupScheduleRemind);
+                GsrTh.Start();
+                Thread PsrTh = new Thread(ScheduleThread.PrivateScheduleRemind);
+                PsrTh.Start();
                 #endregion
 
                 e.CQLog.InfoSuccess("初始化", "插件初始化成功。");
@@ -130,12 +84,27 @@ namespace cc.wnapp.whuHelper.Code
             {
                 e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
             }
-            
-            Thread GsrTh = new Thread(ScheduleThread.GroupScheduleRemind);
-            GsrTh.Start();
 
-            Thread PsrTh = new Thread(ScheduleThread.PrivateScheduleRemind);
-            PsrTh.Start();
+            
+        }
+
+        /// <summary>
+        /// 从对象存储下载缺失的文件
+        /// </summary>
+        /// <param name="path">文件本地存储路径（目录，不带文件名及拓展名）</param>
+        /// <param name="fileName">文件名</param>
+        /// <param name="description">文件描述，用于提示</param>
+        public void InitFiles(string path, string fileName, string description)
+        {
+            if (File.Exists(path + @"\" + fileName) == false)
+            {
+                CQ.Log.Warning("初始化", "检测到" + description + "缺失，正在下载：" + fileName);
+                var client = new RestClient("***REMOVED***" + fileName);
+                var request = new RestRequest(Method.GET);
+                var response = client.DownloadData(request);
+                File.WriteAllBytes(path + @"\" + fileName, response);
+                CQ.Log.InfoSuccess("初始化", "下载成功：" + fileName);
+            }
         }
     }
 

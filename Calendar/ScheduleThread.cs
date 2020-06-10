@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace cc.wnapp.whuHelper.Code
 {
-    static class ScheduleThread
+    public static class ScheduleThread
     {
         /// <summary>
         /// 个人日程提醒

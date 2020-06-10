@@ -32,6 +32,7 @@
             this.bindingSource_StudentDB = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView_StuList = new System.Windows.Forms.DataGridView();
@@ -125,7 +126,6 @@
             this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -174,6 +174,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "账号管理";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(679, 456);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(104, 29);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "测试成绩提醒";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(7, 441);
@@ -188,7 +198,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(383, 53);
+            this.label2.Location = new System.Drawing.Point(240, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 20);
@@ -1118,16 +1128,6 @@
             // bindingSource_Courses
             // 
             this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(679, 456);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 29);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "测试成绩提醒";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 

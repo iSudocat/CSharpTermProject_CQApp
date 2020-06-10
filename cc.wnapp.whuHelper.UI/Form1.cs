@@ -36,6 +36,7 @@ namespace cc.wnapp.whuHelper.UI
         
         private void Form1_Load(object sender, EventArgs e)
         {
+
             tab1Init();
             tab2Init();
             tab3Init();
@@ -46,8 +47,8 @@ namespace cc.wnapp.whuHelper.UI
             BotQQ = CQ.Api.GetLoginQQ();
 
             bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
-
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
+
             stuDataGridView.DataSource = bindingSource_StudentDB;
 
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
@@ -55,6 +56,16 @@ namespace cc.wnapp.whuHelper.UI
             if(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "") != "")
                 tb_jwPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1");
             
+            if(ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "") == "真")
+            {
+                label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
+            }
+            else
+            {
+                label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
+            }
+
+            tb_ReminderTime.Text = ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", "");
         }
 
         private void tab2Init()
@@ -79,7 +90,7 @@ namespace cc.wnapp.whuHelper.UI
             checkBoxColumn.HeaderText = "选择";
             //第一列插入checkbox
             AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
-            AllScoredataGridView.RowHeadersVisible = false;//???
+            AllScoredataGridView.RowHeadersVisible = false;
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -87,7 +98,6 @@ namespace cc.wnapp.whuHelper.UI
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "QQ", tb_QQ.Text);
         }
 
-       
         private void tb_StuID_TextChanged(object sender, EventArgs e)
         {
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "学号", tb_StuID.Text);
@@ -96,6 +106,11 @@ namespace cc.wnapp.whuHelper.UI
         private void tb_jwPw_TextChanged(object sender, EventArgs e)
         {
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", DESTool.Encrypt(tb_jwPw.Text, "jw*1"));
+        }
+
+        private void tb_ReminderTime_TextChanged(object sender, EventArgs e)
+        {
+            ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", tb_ReminderTime.Text);
         }
 
         private void btn_jwlogin_Click(object sender, EventArgs e)
@@ -145,6 +160,13 @@ namespace cc.wnapp.whuHelper.UI
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
+        private void btn_refreshMainList_Click(object sender, EventArgs e)
+        {
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+        }
+
+
         private void dataGridView_StuList_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_StuList.CurrentRow != null)
@@ -153,7 +175,40 @@ namespace cc.wnapp.whuHelper.UI
             }
         }
 
+        private void btn_OpenScoreReminder_Click(object sender, EventArgs e)
+        {
+            string QQ = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
+            string StuID = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
+            string Pw = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "");
+            if (QQ == "" || StuID == "" || Pw == "")
+            {
+                MessageBox.Show("本人部分信息为空，请先完成填写后再尝试开启。", "开启成绩提醒失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else if(tb_ReminderTime.Text == "")
+            {
+                MessageBox.Show("基础检测间隔为空，请先完成填写后再尝试开启。", "开启成绩提醒失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var rand =  new Random();
+                var sign = (rand.Next(0, 2) == 0 ? 1 : -1);
+                var baseTime = Convert.ToInt32(tb_ReminderTime.Text);   //基础时间
+                var floatTime = sign * rand.Next(0, Convert.ToInt32(0.1 * baseTime) + 1);   //±10%的浮动时间
+                var time = baseTime + floatTime;
+                CQ.Log.Debug("延时", Convert.ToString(time));
+                JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
+                ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "真");
+                label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
+            }
+            
+        }
 
+        private void btn_CloseScoreReminder_Click(object sender, EventArgs e)
+        {
+            JobManager.Stop();
+            JobManager.RemoveAllJobs();
+            ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "假");
+            label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
+        }
 
 
         private void QueryAllCourses()
@@ -380,10 +435,15 @@ namespace cc.wnapp.whuHelper.UI
             return GetSelect;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            JobManager.Initialize(new ScoreReminder());
-        }
+
+
+
+
+
+
+
+
+
 
 
 

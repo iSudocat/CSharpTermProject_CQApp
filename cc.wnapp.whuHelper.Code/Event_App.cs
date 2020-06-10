@@ -70,7 +70,7 @@ namespace cc.wnapp.whuHelper.Code
                 #endregion
 
                 #region 启动GithubWatcher Web服务
-                var githubWatcherUrl = "https://localhost:44395/";
+                var githubWatcherUrl = "http://localhost:44395/";
                 WebApp.Start<Startup>(url: githubWatcherUrl);
                 #endregion
 

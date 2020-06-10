@@ -212,7 +212,19 @@ namespace cc.wnapp.whuHelper.Code
             if (msg.Contains("绑定仓库")) 
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.PrivateAttentionHandler);
+                Thread t = new Thread(mp.SubscribeRepository);
+                t.Start();
+            }
+            if (msg.Contains("所有仓库") || msg.Contains("查询仓库")) 
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.QueryRepository);
+                t.Start();
+            }
+            if (msg.Contains("取消绑定"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.Unsubscribe);
                 t.Start();
             }
         }

@@ -16,6 +16,7 @@ using System.Web.Routing;
 using Microsoft.Owin.Hosting;
 using System.Net.Http;
 using FluentScheduler;
+using Tools;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -29,6 +30,7 @@ namespace cc.wnapp.whuHelper.Code
 
     public class event_AppStartup : IAppEnable
     {
+
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
             #region 传出CQApi与CQLog供外部调用
@@ -45,19 +47,20 @@ namespace cc.wnapp.whuHelper.Code
             try
             {
                 #region 基础文件初始化
-                InitFiles(Environment.CurrentDirectory, "dc.dll", "验证码识别组件");
-                InitFiles(Environment.CurrentDirectory, "SQLite.Interop.dll", "SQLite组件");
-                InitFiles(e.CQApi.AppDirectory, "jwxt.db", "教务系统数据库文件");
-                InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件");
-                InitFiles(e.CQApi.AppDirectory, "GithubWatcher.db", "Git数据库文件");
-                #endregion
-
-                #region 周起始日期文件初始化（每次启动需下载一次，故独立）
-                var client = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/FirstWeekDate.ini");
-                var request = new RestRequest(Method.GET);
-                var response = client.DownloadData(request);
-                File.WriteAllBytes(Environment.CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", response);
-                e.CQLog.InfoSuccess("初始化", "周起始日期文件初始化成功。");
+                IF.InitFiles(Environment.CurrentDirectory, "dc.dll", "验证码识别组件");
+                IF.InitFiles(Environment.CurrentDirectory, "SQLite.Interop.dll", "SQLite组件");
+                IF.InitFiles(e.CQApi.AppDirectory, "jwxt.db", "教务系统数据库文件");
+                if (ini.Read(e.CQApi.AppDirectory + @"\配置.ini", "重初始化", "日程", "") == "真")
+                {
+                    IF.InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件", true);
+                    ini.Write(e.CQApi.AppDirectory + @"\配置.ini", "重初始化", "日程", "");
+                }
+                else
+                {
+                    IF.InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件");
+                }  
+                IF.InitFiles(e.CQApi.AppDirectory, "GithubWatcher.db", "Git数据库文件");
+                IF.InitFiles(e.CQApi.AppDirectory, "FirstWeekDate.ini", "周起始日期文件", true);
                 #endregion
 
                 #region 数据库与EF框架初始化
@@ -83,27 +86,6 @@ namespace cc.wnapp.whuHelper.Code
             catch (Exception ex)
             {
                 e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
-            }
-
-            
-        }
-
-        /// <summary>
-        /// 从对象存储下载缺失的文件
-        /// </summary>
-        /// <param name="path">文件本地存储路径（目录，不带文件名及拓展名）</param>
-        /// <param name="fileName">文件名</param>
-        /// <param name="description">文件描述，用于提示</param>
-        public void InitFiles(string path, string fileName, string description)
-        {
-            if (File.Exists(path + @"\" + fileName) == false)
-            {
-                CQ.Log.Warning("初始化", "检测到" + description + "缺失，正在下载：" + fileName);
-                var client = new RestClient("https://chajian-1251910132.file.myqcloud.com/whuHelper/" + fileName);
-                var request = new RestRequest(Method.GET);
-                var response = client.DownloadData(request);
-                File.WriteAllBytes(path + @"\" + fileName, response);
-                CQ.Log.InfoSuccess("初始化", "下载成功：" + fileName);
             }
         }
     }

@@ -2,6 +2,7 @@
 using cc.wnapp.whuHelper.UI;
 using Native.Sdk.Cqp.Interface;
 using Unity;
+using static cc.wnapp.whuHelper.Code.IF;
 
 namespace Native.Core
 {
@@ -16,9 +17,12 @@ namespace Native.Core
 		/// <param name="container">用于注册的 IOC 容器 </param>
 		public static void Register (IUnityContainer unityContainer)
 		{
+			unityContainer.RegisterType<IMenuCall, OpenWindowA>("设置");
+			unityContainer.RegisterType<IMenuCall, MenuInitEas>("重置教务系统数据库");
+			unityContainer.RegisterType<IMenuCall, MenuInitSch>("重置日程数据库");
+			unityContainer.RegisterType<IMenuCall, MenuInitGit>("重置Git提醒数据库");
 			unityContainer.RegisterType<IGroupMessage, event_Message>("群消息处理");
 			unityContainer.RegisterType<IPrivateMessage, event_Message>("私聊消息处理");
-			unityContainer.RegisterType<IMenuCall, OpenWindowA>("设置");
 			unityContainer.RegisterType<ICQStartup, event_CQStartup>("酷Q启动事件");
 			unityContainer.RegisterType<IAppEnable, cc.wnapp.whuHelper.Code.event_AppStartup>("应用已被启用");
 		}

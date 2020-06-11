@@ -14,6 +14,7 @@ using GithubWatcher.Webhook;
 using System.Web.Mvc;
 using GithubWatcher.Models;
 using System.Threading;
+using GithubWatcher.OAuthService;
 
 namespace GithubWatcher.Controllers
 {
@@ -21,18 +22,95 @@ namespace GithubWatcher.Controllers
     {
         private IJsonSerialiser jsonSerialiser;
         private IRequestValidator requestValidator;
+        private GithubConnector githubConnector;
 
         public GithubWatcherController(
             IJsonSerialiser jsonSerialiser,
-            IRequestValidator requestValidator
+            IRequestValidator requestValidator,
+            GithubConnector githubConnector
         ) {
             this.jsonSerialiser = jsonSerialiser;
             this.requestValidator = requestValidator;
+            this.githubConnector = githubConnector;
         }
 
         public GithubWatcherController() {
             jsonSerialiser = new JsonSerialiser();
             requestValidator = new RequestValidator();
+            githubConnector = new GithubConnector();
+        }
+
+        public IHttpActionResult Get(string code, string state)
+        {
+            bool checkResult = false;
+            string fromQQ = Encryption.AesDecrypt(state);
+            var tokenModel = githubConnector.AccessToken(code, ref checkResult); // 获取Access Token
+            if (tokenModel != null)
+            {
+                if (!tokenModel.scope.Contains("repo") || tokenModel.scope == null)    // 用户手动更改了权限，向用户返回权限不足信息
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您申请的权限不足，绑定失败！");
+                    return BadRequest("权限不足");
+                }
+
+                // 调用Github API获取用户数据
+                try
+                {
+                    GithubUserInfo userInfo = githubConnector.GetUserInfo(tokenModel.access_token);     // 用户信息
+                    List<GithubRepositoryInfo> repositories = githubConnector.GetRepositories(tokenModel.access_token);    // 授权用户的所有仓库信息
+
+                    using (var context = new GithubWatcherContext())  
+                    {
+                        var user = context.GithubBindings.FirstOrDefault(s => s.GithubUserName == userInfo.Login);
+
+                        // 如果不存在，则往数据库中添加信息
+                        if (user == null)
+                        {
+                            GithubBinding newBinding = new GithubBinding();
+                            newBinding.QQ = fromQQ;
+                            newBinding.GithubUserName = userInfo.Login;
+
+                            context.GithubBindings.Add(newBinding);
+
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "绑定Github账户" + userInfo.Login + "成功！");
+                        }
+                        else if (user.QQ == fromQQ) 
+                        {
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已经绑定过该Github账户！");
+                        }
+                        else
+                        {
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，该Github账户已被其他用户绑定！");
+                        }
+                        
+
+                        foreach (var repository in repositories) 
+                        {
+                            var query = context.RepositoryInformations.FirstOrDefault(s => s.GithubUserName == userInfo.Login && s.Repository == repository.FullName);
+
+                            // 如果不存在，则往数据库中添加信息
+                            if (query==null)
+                            {
+                                RepositoryInformation newRepositoryInfo = new RepositoryInformation();
+                                newRepositoryInfo.GithubUserName = userInfo.Login;
+                                newRepositoryInfo.Repository = repository.FullName;
+
+                                context.RepositoryInformations.Add(newRepositoryInfo);
+                            }
+                        }
+
+                        context.SaveChanges();
+                        return Ok("绑定成功！");
+                    }
+                }
+                catch(Exception e)
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "错误：" + e.Message);
+                    return BadRequest(e.Message);
+                }
+            }
+
+            return BadRequest("获取Access Token失败！");
         }
 
         // POST: api/GithubWatcher
@@ -70,7 +148,6 @@ namespace GithubWatcher.Controllers
             {
                 return BadRequest("Request中应附有GUID！");
             }
-            
 
             //bool isValidRequest = this.requestValidator.IsValidRequest(signature, "312725802", body);
 
@@ -118,7 +195,7 @@ namespace GithubWatcher.Controllers
         }
 
         // 从payload中创建一条消息记录
-        public PayloadRecord GenerateRecord(Payload payload, string eventType, string delivery)
+        private PayloadRecord GenerateRecord(Payload payload, string eventType, string delivery)
         {
             PayloadRecord newRecord = new PayloadRecord();
 
@@ -161,7 +238,7 @@ namespace GithubWatcher.Controllers
         /// <param name="payload"></param>
         /// <param name="eventType"></param>
         /// <returns></returns>
-        public string GenerateMessage(Payload payload, string eventType)
+        private string GenerateMessage(Payload payload, string eventType)
         {
             string msg = "";
 

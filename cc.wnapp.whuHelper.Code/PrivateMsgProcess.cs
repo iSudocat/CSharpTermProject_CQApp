@@ -14,6 +14,7 @@ using System.Web.SessionState;
 using Schedule;
 using GithubWatcher.Models;
 using System.Text.RegularExpressions;
+using GithubWatcher.OAuthService;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -414,6 +415,7 @@ namespace cc.wnapp.whuHelper.Code
             string pattern = @"绑定仓库#(?<repository>[\S]+)#";
             MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
 
+            // 输入合法，正则匹配到一个仓库名
             if (matches.Count == 1) 
             {
                 using (var context = new GithubWatcherContext())
@@ -422,6 +424,19 @@ namespace cc.wnapp.whuHelper.Code
                     foreach(Match match in matches)
                     {
                         repository = match.Groups["repository"].Value;
+                    }
+
+                    // 确认具有权限绑定的仓库
+                    var authrizedRepositories = from p in context.GithubBindings
+                                                join q in context.RepositoryInformations
+                                                on p.GithubUserName equals q.GithubUserName
+                                                where p.QQ == fromQQ
+                                                select new { q.Repository };
+
+                    if (authrizedRepositories.FirstOrDefault(s => s.Repository == repository) == null)
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您没有权限绑定该仓库或该仓库不存在，请检查您输入的仓库信息！");
+                        return;
                     }
 
                     var subscription = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == repository);
@@ -480,11 +495,11 @@ namespace cc.wnapp.whuHelper.Code
 
         /// <summary>
         /// 取消绑定Git仓库
-        /// 命令格式：取消绑定#仓库名称#
+        /// 命令格式：取消绑定仓库#仓库名称#
         /// </summary>
         public void Unsubscribe()
         {
-            string pattern = @"取消绑定#(?<repository>[\S]+)#";
+            string pattern = @"取消绑定仓库#(?<repository>[\S]+)#";
             MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
 
             if (matches.Count == 1) 
@@ -512,11 +527,88 @@ namespace cc.wnapp.whuHelper.Code
             }
             else if(matches.Count==0)
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个仓库呢？可以输入“查询仓库”查看您已绑定的仓库清单！然后您可以通过输入“取消绑定#仓库名称#”与您不关注的仓库取消绑定哦！");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个仓库呢？可以输入“查询仓库”查看您已绑定的仓库清单！然后您可以通过输入“取消绑定仓库#仓库名称#”与您不关注的仓库取消绑定哦！");
             }
             else
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个仓库取消绑定！输入“取消绑定#仓库名称#”与您不关注的仓库取消绑定！");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个仓库取消绑定！输入“取消绑定仓库#仓库名称#”与您不关注的仓库取消绑定！");
+            }
+        }
+        /// <summary>
+        /// 绑定Github账户
+        /// 命令格式：绑定Github账户
+        /// </summary>
+        public void ConnectGithub()
+        {
+            GithubConnector githubConnector = new GithubConnector();
+            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "请点击下方链接以绑定Github账户\n" + githubConnector.Authorize(fromQQ));
+        }
+        /// <summary>
+        /// 查询已授权的Github账户
+        /// 命令格式：所有Github账户
+        /// </summary>
+        public void QueryAuthorisedGithubAccount()
+        {
+            using (var context = new GithubWatcherContext()) 
+            {
+                var query = context.GithubBindings.Where(p => p.QQ == fromQQ).OrderBy(p => p.GithubUserName);
+
+                if (query.Count() == 0)
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何Github账户，输入“绑定Github账户”以进行绑定！");
+                    return;
+                }
+
+                string message = "您绑定的Github账户有：";
+                int i = 0;
+
+                foreach (var account in query)
+                {
+                    i++;
+                    message = message + $"\n{i}. " + account.GithubUserName;
+                }
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
+            }
+        }
+        /// <summary>
+        /// 取消绑定Github账户
+        /// 命令格式：取消绑定Github账户#账户名称#
+        /// </summary>
+        public void DisconnectGithub()
+        {
+            string pattern = @"取消绑定Github账户#(?<account>[\S]+)#";
+            MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
+
+            if (matches.Count == 1)
+            {
+                using (var context = new GithubWatcherContext())
+                {
+                    string account = "";
+                    foreach (Match match in matches)
+                    {
+                        account = match.Groups["account"].Value;
+                    }
+
+                    var query = context.GithubBindings.FirstOrDefault(p => p.QQ == fromQQ && p.GithubUserName == account);
+                    if (query == null)
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您尚未绑定该Github账户！");
+                    }
+                    else
+                    {
+                        context.GithubBindings.Remove(query);
+                        context.SaveChanges();
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已与Github账户" + account + "取消绑定！");
+                    }
+                }
+            }
+            else if (matches.Count == 0)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个Github账户呢？可以输入“查询Github账户”查看您已绑定的Github账户！然后您可以通过输入“取消绑定Github账户#账户名称#”与Github账户取消绑定哦！");
+            }
+            else
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个Github账户取消绑定！输入“取消绑定Github账户#账户名称#”与Github账户取消绑定！");
             }
         }
     }

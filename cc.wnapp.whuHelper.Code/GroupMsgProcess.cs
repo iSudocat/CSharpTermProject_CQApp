@@ -23,14 +23,21 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddScheduleToDB()
         {
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            if (groupUser.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                if (groupUser.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】\n");
             }
         }
 
@@ -40,15 +47,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddWeeklyScheduleToDB()
         {
-            var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            if (groupUser.AddWeeklySchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
+                var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                if (groupUser.AddWeeklySchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
+                }
+            }
+            catch(Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】\n");
             }
         }
 
@@ -58,11 +72,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void DelScheduleFromDB()
         {
-            var scheduleID = textOp.GetRightText(message, "|");
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            if (groupUser.DelSchedule(scheduleID))
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
+                var scheduleID = textOp.GetRightText(message, "|");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                if (groupUser.DelSchedule(scheduleID))
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】\n");
             }
         }
         /// <summary>
@@ -71,11 +92,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void DelWeeklyScheduleFromDB()
         {
-            var scheduleID = textOp.GetRightText(message, "|");
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            if (groupUser.DelWeeklySchedule(scheduleID))
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
+                var scheduleID = textOp.GetRightText(message, "|");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                if (groupUser.DelWeeklySchedule(scheduleID))
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】\n");
             }
         }
         /// <summary>
@@ -119,10 +147,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetSchedulesFromDB()
         {
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            foreach (var schedule in groupUser.GetSchedules())
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                foreach (var schedule in groupUser.GetSchedules())
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
             }
         }
         /// <summary>
@@ -131,10 +166,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetWeeklySchedulesFromDB()
         {
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            foreach (var weeklySchedule in groupUser.GetWeeklySchedules())
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                foreach (var weeklySchedule in groupUser.GetWeeklySchedules())
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
             }
         }
         /// <summary>
@@ -143,11 +185,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SortScheduleFromDB()
         {
-            var option = textOp.GetRightText(message, "%");
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            foreach (var schedule in groupUser.SortSchedules(option))
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
+                var option = textOp.GetRightText(message, "%");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                foreach (var schedule in groupUser.SortSchedules(option))
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
             }
         }
         /// <summary>
@@ -156,11 +205,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SortWeeklyScheduleFromDB()
         {
-            var option = textOp.GetRightText(message, "%");
-            GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-            foreach (var weeklySchedule in groupUser.SortWeeklySchedules(option))
+            try
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
+                var option = textOp.GetRightText(message, "%");
+                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
+                foreach (var weeklySchedule in groupUser.SortWeeklySchedules(option))
+                {
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
             }
         }
 

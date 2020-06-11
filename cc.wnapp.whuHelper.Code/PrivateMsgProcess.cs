@@ -245,14 +245,21 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddScheduleToDB()
         {
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.AddSchedule(StrToDateTime(dateTime), scheduleType, scheduleContent))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.AddSchedule(StrToDateTime(dateTime), scheduleType, scheduleContent))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】\n");
             }
         }
 
@@ -262,15 +269,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddWeeklyScheduleToDB()
         {
-            var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":"); ;
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.AddWeeklySchedule(StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
+                var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":"); ;
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.AddWeeklySchedule(StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】\n");
             }
         }
 
@@ -280,11 +294,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void DelScheduleFromDB()
         {
-            var scheduleID = textOp.GetRightText(message, "|");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.DelSchedule(scheduleID))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
+                var scheduleID = textOp.GetRightText(message, "|");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.DelSchedule(scheduleID))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】\n");
             }
         }
         /// <summary>
@@ -293,11 +314,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void DelWeeklyScheduleFromDB()
         {
-            var scheduleID = textOp.GetRightText(message, "|");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.DelWeeklySchedule(scheduleID))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
+                var scheduleID = textOp.GetRightText(message, "|");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.DelWeeklySchedule(scheduleID))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】\n");
             }
         }
         /// <summary>
@@ -306,15 +334,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SetScheduleToDB()
         {
-            var scheduleID = textOp.GetMiddleText(message, "-", "|");
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.SetSchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
+                var scheduleID = textOp.GetMiddleText(message, "-", "|");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.SetSchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】\n");
             }
         }
         /// <summary>
@@ -323,16 +358,23 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SetWeeklyScheduleToDB()
         {
-            var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "-"));
-            var scheduleID = textOp.GetMiddleText(message, "-", "|");
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.SetWeeklySchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
+                var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "-"));
+                var scheduleID = textOp.GetMiddleText(message, "-", "|");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.SetWeeklySchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】\n");
             }
         }
 
@@ -342,10 +384,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetSchedulesFromDB()
         {
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (var schedule in personalUser.GetSchedules())
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (var schedule in personalUser.GetSchedules())
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】\n");
             }
         }
         /// <summary>
@@ -354,10 +403,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetWeeklySchedulesFromDB()
         {
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (WeeklySchedule weeklySchedule in personalUser.GetWeeklySchedules())
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (WeeklySchedule weeklySchedule in personalUser.GetWeeklySchedules())
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】\n");
             }
         }
         /// <summary>
@@ -366,11 +422,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SortScheduleFromDB()
         {
-            var option = textOp.GetRightText(message, "%");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (var schedule in personalUser.SortSchedules(option))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
+                var option = textOp.GetRightText(message, "%");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (var schedule in personalUser.SortSchedules(option))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】\n");
             }
         }
         /// <summary>
@@ -379,11 +442,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SortWeeklyScheduleFromDB()
         {
-            var option = textOp.GetRightText(message, "%");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (WeeklySchedule weeklySchedule in personalUser.SortWeeklySchedules(option))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
+                var option = textOp.GetRightText(message, "%");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (WeeklySchedule weeklySchedule in personalUser.SortWeeklySchedules(option))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】\n");
             }
         }
 		/// <summary>

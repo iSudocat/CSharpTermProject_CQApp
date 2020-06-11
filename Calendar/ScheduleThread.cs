@@ -15,16 +15,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public static void PrivateScheduleRemind()  
         {
-
+            List<Schedule.Schedule> schedules = ScheduleInterface.GetGlobalSchedules();
+            List<WeeklySchedule> weeklySchedules = ScheduleInterface.GetGlobalWeeklySchedules();
             while (true)
             {
 
-                foreach (var schedule in ScheduleInterface.GetGlobalSchedules())
+                foreach (var schedule in schedules)
                 {
                     if (schedule.UserType==0&&schedule.ScheduleTime == DateTime.Now)
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
                 }
-                foreach (var weeklySchedule in ScheduleInterface.GetGlobalWeeklySchedules())
+                foreach (var weeklySchedule in weeklySchedules)
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
@@ -40,15 +41,16 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public static void GroupScheduleRemind()
         {
-            
+            List<Schedule.Schedule> schedules = ScheduleInterface.GetGlobalSchedules();
+            List<WeeklySchedule> weeklySchedules = ScheduleInterface.GetGlobalWeeklySchedules();
             while (true)
             {
-                foreach (var schedule in ScheduleInterface.GetGlobalSchedules())
+                foreach (var schedule in schedules)
                 {
-                    if (schedule.UserType == 1 && schedule.ScheduleTime == DateTime.Now)
+                    if (schedule.UserType == 1 && schedule.ScheduleTime.Equals(DateTime.Now))
                         CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
                 }
-                foreach (var weeklySchedule in ScheduleInterface.GetGlobalWeeklySchedules())
+                foreach (var weeklySchedule in weeklySchedules)
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {

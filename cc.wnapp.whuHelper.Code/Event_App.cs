@@ -8,6 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GithubWatcher;
+using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+using Microsoft.Owin.Hosting;
+using System.Net.Http;
+using FluentScheduler;
+using Tools;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -15,78 +24,70 @@ namespace cc.wnapp.whuHelper.Code
     {
         public void CQStartup(object sender, CQStartupEventArgs e)
         {
-            
+
         }
     }
 
     public class event_AppStartup : IAppEnable
     {
+
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
+            #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
-
+            jwxt.CQ.Api = e.CQApi;
+            jwxt.CQ.Log = e.CQLog;
             Schedule.CQ.Api = e.CQApi;
             Schedule.CQ.Log = e.CQLog;
-
-            var CurrentDirectory = System.Environment.CurrentDirectory;
+            GithubWatcher.Shared.CQ.Api = e.CQApi;
+            GithubWatcher.Shared.CQ.Log = e.CQLog;
+            #endregion
 
             try
             {
-                if (File.Exists(CurrentDirectory + @"\dc.dll") == false)
+                #region 基础文件初始化
+                IF.InitFiles(Environment.CurrentDirectory, "dc.dll", "验证码识别组件");
+                IF.InitFiles(Environment.CurrentDirectory, "SQLite.Interop.dll", "SQLite组件");
+                IF.InitFiles(e.CQApi.AppDirectory, "jwxt.db", "教务系统数据库文件");
+                if (ini.Read(e.CQApi.AppDirectory + @"\配置.ini", "重初始化", "日程", "") == "真")
                 {
-                    e.CQLog.Warning("初始化", "检测到验证码识别组件缺失，正在下载：dc.dll");
-                    var client = new RestClient("***REMOVED***dc.dll");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\dc.dll", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：dc.dll");
+                    IF.InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件", true);
+                    ini.Write(e.CQApi.AppDirectory + @"\配置.ini", "重初始化", "日程", "");
                 }
-
-                if (File.Exists(CurrentDirectory + @"\SQLite.Interop.dll") == false)
+                else
                 {
-                    e.CQLog.Warning("初始化", "检测到SQLite组件缺失，正在下载：SQLite.Interop.dll");
-                    var client = new RestClient("***REMOVED***SQLite.Interop.dll");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\SQLite.Interop.dll", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：SQLite.Interop.dll");
-                }
+                    IF.InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件");
+                }  
+                IF.InitFiles(e.CQApi.AppDirectory, "GithubWatcher.db", "Git数据库文件");
+                IF.InitFiles(e.CQApi.AppDirectory, "FirstWeekDate.ini", "周起始日期文件", true);
+                #endregion
 
-                if (File.Exists(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db") == false)
-                {
-                    e.CQLog.Warning("初始化", "检测到数据库文件缺失，正在下载：jwxt.db");
-                    var client = new RestClient("***REMOVED***jwxt.db");
-                    var request = new RestRequest(Method.GET);
-                    var response = client.DownloadData(request);
-                    File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\jwxt.db", response);
-                    e.CQLog.InfoSuccess("初始化", "下载成功：jwxt.db");
-                }
+                #region 数据库与EF框架初始化
+                jwxt.InitializeDB.Init();
+                Schedule.InitializeDB.Init();
+                GithubWatcher.Models.InitializeDB.Init();
+                #endregion
 
-                jwxt.InitializeDB.Init();   //初始化数据库
-                Schedule.InitializeDB.Init();//初始化日程数据库
+                #region 启动GithubWatcher Web服务
+                var githubWatcherUrl = "http://localhost:44395/";
+                WebApp.Start<Startup>(url: githubWatcherUrl);
+                
+                #endregion
 
-
-                #region  周起始日期文件初始化
-                var client0 = new RestClient("***REMOVED***FirstWeekDate.ini");
-                var request0 = new RestRequest(Method.GET);
-                var response0 = client0.DownloadData(request0);
-                File.WriteAllBytes(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", response0);
-                e.CQLog.InfoSuccess("初始化", "周起始日期文件初始化成功。");
+                #region 启动Schedule线程
+                Thread GsrTh = new Thread(ScheduleThread.GroupScheduleRemind);
+                GsrTh.Start();
+                Thread PsrTh = new Thread(ScheduleThread.PrivateScheduleRemind);
+                PsrTh.Start();
                 #endregion
 
                 e.CQLog.InfoSuccess("初始化", "插件初始化成功。");
             }
             catch (Exception ex)
             {
-                e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.Message);
+                e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
             }
-            
-            Thread GsrTh = new Thread(ScheduleThread.GroupScheduleRemind);
-            GsrTh.Start();
-
-            Thread PsrTh = new Thread(ScheduleThread.PrivateScheduleRemind);
-            PsrTh.Start();
         }
     }
 

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace GitHubAutoresponder.Shared {
+namespace GithubWatcher.Shared {
     public class JsonSerialiser : IJsonSerialiser {
         private JsonSerializerSettings settings;
 

@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using GitHubAutoresponder.Shared;
+using GithubWatcher.Shared;
 using GithubWatcher.Webhook;
 
-namespace GitHubAutoresponder.Responder {
+namespace GithubWatcher.Responder {
     public class GitHubResponder : IGitHubResponder {
         private IResponseFactory responseFactory;
         private IHttpClient httpClient;
@@ -35,7 +35,7 @@ namespace GitHubAutoresponder.Responder {
 
             return await this.httpClient.PostAsync(
                 //payload.Commentable.CommentsUrl,
-                payload.Issue.Url,
+                payload.Issue.HtmlUrl,
                 serializedResponse
             );
         }

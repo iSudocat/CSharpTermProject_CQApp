@@ -44,6 +44,33 @@ namespace Native.App.Export
 				Menu_OpenWindowAHandler += AppData.UnityContainer.Resolve<IMenuCall> ("设置").MenuCall;	
 			}	
 			
+			/*	
+			 * Name: 重置教务系统数据库	
+			 * Function: _MenuInitEas	
+			 */	
+			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("重置教务系统数据库"))	
+			{	
+				Menu_MenuInitEasHandler += AppData.UnityContainer.Resolve<IMenuCall> ("重置教务系统数据库").MenuCall;	
+			}	
+			
+			/*	
+			 * Name: 重置日程数据库	
+			 * Function: _MenuInitSch	
+			 */	
+			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("重置日程数据库"))	
+			{	
+				Menu_MenuInitSchHandler += AppData.UnityContainer.Resolve<IMenuCall> ("重置日程数据库").MenuCall;	
+			}	
+			
+			/*	
+			 * Name: 重置Git提醒数据库	
+			 * Function: _MenuInitGit	
+			 */	
+			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("重置Git提醒数据库"))	
+			{	
+				Menu_MenuInitGitHandler += AppData.UnityContainer.Resolve<IMenuCall> ("重置Git提醒数据库").MenuCall;	
+			}	
+			
 		}	
 		#endregion	
 		
@@ -60,6 +87,54 @@ namespace Native.App.Export
 			{	
 				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "设置", "_OpenWindowA");	
 				Menu_OpenWindowAHandler (typeof (CQMenuExport), args);	
+			}	
+			return 0;	
+		}	
+		
+		/*	
+		 * Name: 重置教务系统数据库	
+		 * Function: _MenuInitEas	
+		 */	
+		public static event EventHandler<CQMenuCallEventArgs> Menu_MenuInitEasHandler;	
+		[DllExport (ExportName = "_MenuInitEas", CallingConvention = CallingConvention.StdCall)]	
+		public static int Menu_MenuInitEas ()	
+		{	
+			if (Menu_MenuInitEasHandler != null)	
+			{	
+				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "重置教务系统数据库", "_MenuInitEas");	
+				Menu_MenuInitEasHandler (typeof (CQMenuExport), args);	
+			}	
+			return 0;	
+		}	
+		
+		/*	
+		 * Name: 重置日程数据库	
+		 * Function: _MenuInitSch	
+		 */	
+		public static event EventHandler<CQMenuCallEventArgs> Menu_MenuInitSchHandler;	
+		[DllExport (ExportName = "_MenuInitSch", CallingConvention = CallingConvention.StdCall)]	
+		public static int Menu_MenuInitSch ()	
+		{	
+			if (Menu_MenuInitSchHandler != null)	
+			{	
+				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "重置日程数据库", "_MenuInitSch");	
+				Menu_MenuInitSchHandler (typeof (CQMenuExport), args);	
+			}	
+			return 0;	
+		}	
+		
+		/*	
+		 * Name: 重置Git提醒数据库	
+		 * Function: _MenuInitGit	
+		 */	
+		public static event EventHandler<CQMenuCallEventArgs> Menu_MenuInitGitHandler;	
+		[DllExport (ExportName = "_MenuInitGit", CallingConvention = CallingConvention.StdCall)]	
+		public static int Menu_MenuInitGit ()	
+		{	
+			if (Menu_MenuInitGitHandler != null)	
+			{	
+				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "重置Git提醒数据库", "_MenuInitGit");	
+				Menu_MenuInitGitHandler (typeof (CQMenuExport), args);	
 			}	
 			return 0;	
 		}	

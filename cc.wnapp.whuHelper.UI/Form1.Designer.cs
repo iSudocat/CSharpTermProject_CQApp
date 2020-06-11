@@ -32,9 +32,23 @@
             this.bindingSource_StudentDB = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tb_ReminderTime = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btn_CloseScoreReminder = new System.Windows.Forms.Button();
+            this.btn_OpenScoreReminder = new System.Windows.Forms.Button();
+            this.label_ScoreReminderState = new System.Windows.Forms.Label();
+            this.btn_refreshMainList = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView_StuList = new System.Windows.Forms.DataGridView();
+            this.QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StuID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StuName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.College = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_jwlogin = new System.Windows.Forms.Button();
             this.tb_jwPw = new System.Windows.Forms.TextBox();
@@ -95,26 +109,35 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
-            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSelectNoGX = new System.Windows.Forms.Button();
             this.buttonSelectNoGB = new System.Windows.Forms.Button();
-            this.buttonSelectCS = new System.Windows.Forms.Button();
+            this.buttonSelectDepart = new System.Windows.Forms.Button();
             this.buttonSelectNoZX = new System.Windows.Forms.Button();
             this.buttonSelectNoZB = new System.Windows.Forms.Button();
             this.buttonSelectNo = new System.Windows.Forms.Button();
             this.buttonSelectAll = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StuID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StuName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.College = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_StuList)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -128,8 +151,8 @@
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllScoredataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StuScore)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StuScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Courses)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,6 +171,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.btn_refreshMainList);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.dataGridView_StuList);
@@ -159,9 +184,104 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "账号管理";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.tb_ReminderTime);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.btn_CloseScoreReminder);
+            this.panel2.Controls.Add(this.btn_OpenScoreReminder);
+            this.panel2.Controls.Add(this.label_ScoreReminderState);
+            this.panel2.Location = new System.Drawing.Point(542, 82);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(267, 180);
+            this.panel2.TabIndex = 22;
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Location = new System.Drawing.Point(13, 87);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(236, 48);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "真实检测间隔将在基础检测间隔之上自动浮动±10%";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(174, 49);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(37, 20);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "分钟";
+            // 
+            // tb_ReminderTime
+            // 
+            this.tb_ReminderTime.Location = new System.Drawing.Point(111, 46);
+            this.tb_ReminderTime.Name = "tb_ReminderTime";
+            this.tb_ReminderTime.Size = new System.Drawing.Size(56, 26);
+            this.tb_ReminderTime.TabIndex = 25;
+            this.tb_ReminderTime.TextChanged += new System.EventHandler(this.tb_ReminderTime_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(13, 49);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 20);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "基础检测间隔";
+            // 
+            // btn_CloseScoreReminder
+            // 
+            this.btn_CloseScoreReminder.Location = new System.Drawing.Point(127, 139);
+            this.btn_CloseScoreReminder.Name = "btn_CloseScoreReminder";
+            this.btn_CloseScoreReminder.Size = new System.Drawing.Size(90, 29);
+            this.btn_CloseScoreReminder.TabIndex = 23;
+            this.btn_CloseScoreReminder.Text = "关闭检测";
+            this.btn_CloseScoreReminder.UseVisualStyleBackColor = true;
+            this.btn_CloseScoreReminder.Click += new System.EventHandler(this.btn_CloseScoreReminder_Click);
+            // 
+            // btn_OpenScoreReminder
+            // 
+            this.btn_OpenScoreReminder.Location = new System.Drawing.Point(17, 139);
+            this.btn_OpenScoreReminder.Name = "btn_OpenScoreReminder";
+            this.btn_OpenScoreReminder.Size = new System.Drawing.Size(90, 29);
+            this.btn_OpenScoreReminder.TabIndex = 22;
+            this.btn_OpenScoreReminder.Text = "开启检测";
+            this.btn_OpenScoreReminder.UseVisualStyleBackColor = true;
+            this.btn_OpenScoreReminder.Click += new System.EventHandler(this.btn_OpenScoreReminder_Click);
+            // 
+            // label_ScoreReminderState
+            // 
+            this.label_ScoreReminderState.AutoSize = true;
+            this.label_ScoreReminderState.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_ScoreReminderState.Location = new System.Drawing.Point(13, 9);
+            this.label_ScoreReminderState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_ScoreReminderState.Name = "label_ScoreReminderState";
+            this.label_ScoreReminderState.Size = new System.Drawing.Size(135, 20);
+            this.label_ScoreReminderState.TabIndex = 20;
+            this.label_ScoreReminderState.Text = "本人新出成绩提醒：";
+            // 
+            // btn_refreshMainList
+            // 
+            this.btn_refreshMainList.Location = new System.Drawing.Point(7, 441);
+            this.btn_refreshMainList.Name = "btn_refreshMainList";
+            this.btn_refreshMainList.Size = new System.Drawing.Size(60, 29);
+            this.btn_refreshMainList.TabIndex = 18;
+            this.btn_refreshMainList.Text = "刷新";
+            this.btn_refreshMainList.UseVisualStyleBackColor = true;
+            this.btn_refreshMainList.Click += new System.EventHandler(this.btn_refreshMainList_Click);
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(7, 441);
+            this.button1.Location = new System.Drawing.Point(74, 441);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(137, 29);
             this.button1.TabIndex = 15;
@@ -173,7 +293,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(383, 53);
+            this.label2.Location = new System.Drawing.Point(198, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 20);
@@ -200,9 +320,53 @@
             this.dataGridView_StuList.RowHeadersWidth = 51;
             this.dataGridView_StuList.RowTemplate.Height = 23;
             this.dataGridView_StuList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_StuList.Size = new System.Drawing.Size(819, 353);
+            this.dataGridView_StuList.Size = new System.Drawing.Size(529, 353);
             this.dataGridView_StuList.TabIndex = 2;
             this.dataGridView_StuList.SelectionChanged += new System.EventHandler(this.dataGridView_StuList_SelectionChanged);
+            // 
+            // QQ
+            // 
+            this.QQ.DataPropertyName = "QQ";
+            this.QQ.HeaderText = "QQ";
+            this.QQ.MinimumWidth = 6;
+            this.QQ.Name = "QQ";
+            this.QQ.ReadOnly = true;
+            // 
+            // StuID
+            // 
+            this.StuID.DataPropertyName = "StuID";
+            this.StuID.HeaderText = "学号";
+            this.StuID.MinimumWidth = 6;
+            this.StuID.Name = "StuID";
+            this.StuID.ReadOnly = true;
+            this.StuID.Width = 120;
+            // 
+            // StuName
+            // 
+            this.StuName.DataPropertyName = "StuName";
+            this.StuName.HeaderText = "姓名";
+            this.StuName.MinimumWidth = 6;
+            this.StuName.Name = "StuName";
+            this.StuName.ReadOnly = true;
+            // 
+            // College
+            // 
+            this.College.DataPropertyName = "College";
+            this.College.HeaderText = "学院";
+            this.College.MinimumWidth = 6;
+            this.College.Name = "College";
+            this.College.ReadOnly = true;
+            this.College.Width = 180;
+            // 
+            // Bot
+            // 
+            this.Bot.DataPropertyName = "BotQQ";
+            this.Bot.HeaderText = "BotQQ";
+            this.Bot.MinimumWidth = 6;
+            this.Bot.Name = "Bot";
+            this.Bot.ReadOnly = true;
+            this.Bot.Visible = false;
+            this.Bot.Width = 125;
             // 
             // panel1
             // 
@@ -404,7 +568,7 @@
             this.QQNum.MinimumWidth = 6;
             this.QQNum.Name = "QQNum";
             this.QQNum.ReadOnly = true;
-            this.QQNum.Width = 125;
+            this.QQNum.Width = 90;
             // 
             // StudentID
             // 
@@ -413,7 +577,7 @@
             this.StudentID.MinimumWidth = 6;
             this.StudentID.Name = "StudentID";
             this.StudentID.ReadOnly = true;
-            this.StudentID.Width = 125;
+            this.StudentID.Width = 120;
             // 
             // StudentName
             // 
@@ -829,9 +993,21 @@
             // 
             // AllScoredataGridView
             // 
-            this.AllScoredataGridView.AutoGenerateColumns = false;
             this.AllScoredataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AllScoredataGridView.DataSource = this.bindingSource_StuScore;
+            this.AllScoredataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column11,
+            this.Column12,
+            this.Column13});
             this.AllScoredataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AllScoredataGridView.Location = new System.Drawing.Point(3, 22);
             this.AllScoredataGridView.Name = "AllScoredataGridView";
@@ -840,11 +1016,117 @@
             this.AllScoredataGridView.Size = new System.Drawing.Size(822, 271);
             this.AllScoredataGridView.TabIndex = 0;
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "LessonName";
+            this.Column1.HeaderText = "课程名";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "LessonType";
+            this.Column2.HeaderText = "课程种类";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "GeneralLessonType";
+            this.Column3.HeaderText = "总体课程类别";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 125;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "LessonAttribute";
+            this.Column4.HeaderText = "课程性质";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Credit";
+            this.Column5.HeaderText = "学分";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 125;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "TeacherName";
+            this.Column6.HeaderText = "老师";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 125;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "TeachingCollege";
+            this.Column7.HeaderText = "授课学院";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 125;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "LearningType";
+            this.Column8.HeaderText = "辅修必修";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 125;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "Year";
+            this.Column9.HeaderText = "学年";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 125;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "Term";
+            this.Column10.HeaderText = "学期";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.Width = 125;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "Mark";
+            this.Column11.HeaderText = "分数";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 125;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "StuID";
+            this.Column12.HeaderText = "StuID";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.Visible = false;
+            this.Column12.Width = 125;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "Student";
+            this.Column13.HeaderText = "Student";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.Visible = false;
+            this.Column13.Width = 125;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.buttonSelectNoGX);
             this.groupBox4.Controls.Add(this.buttonSelectNoGB);
-            this.groupBox4.Controls.Add(this.buttonSelectCS);
+            this.groupBox4.Controls.Add(this.buttonSelectDepart);
             this.groupBox4.Controls.Add(this.buttonSelectNoZX);
             this.groupBox4.Controls.Add(this.buttonSelectNoZB);
             this.groupBox4.Controls.Add(this.buttonSelectNo);
@@ -876,15 +1158,15 @@
             this.buttonSelectNoGB.UseVisualStyleBackColor = true;
             this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
             // 
-            // buttonSelectCS
+            // buttonSelectDepart
             // 
-            this.buttonSelectCS.Location = new System.Drawing.Point(708, 30);
-            this.buttonSelectCS.Name = "buttonSelectCS";
-            this.buttonSelectCS.Size = new System.Drawing.Size(112, 31);
-            this.buttonSelectCS.TabIndex = 13;
-            this.buttonSelectCS.Text = "去除非计院";
-            this.buttonSelectCS.UseVisualStyleBackColor = true;
-            this.buttonSelectCS.Click += new System.EventHandler(this.buttonSelectCS_Click);
+            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
+            this.buttonSelectDepart.Name = "buttonSelectDepart";
+            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
+            this.buttonSelectDepart.TabIndex = 13;
+            this.buttonSelectDepart.Text = "去除非本院";
+            this.buttonSelectDepart.UseVisualStyleBackColor = true;
+            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
             // 
             // buttonSelectNoZX
             // 
@@ -940,52 +1222,6 @@
             // 
             this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
             // 
-            // QQ
-            // 
-            this.QQ.DataPropertyName = "QQ";
-            this.QQ.HeaderText = "QQ";
-            this.QQ.MinimumWidth = 6;
-            this.QQ.Name = "QQ";
-            this.QQ.ReadOnly = true;
-            this.QQ.Width = 150;
-            // 
-            // StuID
-            // 
-            this.StuID.DataPropertyName = "StuID";
-            this.StuID.HeaderText = "学号";
-            this.StuID.MinimumWidth = 6;
-            this.StuID.Name = "StuID";
-            this.StuID.ReadOnly = true;
-            this.StuID.Width = 120;
-            // 
-            // StuName
-            // 
-            this.StuName.DataPropertyName = "StuName";
-            this.StuName.HeaderText = "姓名";
-            this.StuName.MinimumWidth = 6;
-            this.StuName.Name = "StuName";
-            this.StuName.ReadOnly = true;
-            this.StuName.Width = 120;
-            // 
-            // College
-            // 
-            this.College.DataPropertyName = "College";
-            this.College.HeaderText = "学院";
-            this.College.MinimumWidth = 6;
-            this.College.Name = "College";
-            this.College.ReadOnly = true;
-            this.College.Width = 200;
-            // 
-            // Bot
-            // 
-            this.Bot.DataPropertyName = "BotQQ";
-            this.Bot.HeaderText = "BotQQ";
-            this.Bot.MinimumWidth = 6;
-            this.Bot.Name = "Bot";
-            this.Bot.ReadOnly = true;
-            this.Bot.Visible = false;
-            this.Bot.Width = 125;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1002,6 +1238,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_StuList)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1020,8 +1258,8 @@
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.AllScoredataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StuScore)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StuScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Courses)).EndInit();
             this.ResumeLayout(false);
 
@@ -1040,7 +1278,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tb_jwPw;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tb_StuID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_jwlogin;
@@ -1071,11 +1308,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Note;
         private System.Windows.Forms.DataGridViewTextBoxColumn SID;
         private System.Windows.Forms.DataGridViewTextBoxColumn S;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QQNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StudentID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StudentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn School;
-        private System.Windows.Forms.DataGridViewTextBoxColumn botQQq;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -1100,18 +1332,46 @@
         private System.Windows.Forms.TextBox textBoxCourseName;
         private System.Windows.Forms.Button buttonSelectNoGX;
         private System.Windows.Forms.Button buttonSelectNoGB;
-        private System.Windows.Forms.Button buttonSelectCS;
+        private System.Windows.Forms.Button buttonSelectDepart;
         private System.Windows.Forms.Button buttonSelectNoZX;
         private System.Windows.Forms.Button buttonSelectNoZB;
         private System.Windows.Forms.Button buttonSelectNo;
         private System.Windows.Forms.Button buttonSelectAll;
-        private System.Windows.Forms.DataGridView AllScoredataGridView;
         private System.Windows.Forms.BindingSource bindingSource_StuScore;
+        private System.Windows.Forms.DataGridView AllScoredataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn QQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn StuID;
         private System.Windows.Forms.DataGridViewTextBoxColumn StuName;
         private System.Windows.Forms.DataGridViewTextBoxColumn College;
         private System.Windows.Forms.DataGridViewTextBoxColumn Bot;
+        private System.Windows.Forms.Button btn_refreshMainList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QQNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StudentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StudentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn School;
+        private System.Windows.Forms.DataGridViewTextBoxColumn botQQq;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btn_CloseScoreReminder;
+        private System.Windows.Forms.Button btn_OpenScoreReminder;
+        private System.Windows.Forms.Label label_ScoreReminderState;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tb_ReminderTime;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tb_StuID;
     }
 }
 

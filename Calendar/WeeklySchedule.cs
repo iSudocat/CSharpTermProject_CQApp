@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 
 namespace Schedule
 {
     public class WeeklySchedule
     {
-        [Required]
-        public static int Num = 0;//计数器
         [Required]
         [Key, Column(Order = 1)]
         public long UserQQ { get; set; }//使用人或者群组qq
@@ -29,17 +28,35 @@ namespace Schedule
         //日程持续周数，每进行一周，weekspan-1 datetime加一周
         [Required]
         public int WeekSpan { get; set; }
+        public WeeklySchedule() { }
         public WeeklySchedule(long userQQ, int userType, DateTime dt, string st, string sc,int weekSpan)
         {
-            Num++;
             UserQQ = userQQ;
             UserType = userType;
             ScheduleTime = dt;
             ScheduleType = st;
             ScheduleContent = sc;
             WeekSpan = weekSpan;
-            ScheduleID = Convert.ToString(UserQQ) + Convert.ToString(Num);
+            ScheduleID = GetWeeklySchedueID(Convert.ToString(UserQQ))+ Guid.NewGuid().ToString();
         }
+        private static string GetWeeklySchedueID(string qq)
+        {
+            string source = qq + DateTime.Now.ToString();
+            MD5 md5Hash = MD5.Create();
+            string hash = GetMd5Hash(md5Hash, source);
+            return hash;
+        }
+        static string GetMd5Hash(MD5 md5Hash, string input)
+        {
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
+
         public string DisplaySchedule()
         {
             return "使用人或群组QQ：" + UserQQ + "\r\n"

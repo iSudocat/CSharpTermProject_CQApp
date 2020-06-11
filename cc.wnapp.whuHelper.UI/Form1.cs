@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComputeScore;
+using CourseFunction;
+using FluentScheduler;
 using jwxt;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
@@ -31,9 +33,10 @@ namespace cc.wnapp.whuHelper.UI
             InitializeComponent();
             
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
+
             tab1Init();
             tab2Init();
             tab3Init();
@@ -44,24 +47,32 @@ namespace cc.wnapp.whuHelper.UI
             BotQQ = CQ.Api.GetLoginQQ();
 
             bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
-
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
-            stuDataGridView.DataSource = bindingSource_StudentDB;
 
-            Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-            courseDataGridView.DataSource = bindingSource_Courses;
+            stuDataGridView.DataSource = bindingSource_StudentDB;
 
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
             tb_StuID.Text= ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
             if(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "") != "")
                 tb_jwPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1");
             
+            if(ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "") == "真")
+            {
+                label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
+            }
+            else
+            {
+                label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
+            }
+
+            tb_ReminderTime.Text = ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", "");
         }
 
         private void tab2Init()
         {
-
+            Student student = bindingSource_StudentDB.Current as Student;
+            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+            courseDataGridView.DataSource = bindingSource_Courses;
         }
 
         private void tab3Init()
@@ -79,7 +90,7 @@ namespace cc.wnapp.whuHelper.UI
             checkBoxColumn.HeaderText = "选择";
             //第一列插入checkbox
             AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
-            AllScoredataGridView.RowHeadersVisible = false;//???
+            AllScoredataGridView.RowHeadersVisible = false;
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -87,7 +98,6 @@ namespace cc.wnapp.whuHelper.UI
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "QQ", tb_QQ.Text);
         }
 
-       
         private void tb_StuID_TextChanged(object sender, EventArgs e)
         {
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "学号", tb_StuID.Text);
@@ -98,17 +108,21 @@ namespace cc.wnapp.whuHelper.UI
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", DESTool.Encrypt(tb_jwPw.Text, "jw*1"));
         }
 
+        private void tb_ReminderTime_TextChanged(object sender, EventArgs e)
+        {
+            ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", tb_ReminderTime.Text);
+        }
+
         private void btn_jwlogin_Click(object sender, EventArgs e)
         {
             EasLogin jwxt = new EasLogin(Convert.ToString(BotQQ.Id), tb_QQ.Text, tb_StuID.Text, tb_jwPw.Text, 3);
             try
             {
-                if (jwxt.LoginSys() == true)
+                if (jwxt.TryLogin() == true)
                 {
                     EasGetScore jwscore = new EasGetScore();
                     jwscore.GetScore(jwxt);
                     EasGetCourse jwcourse = new EasGetCourse();
-                    //将Course信息存储到数据库中
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
@@ -146,6 +160,13 @@ namespace cc.wnapp.whuHelper.UI
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
+        private void btn_refreshMainList_Click(object sender, EventArgs e)
+        {
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+        }
+
+
         private void dataGridView_StuList_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_StuList.CurrentRow != null)
@@ -154,14 +175,47 @@ namespace cc.wnapp.whuHelper.UI
             }
         }
 
+        private void btn_OpenScoreReminder_Click(object sender, EventArgs e)
+        {
+            string QQ = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
+            string StuID = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
+            string Pw = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "");
+            if (QQ == "" || StuID == "" || Pw == "")
+            {
+                MessageBox.Show("本人部分信息为空，请先完成填写后再尝试开启。", "开启成绩提醒失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else if(tb_ReminderTime.Text == "")
+            {
+                MessageBox.Show("基础检测间隔为空，请先完成填写后再尝试开启。", "开启成绩提醒失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var rand =  new Random();
+                var sign = (rand.Next(0, 2) == 0 ? 1 : -1);
+                var baseTime = Convert.ToInt32(tb_ReminderTime.Text);   //基础时间
+                var floatTime = sign * rand.Next(0, Convert.ToInt32(0.1 * baseTime) + 1);   //±10%的浮动时间
+                var time = baseTime + floatTime;
+                CQ.Log.Debug("延时", Convert.ToString(time));
+                JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
+                ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "真");
+                label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
+            }
+            
+        }
 
+        private void btn_CloseScoreReminder_Click(object sender, EventArgs e)
+        {
+            JobManager.Stop();
+            JobManager.RemoveAllJobs();
+            ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "假");
+            label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
+        }
 
 
         private void QueryAllCourses()
         {
             Student student = bindingSource_StudentDB.Current as Student;
             bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-            bindingSource_Courses.ResetBindings(false);
+            courseDataGridView.DataSource = bindingSource_Courses;
         }
 
         private void delButton_Click(object sender, EventArgs e)
@@ -175,12 +229,13 @@ namespace cc.wnapp.whuHelper.UI
             MessageBox.Show($"课程号：{courseID}");
             CourseService.RemoveCourse(courseID, getStuID());
             QueryAllCourses();
-            courseDataGridView.DataSource = bindingSource_Courses;
+            //courseDataGridView.DataSource = bindingSource_Courses;
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-
+            QueryAllCourses();
+            bindingSource_Courses.ResetBindings(false);
         }
 
         private void stuDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -198,7 +253,9 @@ namespace cc.wnapp.whuHelper.UI
         }
         private void queryButton_Click(object sender, EventArgs e)
         {
-            string stuID = getStuID();
+            //QueryAllCourses();
+            string stuID = stuDataGridView.CurrentRow.Cells[1].Value.ToString();
+            //MessageBox.Show($"StuID:{stuID}\nSelectedIndex:{queryComboBox.SelectedIndex}");
             switch (queryComboBox.SelectedIndex)
             {
                 case 0:
@@ -223,6 +280,15 @@ namespace cc.wnapp.whuHelper.UI
                     bindingSource_Courses.DataSource = CourseService.QueryByTeacher(queryTextBox.Text, stuID);
                     break;
             }
+            //StringBuilder stringBuilder = new StringBuilder();
+            //for (int i = 0; i < bindingSource_Courses.Count; i++)
+            //{
+            //    Course course = bindingSource_Courses[i] as Course;
+            //    stringBuilder.Append(course.ToString()+"\n");
+            //}
+
+            //MessageBox.Show(stringBuilder.ToString());
+            bindingSource_Courses.ResetBindings(true);
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -259,61 +325,77 @@ namespace cc.wnapp.whuHelper.UI
 
         private void buttonSelectNoZB_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 1; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if(AllScoredataGridView.Rows[i].Cells[2].ToString() == "专业必修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if(AllScoredataGridView.CurrentRow != null)
+                {
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业必修"
+                   || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业教育必修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
+               
             }
         }
 
         private void buttonSelectNoZX_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "专业选修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    //LessonType可能是第二个
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
             }
         }
 
         private void buttonSelectNoGB_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "公共必修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共必修"
+                    || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共基础必修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
             }
         }
 
         private void buttonSelectNoGX_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[2].ToString() == "公共选修")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    //LessonType可能是第二个
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共选修")
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                }
             }
         }
 
         private void buttonSelectCS_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
-                //LessonType可能是第二个
-                if (AllScoredataGridView.Rows[i].Cells[7].ToString() == "计算机学院")
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "True";
-                else
-                    AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                if (AllScoredataGridView.CurrentRow != null)
+                {
+                    String Department = jwOp.GetCollege(tb_StuID.Text);
+                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department)
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "True";
+                    else
+                        AllScoredataGridView.Rows[i].Cells[0].Value = "False";
+                }
             }
         }
 
@@ -337,14 +419,14 @@ namespace cc.wnapp.whuHelper.UI
             List<miniScore> GetSelect = new List<miniScore>();
             if(AllScoredataGridView.Rows.Count > 0)
             {
-                for(int i = 0; i < AllScoredataGridView.Rows.Count; i++)
+                for(int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
                 {
                     DataGridViewCheckBoxCell checkcell = (DataGridViewCheckBoxCell)AllScoredataGridView.Rows[i].Cells[0];
                     Boolean flag = Convert.ToBoolean(checkcell.Value);
                     if(flag)
                     {
-                        float score = float.Parse(AllScoredataGridView.Rows[i].Cells["Mark"].Value.ToString());
-                        float credit = float.Parse(AllScoredataGridView.Rows[i].Cells["Credit"].Value.ToString());
+                        float score = float.Parse(AllScoredataGridView.Rows[i].Cells["Column11"].Value.ToString());
+                        float credit = float.Parse(AllScoredataGridView.Rows[i].Cells["Column5"].Value.ToString());
                         miniScore temp = new miniScore(score, credit);
                         GetSelect.Add(temp);
                     }
@@ -352,6 +434,17 @@ namespace cc.wnapp.whuHelper.UI
             }
             return GetSelect;
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
         //测试时使用

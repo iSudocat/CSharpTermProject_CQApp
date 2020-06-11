@@ -65,6 +65,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentScheduler, Version=5.3.0.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.5.3.0\lib\net40\FluentScheduler.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -133,6 +136,14 @@
       <Project>{bf3c91d0-65c7-40a2-bc0c-4cc59c7b3ea4}</Project>
       <Name>ComputeScore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CourseService\CourseFunction.csproj">
+      <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
+      <Name>CourseFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EducationalAdministrationSystem\EducationalAdministrationSystem.csproj">
+      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
+      <Name>EducationalAdministrationSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
@@ -140,10 +151,6 @@
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\教务系统登录与信息获取\教务系统登录与信息获取.csproj">
-      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
-      <Name>教务系统登录与信息获取</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

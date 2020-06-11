@@ -1,0 +1,12 @@
+diff a/ComputeScore/ScoreService.cs b/ComputeScore/ScoreService.cs	(rejected hunks)
+@@ -158,8 +158,8 @@
+             foreach (miniScore s in Slist)
+             {
+                 CreditAll += s.Credit;
+-                ScoreAll += ComputeGPA(s.Score) * s.Credit;
+-                GPAAll += s.Credit * s.Score;
++                GPAAll += ComputeGPA(s.Score) * s.Credit;
++                ScoreAll += s.Credit * s.Score;
+             }
+ 
+             float GPA = GPAAll / CreditAll;

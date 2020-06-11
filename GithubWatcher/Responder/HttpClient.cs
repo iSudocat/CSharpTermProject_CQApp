@@ -2,16 +2,16 @@ using Microsoft.Net.Http.Headers;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GitHubAutoresponder.Shared;
+using GithubWatcher.Shared;
 
-namespace GitHubAutoresponder.Responder {
+namespace GithubWatcher.Responder {
     public class HttpClient : IHttpClient {
         const string CONTENT_TYPE_HEADER = "application/vnd.github.v3+json";
         const string USER_AGENT_HEADER = "GitHubAutoResponder";
 
         private System.Net.Http.HttpClient client;
 
-        public HttpClient(IEnvironment environment) {
+        public HttpClient(IGitEnvironment environment) {
             this.client = new System.Net.Http.HttpClient();
             this.client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, USER_AGENT_HEADER);
             this.client.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Basic {environment.EncodededCredentials}");

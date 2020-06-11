@@ -83,8 +83,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.comboBoxTerm = new System.Windows.Forms.ComboBox();
-            this.textBoxCreditNum = new System.Windows.Forms.TextBox();
-            this.textBoxCourseName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -100,18 +98,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonSelectNoGX = new System.Windows.Forms.Button();
-            this.buttonSelectNoGB = new System.Windows.Forms.Button();
-            this.buttonSelectDepart = new System.Windows.Forms.Button();
-            this.buttonSelectNoZX = new System.Windows.Forms.Button();
-            this.buttonSelectNoZB = new System.Windows.Forms.Button();
-            this.buttonSelectNo = new System.Windows.Forms.Button();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,6 +111,22 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonSelectNoGX = new System.Windows.Forms.Button();
+            this.buttonSelectNoGB = new System.Windows.Forms.Button();
+            this.buttonSelectDepart = new System.Windows.Forms.Button();
+            this.buttonSelectNoZX = new System.Windows.Forms.Button();
+            this.buttonSelectNoZB = new System.Windows.Forms.Button();
+            this.buttonSelectNo = new System.Windows.Forms.Button();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.comboBoxCourseName = new System.Windows.Forms.ComboBox();
+            this.comboBoxCreditNum = new System.Windows.Forms.ComboBox();
+            this.comboBoxYear = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -713,13 +715,14 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.comboBoxYear);
+            this.groupBox7.Controls.Add(this.label11);
+            this.groupBox7.Controls.Add(this.comboBoxCreditNum);
+            this.groupBox7.Controls.Add(this.comboBoxCourseName);
             this.groupBox7.Controls.Add(this.comboBoxTerm);
-            this.groupBox7.Controls.Add(this.textBoxCreditNum);
-            this.groupBox7.Controls.Add(this.textBoxCourseName);
             this.groupBox7.Controls.Add(this.label10);
             this.groupBox7.Controls.Add(this.label9);
             this.groupBox7.Controls.Add(this.label8);
-            this.groupBox7.Controls.Add(this.buttonRestore);
             this.groupBox7.Controls.Add(this.buttonSearch);
             this.groupBox7.Location = new System.Drawing.Point(7, 159);
             this.groupBox7.Name = "groupBox7";
@@ -731,29 +734,15 @@
             // comboBoxTerm
             // 
             this.comboBoxTerm.FormattingEnabled = true;
-            this.comboBoxTerm.Location = new System.Drawing.Point(67, 18);
+            this.comboBoxTerm.Location = new System.Drawing.Point(256, 18);
             this.comboBoxTerm.Name = "comboBoxTerm";
             this.comboBoxTerm.Size = new System.Drawing.Size(107, 31);
             this.comboBoxTerm.TabIndex = 15;
             // 
-            // textBoxCreditNum
-            // 
-            this.textBoxCreditNum.Location = new System.Drawing.Point(440, 16);
-            this.textBoxCreditNum.Name = "textBoxCreditNum";
-            this.textBoxCreditNum.Size = new System.Drawing.Size(100, 31);
-            this.textBoxCreditNum.TabIndex = 14;
-            // 
-            // textBoxCourseName
-            // 
-            this.textBoxCourseName.Location = new System.Drawing.Point(259, 16);
-            this.textBoxCourseName.Name = "textBoxCourseName";
-            this.textBoxCourseName.Size = new System.Drawing.Size(100, 31);
-            this.textBoxCourseName.TabIndex = 13;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(376, 21);
+            this.label10.Location = new System.Drawing.Point(552, 21);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 24);
             this.label10.TabIndex = 11;
@@ -762,7 +751,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(189, 21);
+            this.label9.Location = new System.Drawing.Point(369, 21);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 24);
             this.label9.TabIndex = 10;
@@ -771,7 +760,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 23);
+            this.label8.Location = new System.Drawing.Point(204, 23);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(46, 24);
             this.label8.TabIndex = 9;
@@ -779,7 +768,7 @@
             // 
             // buttonRestore
             // 
-            this.buttonRestore.Location = new System.Drawing.Point(616, 18);
+            this.buttonRestore.Location = new System.Drawing.Point(604, 19);
             this.buttonRestore.Name = "buttonRestore";
             this.buttonRestore.Size = new System.Drawing.Size(75, 31);
             this.buttonRestore.TabIndex = 8;
@@ -789,12 +778,13 @@
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(708, 19);
+            this.buttonSearch.Location = new System.Drawing.Point(744, 18);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(75, 31);
             this.buttonSearch.TabIndex = 7;
             this.buttonSearch.Text = "查询";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // groupBox6
             // 
@@ -804,6 +794,7 @@
             this.groupBox6.Controls.Add(this.labelAverage);
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.labelGPA);
+            this.groupBox6.Controls.Add(this.buttonRestore);
             this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Location = new System.Drawing.Point(6, 6);
             this.groupBox6.Name = "groupBox6";
@@ -911,106 +902,6 @@
             this.AllScoredataGridView.Size = new System.Drawing.Size(822, 266);
             this.AllScoredataGridView.TabIndex = 0;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.buttonSelectNoGX);
-            this.groupBox4.Controls.Add(this.buttonSelectNoGB);
-            this.groupBox4.Controls.Add(this.buttonSelectDepart);
-            this.groupBox4.Controls.Add(this.buttonSelectNoZX);
-            this.groupBox4.Controls.Add(this.buttonSelectNoZB);
-            this.groupBox4.Controls.Add(this.buttonSelectNo);
-            this.groupBox4.Controls.Add(this.buttonSelectAll);
-            this.groupBox4.Location = new System.Drawing.Point(6, 77);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(828, 81);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "操作";
-            // 
-            // buttonSelectNoGX
-            // 
-            this.buttonSelectNoGX.Location = new System.Drawing.Point(583, 30);
-            this.buttonSelectNoGX.Name = "buttonSelectNoGX";
-            this.buttonSelectNoGX.Size = new System.Drawing.Size(96, 31);
-            this.buttonSelectNoGX.TabIndex = 15;
-            this.buttonSelectNoGX.Text = "去除公选";
-            this.buttonSelectNoGX.UseVisualStyleBackColor = true;
-            this.buttonSelectNoGX.Click += new System.EventHandler(this.buttonSelectNoGX_Click);
-            // 
-            // buttonSelectNoGB
-            // 
-            this.buttonSelectNoGB.Location = new System.Drawing.Point(465, 30);
-            this.buttonSelectNoGB.Name = "buttonSelectNoGB";
-            this.buttonSelectNoGB.Size = new System.Drawing.Size(98, 31);
-            this.buttonSelectNoGB.TabIndex = 14;
-            this.buttonSelectNoGB.Text = "去除公必";
-            this.buttonSelectNoGB.UseVisualStyleBackColor = true;
-            this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
-            // 
-            // buttonSelectDepart
-            // 
-            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
-            this.buttonSelectDepart.Name = "buttonSelectDepart";
-            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
-            this.buttonSelectDepart.TabIndex = 13;
-            this.buttonSelectDepart.Text = "去除非本院";
-            this.buttonSelectDepart.UseVisualStyleBackColor = true;
-            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
-            // 
-            // buttonSelectNoZX
-            // 
-            this.buttonSelectNoZX.Location = new System.Drawing.Point(348, 30);
-            this.buttonSelectNoZX.Name = "buttonSelectNoZX";
-            this.buttonSelectNoZX.Size = new System.Drawing.Size(92, 31);
-            this.buttonSelectNoZX.TabIndex = 12;
-            this.buttonSelectNoZX.Text = "去除专选";
-            this.buttonSelectNoZX.UseVisualStyleBackColor = true;
-            this.buttonSelectNoZX.Click += new System.EventHandler(this.buttonSelectNoZX_Click);
-            // 
-            // buttonSelectNoZB
-            // 
-            this.buttonSelectNoZB.Location = new System.Drawing.Point(234, 30);
-            this.buttonSelectNoZB.Name = "buttonSelectNoZB";
-            this.buttonSelectNoZB.Size = new System.Drawing.Size(90, 31);
-            this.buttonSelectNoZB.TabIndex = 11;
-            this.buttonSelectNoZB.Text = "去除专必";
-            this.buttonSelectNoZB.UseVisualStyleBackColor = true;
-            this.buttonSelectNoZB.Click += new System.EventHandler(this.buttonSelectNoZB_Click);
-            // 
-            // buttonSelectNo
-            // 
-            this.buttonSelectNo.Location = new System.Drawing.Point(125, 30);
-            this.buttonSelectNo.Name = "buttonSelectNo";
-            this.buttonSelectNo.Size = new System.Drawing.Size(88, 31);
-            this.buttonSelectNo.TabIndex = 10;
-            this.buttonSelectNo.Text = "全不选";
-            this.buttonSelectNo.UseVisualStyleBackColor = true;
-            this.buttonSelectNo.Click += new System.EventHandler(this.buttonSelectNo_Click);
-            // 
-            // buttonSelectAll
-            // 
-            this.buttonSelectAll.Location = new System.Drawing.Point(22, 30);
-            this.buttonSelectAll.Name = "buttonSelectAll";
-            this.buttonSelectAll.Size = new System.Drawing.Size(85, 31);
-            this.buttonSelectAll.TabIndex = 9;
-            this.buttonSelectAll.Text = "全选";
-            this.buttonSelectAll.UseVisualStyleBackColor = true;
-            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 32);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(837, 505);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "关注管理";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // bindingSource_Courses
-            // 
-            this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
-            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "LessonName";
@@ -1116,6 +1007,139 @@
             this.Column13.Name = "Column13";
             this.Column13.Visible = false;
             this.Column13.Width = 125;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.buttonSelectNoGX);
+            this.groupBox4.Controls.Add(this.buttonSelectNoGB);
+            this.groupBox4.Controls.Add(this.buttonSelectDepart);
+            this.groupBox4.Controls.Add(this.buttonSelectNoZX);
+            this.groupBox4.Controls.Add(this.buttonSelectNoZB);
+            this.groupBox4.Controls.Add(this.buttonSelectNo);
+            this.groupBox4.Controls.Add(this.buttonSelectAll);
+            this.groupBox4.Location = new System.Drawing.Point(6, 77);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(828, 81);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "操作";
+            // 
+            // buttonSelectNoGX
+            // 
+            this.buttonSelectNoGX.Location = new System.Drawing.Point(583, 30);
+            this.buttonSelectNoGX.Name = "buttonSelectNoGX";
+            this.buttonSelectNoGX.Size = new System.Drawing.Size(96, 31);
+            this.buttonSelectNoGX.TabIndex = 15;
+            this.buttonSelectNoGX.Text = "去除公选";
+            this.buttonSelectNoGX.UseVisualStyleBackColor = true;
+            this.buttonSelectNoGX.Click += new System.EventHandler(this.buttonSelectNoGX_Click);
+            // 
+            // buttonSelectNoGB
+            // 
+            this.buttonSelectNoGB.Location = new System.Drawing.Point(465, 30);
+            this.buttonSelectNoGB.Name = "buttonSelectNoGB";
+            this.buttonSelectNoGB.Size = new System.Drawing.Size(98, 31);
+            this.buttonSelectNoGB.TabIndex = 14;
+            this.buttonSelectNoGB.Text = "去除公必";
+            this.buttonSelectNoGB.UseVisualStyleBackColor = true;
+            this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
+            // 
+            // buttonSelectDepart
+            // 
+            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
+            this.buttonSelectDepart.Name = "buttonSelectDepart";
+            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
+            this.buttonSelectDepart.TabIndex = 13;
+            this.buttonSelectDepart.Text = "去除非本院";
+            this.buttonSelectDepart.UseVisualStyleBackColor = true;
+            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
+            // 
+            // buttonSelectNoZX
+            // 
+            this.buttonSelectNoZX.Location = new System.Drawing.Point(348, 30);
+            this.buttonSelectNoZX.Name = "buttonSelectNoZX";
+            this.buttonSelectNoZX.Size = new System.Drawing.Size(92, 31);
+            this.buttonSelectNoZX.TabIndex = 12;
+            this.buttonSelectNoZX.Text = "去除专选";
+            this.buttonSelectNoZX.UseVisualStyleBackColor = true;
+            this.buttonSelectNoZX.Click += new System.EventHandler(this.buttonSelectNoZX_Click);
+            // 
+            // buttonSelectNoZB
+            // 
+            this.buttonSelectNoZB.Location = new System.Drawing.Point(234, 30);
+            this.buttonSelectNoZB.Name = "buttonSelectNoZB";
+            this.buttonSelectNoZB.Size = new System.Drawing.Size(90, 31);
+            this.buttonSelectNoZB.TabIndex = 11;
+            this.buttonSelectNoZB.Text = "去除专必";
+            this.buttonSelectNoZB.UseVisualStyleBackColor = true;
+            this.buttonSelectNoZB.Click += new System.EventHandler(this.buttonSelectNoZB_Click);
+            // 
+            // buttonSelectNo
+            // 
+            this.buttonSelectNo.Location = new System.Drawing.Point(125, 30);
+            this.buttonSelectNo.Name = "buttonSelectNo";
+            this.buttonSelectNo.Size = new System.Drawing.Size(88, 31);
+            this.buttonSelectNo.TabIndex = 10;
+            this.buttonSelectNo.Text = "全不选";
+            this.buttonSelectNo.UseVisualStyleBackColor = true;
+            this.buttonSelectNo.Click += new System.EventHandler(this.buttonSelectNo_Click);
+            // 
+            // buttonSelectAll
+            // 
+            this.buttonSelectAll.Location = new System.Drawing.Point(22, 30);
+            this.buttonSelectAll.Name = "buttonSelectAll";
+            this.buttonSelectAll.Size = new System.Drawing.Size(85, 31);
+            this.buttonSelectAll.TabIndex = 9;
+            this.buttonSelectAll.Text = "全选";
+            this.buttonSelectAll.UseVisualStyleBackColor = true;
+            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 32);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(837, 505);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "关注管理";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // bindingSource_Courses
+            // 
+            this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
+            // 
+            // comboBoxCourseName
+            // 
+            this.comboBoxCourseName.FormattingEnabled = true;
+            this.comboBoxCourseName.Location = new System.Drawing.Point(439, 18);
+            this.comboBoxCourseName.Name = "comboBoxCourseName";
+            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 31);
+            this.comboBoxCourseName.TabIndex = 16;
+            // 
+            // comboBoxCreditNum
+            // 
+            this.comboBoxCreditNum.FormattingEnabled = true;
+            this.comboBoxCreditNum.Location = new System.Drawing.Point(622, 18);
+            this.comboBoxCreditNum.Name = "comboBoxCreditNum";
+            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 31);
+            this.comboBoxCreditNum.TabIndex = 17;
+            // 
+            // comboBoxYear
+            // 
+            this.comboBoxYear.FormattingEnabled = true;
+            this.comboBoxYear.Location = new System.Drawing.Point(89, 17);
+            this.comboBoxYear.Name = "comboBoxYear";
+            this.comboBoxYear.Size = new System.Drawing.Size(107, 31);
+            this.comboBoxYear.TabIndex = 19;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(37, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(46, 24);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "学年";
             // 
             // Form1
             // 
@@ -1227,8 +1251,6 @@
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonCompute;
         private System.Windows.Forms.ComboBox comboBoxTerm;
-        private System.Windows.Forms.TextBox textBoxCreditNum;
-        private System.Windows.Forms.TextBox textBoxCourseName;
         private System.Windows.Forms.Button buttonSelectNoGX;
         private System.Windows.Forms.Button buttonSelectNoGB;
         private System.Windows.Forms.Button buttonSelectDepart;
@@ -1256,6 +1278,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.ComboBox comboBoxCreditNum;
+        private System.Windows.Forms.ComboBox comboBoxCourseName;
+        private System.Windows.Forms.ComboBox comboBoxYear;
+        private System.Windows.Forms.Label label11;
     }
 }
 

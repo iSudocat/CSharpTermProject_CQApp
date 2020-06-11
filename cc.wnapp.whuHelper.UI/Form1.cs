@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,23 @@ namespace cc.wnapp.whuHelper.UI
             //第一列插入checkbox
             AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
             AllScoredataGridView.RowHeadersVisible = false;//???
+
+            //初始化combobox
+            List<Score> combo = jwOp.GetScores(student.StuID);
+            //提取成绩列表中的唯一值
+            List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
+            CourseName.Insert(0, " ");
+            List<String> Credit = combo.Select(x => x.Credit).Distinct().ToList();
+            Credit.Insert(0, " ");
+            List<String> Year = combo.Select(x => x.Year).Distinct().ToList();
+            Year.Insert(0, " ");
+            List<String> Term = new List<string>{ " ", "1", "2" };
+            comboBoxCourseName.DataSource = CourseName;
+            comboBoxCreditNum.DataSource = Credit;
+            comboBoxYear.DataSource = Year;
+            comboBoxTerm.DataSource = Term;
+            
+         
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -367,6 +385,41 @@ namespace cc.wnapp.whuHelper.UI
                 }
             }
             return GetSelect;
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            Student student = bindingSource_StudentDB.Current as Student;
+            List<Score> temp = jwOp.GetScores(student.StuID);
+            String CourseName = comboBoxCourseName.SelectedItem.ToString();
+            String Year = comboBoxYear.SelectedItem.ToString();
+            String Term = comboBoxTerm.SelectedItem.ToString();
+            String Credit = comboBoxCreditNum.SelectedItem.ToString();
+            if (CourseName != " ")
+            {
+                Score Course = temp.FirstOrDefault(p => p.LessonName == CourseName);
+                bindingSource_StuScore.DataSource = Course;
+                bindingSource_StuScore.ResetBindings(false);
+                return;
+            }
+
+            if (Credit != " ")
+            {
+                temp = temp.Where(p => p.Credit == Credit).OrderBy(p => p.Year).ThenBy(p => p.Term).ToList();
+            }
+
+            if (Year != " ")
+            {
+                temp = temp.Where(p => p.Year == Year).OrderBy(p => p.Term).ThenBy(p => p.Credit).ToList();
+            }
+
+            if (Term != " ")
+            {
+                temp = temp.Where(p => p.Term == Term).OrderBy(p => p.Year).ThenBy(p => p.Credit).ToList();
+            }
+
+            bindingSource_StuScore.DataSource = temp;
+            bindingSource_StuScore.ResetBindings(false);
         }
 
 

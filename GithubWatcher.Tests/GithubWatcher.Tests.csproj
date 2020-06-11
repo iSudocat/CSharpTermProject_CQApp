@@ -491,6 +491,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OAuthService\EncryptionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\JsonSerialiserTest.cs" />
     <Compile Include="Shared\PrivateMessageProcess.cs" />

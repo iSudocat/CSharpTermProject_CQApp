@@ -18,8 +18,8 @@ namespace GithubWatcher
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{code}",
+                defaults: new { code = RouteParameter.Optional }
                 );
 
             appBuilder.UseWebApi(config);

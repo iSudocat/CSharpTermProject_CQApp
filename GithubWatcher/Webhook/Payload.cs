@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GithubWatcher.Webhook {
@@ -12,7 +13,7 @@ namespace GithubWatcher.Webhook {
         public string Ref { get; set; }
         public Issue Issue { get; set; }
         public PullRequest PullRequest { get; set; }
-        public Commits Commits { get; set; }
+        public IList<Commits> Commits { get; set; }
 
         public Payload()
         {
@@ -20,7 +21,7 @@ namespace GithubWatcher.Webhook {
             Repository = new Repository();
             Issue = new Issue();
             PullRequest = new PullRequest();
-            Commits = new Commits();
+            Commits = new List<Commits>();
         }
     }
 }

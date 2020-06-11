@@ -17,7 +17,6 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
-
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
@@ -93,7 +92,6 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.ScheduleCommand);
                 t.Start();
             }
-
 
         }
         /// <summary>
@@ -209,6 +207,42 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.PrivateAttentionHandler);
+                t.Start();
+            }
+            if (msg.Contains("绑定仓库")) 
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.SubscribeRepository);
+                t.Start();
+            }
+            if (msg.Contains("所有仓库") || msg.Contains("查询仓库")) 
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.QueryRepository);
+                t.Start();
+            }
+            if (msg.Contains("取消绑定仓库"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.Unsubscribe);
+                t.Start();
+            }
+            if(msg.Contains("绑定Github账户")||msg.Contains("绑定github账户")||msg.Contains("绑定GITHUB账户"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.ConnectGithub);
+                t.Start();
+            }
+            if (msg.Contains("所有Github账户") || msg.Contains("查询Github账户"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.QueryAuthorisedGithubAccount);
+                t.Start();
+            }
+            if (msg.Contains("取消绑定Github账户"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.DisconnectGithub);
                 t.Start();
             }
         }

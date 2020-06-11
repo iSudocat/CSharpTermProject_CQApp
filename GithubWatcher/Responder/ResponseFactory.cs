@@ -1,6 +1,6 @@
 using GithubWatcher.Webhook;
 
-namespace GitHubAutoresponder.Responder {
+namespace GithubWatcher.Responder {
     public class ResponseFactory : IResponseFactory {
         public Response CreateFromPayload(Payload payload) {
             // TODO: separate string (read from MD file?)

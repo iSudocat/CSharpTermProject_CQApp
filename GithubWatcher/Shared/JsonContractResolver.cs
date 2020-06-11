@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Serialization;
 
-namespace GitHubAutoresponder.Shared {
+namespace GithubWatcher.Shared {
     public static class JsonContractResolver {
         private static IContractResolver resolver;
 

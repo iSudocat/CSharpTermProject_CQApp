@@ -8,6 +8,6 @@ namespace GithubWatcher.Webhook
     public class Issue
     {
         public string Title { get; set; }
-        public string Url { get; set; }
+        public string HtmlUrl { get; set; }
     }
 }

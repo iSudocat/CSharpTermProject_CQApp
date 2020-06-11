@@ -10,7 +10,7 @@ namespace GithubWatcher.Webhook.Tests {
 
             bool isValid = validator.IsValidRequest(
                 "sha1=7ef2f3063ac865672e979b42272b8d5c81240190",
-                "some-key",
+                "312725802",
                 "some payload"
             );
 

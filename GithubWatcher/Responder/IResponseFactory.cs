@@ -1,6 +1,6 @@
 using GithubWatcher.Webhook;
 
-namespace GitHubAutoresponder.Responder {
+namespace GithubWatcher.Responder {
     public interface IResponseFactory {
         Response CreateFromPayload(Payload payload);
     }

@@ -221,7 +221,7 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.QueryRepository);
                 t.Start();
             }
-            if (msg.Contains("取消绑定仓库"))
+            if (msg.Contains("解绑仓库"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.Unsubscribe);
@@ -239,7 +239,7 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.QueryAuthorisedGithubAccount);
                 t.Start();
             }
-            if (msg.Contains("取消绑定Github账户"))
+            if (msg.Contains("解绑Github账户"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.DisconnectGithub);

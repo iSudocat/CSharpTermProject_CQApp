@@ -15,5 +15,6 @@ namespace GithubWatcher.Models
         [Required]
         [Key, Column(Order = 2)]
         public string GithubUserName { get; set; }
+        public string AccessToken { get; set; }
     }
 }

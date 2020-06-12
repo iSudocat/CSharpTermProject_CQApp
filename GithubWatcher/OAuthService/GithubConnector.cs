@@ -13,7 +13,7 @@ namespace GithubWatcher.OAuthService
         private string data = string.Empty;
         private readonly string appID = "a51e3ecd629e790be472";
         private readonly string appSecret = "46d2660f0e8e2732d1393ecf7077380e6b197ee1";//如果信息应用失败，请联系作者更新。
-        private readonly string redirect_url = "http://localhost:44395/api/GithubWatcher";//如果信息应用失败，请联系作者更新。
+        private readonly string redirect_url = "http://3fa164385d3d.ngrok.io/api/GithubWatcher";//如果信息应用失败，请联系作者更新。
         private readonly string scope = "repo";
 
         #region 认证
@@ -79,6 +79,33 @@ namespace GithubWatcher.OAuthService
             {
                 JsonSerialiser jsonSerialiser = new JsonSerialiser();
                 return jsonSerialiser.Deserialise<List<GithubRepositoryInfo>>(response);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        #endregion
+
+        #region 添加Webhook
+        public bool CreateWebhook(string access_token, string owner, string repo)
+        {
+            // 不是自己的仓库，不做任何处理
+            if(!repo.StartsWith(owner))
+            {
+                return true;
+            }
+
+            url = string.Format("https://api.github.com/repos/{0}/hooks", repo);
+            string response = HttpService.HttpPostWebhook(url, access_token);
+
+            try
+            {
+                if(response.Contains("name"))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {

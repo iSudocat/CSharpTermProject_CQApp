@@ -69,6 +69,7 @@ namespace GithubWatcher.Controllers
                             GithubBinding newBinding = new GithubBinding();
                             newBinding.QQ = fromQQ;
                             newBinding.GithubUserName = userInfo.Login;
+                            newBinding.AccessToken = tokenModel.access_token;
 
                             context.GithubBindings.Add(newBinding);
 
@@ -76,7 +77,16 @@ namespace GithubWatcher.Controllers
                         }
                         else if (user.QQ == fromQQ) 
                         {
-                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已经绑定过该Github账户！");
+                            if(user.AccessToken==tokenModel.access_token)
+                            {
+                                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已经绑定过该Github账户！");
+                            }
+                            else
+                            {
+                                // 更新accessToken
+                                user.AccessToken = tokenModel.access_token;
+                                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已经绑定过该Github账户，已为您刷新Access Token，请尽快完成仓库绑定操作。");
+                            }
                         }
                         else
                         {
@@ -175,13 +185,18 @@ namespace GithubWatcher.Controllers
                 {
                     return BadRequest("此记录已发送，不可重复发送！");
                 }
+
+                string msg = GenerateMessage(payload, eventType);
+
+                var user = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == payload.Repository.FullName);
+
+                if(user!=null)
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(user.QQ), msg);
+                }
+
+                return Ok(msg);
             }
-
-            string msg = GenerateMessage(payload, eventType);
-
-            CQ.Api.SendPrivateMessage(Convert.ToInt64("2426837192"), msg);
-
-            return Ok(msg);
         }
 
         // 支持的事件

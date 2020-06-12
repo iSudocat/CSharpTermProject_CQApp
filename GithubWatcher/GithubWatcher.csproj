@@ -543,6 +543,8 @@
     <Compile Include="Models\PayloadRecord.cs" />
     <Compile Include="Models\RepositoryInformation.cs" />
     <Compile Include="Models\RepositorySubscription.cs" />
+    <Compile Include="OAuthService\WebhookConfig.cs" />
+    <Compile Include="OAuthService\WebhookData.cs" />
     <Compile Include="OAuthService\Encryption.cs" />
     <Compile Include="OAuthService\GithubConnector.cs" />
     <Compile Include="OAuthService\GithubRepositoryInfo.cs" />

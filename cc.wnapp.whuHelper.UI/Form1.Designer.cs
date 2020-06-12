@@ -33,15 +33,15 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.label_sr4 = new System.Windows.Forms.Label();
+            this.label_sr3 = new System.Windows.Forms.Label();
             this.tb_ReminderTime = new System.Windows.Forms.TextBox();
-            this.label_jg = new System.Windows.Forms.Label();
+            this.label_sr2 = new System.Windows.Forms.Label();
             this.btn_CloseScoreReminder = new System.Windows.Forms.Button();
             this.btn_OpenScoreReminder = new System.Windows.Forms.Button();
-            this.label_ScoreReminderState = new System.Windows.Forms.Label();
+            this.label_sr1 = new System.Windows.Forms.Label();
             this.btn_refreshMainList = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_DelJWSelect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView_StuList = new System.Windows.Forms.DataGridView();
             this.QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,11 +92,14 @@
             this.queryComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.comboBoxYear = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBoxCreditNum = new System.Windows.Forms.ComboBox();
+            this.comboBoxCourseName = new System.Windows.Forms.ComboBox();
             this.comboBoxTerm = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.buttonRestore = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.buttonCompute = new System.Windows.Forms.Button();
@@ -105,6 +108,7 @@
             this.labelAverage = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.labelGPA = new System.Windows.Forms.Label();
+            this.buttonRestore = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
@@ -133,10 +137,6 @@
             this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.comboBoxCourseName = new System.Windows.Forms.ComboBox();
-            this.comboBoxCreditNum = new System.Windows.Forms.ComboBox();
-            this.comboBoxYear = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -176,7 +176,7 @@
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.btn_refreshMainList);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.btn_DelJWSelect);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.dataGridView_StuList);
             this.tabPage1.Controls.Add(this.panel1);
@@ -189,38 +189,38 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.label_sr4);
+            this.panel2.Controls.Add(this.label_sr3);
             this.panel2.Controls.Add(this.tb_ReminderTime);
-            this.panel2.Controls.Add(this.label_jg);
+            this.panel2.Controls.Add(this.label_sr2);
             this.panel2.Controls.Add(this.btn_CloseScoreReminder);
             this.panel2.Controls.Add(this.btn_OpenScoreReminder);
-            this.panel2.Controls.Add(this.label_ScoreReminderState);
+            this.panel2.Controls.Add(this.label_sr1);
             this.panel2.Location = new System.Drawing.Point(542, 82);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 180);
             this.panel2.TabIndex = 22;
             // 
-            // label13
+            // label_sr4
             // 
-            this.label13.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(13, 87);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(236, 48);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "真实检测间隔将在基础检测间隔之上自动浮动±10%";
+            this.label_sr4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_sr4.Location = new System.Drawing.Point(13, 87);
+            this.label_sr4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_sr4.Name = "label_sr4";
+            this.label_sr4.Size = new System.Drawing.Size(236, 48);
+            this.label_sr4.TabIndex = 27;
+            this.label_sr4.Text = "真实检测间隔将在基础检测间隔之上自动浮动±10%";
             // 
-            // label12
+            // label_sr3
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(174, 49);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(37, 20);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "分钟";
+            this.label_sr3.AutoSize = true;
+            this.label_sr3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_sr3.Location = new System.Drawing.Point(174, 49);
+            this.label_sr3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_sr3.Name = "label_sr3";
+            this.label_sr3.Size = new System.Drawing.Size(37, 20);
+            this.label_sr3.TabIndex = 26;
+            this.label_sr3.Text = "分钟";
             // 
             // tb_ReminderTime
             // 
@@ -230,16 +230,16 @@
             this.tb_ReminderTime.TabIndex = 25;
             this.tb_ReminderTime.TextChanged += new System.EventHandler(this.tb_ReminderTime_TextChanged);
             // 
-            // label_jg
+            // label_sr2
             // 
-            this.label_jg.AutoSize = true;
-            this.label_jg.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_jg.Location = new System.Drawing.Point(13, 49);
-            this.label_jg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_jg.Name = "label11";
-            this.label_jg.Size = new System.Drawing.Size(93, 20);
-            this.label_jg.TabIndex = 24;
-            this.label_jg.Text = "基础检测间隔";
+            this.label_sr2.AutoSize = true;
+            this.label_sr2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_sr2.Location = new System.Drawing.Point(13, 49);
+            this.label_sr2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_sr2.Name = "label_sr2";
+            this.label_sr2.Size = new System.Drawing.Size(93, 20);
+            this.label_sr2.TabIndex = 24;
+            this.label_sr2.Text = "基础检测间隔";
             // 
             // btn_CloseScoreReminder
             // 
@@ -261,16 +261,16 @@
             this.btn_OpenScoreReminder.UseVisualStyleBackColor = true;
             this.btn_OpenScoreReminder.Click += new System.EventHandler(this.btn_OpenScoreReminder_Click);
             // 
-            // label_ScoreReminderState
+            // label_sr1
             // 
-            this.label_ScoreReminderState.AutoSize = true;
-            this.label_ScoreReminderState.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_ScoreReminderState.Location = new System.Drawing.Point(13, 9);
-            this.label_ScoreReminderState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_ScoreReminderState.Name = "label_ScoreReminderState";
-            this.label_ScoreReminderState.Size = new System.Drawing.Size(135, 20);
-            this.label_ScoreReminderState.TabIndex = 20;
-            this.label_ScoreReminderState.Text = "本人新出成绩提醒：";
+            this.label_sr1.AutoSize = true;
+            this.label_sr1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_sr1.Location = new System.Drawing.Point(13, 9);
+            this.label_sr1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_sr1.Name = "label_sr1";
+            this.label_sr1.Size = new System.Drawing.Size(135, 20);
+            this.label_sr1.TabIndex = 20;
+            this.label_sr1.Text = "本人新出成绩提醒：";
             // 
             // btn_refreshMainList
             // 
@@ -282,15 +282,15 @@
             this.btn_refreshMainList.UseVisualStyleBackColor = true;
             this.btn_refreshMainList.Click += new System.EventHandler(this.btn_refreshMainList_Click);
             // 
-            // button1
+            // btn_DelJWSelect
             // 
-            this.button1.Location = new System.Drawing.Point(74, 441);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 29);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "删除选中账号数据";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_DelJWSelect.Location = new System.Drawing.Point(74, 441);
+            this.btn_DelJWSelect.Name = "btn_DelJWSelect";
+            this.btn_DelJWSelect.Size = new System.Drawing.Size(137, 29);
+            this.btn_DelJWSelect.TabIndex = 15;
+            this.btn_DelJWSelect.Text = "删除选中账号数据";
+            this.btn_DelJWSelect.UseVisualStyleBackColor = true;
+            this.btn_DelJWSelect.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -850,12 +850,45 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "查询";
             // 
+            // comboBoxYear
+            // 
+            this.comboBoxYear.FormattingEnabled = true;
+            this.comboBoxYear.Location = new System.Drawing.Point(89, 17);
+            this.comboBoxYear.Name = "comboBoxYear";
+            this.comboBoxYear.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxYear.TabIndex = 19;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(37, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 20);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "学年";
+            // 
+            // comboBoxCreditNum
+            // 
+            this.comboBoxCreditNum.FormattingEnabled = true;
+            this.comboBoxCreditNum.Location = new System.Drawing.Point(622, 18);
+            this.comboBoxCreditNum.Name = "comboBoxCreditNum";
+            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxCreditNum.TabIndex = 17;
+            // 
+            // comboBoxCourseName
+            // 
+            this.comboBoxCourseName.FormattingEnabled = true;
+            this.comboBoxCourseName.Location = new System.Drawing.Point(439, 18);
+            this.comboBoxCourseName.Name = "comboBoxCourseName";
+            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxCourseName.TabIndex = 16;
+            // 
             // comboBoxTerm
             // 
             this.comboBoxTerm.FormattingEnabled = true;
             this.comboBoxTerm.Location = new System.Drawing.Point(256, 18);
             this.comboBoxTerm.Name = "comboBoxTerm";
-            this.comboBoxTerm.Size = new System.Drawing.Size(107, 31);
+            this.comboBoxTerm.Size = new System.Drawing.Size(107, 28);
             this.comboBoxTerm.TabIndex = 15;
             // 
             // label10
@@ -863,7 +896,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(552, 21);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 24);
+            this.label10.Size = new System.Drawing.Size(51, 20);
             this.label10.TabIndex = 11;
             this.label10.Text = "学分数";
             // 
@@ -872,7 +905,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(369, 21);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(64, 24);
+            this.label9.Size = new System.Drawing.Size(51, 20);
             this.label9.TabIndex = 10;
             this.label9.Text = "课程名";
             // 
@@ -881,19 +914,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(204, 23);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 24);
+            this.label8.Size = new System.Drawing.Size(37, 20);
             this.label8.TabIndex = 9;
             this.label8.Text = "学期";
-            // 
-            // buttonRestore
-            // 
-            this.buttonRestore.Location = new System.Drawing.Point(604, 19);
-            this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(75, 31);
-            this.buttonRestore.TabIndex = 8;
-            this.buttonRestore.Text = "复位";
-            this.buttonRestore.UseVisualStyleBackColor = true;
-            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
             // 
             // buttonSearch
             // 
@@ -977,6 +1000,16 @@
             this.labelGPA.TabIndex = 1;
             this.labelGPA.Text = "0.0";
             // 
+            // buttonRestore
+            // 
+            this.buttonRestore.Location = new System.Drawing.Point(604, 19);
+            this.buttonRestore.Name = "buttonRestore";
+            this.buttonRestore.Size = new System.Drawing.Size(75, 31);
+            this.buttonRestore.TabIndex = 8;
+            this.buttonRestore.Text = "复位";
+            this.buttonRestore.UseVisualStyleBackColor = true;
+            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -1020,6 +1053,7 @@
             this.AllScoredataGridView.RowTemplate.Height = 27;
             this.AllScoredataGridView.Size = new System.Drawing.Size(822, 271);
             this.AllScoredataGridView.TabIndex = 0;
+            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "LessonName";
@@ -1214,10 +1248,10 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 32);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(837, 505);
+            this.tabPage4.Size = new System.Drawing.Size(837, 508);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "关注管理";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1225,39 +1259,6 @@
             // bindingSource_Courses
             // 
             this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
-            // 
-            // comboBoxCourseName
-            // 
-            this.comboBoxCourseName.FormattingEnabled = true;
-            this.comboBoxCourseName.Location = new System.Drawing.Point(439, 18);
-            this.comboBoxCourseName.Name = "comboBoxCourseName";
-            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 31);
-            this.comboBoxCourseName.TabIndex = 16;
-            // 
-            // comboBoxCreditNum
-            // 
-            this.comboBoxCreditNum.FormattingEnabled = true;
-            this.comboBoxCreditNum.Location = new System.Drawing.Point(622, 18);
-            this.comboBoxCreditNum.Name = "comboBoxCreditNum";
-            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 31);
-            this.comboBoxCreditNum.TabIndex = 17;
-            // 
-            // comboBoxYear
-            // 
-            this.comboBoxYear.FormattingEnabled = true;
-            this.comboBoxYear.Location = new System.Drawing.Point(89, 17);
-            this.comboBoxYear.Name = "comboBoxYear";
-            this.comboBoxYear.Size = new System.Drawing.Size(107, 31);
-            this.comboBoxYear.TabIndex = 19;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(37, 22);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(46, 24);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "学年";
             // 
             // Form1
             // 
@@ -1316,7 +1317,7 @@
         private System.Windows.Forms.TextBox tb_jwPw;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_DelJWSelect;
         private System.Windows.Forms.Button btn_jwlogin;
         private System.Windows.Forms.BindingSource bindingSource_Courses;
         private System.Windows.Forms.DataGridView courseDataGridView;
@@ -1402,12 +1403,12 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btn_CloseScoreReminder;
         private System.Windows.Forms.Button btn_OpenScoreReminder;
-        private System.Windows.Forms.Label label_ScoreReminderState;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label_sr1;
+        private System.Windows.Forms.Label label_sr4;
+        private System.Windows.Forms.Label label_sr3;
         private System.Windows.Forms.TextBox tb_ReminderTime;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label_jg;
+        private System.Windows.Forms.Label label_sr2;
         private System.Windows.Forms.TextBox tb_StuID;
 		private System.Windows.Forms.ComboBox comboBoxCreditNum;
         private System.Windows.Forms.ComboBox comboBoxCourseName;

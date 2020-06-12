@@ -458,7 +458,7 @@ namespace cc.wnapp.whuHelper.Code
                 CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
-		/// <summary>
+        /// <summary>
         /// 查看日程模块命令格式
         /// 命令格式：日程模块
         /// </summary>
@@ -563,7 +563,7 @@ namespace cc.wnapp.whuHelper.Code
                     CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "无法同时绑定多个仓库，请输入“绑定仓库#仓库名称#”以绑定仓库！");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "绑定错误：" + e.Message);
                 return;
@@ -577,24 +577,25 @@ namespace cc.wnapp.whuHelper.Code
             using (var context = new GithubWatcherContext())
             {
                 var query = context.RepositorySubscriptions.Where(p => p.QQ == fromQQ).OrderBy(p => p.RepositoryName);
-                    string msg1 = msg.Substring(4);
-                if (query.Count() == 0) 
+
+                if (query.Count() == 0)
                 {
                     CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何仓库，输入“绑定仓库#仓库名称#”以绑定仓库！");
                     return;
                 }
-                    string[] msgprocess = msg1.Split('|');
+
                 string message = "您绑定的仓库有：";
                 int i = 0;
-                    for (int i = 0; i < msgprocess.Length; i++)
-                foreach(var subscription in query)
+
+                foreach (var subscription in query)
                 {
+                    i++;
                     message = message + $"\n{i}. " + subscription.RepositoryName;
                 }
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
             }
         }
-                        string msgtemp = msgprocess[i];
+
         /// <summary>
         /// 取消绑定Git仓库
         /// 命令格式：解绑仓库#仓库名称#
@@ -603,34 +604,39 @@ namespace cc.wnapp.whuHelper.Code
         {
             string pattern = @"解绑仓库#(?<repository>[\S]+)#";
             MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
-                        if (msgtemp == "去除公选")
-            if (matches.Count == 1) 
+
+            if (matches.Count == 1)
             {
+                using (var context = new GithubWatcherContext())
+                {
                     string repository = "";
                     foreach (Match match in matches)
                     {
                         repository = match.Groups["repository"].Value;
                     }
-                        if (msgtemp == "去除公必")
+
                     var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository);
-                    if (query == null) 
+                    if (query == null)
                     {
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您尚未绑定该仓库！");
                     }
                     else
                     {
+                        context.RepositorySubscriptions.Remove(query);
                         context.SaveChanges();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已与仓库" + repository + "取消绑定！");
                     }
                 }
             }
-            else if(matches.Count==0)
+            else if (matches.Count == 0)
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个仓库呢？可以输入“查询仓库”查看您已绑定的仓库清单！然后您可以通过输入“解绑仓库#仓库名称#”与您不关注的仓库取消绑定哦！");
             }
+            else
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个仓库取消绑定！输入“解绑仓库#仓库名称#”与您不关注的仓库取消绑定！");
             }
+        }
         /// <summary>
         /// 绑定Github账户
         /// 命令格式：绑定Github账户
@@ -646,21 +652,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void QueryAuthorisedGithubAccount()
         {
+            using (var context = new GithubWatcherContext())
             {
                 var query = context.GithubBindings.Where(p => p.QQ == fromQQ).OrderBy(p => p.GithubUserName);
-                            isIlegal++;
+
                 if (query.Count() == 0)
                 {
                     CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何Github账户，输入“绑定Github账户”以进行绑定！");
                     return;
                 }
-                        if (msgtemp == "去除专必")
+
                 string message = "您绑定的Github账户有：";
                 int i = 0;
 
                 foreach (var account in query)
                 {
-                            Slist = ScoreService.noZhuanBi(Slist);
+                    i++;
                     message = message + $"\n{i}. " + account.GithubUserName;
                 }
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
@@ -674,38 +681,41 @@ namespace cc.wnapp.whuHelper.Code
         {
             string pattern = @"解绑Github账户#(?<account>[\S]+)#";
             MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
-                        if (msgtemp == "去除非本院")
+
             if (matches.Count == 1)
             {
+                using (var context = new GithubWatcherContext())
+                {
                     string account = "";
                     foreach (Match match in matches)
                     {
                         account = match.Groups["account"].Value;
                     }
-                        if(isIlegal == 0)
+
                     var query = context.GithubBindings.FirstOrDefault(p => p.QQ == fromQQ && p.GithubUserName == account);
                     if (query == null)
                     {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您尚未绑定该Github账户！");
                     }
                     else
                     {
                         context.GithubBindings.Remove(query);   // 删除绑定信息
-                        if(i == msgprocess.Length -1 && flag ==true)
+
                         // 删除仓库信息
                         var repositories = context.RepositoryInformations.Where(s => s.GithubUserName == account);
-                        foreach(var repository in repositories)
+                        foreach (var repository in repositories)
                         {
                             context.RepositoryInformations.Remove(repository);
-                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【存在非法指令】\n非法指令已被跳过，请检查后重新输入。");
+
                             // 如果仓库已订阅，也一并删除
                             var subscription = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == repository.Repository);
-                            if (subscription != null) 
+                            if (subscription != null)
                             {
                                 context.RepositorySubscriptions.Remove(subscription);
                             }
                         }
-                    StuGPA = ScoreService.Compute(Slist);
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
+
+
 
                         context.SaveChanges();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已与Github账户" + account + "取消绑定！");
@@ -721,8 +731,8 @@ namespace cc.wnapp.whuHelper.Code
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个Github账户取消绑定！输入“解绑Github账户#账户名称#”与Github账户取消绑定！");
             }
         }
-		
-		/// <summary>
+
+        /// <summary>
         /// 查询成绩处理函数，需要绑定
         /// 命令格式：查询成绩 操作1|操作2|操作3
         /// 可选操作：去除公选、去除公必、去除专必、去除专选、去除非本院
@@ -730,7 +740,7 @@ namespace cc.wnapp.whuHelper.Code
         public void ComputeScore()
         {
             string StuID = jwOp.GetStuID(fromQQ);
-            if(StuID != "")
+            if (StuID != "")
             {
                 List<Score> Slist = jwOp.GetScores(StuID);
                 GPAInfo StuGPA;
@@ -774,14 +784,14 @@ namespace cc.wnapp.whuHelper.Code
                         }
                         if (msgtemp == "去除非本院")
                         {
-                            Slist = ScoreService.onlyDepartment(Slist,jwOp.GetCollege(StuID));
+                            Slist = ScoreService.onlyDepartment(Slist, jwOp.GetCollege(StuID));
                             isIlegal++;
                         }
-                        if(isIlegal == 0)
+                        if (isIlegal == 0)
                         {
                             flag = true;
                         }
-                        if(i == msgprocess.Length -1 && flag ==true)
+                        if (i == msgprocess.Length - 1 && flag == true)
                         {
                             CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【存在非法指令】\n非法指令已被跳过，请检查后重新输入。");
                         }
@@ -795,7 +805,7 @@ namespace cc.wnapp.whuHelper.Code
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【未绑定教务系统】\n请先绑定教务系统，格式：绑定教务系统 学号|密码");
             }
-            
+
         }
     }
 }

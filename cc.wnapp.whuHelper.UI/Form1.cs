@@ -59,11 +59,11 @@ namespace cc.wnapp.whuHelper.UI
             
             if(ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "") == "真")
             {
-                label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
+                label_sr1.Text = "本人新出成绩提醒：已开启";
             }
             else
             {
-                label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
+                label_sr1.Text = "本人新出成绩提醒：已关闭";
             }
 
             tb_ReminderTime.Text = ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", "");
@@ -215,7 +215,7 @@ namespace cc.wnapp.whuHelper.UI
                 CQ.Log.Debug("延时", Convert.ToString(time));
                 JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
                 ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "真");
-                label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
+                label_sr1.Text = "本人新出成绩提醒：已开启";
             }
             
         }
@@ -225,7 +225,7 @@ namespace cc.wnapp.whuHelper.UI
             JobManager.Stop();
             JobManager.RemoveAllJobs();
             ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "假");
-            label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
+            label_sr1.Text = "本人新出成绩提醒：已关闭";
         }
 
         private void refreshButton_Click(object sender, EventArgs e)

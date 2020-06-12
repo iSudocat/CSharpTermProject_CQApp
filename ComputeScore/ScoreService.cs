@@ -10,13 +10,14 @@ namespace ComputeScore
 {
   public  class ScoreService
     {
+        /*
         private List<Score> Slist;
         public String StuID;
         public ScoreService(String StuID)
         {
             Slist = jwOp.GetScores(StuID);
             this.StuID = StuID;
-        }
+        } */
 
         /// <summary>
         /// 成绩GPA转换
@@ -69,7 +70,7 @@ namespace ComputeScore
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo AllCredit()
+        public static GPAInfo AllCredit(List<Score> Slist)
         {
             //List<Score> Slist = jwOp.GetScores(StuID);
             GPAInfo Stu = Compute(Slist);
@@ -81,12 +82,11 @@ namespace ComputeScore
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo noGongXuan()
+        public static List<Score> noGongXuan(List<Score> Slist)
         {
             //List<Score> Slist = jwOp.GetScores(StuID);
-            Slist = Slist.Where(p => p.LessonType != "公共选修").ToList();
-            GPAInfo Stu = Compute(Slist);
-            return Stu;
+            Slist = Slist.Where(p => p.LessonType != "公共选修" && p.LessonType != "通识教育选修").ToList();
+            return Slist;
         }
 
         /// <summary>
@@ -94,12 +94,11 @@ namespace ComputeScore
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo noZhuanXuan()
+        public static List<Score> noZhuanXuan(List<Score> Slist)
         {
             //List<Score> Slist = jwOp.GetScores(StuID);
-            Slist = Slist.Where(p => p.LessonType != "专业选修").ToList();
-            GPAInfo Stu = Compute(Slist);
-            return Stu;
+            Slist = Slist.Where(p => p.LessonType != "专业选修" && p.LessonType != "专业教育选修").ToList();
+            return Slist;
         }
 
         /// <summary>
@@ -107,12 +106,11 @@ namespace ComputeScore
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo noGongBi()
+        public static List<Score> noGongBi(List<Score> Slist)
         {
            // List<Score> Slist = jwOp.GetScores(StuID);
-            Slist = Slist.Where(p => p.LessonType != "公共必修").ToList();
-            GPAInfo Stu = Compute(Slist);
-            return Stu;
+            Slist = Slist.Where(p => p.LessonType != "公共必修" && p.LessonType != "公共基础必修").ToList();
+            return Slist;
         }
 
         /// <summary>
@@ -120,12 +118,11 @@ namespace ComputeScore
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo noZhuanBi()
+        public static List<Score> noZhuanBi(List<Score> Slist)
         {
            // List<Score> Slist = jwOp.GetScores(StuID);
-            Slist = Slist.Where(p => p.LessonType != "专业必修").ToList();
-            GPAInfo Stu = Compute(Slist);
-            return Stu;
+            Slist = Slist.Where(p => p.LessonType != "专业必修" && p.LessonType != "专业教育必修").ToList();
+            return Slist;
         }
 
 
@@ -134,12 +131,11 @@ namespace ComputeScore
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
-        public GPAInfo onlyCS()
+        public static List<Score> onlyDepartment(List<Score> Slist,string department)
         {
            // List<Score> Slist = jwOp.GetScores(StuID);
-            Slist = Slist.Where(p => p.TeachingCollege == "计算机学院").ToList();
-            GPAInfo Stu = Compute(Slist);
-            return Stu;
+            Slist = Slist.Where(p => p.TeachingCollege == department).ToList();
+            return Slist;
         }
 
         /// <summary>

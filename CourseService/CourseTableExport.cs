@@ -8,6 +8,8 @@ using Microsoft;
 using NPOI;
 using NPOI.HSSF.UserModel;
 using System.IO;
+using NPOI.SS.Formula.Functions;
+using NPOI.SS.UserModel;
 
 namespace CourseFunction
 {
@@ -18,8 +20,11 @@ namespace CourseFunction
             List<Course> Courses = CourseService.GetCourses(stuID);
             //创建Excel工作薄
             HSSFWorkbook excelBook = new HSSFWorkbook();
-            //创建工作表1并命名
-            NPOI.SS.UserModel.ISheet sheet1 = excelBook.CreateSheet("课程表");
+            //创建工作表1和工作表2并命名
+            NPOI.SS.UserModel.ISheet sheet1 = excelBook.CreateSheet("列表模式");
+            NPOI.SS.UserModel.ISheet sheet2 = excelBook.CreateSheet("周历模式");
+            
+            //列表模式（表1）添加数据
             //创建表头行 CreateRow(0)
             NPOI.SS.UserModel.IRow row1 = sheet1.CreateRow(0);
 
@@ -51,6 +56,47 @@ namespace CourseFunction
                 row.CreateCell(10).SetCellValue(Courses[i].Note);
             }
 
+            //周历模式（表2）添加数据
+            NPOI.SS.UserModel.IRow row2 = sheet2.CreateRow(0);
+            
+            row2.CreateCell(0).SetCellValue("节次");
+            row2.CreateCell(1).SetCellValue("日");
+            row2.CreateCell(2).SetCellValue("一");
+            row2.CreateCell(3).SetCellValue("二");
+            row2.CreateCell(4).SetCellValue("三");
+            row2.CreateCell(5).SetCellValue("四");
+            row2.CreateCell(6).SetCellValue("五");
+            row2.CreateCell(7).SetCellValue("六");
+
+            for (int i = 0; i < 13; i ++)
+            {
+                row2 = sheet2.CreateRow(i + 1);
+                row2.CreateCell(0).SetCellValue("1");
+            }
+
+            for (int i = 0; i < Courses.Count; i ++)
+            {
+                Course course = Courses[i];
+                List<List<Object>> temp = CourseTime.ParseClassTime(course);
+                for (int j = 0; j < temp.Count; j ++)
+                {
+                    string weekSpan = (string)temp[j][1];
+                    int courseBegin = (int)temp[j][2];
+                    int courseEnd = (int)temp[j][3];
+                    string weekDayByString = (string)temp[j][4];
+                    int weekDay = CourseTime.WeekDayTrans(weekDayByString);
+
+                    NPOI.SS.UserModel.IRow row = sheet2.CreateRow(courseBegin);
+                    ICell cell = row.CreateCell(weekDay);
+                    ICellStyle cellStyle = excelBook.CreateCellStyle();
+                    cellStyle.WrapText = true;
+                    cell.CellStyle = cellStyle;
+
+                    cell.SetCellValue($"{course.LessonName}\n{weekSpan}周");
+                    sheet2.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(courseBegin, courseEnd, weekDay, weekDay));
+                }
+            }
+            
             using (FileStream fs = File.OpenWrite(@"C:\Users\Administrator\Desktop\CourseTable.xlsx"))
             {
                 excelBook.Write(fs);

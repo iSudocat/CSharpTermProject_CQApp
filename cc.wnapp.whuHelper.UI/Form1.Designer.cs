@@ -492,7 +492,6 @@
             this.groupBox3.Text = "操作";
             // 
             // refreshButton
-            // ExportButton
             // 
             this.refreshButton.Location = new System.Drawing.Point(518, 27);
             this.refreshButton.Name = "refreshButton";
@@ -501,6 +500,9 @@
             this.refreshButton.Text = "刷新课程";
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // ExportButton
+            // 
             this.ExportButton.BackColor = System.Drawing.SystemColors.Window;
             this.ExportButton.Location = new System.Drawing.Point(518, 27);
             this.ExportButton.Name = "ExportButton";
@@ -538,6 +540,7 @@
             this.addButton.TabIndex = 0;
             this.addButton.Text = "添加课程";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // groupBox2
             // 

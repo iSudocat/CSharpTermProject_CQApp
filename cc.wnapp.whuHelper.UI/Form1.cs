@@ -286,6 +286,7 @@ namespace cc.wnapp.whuHelper.UI
                     bindingSource_Courses.DataSource = CourseService.QueryByTeacher(queryTextBox.Text, stuID);
                     break;
             }
+            #region 废弃代码
             //StringBuilder stringBuilder = new StringBuilder();
             //for (int i = 0; i < bindingSource_Courses.Count; i++)
             //{
@@ -294,6 +295,7 @@ namespace cc.wnapp.whuHelper.UI
             //}
 
             //MessageBox.Show(stringBuilder.ToString());
+            #endregion
             bindingSource_Courses.ResetBindings(true);
         }
 
@@ -311,7 +313,7 @@ namespace cc.wnapp.whuHelper.UI
             MessageBox.Show(course.LessonNum);
             try
             {
-                var time = jwOp.ParseClassTime(course);
+                var time = CourseTime.ParseClassTime(course);
                 if (time == null)
                 {
                     MessageBox.Show("出现错误", "查询失败");
@@ -461,6 +463,12 @@ namespace cc.wnapp.whuHelper.UI
                 }
             }
             return GetSelect;
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            Student student = bindingSource_StudentDB.Current as Student;
+            CourseTableExport.ExportExcel(student.StuID);
         }
 
 

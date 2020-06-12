@@ -100,6 +100,29 @@ namespace CourseFunction
             }
         }
 
+        public static int WeekDayTrans(string weekday)
+        {
+            switch (weekday)
+            {
+                case "Sun":
+                    return 1;
+                case "Mon":
+                    return 2;
+                case "Tue":
+                    return 3;
+                case "Wed":
+                    return 4;
+                case "Thu":
+                    return 5;
+                case "Fri":
+                    return 6;
+                case "Sat":
+                    return 7;
+                default:
+                    return 0;
+            }
+        }
+
         public static List<List<Object>> ParseClassTime(Course course)           //解析jwxt数据库的课程时间
         {
             List<List<Object>> courseTimes = new List<List<Object>>();
@@ -129,10 +152,11 @@ namespace CourseFunction
 
                 theRest = theRest.Split(':')[1];
                 int classFirstWeek = int.Parse(theRest.Split('-')[0]);  //获取上课起始周
+
                 theRest = theRest.Split('-')[1];
                 int classLastWeek = int.Parse(theRest.Split(',')[0].Substring(0, theRest.Split(',')[0].Length - 1)); //获取上课末周
                 //int classStartNum1 = int.Parse(theRest.Split(',')[1].Substring(theRest.Split(',')[1].Length - 1, 1));
-                int weekSpan1 = classLastWeek - classFirstWeek + 1;
+                int weekSpan = classLastWeek - classFirstWeek + 1;
 
                 #region
                 //string weekday2 = Time2.Split(':')[0];    //获取第二次的星期几
@@ -148,8 +172,10 @@ namespace CourseFunction
                 //修改为二维数组
                 tempList.Add(new DateTime(weekDayDate.Year, weekDayDate.Month, weekDayDate.Day,
                     GetClassTime(courseBegin)["hour"], GetClassTime(courseBegin)["minute"], GetClassTime(courseBegin)["second"]));
+                tempList.Add(weekSpan);
                 tempList.Add(courseBegin);
                 tempList.Add(courseEnd);
+                tempList.Add(weekday);
                 courseTimes.Add(tempList);
             }
             //if (matches.Count == 1)    

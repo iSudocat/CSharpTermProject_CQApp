@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using jwxt;
+using CourseFunction;
 
 namespace Schedule
 {
@@ -22,27 +23,38 @@ namespace Schedule
             List<Course> courses = jwOp.GetCourses(userStuID);
             foreach(Course course in courses)
             {
-                if (jwOp.ParseClassTime(course).Count == 1)
+                List<List<Object>> temp = CourseTime.ParseClassTime(course);
+                for (int i = 0; i < temp.Count; i ++)
                 {
-                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0][0];
+                    DateTime dt = (DateTime)temp[i][0];
                     string st = "每周课程提醒";
                     string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
-                    int weekSpan = (int)jwOp.ParseClassTime(course)[0][1];
+                    int weekSpan = (int)temp[i][1];
                     if(!AddWeeklySchedule(dt, st, sc, weekSpan))
                         return false;
                 }
-                else if(jwOp.ParseClassTime(course).Count == 2)
-                {
-                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0][0];
-                    string st = "每周课程提醒";
-                    string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
-                    int weekSpan = (int)jwOp.ParseClassTime(course)[0][1];
-                    ;
-                    dt = (DateTime)jwOp.ParseClassTime(course)[1][0];
-                    weekSpan = (int)jwOp.ParseClassTime(course)[1][1];
-                    if(!AddWeeklySchedule(dt, st, sc, weekSpan)||!AddWeeklySchedule(dt, st, sc, weekSpan))
-                        return false;
-                }
+                #region 用循环添加日程
+                //if (CourseTime.ParseClassTime(course).Count == 1)
+                //{
+                //  DateTime dt = (DateTime)CourseTime.ParseClassTime(course)[0][0];
+                //  string st = "每周课程提醒";
+                //  string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
+                //  int weekSpan = (int)CourseTime.ParseClassTime(course)[0][1];
+                //  if (!AddWeeklySchedule(dt, st, sc, weekSpan))
+                //      return false;
+                //}
+                //else if(CourseTime.ParseClassTime(course).Count == 2)
+                //{
+                //    DateTime dt = (DateTime)CourseTime.ParseClassTime(course)[0][0];
+                //    string st = "每周课程提醒";
+                //    string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
+                //    int weekSpan = (int)CourseTime.ParseClassTime(course)[0][1];
+                //    dt = (DateTime)CourseTime.ParseClassTime(course)[1][0];
+                //    weekSpan = (int)CourseTime.ParseClassTime(course)[1][1];
+                //    if(!AddWeeklySchedule(dt, st, sc, weekSpan)||!AddWeeklySchedule(dt, st, sc, weekSpan))
+                //        return false;
+                //}
+                #endregion
             }
             return true;
         }

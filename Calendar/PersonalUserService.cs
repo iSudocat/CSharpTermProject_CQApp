@@ -39,7 +39,7 @@ namespace Schedule
                     int weekSpan = (int)jwOp.ParseClassTime(course)[0][1];
                     ;
                     dt = (DateTime)jwOp.ParseClassTime(course)[1][0];
-                    weekSpan = (int)jwOp.ParseClassTime(course)[1][];
+                    weekSpan = (int)jwOp.ParseClassTime(course)[1][1];
                     if(!AddWeeklySchedule(dt, st, sc, weekSpan)||!AddWeeklySchedule(dt, st, sc, weekSpan))
                         return false;
                 }

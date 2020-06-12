@@ -540,9 +540,9 @@
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(145, 34);
             this.addButton.TabIndex = 0;
-            this.addButton.Text = "添加课程";
+            this.addButton.Text = "导出课程";
             this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // groupBox2
             // 

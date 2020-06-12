@@ -21,14 +21,14 @@ namespace Schedule
                 foreach (var schedule in schedules)
                 {
                     if (schedule.UserType == 0 && schedule.ScheduleTime.ToString() == DateTime.Now.ToString())
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ.ToString()), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ.ToString()), $"【日程提醒】 {schedule.ScheduleContent}");
                 }
                 foreach (var weeklySchedule in weeklySchedules)
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
                         if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.AddDays(7 * i).ToString() == DateTime.Now.ToString())
-                            CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【日程提醒】\n{weeklySchedule.ScheduleContent}", "\n");
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【日程提醒】 {weeklySchedule.ScheduleContent}");
                     }
                 }
                 System.Threading.Thread.Sleep(1000);
@@ -47,14 +47,14 @@ namespace Schedule
                 foreach (var schedule in schedules)
                 {
                     if (schedule.UserType == 1 && schedule.ScheduleTime.ToString()==DateTime.Now.ToString())
-                        CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ.ToString()), $"【日程提醒】\n{schedule.ScheduleContent}", "\n");
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ.ToString()), $"【日程提醒】 {schedule.ScheduleContent}");
                 }
                 foreach (var weeklySchedule in weeklySchedules)
                 {
                     for (int i = 0; i < weeklySchedule.WeekSpan; i++)
                     {
                         if (weeklySchedule.UserType == 1 && weeklySchedule.ScheduleTime.AddDays(7 * i).ToString() == DateTime.Now.ToString())
-                            CQ.Api.SendGroupMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【日程提醒】\n{weeklySchedule.ScheduleContent}", "\n");
+                            CQ.Api.SendGroupMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【日程提醒】 {weeklySchedule.ScheduleContent}");
                     }
                 }
                 System.Threading.Thread.Sleep(1000);

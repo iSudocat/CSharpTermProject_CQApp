@@ -36,7 +36,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tb_ReminderTime = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label_jg = new System.Windows.Forms.Label();
             this.btn_CloseScoreReminder = new System.Windows.Forms.Button();
             this.btn_OpenScoreReminder = new System.Windows.Forms.Button();
             this.label_ScoreReminderState = new System.Windows.Forms.Label();
@@ -192,7 +192,7 @@
             this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.tb_ReminderTime);
-            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label_jg);
             this.panel2.Controls.Add(this.btn_CloseScoreReminder);
             this.panel2.Controls.Add(this.btn_OpenScoreReminder);
             this.panel2.Controls.Add(this.label_ScoreReminderState);
@@ -230,16 +230,16 @@
             this.tb_ReminderTime.TabIndex = 25;
             this.tb_ReminderTime.TextChanged += new System.EventHandler(this.tb_ReminderTime_TextChanged);
             // 
-            // label11
+            // label_jg
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(13, 49);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(93, 20);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "基础检测间隔";
+            this.label_jg.AutoSize = true;
+            this.label_jg.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_jg.Location = new System.Drawing.Point(13, 49);
+            this.label_jg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_jg.Name = "label11";
+            this.label_jg.Size = new System.Drawing.Size(93, 20);
+            this.label_jg.TabIndex = 24;
+            this.label_jg.Text = "基础检测间隔";
             // 
             // btn_CloseScoreReminder
             // 
@@ -1407,6 +1407,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tb_ReminderTime;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label_jg;
         private System.Windows.Forms.TextBox tb_StuID;
 		private System.Windows.Forms.ComboBox comboBoxCreditNum;
         private System.Windows.Forms.ComboBox comboBoxCourseName;

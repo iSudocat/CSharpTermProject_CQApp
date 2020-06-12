@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using jwxt;
+using Microsoft;
 
 namespace CourseFunction
 {
@@ -16,12 +17,6 @@ namespace CourseFunction
         {
 
         }
-
-        public CourseService(EasLogin jw)
-        {
-            JW = jw;
-        }
-
 
         public static IQueryable<Course> AllCourses(jwContext context, string stuID)
         {
@@ -137,5 +132,7 @@ namespace CourseFunction
                 return query.ToList();
             }
         }
+
+
     }
 }

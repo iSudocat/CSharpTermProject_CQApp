@@ -22,24 +22,24 @@ namespace Schedule
             List<Course> courses = jwOp.GetCourses(userStuID);
             foreach(Course course in courses)
             {
-                if (jwOp.ParseClassTime(course).Length == 2)
+                if (jwOp.ParseClassTime(course).Count == 1)
                 {
-                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0];
+                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0][0];
                     string st = "每周课程提醒";
                     string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
-                    int weekSpan = (int)jwOp.ParseClassTime(course)[1];
+                    int weekSpan = (int)jwOp.ParseClassTime(course)[0][1];
                     if(!AddWeeklySchedule(dt, st, sc, weekSpan))
                         return false;
                 }
-                else if(jwOp.ParseClassTime(course).Length == 4)
+                else if(jwOp.ParseClassTime(course).Count == 2)
                 {
-                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0];
+                    DateTime dt = (DateTime)jwOp.ParseClassTime(course)[0][0];
                     string st = "每周课程提醒";
                     string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
-                    int weekSpan = (int)jwOp.ParseClassTime(course)[1];
+                    int weekSpan = (int)jwOp.ParseClassTime(course)[0][1];
                     ;
-                    dt = (DateTime)jwOp.ParseClassTime(course)[2];
-                    weekSpan = (int)jwOp.ParseClassTime(course)[3];
+                    dt = (DateTime)jwOp.ParseClassTime(course)[1][0];
+                    weekSpan = (int)jwOp.ParseClassTime(course)[1][];
                     if(!AddWeeklySchedule(dt, st, sc, weekSpan)||!AddWeeklySchedule(dt, st, sc, weekSpan))
                         return false;
                 }

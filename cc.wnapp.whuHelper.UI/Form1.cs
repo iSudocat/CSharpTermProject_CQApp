@@ -195,7 +195,7 @@ namespace cc.wnapp.whuHelper.UI
                 var floatTime = sign * rand.Next(0, Convert.ToInt32(0.1 * baseTime) + 1);   //±10%的浮动时间
                 var time = baseTime + floatTime;
                 CQ.Log.Debug("延时", Convert.ToString(time));
-                JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
+                //JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
                 ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "真");
                 label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
             }
@@ -232,10 +232,10 @@ namespace cc.wnapp.whuHelper.UI
             //courseDataGridView.DataSource = bindingSource_Courses;
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void exportButton_Click(object sender, EventArgs e)
         {
-            QueryAllCourses();
-            bindingSource_Courses.ResetBindings(false);
+            Student student = bindingSource_StudentDB.Current as Student;
+            CourseTableExport.ExportExcel(student.StuID);
         }
 
         private void stuDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -298,7 +298,29 @@ namespace cc.wnapp.whuHelper.UI
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
+            Student student = bindingSource_StudentDB.Current as Student;
+            Course course = CourseService.QueryByLessonNum(courseID, student.StuID).FirstOrDefault();
 
+            MessageBox.Show(course.LessonNum);
+            try
+            {
+                var time = jwOp.ParseClassTime(course);
+                if (time == null)
+                {
+                    MessageBox.Show("出现错误", "查询失败");
+                }
+                else
+                {
+                    DateTime dt = (DateTime)time[0][0];
+                    MessageBox.Show(dt.ToString() + $"结束{time[0][2]}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)

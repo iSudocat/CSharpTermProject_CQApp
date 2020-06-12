@@ -195,7 +195,7 @@ namespace cc.wnapp.whuHelper.UI
                 var floatTime = sign * rand.Next(0, Convert.ToInt32(0.1 * baseTime) + 1);   //±10%的浮动时间
                 var time = baseTime + floatTime;
                 CQ.Log.Debug("延时", Convert.ToString(time));
-                //JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
+                JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
                 ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "真");
                 label_ScoreReminderState.Text = "本人新出成绩提醒：已开启";
             }

@@ -210,6 +210,12 @@ namespace cc.wnapp.whuHelper.UI
             label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
         }
 
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+        }
+
 
         private void QueryAllCourses()
         {
@@ -232,10 +238,10 @@ namespace cc.wnapp.whuHelper.UI
             //courseDataGridView.DataSource = bindingSource_Courses;
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void exportButton_Click(object sender, EventArgs e)
         {
-            QueryAllCourses();
-            bindingSource_Courses.ResetBindings(false);
+            Student student = bindingSource_StudentDB.Current as Student;
+            CourseTableExport.ExportExcel(student.StuID);
         }
 
         private void stuDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -298,7 +304,29 @@ namespace cc.wnapp.whuHelper.UI
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
+            Student student = bindingSource_StudentDB.Current as Student;
+            Course course = CourseService.QueryByLessonNum(courseID, student.StuID).FirstOrDefault();
 
+            MessageBox.Show(course.LessonNum);
+            try
+            {
+                var time = jwOp.ParseClassTime(course);
+                if (time == null)
+                {
+                    MessageBox.Show("出现错误", "查询失败");
+                }
+                else
+                {
+                    DateTime dt = (DateTime)time[0][0];
+                    MessageBox.Show(dt.ToString() + $"结束{time[0][2]}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)

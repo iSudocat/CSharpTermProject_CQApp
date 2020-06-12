@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using System.Web.SessionState;
 using Schedule;
 using ComputeScore;
+using System.Text.RegularExpressions;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -44,6 +45,10 @@ namespace cc.wnapp.whuHelper.Code
                         EasGetCourse jwcourse = new EasGetCourse();
                         //将Course信息存储到数据库中
                         jwcourse.GetCourse(jwxt);
+
+                        //将成绩信息存储到数据库中
+                        EasGetScore jwScore = new EasGetScore();
+                        jwScore.GetScore(jwxt);
 
                         ini.Write(AppDirectory + @"\配置.ini", fromQQ, "学号", StuID);
                         ini.Write(AppDirectory + @"\配置.ini", fromQQ, "密码", DESTool.Encrypt(Password, "jw*1"));
@@ -419,6 +424,8 @@ namespace cc.wnapp.whuHelper.Code
         public void ComputeScore()
         {
             string StuID = jwOp.GetStuID(fromQQ);
+            Regex regex = new Regex(@"[0-9]{4}");
+            Regex regexTerm = new Regex(@"第?[123一二三]?学期?"); //可以匹配1,2,3,一,二,三,第x学期
             if(StuID != "")
             {
                 List<Score> Slist = jwOp.GetScores(StuID);
@@ -435,48 +442,76 @@ namespace cc.wnapp.whuHelper.Code
                 //存在操作
                 else
                 {
-                    string msg1 = msg.Substring(4);
-                    string[] msgprocess = msg1.Split('|');
-                    for (int i = 0; i < msgprocess.Length; i++)
+                    try
                     {
-                        isIlegal = 0;
-                        string msgtemp = msgprocess[i];
-                        if (msgtemp == "去除公选")
+                        string msg1 = msg.Substring(4);
+                        string[] msgprocess = msg1.Split('|');
+                        for (int i = 0; i < msgprocess.Length; i++)
                         {
-                            Slist = ScoreService.noGongXuan(Slist);
-                            isIlegal++;
+                            isIlegal = 0;
+                            string msgtemp = msgprocess[i];
+                            if (msgtemp == "去除公选")
+                            {
+                                Slist = ScoreService.noGongXuan(Slist);
+                                isIlegal++;
+                            }
+                            if (msgtemp == "去除公必")
+                            {
+                                Slist = ScoreService.noGongBi(Slist);
+                                isIlegal++;
+                            }
+                            if (msgtemp == "去除专选")
+                            {
+                                Slist = ScoreService.noZhuanXuan(Slist);
+                                isIlegal++;
+                            }
+                            if (msgtemp == "去除专必")
+                            {
+                                Slist = ScoreService.noZhuanBi(Slist);
+                                isIlegal++;
+                            }
+                            if (msgtemp == "去除非本院")
+                            {
+                                Slist = ScoreService.onlyDepartment(Slist, jwOp.GetCollege(StuID));
+                                isIlegal++;
+                            }
+                            if (regex.IsMatch(msgtemp))
+                            {
+                                Slist = ScoreService.onlyThisYear(Slist, msgtemp);
+                                isIlegal++;
+                            }
+                            if (regexTerm.IsMatch(msgtemp))
+                            {
+                                msgtemp = msgtemp.Replace("一", "1");
+                                msgtemp = msgtemp.Replace("二", "2");
+                                msgtemp = msgtemp.Replace("三", "3");
+                                Slist = ScoreService.onlyThisTerm(Slist, msgtemp[1].ToString());
+                                isIlegal++;
+                            }
+                            if (isIlegal == 0)
+                            {
+                                flag = true;
+                            }
+                            if (i == msgprocess.Length - 1 && flag == true)
+                            {
+                                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【存在非法指令】\n非法指令已被跳过，请检查后重新输入。");
+                            }
                         }
-                        if (msgtemp == "去除公必")
-                        {
-                            Slist = ScoreService.noGongBi(Slist);
-                            isIlegal++;
-                        }
-                        if (msgtemp == "去除专选")
-                        {
-                            Slist = ScoreService.noZhuanXuan(Slist);
-                            isIlegal++;
-                        }
-                        if (msgtemp == "去除专必")
-                        {
-                            Slist = ScoreService.noZhuanBi(Slist);
-                            isIlegal++;
-                        }
-                        if (msgtemp == "去除非本院")
-                        {
-                            Slist = ScoreService.onlyDepartment(Slist,jwOp.GetCollege(StuID));
-                            isIlegal++;
-                        }
-                        if(isIlegal == 0)
-                        {
-                            flag = true;
-                        }
-                        if(i == msgprocess.Length -1 && flag ==true)
-                        {
-                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【存在非法指令】\n非法指令已被跳过，请检查后重新输入。");
-                        }
+                            StuGPA = ScoreService.Compute(Slist);
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
                     }
-                    StuGPA = ScoreService.Compute(Slist);
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
+                    catch(Exception e)
+                    {
+                        if(e.Message == "学年不存在")
+                        {
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【学年不存在】\n请输入正确的学年进行查询");
+                        }
+                        if (e.Message == "学期不存在")
+                        {
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【学期不存在】\n请输入正确的学年及学期进行查询");
+                        }
+
+                    }
                 }
 
             }
@@ -486,5 +521,22 @@ namespace cc.wnapp.whuHelper.Code
             }
             
         }
+
+        public void RenewScore()
+        {
+            string AppDirectory = CQ.Api.AppDirectory;
+            string StuID = ini.Read(AppDirectory + @"\配置.ini", fromQQ, "学号", "");
+            string PassWord = ini.Read(AppDirectory + @"\配置.ini", fromQQ, "密码", "");
+            PassWord = DESTool.Decrypt(PassWord, "jw*1");
+            EasLogin jwxt = new EasLogin(botQQ, fromQQ, StuID, PassWord, 3);
+            for (int i = 0; i <= jwxt.TryNum; i++)
+            {
+                jwxt.LoginTry();
+            }
+            EasGetScore jwScore = new EasGetScore();
+            jwScore.GetScore(jwxt);
+        }
+
+
     }
 }

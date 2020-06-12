@@ -32,12 +32,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 if (groupUser.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】");
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】");
             }
         }
 
@@ -57,12 +57,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 if (groupUser.AddWeeklySchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】");
                 }
             }
             catch(Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】");
             }
         }
 
@@ -78,12 +78,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 if (groupUser.DelSchedule(scheduleID))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】");
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】");
             }
         }
         /// <summary>
@@ -98,12 +98,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 if (groupUser.DelWeeklySchedule(scheduleID))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】");
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】");
             }
         }
         /// <summary>
@@ -119,7 +119,7 @@ namespace cc.wnapp.whuHelper.Code
             GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.SetSchedule(scheduleID, PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【修改成功】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【修改成功】");
             }
         }
         /// <summary>
@@ -137,7 +137,7 @@ namespace cc.wnapp.whuHelper.Code
             GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             if (groupUser.SetWeeklySchedule(scheduleID, PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【修改成功】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【修改成功】");
             }
         }
 
@@ -152,12 +152,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 foreach (var schedule in groupUser.GetSchedules())
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -171,12 +171,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 foreach (var weeklySchedule in groupUser.GetWeeklySchedules())
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -191,12 +191,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 foreach (var schedule in groupUser.SortSchedules(option))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule(), "\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -211,12 +211,12 @@ namespace cc.wnapp.whuHelper.Code
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
                 foreach (var weeklySchedule in groupUser.SortWeeklySchedules(option))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule(), "\n");
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】\n");
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】");
             }
         }
 
@@ -237,7 +237,7 @@ namespace cc.wnapp.whuHelper.Code
                 "查看群周日程\n" +
                 "查看群日程%时间or类型\n" +
                 "查看群周日程%时间or类型";
-            CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup),Command , "\n");
+            CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup),Command);
         }
     }
 }

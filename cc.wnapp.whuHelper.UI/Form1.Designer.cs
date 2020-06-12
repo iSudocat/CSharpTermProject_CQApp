@@ -60,6 +60,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
@@ -477,6 +478,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.refreshButton);
             this.groupBox3.Controls.Add(this.ExportButton);
             this.groupBox3.Controls.Add(this.updateButton);
             this.groupBox3.Controls.Add(this.delButton);
@@ -489,8 +491,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
             // 
+            // refreshButton
             // ExportButton
             // 
+            this.refreshButton.Location = new System.Drawing.Point(518, 27);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(145, 34);
+            this.refreshButton.TabIndex = 3;
+            this.refreshButton.Text = "刷新课程";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             this.ExportButton.BackColor = System.Drawing.SystemColors.Window;
             this.ExportButton.Location = new System.Drawing.Point(518, 27);
             this.ExportButton.Name = "ExportButton";
@@ -1295,6 +1305,7 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView stuDataGridView;
+        private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Button ExportButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn LessonNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn LessonName;

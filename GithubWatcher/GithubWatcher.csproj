@@ -536,10 +536,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\GithubWatcherController.cs" />
+    <Compile Include="Models\GithubAccessToken.cs" />
+    <Compile Include="Models\GithubBinding.cs" />
     <Compile Include="Models\GithubWatcherContext.cs" />
     <Compile Include="Models\InitializeDB.cs" />
     <Compile Include="Models\PayloadRecord.cs" />
+    <Compile Include="Models\RepositoryInformation.cs" />
     <Compile Include="Models\RepositorySubscription.cs" />
+    <Compile Include="OAuthService\Encryption.cs" />
+    <Compile Include="OAuthService\GithubConnector.cs" />
+    <Compile Include="OAuthService\GithubRepositoryInfo.cs" />
+    <Compile Include="OAuthService\GithubUserInfo.cs" />
+    <Compile Include="OAuthService\HttpService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\CQ.cs" />
     <Compile Include="Responder\GitHubResponder.cs" />

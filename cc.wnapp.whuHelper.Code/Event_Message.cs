@@ -221,10 +221,28 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.QueryRepository);
                 t.Start();
             }
-            if (msg.Contains("取消绑定"))
+            if (msg.Contains("取消绑定仓库"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.Unsubscribe);
+                t.Start();
+            }
+            if(msg.Contains("绑定Github账户")||msg.Contains("绑定github账户")||msg.Contains("绑定GITHUB账户"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.ConnectGithub);
+                t.Start();
+            }
+            if (msg.Contains("所有Github账户") || msg.Contains("查询Github账户"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.QueryAuthorisedGithubAccount);
+                t.Start();
+            }
+            if (msg.Contains("取消绑定Github账户"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.DisconnectGithub);
                 t.Start();
             }
         }

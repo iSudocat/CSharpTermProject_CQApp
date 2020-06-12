@@ -127,7 +127,7 @@ namespace ComputeScore
 
 
         /// <summary>
-        /// 获取指定学生的GPA信息，只算计算机学院课程
+        /// 获取指定学生的GPA信息
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
@@ -135,6 +135,34 @@ namespace ComputeScore
         {
            // List<Score> Slist = jwOp.GetScores(StuID);
             Slist = Slist.Where(p => p.TeachingCollege == department).ToList();
+            return Slist;
+        }
+
+        /// <summary>
+        /// 获取指定学生的GPA信息，只查某一学年的成绩
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static List<Score> onlyThisYear(List<Score> Slist, string Year)
+        {
+            // List<Score> Slist = jwOp.GetScores(StuID);
+            Slist = Slist.Where(p => p.Year == Year).ToList();
+            if (Slist.Count == 0)
+                throw new Exception("学年不存在");
+            return Slist;
+        }
+
+        /// <summary>
+        /// 获取指定学生的GPA信息，只查某一学期的成绩
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static List<Score> onlyThisTerm(List<Score> Slist, string Term)
+        {
+            // List<Score> Slist = jwOp.GetScores(StuID);
+            Slist = Slist.Where(p => p.Term == Term).ToList();
+            if (Slist.Count == 0)
+                throw new Exception("学期不存在");
             return Slist;
         }
 

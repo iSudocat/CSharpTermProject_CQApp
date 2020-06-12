@@ -217,6 +217,13 @@ namespace cc.wnapp.whuHelper.Code
                 t.Start();
             }
 
+            if (msg.Contains("更新成绩"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.RenewScore);
+                t.Start();
+            }
+
         }
 
     }

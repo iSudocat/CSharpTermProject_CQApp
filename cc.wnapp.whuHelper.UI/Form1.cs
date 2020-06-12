@@ -277,7 +277,7 @@ namespace cc.wnapp.whuHelper.UI
 
         private void buttonSelectNoZB_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < AllScoredataGridView.Rows.Count - 1; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
                 if(AllScoredataGridView.CurrentRow != null)
                 {
@@ -298,7 +298,8 @@ namespace cc.wnapp.whuHelper.UI
                 if (AllScoredataGridView.CurrentRow != null)
                 {
                     //LessonType可能是第二个
-                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修")
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修"
+                        || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业教育选修")
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
@@ -328,7 +329,8 @@ namespace cc.wnapp.whuHelper.UI
                 if (AllScoredataGridView.CurrentRow != null)
                 {
                     //LessonType可能是第二个
-                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共选修")
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共选修"
+                        || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "通识教育选修")
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";

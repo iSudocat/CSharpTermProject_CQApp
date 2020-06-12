@@ -465,7 +465,7 @@ namespace cc.wnapp.whuHelper.UI
             return GetSelect;
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void ExportButton_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
             CourseTableExport.ExportExcel(student.StuID);

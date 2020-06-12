@@ -114,7 +114,7 @@ namespace CourseFunction
                     return 4;
                 case "Thu":
                     return 5;
-                case "Fri":
+                case "Fir":
                     return 6;
                 case "Sat":
                     return 7;
@@ -138,7 +138,7 @@ namespace CourseFunction
                 Time1 = matches[0].Value;
                 //Time2 = matches[1].Value;
 
-                string courseSpan = Time1.Split(';')[1]; //上课的节数  类似：11-13节
+                string courseSpan = Time1.Split(';')[1].Split(',')[0]; //上课的节数  类似：11-13节
                 string theRest = Time1.Split(';')[0]; //剩下的是：Mon:9-14周,每1周
 
                 //处理上课的节数
@@ -172,10 +172,12 @@ namespace CourseFunction
                 //修改为二维数组
                 tempList.Add(new DateTime(weekDayDate.Year, weekDayDate.Month, weekDayDate.Day,
                     GetClassTime(courseBegin)["hour"], GetClassTime(courseBegin)["minute"], GetClassTime(courseBegin)["second"]));
-                tempList.Add(weekSpan);
-                tempList.Add(courseBegin);
-                tempList.Add(courseEnd);
-                tempList.Add(weekday);
+                tempList.Add(weekSpan); //1
+                tempList.Add(courseBegin); //2
+                tempList.Add(courseEnd); //3
+                tempList.Add(weekday); //4
+                tempList.Add(classFirstWeek); //5
+                tempList.Add(classLastWeek); //6
                 courseTimes.Add(tempList);
             }
             //if (matches.Count == 1)    

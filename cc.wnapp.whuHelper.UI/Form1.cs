@@ -210,6 +210,12 @@ namespace cc.wnapp.whuHelper.UI
             label_ScoreReminderState.Text = "本人新出成绩提醒：已关闭";
         }
 
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+        }
+
 
         private void QueryAllCourses()
         {

@@ -26,7 +26,9 @@ namespace GithubWatcher.Models
 
         }
 
-        public DbSet<PayloadRecord> PayloadRecords { get; set; }
-        public DbSet<RepositorySubscription> RepositorySubscriptions { get; set; }
+        public DbSet<PayloadRecord> PayloadRecords { get; set; }    // Github更新消息记录
+        public DbSet<RepositorySubscription> RepositorySubscriptions { get; set; }  // 用户绑定记录
+        public DbSet<GithubBinding> GithubBindings { get; set; }    // 用户绑定Github账户记录
+        public DbSet<RepositoryInformation> RepositoryInformations { get; set; }    // 仓库信息记录
     }
 }

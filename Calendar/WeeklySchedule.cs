@@ -37,7 +37,7 @@ namespace Schedule
             ScheduleType = st;
             ScheduleContent = sc;
             WeekSpan = weekSpan;
-            ScheduleID = GetWeeklySchedueID(Convert.ToString(UserQQ))+ Guid.NewGuid().ToString();
+            ScheduleID = GetWeeklySchedueID(Convert.ToString(UserQQ));
         }
         private static string GetWeeklySchedueID(string qq)
         {

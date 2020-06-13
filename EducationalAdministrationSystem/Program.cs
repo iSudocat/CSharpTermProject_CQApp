@@ -13,7 +13,7 @@ using System.IO;
 using Tools;
 using FluentScheduler;
 
-namespace jwxt
+namespace Eas
 {
     class Program
     {

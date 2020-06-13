@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using ComputeScore;
 using CourseFunction;
 using FluentScheduler;
-using jwxt;
+using Eas;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using Native.Sdk.Cqp.Model;
@@ -47,7 +47,7 @@ namespace cc.wnapp.whuHelper.UI
         {
             BotQQ = CQ.Api.GetLoginQQ();
 
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
 
             stuDataGridView.DataSource = bindingSource_StudentDB;
@@ -79,7 +79,7 @@ namespace cc.wnapp.whuHelper.UI
         private void tab3Init()
         {
             Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_StuScore.DataSource = jwOp.GetScores(student.StuID);
+            bindingSource_StuScore.DataSource = EasOP.GetScores(student.StuID);
             AllScoredataGridView.DataSource = bindingSource_StuScore;
 
             //防止列乱序
@@ -94,7 +94,7 @@ namespace cc.wnapp.whuHelper.UI
             AllScoredataGridView.RowHeadersVisible = false;
 
             //初始化combobox
-            List<Score> combo = jwOp.GetScores(student.StuID);
+            List<Score> combo = EasOP.GetScores(student.StuID);
             //提取成绩列表中的唯一值
             List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
             CourseName.Insert(0, " ");
@@ -143,7 +143,7 @@ namespace cc.wnapp.whuHelper.UI
                     EasGetCourse jwcourse = new EasGetCourse();
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+                    bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
                     dataGridView_StuList.DataSource = bindingSource_StudentDB;
 
                     //课程表 数据绑定
@@ -173,14 +173,14 @@ namespace cc.wnapp.whuHelper.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            jwOp.DeleteStu(CurrentStuID_jw);
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            EasOP.DeleteStu(CurrentStuID_jw);
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
         private void btn_refreshMainList_Click(object sender, EventArgs e)
         {
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
@@ -230,7 +230,7 @@ namespace cc.wnapp.whuHelper.UI
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
@@ -440,7 +440,7 @@ namespace cc.wnapp.whuHelper.UI
             {
                 if (AllScoredataGridView.CurrentRow != null)
                 {
-                    String Department = jwOp.GetCollege(tb_StuID.Text);
+                    String Department = EasOP.GetCollege(tb_StuID.Text);
                     if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department)
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
                     else
@@ -452,7 +452,7 @@ namespace cc.wnapp.whuHelper.UI
         private void buttonRestore_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_StuScore.DataSource = jwOp.GetScores(student.StuID);
+            bindingSource_StuScore.DataSource = EasOP.GetScores(student.StuID);
         }
 
         private void buttonCompute_Click(object sender, EventArgs e)
@@ -495,7 +495,7 @@ namespace cc.wnapp.whuHelper.UI
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
-            List<Score> temp = jwOp.GetScores(student.StuID);
+            List<Score> temp = EasOP.GetScores(student.StuID);
             String CourseName = comboBoxCourseName.SelectedItem.ToString();
             String Year = comboBoxYear.SelectedItem.ToString();
             String Term = comboBoxTerm.SelectedItem.ToString();

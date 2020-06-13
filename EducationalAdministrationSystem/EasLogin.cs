@@ -10,7 +10,7 @@ using HtmlAgilityPack;
 using System.Globalization;
 using Tools;
 
-namespace jwxt
+namespace Eas
 {
     public class EasLogin
     {

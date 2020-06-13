@@ -8,7 +8,7 @@ using FluentScheduler;
 using Native.Sdk.Cqp.Model;
 using Tools;
 
-namespace jwxt
+namespace Eas
 {
     public class ScoreReminder : IJob
     {

@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Native.Sdk.Cqp.Model;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +10,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Tools;
 
-namespace jwxt
+namespace Eas
 {
-    public static class jwOp
+    public static class EasOP
     {
         /// <summary>
         /// 获取绑定在指定机器人账号下的所有教务系统学生信息
@@ -173,5 +174,104 @@ namespace jwxt
             }
         }
 
+
+        /// <summary>
+        /// 更新指定学生的成绩信息 请注意捕获异常
+        /// </summary>
+        /// <param name="StuQQ">学生QQ</param>
+        /// <returns>成功返回true 失败将抛出异常 请注意捕获UpdataErrorException</returns>
+        public static bool UpdateScore(string StuQQ)
+        {
+            QQ BotQQ = CQ.Api.GetLoginQQ();
+            string AppDirectory = CQ.Api.AppDirectory;
+            string StuID = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "学号", "");
+            string Pw = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "密码", "");
+            if (StuID == "" || Pw == "")
+            {
+                throw new UpdataErrorException("当前QQ未绑定教务系统账户。");
+            }
+            EasLogin jwxt = new EasLogin(Convert.ToString(BotQQ.Id), StuQQ, StuID, Pw, 3);
+            try
+            {
+                if (jwxt.TryLogin() == true)
+                {
+                    EasGetScore jwscore = new EasGetScore();
+                    jwscore.GetScore(jwxt);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "密码错误")
+                {
+                    throw new UpdataErrorException("用户名或密码错误。");
+                }
+                else if (ex.Message == "验证码错误")
+                {
+                    throw new UpdataErrorException("验证码错误达到上限，请稍后再试。");
+                }
+                else
+                {
+                    throw new UpdataErrorException("发生未知错误。");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新指定学生的课程信息 请注意捕获异常
+        /// </summary>
+        /// <param name="StuQQ">学生QQ</param>
+        /// <returns>成功返回true 失败将抛出异常 请注意捕获UpdataErrorException</returns>
+        public static bool UpdateCourse(string StuQQ)
+        {
+            QQ BotQQ = CQ.Api.GetLoginQQ();
+            string AppDirectory = CQ.Api.AppDirectory;
+            string StuID = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "学号", "");
+            string Pw = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "密码", "");
+            if (StuID == "" || Pw == "")
+            {
+                throw new UpdataErrorException("当前QQ未绑定教务系统账户。");
+            }
+            EasLogin jwxt = new EasLogin(Convert.ToString(BotQQ.Id), StuQQ, StuID, Pw, 3);
+            try
+            {
+                if (jwxt.TryLogin() == true)
+                {
+                    EasGetCourse jwcourse = new EasGetCourse();
+                    jwcourse.GetCourse(jwxt);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "密码错误")
+                {
+                    throw new UpdataErrorException("用户名或密码错误。");
+                }
+                else if (ex.Message == "验证码错误")
+                {
+                    throw new UpdataErrorException("验证码错误达到上限，请稍后再试。");
+                }
+                else
+                {
+                    throw new UpdataErrorException("发生未知错误。");
+                }
+            }
+        }
+
+        public class UpdataErrorException : ApplicationException
+        {
+            public UpdataErrorException(string message) : base(message)
+            {
+            }
+        }
     }
 }

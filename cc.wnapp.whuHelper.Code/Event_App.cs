@@ -37,8 +37,8 @@ namespace cc.wnapp.whuHelper.Code
             #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
-            jwxt.CQ.Api = e.CQApi;
-            jwxt.CQ.Log = e.CQLog;
+            Eas.CQ.Api = e.CQApi;
+            Eas.CQ.Log = e.CQLog;
             Schedule.CQ.Api = e.CQApi;
             Schedule.CQ.Log = e.CQLog;
             GithubWatcher.Shared.CQ.Api = e.CQApi;
@@ -65,7 +65,7 @@ namespace cc.wnapp.whuHelper.Code
                 #endregion
 
                 #region 数据库与EF框架初始化
-                jwxt.InitializeDB.Init();
+                Eas.InitializeDB.Init();
                 Schedule.InitializeDB.Init();
                 GithubWatcher.Models.InitializeDB.Init();
                 #endregion

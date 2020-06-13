@@ -150,10 +150,16 @@ namespace cc.wnapp.whuHelper.Code
             try
             {
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                foreach (var schedule in groupUser.GetSchedules())
+                List<Schedule.Schedule> schedules = groupUser.GetSchedules();
+                if (schedules.Count > 0)
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
+                    foreach (var schedule in schedules)
+                    {
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【暂无群日程】");
             }
             catch (Exception e)
             {
@@ -169,10 +175,16 @@ namespace cc.wnapp.whuHelper.Code
             try
             {
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                foreach (var weeklySchedule in groupUser.GetWeeklySchedules())
+                List<WeeklySchedule> weeklySchedules = groupUser.GetWeeklySchedules();
+                if (weeklySchedules.Count > 0)
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
+                    foreach (var weeklySchedule in weeklySchedules)
+                    {
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【暂无群周日程】");
             }
             catch (Exception e)
             {
@@ -181,7 +193,7 @@ namespace cc.wnapp.whuHelper.Code
         }
         /// <summary>
         /// 按序查看群日程
-        /// 命令格式：查看群日程%时间or类型
+        /// 命令格式：按序查看群日程%时间or类型
         /// </summary>
         public void SortScheduleFromDB()
         {
@@ -189,10 +201,16 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var option = textOp.GetRightText(message, "%");
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                foreach (var schedule in groupUser.SortSchedules(option))
+                List<Schedule.Schedule> schedules = groupUser.SortSchedules(option);
+                if (schedules.Count > 0)
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
+                    foreach (var schedule in schedules)
+                    {
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【暂无群日程】");
             }
             catch (Exception e)
             {
@@ -201,7 +219,7 @@ namespace cc.wnapp.whuHelper.Code
         }
         /// <summary>
         /// 按序查看群周日程
-        /// 命令格式：查看群周日程%时间or类型
+        /// 命令格式：按序查看群周日程%时间or类型
         /// </summary>
         public void SortWeeklyScheduleFromDB()
         {
@@ -209,10 +227,16 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var option = textOp.GetRightText(message, "%");
                 GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                foreach (var weeklySchedule in groupUser.SortWeeklySchedules(option))
+                List<WeeklySchedule> weekSchedules=groupUser.SortWeeklySchedules(option);
+                if (weekSchedules.Count > 0)
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
+                    foreach (var weeklySchedule in weekSchedules)
+                    {
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup),"【暂无群周日程】");
             }
             catch (Exception e)
             {
@@ -229,14 +253,15 @@ namespace cc.wnapp.whuHelper.Code
             GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
             String Command = "命令格式：\n" +
                 "添加群日程|2020/6/2 18:30:00(日常生活):吃饭\n" +
+                "添加群周日程~周数|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "删除群日程|日程号\n" +
                 "删除群周日程|日程号\n" +
                 "修改群日程-日程编号|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "修改群周日程~周数-日程编号|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "查看群日程\n" +
                 "查看群周日程\n" +
-                "查看群日程%时间or类型\n" +
-                "查看群周日程%时间or类型";
+                "按序查看群日程%时间or类型\n" +
+                "按序查看群周日程%时间or类型";
             CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup),Command);
         }
     }

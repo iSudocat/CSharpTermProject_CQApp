@@ -33,7 +33,7 @@ namespace Schedule
             ScheduleTime = dt;
             ScheduleType = st;
             ScheduleContent = sc;
-            ScheduleID = GetSchedueID(Convert.ToString(UserQQ))+ Guid.NewGuid().ToString();
+            ScheduleID = GetSchedueID(Convert.ToString(UserQQ));
         }
         private static string GetSchedueID(string qq)
         {

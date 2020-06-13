@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Tools;
-using jwxt;
+using Eas;
 using CourseFunction;
 using Native.Sdk.Cqp;
 using System.Net.Http.Headers;
@@ -26,6 +26,7 @@ namespace cc.wnapp.whuHelper.Code
         public string message { get; set; }
         public string botQQ { get; set; }
 
+        #region Sudocat（教务系统绑定）
         /// <summary>
         /// 绑定教务系统账号命令处理函数
         /// 命令格式：绑定教务系统 学号|密码
@@ -41,7 +42,7 @@ namespace cc.wnapp.whuHelper.Code
             {
                 try
                 {
-                    if (jwOp.StuExist(StuID) == false)
+                    if (EasOP.StuExist(StuID) == false)
                     {
                         jwxt.LoginSys();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
@@ -56,7 +57,7 @@ namespace cc.wnapp.whuHelper.Code
                     }
                     else
                     {
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【绑定失败】\n当前学号已被QQ：", jwOp.GetStuQQ(StuID), "绑定，不能再次绑定。");
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【绑定失败】\n当前学号已被QQ：", EasOP.GetStuQQ(StuID), "绑定，不能再次绑定。");
                     }
 
                 }
@@ -89,8 +90,10 @@ namespace cc.wnapp.whuHelper.Code
             }
         }
 
-        //课程表模块
 
+        #endregion
+
+        #region zjc （课程表模块）
         public void QueryCourseTable()
         {
             using (jwContext context = new jwContext())
@@ -192,6 +195,22 @@ namespace cc.wnapp.whuHelper.Code
             }
         }
 
+        /// <summary>
+        /// 导入课程提醒
+        /// 命令格式：导入课程
+        /// </summary>
+        public void AddCourseScheduleToDB()
+        {
+            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+            if (personalUser.AddCourseSchedule())
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【导入成功】");
+            }
+        }
+
+        #endregion
+
+        #region cjq/sgm （关注模块）
         //检测是否要注册新的关注点
         public void PrivateAttentionHandler()
         {
@@ -229,18 +248,9 @@ namespace cc.wnapp.whuHelper.Code
             int second = int.Parse(theRest.Split(':')[2]);
             return new DateTime(year, month, day, hour, minute, second);
         }
-        /// <summary>
-        /// 课程提醒
-        /// 命令格式：导入课程
-        /// </summary>
-        public void AddCourseScheduleToDB()
-        {
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.AddCourseSchedule())
-            {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【导入成功】");
-            }
-        }
+        #endregion
+
+        #region lj/zzq （日程提醒模块）
         /// <summary>
         /// 添加个人用户日程
         /// 命令格式：添加日程|2020/6/2 18:30:00(日常生活):吃饭 
@@ -477,7 +487,9 @@ namespace cc.wnapp.whuHelper.Code
                 "查看周日程%时间or类型";
             CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), Command);
         }
+#endregion
 
+        #region zy （Git模块）
         /// <summary>
         /// 绑定Git仓库
         /// 命令格式：绑定仓库#仓库名称#
@@ -731,7 +743,9 @@ namespace cc.wnapp.whuHelper.Code
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个Github账户取消绑定！输入“解绑Github账户#账户名称#”与Github账户取消绑定！");
             }
         }
+        #endregion
 
+        #region sgm （成绩查询模块）
         /// <summary>
         /// 查询成绩处理函数，需要绑定
         /// 命令格式：查询成绩 操作1|操作2|操作3
@@ -739,10 +753,10 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void ComputeScore()
         {
-            string StuID = jwOp.GetStuID(fromQQ);
+            string StuID = EasOP.GetStuID(fromQQ);
             if (StuID != "")
             {
-                List<Score> Slist = jwOp.GetScores(StuID);
+                List<Score> Slist = EasOP.GetScores(StuID);
                 GPAInfo StuGPA;
                 int isIlegal = 0;
                 bool flag = false;
@@ -784,7 +798,7 @@ namespace cc.wnapp.whuHelper.Code
                         }
                         if (msgtemp == "去除非本院")
                         {
-                            Slist = ScoreService.onlyDepartment(Slist, jwOp.GetCollege(StuID));
+                            Slist = ScoreService.onlyDepartment(Slist, EasOP.GetCollege(StuID));
                             isIlegal++;
                         }
                         if (isIlegal == 0)
@@ -807,5 +821,6 @@ namespace cc.wnapp.whuHelper.Code
             }
 
         }
+        #endregion
     }
 }

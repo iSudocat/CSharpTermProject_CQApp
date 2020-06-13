@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using jwxt;
+using Eas;
 using CourseFunction;
 
 namespace Schedule
@@ -19,8 +19,8 @@ namespace Schedule
         
         public bool AddCourseSchedule()  //将课程导入日程
         {
-            string userStuID = jwOp.GetStuID((this.QQ).ToString());
-            List<Course> courses = jwOp.GetCourses(userStuID);
+            string userStuID = EasOP.GetStuID((this.QQ).ToString());
+            List<Course> courses = EasOP.GetCourses(userStuID);
             foreach(Course course in courses)
             {
                 List<List<Object>> temp = CourseTime.ParseClassTime(course);

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Schedule;
 using Tools;
-using jwxt;
+using Eas;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -16,7 +16,7 @@ namespace cc.wnapp.whuHelper.Code
         public string message { get; set; }
         public string botQQ { get; set; }
 
-
+        #region lj/zzq （日程提醒模块）
         /// <summary>
         /// 添加群日程
         /// 命令格式：添加群日程|2020/6/2 18:30:00(日常生活):吃饭 
@@ -239,5 +239,7 @@ namespace cc.wnapp.whuHelper.Code
                 "查看群周日程%时间or类型";
             CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup),Command);
         }
+
+        #endregion
     }
 }

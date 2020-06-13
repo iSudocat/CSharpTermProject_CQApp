@@ -22,10 +22,6 @@ namespace cc.wnapp.whuHelper.Code
             string fromqq = e.FromQQ;
             string fromgroup = e.FromGroup;
 
-            //Sudocat注：群消息处理方法请写在GroupMsgProcess中，并请按下面私聊消息中的写法改成线程方式调用。
-            //msgProcess.GroupAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
-
-
             if (msg.Contains("添加群日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
@@ -102,12 +98,13 @@ namespace cc.wnapp.whuHelper.Code
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
-            if (msg.Contains("绑定教务系统"))
+            if (msg.StartsWith("绑定教务系统"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.BindEasAccount);
                 t.Start();
             }
+
             //查询课程表模块
             if (msg.Contains("课程表"))
             {

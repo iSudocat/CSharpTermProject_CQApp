@@ -7,7 +7,7 @@ using HtmlAgilityPack;
 using RestSharp;
 
 
-namespace jwxt
+namespace Eas
 {
     public class jwUrl
     {

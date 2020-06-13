@@ -26,67 +26,67 @@ namespace cc.wnapp.whuHelper.Code
             //msgProcess.GroupAttentionHandler(fromqq, msg, Convert.ToString(BotQQ.Id));
 
 
-            if (msg.Contains("添加群日程"))
+            if (msg.StartsWith("添加群日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.AddScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("添加群周日程"))
+            if (msg.StartsWith("添加群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.AddWeeklyScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("删除群日程"))
+            if (msg.StartsWith("删除群日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.DelScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("删除群周日程"))
+            if (msg.StartsWith("删除群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.DelWeeklyScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("修改群日程"))
+            if (msg.StartsWith("修改群日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SetScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("修改群周日程"))
+            if (msg.StartsWith("修改群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SetWeeklyScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("查看群日程"))
+            if (msg.StartsWith("查看群日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.GetSchedulesFromDB);
                 t.Start();
             }
-            if (msg.Contains("查看群周日程"))
+            if (msg.StartsWith("查看群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.GetWeeklySchedulesFromDB);
                 t.Start();
             }
-            if (msg.Contains("按序查看群日程"))
+            if (msg.StartsWith("按序查看群日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SortScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("按序查看群周日程"))
+            if (msg.StartsWith("按序查看群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SortWeeklyScheduleFromDB);
                 t.Start();
             }
-            if(msg.Contains("日程模块"))
+            if(msg.StartsWith("日程模块"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.ScheduleCommand);
@@ -130,74 +130,74 @@ namespace cc.wnapp.whuHelper.Code
                 t.Start();
             }
 
-            if (msg.Contains("导入课程"))
+            if (msg.StartsWith("导入课程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.AddCourseScheduleToDB);
                 t.Start();
             }
 
-            if (msg.Contains("添加日程"))
+            if (msg.StartsWith("添加日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.AddScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("添加周日程"))
+            if (msg.StartsWith("添加周日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.AddWeeklyScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("删除日程"))
+            if (msg.StartsWith("删除日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.DelScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("删除周日程"))
+            if (msg.StartsWith("删除周日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.DelWeeklyScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("修改日程"))
+            if (msg.StartsWith("修改日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SetScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("修改周日程"))
+            if (msg.StartsWith("修改周日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SetWeeklyScheduleToDB);
                 t.Start();
             }
-            if (msg.Contains("查看日程"))
+            if (msg.StartsWith("查看日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.GetSchedulesFromDB);
                 t.Start();
             }
-            if (msg.Contains("查看周日程"))
+            if (msg.StartsWith("查看周日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.GetWeeklySchedulesFromDB);
                 t.Start();
             }
-            if (msg.Contains("按序查看日程"))
+            if (msg.StartsWith("按序查看日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SortScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("按序查看周日程"))
+            if (msg.StartsWith("按序查看周日程"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.SortWeeklyScheduleFromDB);
                 t.Start();
             }
-            if (msg.Contains("日程模块"))
+            if (msg.StartsWith("日程模块"))
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.ScheduleCommand);

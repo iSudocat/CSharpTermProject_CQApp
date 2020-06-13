@@ -261,7 +261,7 @@ namespace cc.wnapp.whuHelper.Code
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】");
             }
         }
 
@@ -286,7 +286,7 @@ namespace cc.wnapp.whuHelper.Code
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】");
             }
         }
 
@@ -307,7 +307,7 @@ namespace cc.wnapp.whuHelper.Code
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】");
             }
         }
         /// <summary>
@@ -327,7 +327,7 @@ namespace cc.wnapp.whuHelper.Code
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】");
             }
         }
         /// <summary>
@@ -351,7 +351,7 @@ namespace cc.wnapp.whuHelper.Code
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】");
             }
         }
         /// <summary>
@@ -376,7 +376,7 @@ namespace cc.wnapp.whuHelper.Code
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】");
             }
         }
 
@@ -389,14 +389,20 @@ namespace cc.wnapp.whuHelper.Code
             try
             {
                 PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-                foreach (var schedule in personalUser.GetSchedules())
+                List<Schedule.Schedule> schedules = personalUser.GetSchedules();
+                if (schedules.Count > 0)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule());
+                    foreach (var schedule in schedules)
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【暂无日程】");
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -408,14 +414,20 @@ namespace cc.wnapp.whuHelper.Code
             try
             {
                 PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-                foreach (WeeklySchedule weeklySchedule in personalUser.GetWeeklySchedules())
+                List<WeeklySchedule> weeklySchedules = personalUser.GetWeeklySchedules();
+                if (weeklySchedules.Count > 0)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule());
+                    foreach (WeeklySchedule weeklySchedule in weeklySchedules)
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【暂无周日程】");
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -428,14 +440,20 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var option = textOp.GetRightText(message, "%");
                 PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-                foreach (var schedule in personalUser.SortSchedules(option))
+                List<Schedule.Schedule> Schedules = personalUser.SortSchedules(option);
+                if (Schedules.Count > 0)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule());
+                    foreach (var schedule in Schedules)
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【暂无日程】");
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -448,14 +466,20 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var option = textOp.GetRightText(message, "%");
                 PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-                foreach (WeeklySchedule weeklySchedule in personalUser.SortWeeklySchedules(option))
+                List<WeeklySchedule> weeklySchedules = personalUser.SortWeeklySchedules(option);
+                if (weeklySchedules.Count > 0)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule());
+                    foreach (WeeklySchedule weeklySchedule in weeklySchedules)
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule());
+                    }
                 }
+                else
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【暂无周日程】");
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -466,15 +490,16 @@ namespace cc.wnapp.whuHelper.Code
         {
             PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             String Command = "命令格式：\n" +
-                "添加日程|2020/6/2 18:30:00(日常生活):吃饭\n" +
+                "添加日程|2020/6/2 18:30:00(日常生活):吃饭\n" + 
+                "添加周日程~周数|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "删除日程|日程号\n" +
                 "删除周日程|日程号\n" +
                 "修改日程-日程编号|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "修改周日程~周数-日程编号|2020/6/2 18:30:00(日常生活):吃饭\n" +
                 "查看日程\n" +
                 "查看周日程\n" +
-                "查看日程%时间or类型\n" +
-                "查看周日程%时间or类型";
+                "按序查看日程%时间or类型\n" +
+                "按序查看周日程%时间or类型";
             CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), Command);
         }
 

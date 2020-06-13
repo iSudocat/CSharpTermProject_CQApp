@@ -24,7 +24,6 @@ namespace Eas
 
         public void GetURLs()
         {
-            
             var client = new RestClient(home_url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Host", "bkjw.whu.edu.cn");

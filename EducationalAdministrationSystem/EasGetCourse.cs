@@ -35,7 +35,6 @@ namespace Eas
 
         public void ProcessCourse()
         {
-
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(course_result);
             HtmlNode table = htmlDoc.DocumentNode.SelectSingleNode("//table[@class='table listTable']");

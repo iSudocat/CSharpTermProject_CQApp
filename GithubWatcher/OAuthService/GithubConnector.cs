@@ -13,7 +13,7 @@ namespace GithubWatcher.OAuthService
         private string data = string.Empty;
         private readonly string appID = "a51e3ecd629e790be472";
         private readonly string appSecret = "46d2660f0e8e2732d1393ecf7077380e6b197ee1";//如果信息应用失败，请联系作者更新。
-        private readonly string redirect_url = "http://3fa164385d3d.ngrok.io/api/GithubWatcher";//如果信息应用失败，请联系作者更新。
+        private readonly string redirect_url = "http://f87e077e36bd.ngrok.io/api/GithubWatcher";//如果信息应用失败，请联系作者更新。
         private readonly string scope = "repo";
 
         #region 认证

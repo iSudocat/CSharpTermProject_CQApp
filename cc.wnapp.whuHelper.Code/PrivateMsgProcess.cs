@@ -644,8 +644,6 @@ namespace cc.wnapp.whuHelper.Code
                             }
                         }
 
-
-
                         context.SaveChanges();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已与Github账户" + account + "取消绑定！");
                     }

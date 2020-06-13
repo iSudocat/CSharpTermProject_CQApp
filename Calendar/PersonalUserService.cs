@@ -27,6 +27,7 @@ namespace Schedule
                 for (int i = 0; i < temp.Count; i ++)
                 {
                     DateTime dt = (DateTime)temp[i][0];
+                    dt = dt.AddMinutes(-15);
                     string st = "每周课程提醒";
                     string sc = $"{course.LessonName},{course.Teacher},{course.Time}";
                     int weekSpan = (int)temp[i][1];

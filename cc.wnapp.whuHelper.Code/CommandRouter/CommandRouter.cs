@@ -6,7 +6,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
 {
     public class CommandRouter
     {
-        private List<CommandServiceProvider> CommandList;
+        private List<CommandServiceProvider> CommandList = new List<CommandServiceProvider>();
 
         /// <summary>
         /// 添加指令

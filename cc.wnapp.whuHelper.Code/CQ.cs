@@ -20,6 +20,10 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public static CQLog Log { get; set; }
 
+        /// <summary>
+        /// 指令路由
+        /// </summary>
+        public static CommandRouter.CommandRouter CommandRouter { get; set; }
     }
 
 }

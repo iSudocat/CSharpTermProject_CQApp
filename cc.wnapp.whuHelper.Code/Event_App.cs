@@ -37,6 +37,8 @@ namespace cc.wnapp.whuHelper.Code
             #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
+            CQ.CommandRouter = new CommandRouter.CommandRouter();
+
             Eas.CQ.Api = e.CQApi;
             Eas.CQ.Log = e.CQLog;
             Schedule.CQ.Api = e.CQApi;
@@ -89,6 +91,9 @@ namespace cc.wnapp.whuHelper.Code
             {
                 e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
             }
+
+
+            // CQ.CommandRouter.Add();
         }
     }
 

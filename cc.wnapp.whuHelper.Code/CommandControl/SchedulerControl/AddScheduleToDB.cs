@@ -19,7 +19,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 string str = message.Split(')')[1];
                 var scheduleContent = textOp.GetRightText(str, ":");
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
-                if (User.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
+                if (User.AddSchedule(GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent))
                 {
                     Replay( "【添加成功】");
                 }

@@ -5,6 +5,11 @@
         /// <summary>
         /// 开头匹配
         /// </summary>
+        Any = 0x0,
+
+        /// <summary>
+        /// 开头匹配
+        /// </summary>
         StartsWith = 0x1,
 
         /// <summary>

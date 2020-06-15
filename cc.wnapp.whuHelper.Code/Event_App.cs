@@ -1,24 +1,15 @@
 ﻿using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
-using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using GithubWatcher;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 using Microsoft.Owin.Hosting;
-using System.Net.Http;
+using cc.wnapp.whuHelper.Code.CommandControl.ClassSchedule;
 using cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem;
+using cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher;
+using cc.wnapp.whuHelper.Code.CommandControl.Notification;
 using cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl;
 using cc.wnapp.whuHelper.Code.CommandRouter;
-using FluentScheduler;
 using Schedule;
 using Tools;
 
@@ -130,6 +121,29 @@ namespace cc.wnapp.whuHelper.Code
 
             CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "绑定教务系统", typeof(BindEasAccount));
 
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTable));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询", typeof(QueryFunction));                // 按..查询
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程", typeof(AddCourseScheduleToDB));
+
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepository));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有仓库", typeof(QueryRepository));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询仓库", typeof(QueryRepository));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑仓库", typeof(Unsubscribe));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定Github账户", typeof(ConnectGithub));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定github账户", typeof(ConnectGithub));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定GITHUB账户", typeof(ConnectGithub));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有Github账户", typeof(QueryAuthorisedGithubAccount));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询Github账户", typeof(QueryAuthorisedGithubAccount));
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑Github账户", typeof(DisconnectGithub));
+
+            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(CommandControl.EducationalAdministrationSystem.ComputeScore));
+
+            // TODO 消息监控
+            // MatchType.Any 含义为不管条件均会触发
+            // CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(GroupAttentionHandler));
+            // CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(PrivateAttentionHandler));
+            
         }
     }
 

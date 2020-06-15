@@ -83,12 +83,13 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
 
             if (e != null)
             {
-                if ((MatchType & MatchType.Contains) == MatchType.Contains)
+                if (MatchType == MatchType.Any)
                 {
-                    if (((string) e.Message).Contains(MatchStr)) Flag = true;
-                }
-
-                if ((MatchType & MatchType.StartsWith) == MatchType.StartsWith)
+                    Flag = true;
+                } else if ((MatchType & MatchType.Contains) == MatchType.Contains)
+                {
+                    if (((string)e.Message).Contains(MatchStr)) Flag = true;
+                } else if ((MatchType & MatchType.StartsWith) == MatchType.StartsWith)
                 {
                     if (((string) e.Message).StartsWith(MatchStr)) Flag = true;
                 }

@@ -1,4 +1,5 @@
-﻿using Native.Sdk.Cqp.EventArgs;
+﻿using System.Web.UI.WebControls;
+using Native.Sdk.Cqp.EventArgs;
 
 namespace cc.wnapp.whuHelper.Code.CommandRouter
 {
@@ -37,5 +38,32 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
         /// </summary>
         /// <returns>0:忽略 1:拦截</returns>
         public abstract int Handle();
+
+        public int Replay(string Msg)
+        {
+            if (CQEventArgsArgs == null)
+            {
+                return 0;
+            }
+            else if (CQEventArgsArgs is CQGroupMessageEventArgs)
+            {
+                return CQ.Api.SendGroupMessage(
+                    ((CQGroupMessageEventArgs) CQEventArgsArgs).FromGroup,
+                    "[CQ:at,qq="+ ((CQGroupMessageEventArgs)CQEventArgsArgs).FromQQ + "]"+ Msg
+                ).Id;
+            }
+            else if (CQEventArgsArgs is CQPrivateMessageEventArgs)
+            {
+                return CQ.Api.SendGroupMessage(
+                    ((CQPrivateMessageEventArgs)CQEventArgsArgs).FromQQ,
+                    Msg
+                ).Id;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
     }
 }

@@ -17,30 +17,7 @@ namespace cc.wnapp.whuHelper.Code
         public string botQQ { get; set; }
 
         #region lj/zzq （日程提醒模块）
-        /// <summary>
-        /// 添加群日程
-        /// 命令格式：添加群日程|2020/6/2 18:30:00(日常生活):吃饭 
-        /// </summary>
-        public void AddScheduleToDB()
-        {
-            try
-            {
-                var dateTime = textOp.GetMiddleText(message, "|", "(");
-                var scheduleType = textOp.GetMiddleText(message, "(", ")");
-                string str = message.Split(')')[1];
-                var scheduleContent = textOp.GetRightText(str, ":");
-                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                if (groupUser.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
-                {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】");
-                }
-            }
-            catch (Exception e)
-            {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】");
-            }
-        }
-
+        
         /// <summary>
         /// 添加群日程
         /// 命令格式：添加群周日程~周数|2020/6/2 18:30:00(日常生活):吃饭 

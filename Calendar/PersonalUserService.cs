@@ -9,7 +9,7 @@ using CourseFunction;
 
 namespace Schedule
 {
-    public class PersonalUserService
+    public class PersonalUserService : UserService
     {
         public long QQ { get; set; }
         public PersonalUserService(long qq)
@@ -59,7 +59,7 @@ namespace Schedule
             }
             return true;
         }
-        public bool AddSchedule(DateTime dt,string st,string sc)
+        public override bool AddSchedule(DateTime dt,string st,string sc)
         {
             using (var db = new ScheduleContext())
             {
@@ -71,7 +71,7 @@ namespace Schedule
         }
 
 
-        public bool DelSchedule(string id)
+        public override bool DelSchedule(string id)
         {
             using(var db=new ScheduleContext())
             {
@@ -86,7 +86,7 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public List<Schedule> GetSchedules()
+        public override List<Schedule> GetSchedules()
         {
             using(var db=new ScheduleContext())
             {
@@ -96,7 +96,7 @@ namespace Schedule
                 return schedules.ToList();
             }
         }
-        public List<Schedule> SortSchedules(string option)
+        public override List<Schedule> SortSchedules(string option)
         {
             using(var db=new ScheduleContext())
             {
@@ -119,7 +119,7 @@ namespace Schedule
                 }
             }
         }
-        public bool SetSchedule(string id,DateTime dt,string st,string sc)
+        public override bool SetSchedule(string id,DateTime dt,string st,string sc)
         {
             using(var db=new ScheduleContext())
             {
@@ -136,7 +136,7 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public bool AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
+        public override bool AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
         {
             using (var db = new ScheduleContext())
             {
@@ -146,7 +146,7 @@ namespace Schedule
                 return true;
             }
         }
-        public bool DelWeeklySchedule(string id)
+        public override bool DelWeeklySchedule(string id)
         {
             using (var db = new ScheduleContext())
             {
@@ -161,7 +161,7 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public List<WeeklySchedule> GetWeeklySchedules()
+        public override List<WeeklySchedule> GetWeeklySchedules()
         {
             using (var db = new ScheduleContext())
             {
@@ -171,7 +171,7 @@ namespace Schedule
                 return weeklySchedules.ToList();
             }
         }
-        public List<WeeklySchedule> SortWeeklySchedules(string option)
+        public override List<WeeklySchedule> SortWeeklySchedules(string option)
         {
             using (var db = new ScheduleContext())
             {
@@ -194,7 +194,7 @@ namespace Schedule
                 }
             }
         }
-        public bool SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
+        public override bool SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
         {
             using (var db = new ScheduleContext())
             {

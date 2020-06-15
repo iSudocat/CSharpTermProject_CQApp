@@ -9,7 +9,7 @@ using static Schedule.PersonalUserService;
 
 namespace Schedule
 {
-    public class GroupUserService
+    public class GroupUserService : UserService
     {
         public long GroupQQ { get; set; }//群组QQ
         public long QQ { get; set; }//群成员QQ,也就是正在操作的那个人
@@ -29,7 +29,7 @@ namespace Schedule
             else { return false; }
         }
         //增加群日程需要权限
-        public Boolean AddSchedule(DateTime dt, string st, string sc)
+        public override Boolean AddSchedule(DateTime dt, string st, string sc)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
@@ -41,7 +41,7 @@ namespace Schedule
             }
         }
         //删除群日程需要权限
-        public Boolean DelSchedule(string id)
+        public override Boolean DelSchedule(string id)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
@@ -58,7 +58,7 @@ namespace Schedule
             }
         }
         //查看群日程无需权限
-        public List<Schedule> GetSchedules()
+        public override List<Schedule> GetSchedules()
         {
             using (var db = new ScheduleContext())
             {
@@ -69,7 +69,7 @@ namespace Schedule
             }
         }
         //排序查看群日程无需权限
-        public List<Schedule> SortSchedules(string option)
+        public override List<Schedule> SortSchedules(string option)
         {
             using (var db = new ScheduleContext())
             {
@@ -93,7 +93,7 @@ namespace Schedule
             }
         }
         //修改群日程需要权限
-        public Boolean SetSchedule(string id, DateTime dt, string st, string sc)
+        public override Boolean SetSchedule(string id, DateTime dt, string st, string sc)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
@@ -111,7 +111,7 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public Boolean AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
+        public override Boolean AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
@@ -122,7 +122,7 @@ namespace Schedule
                 return true;
             }
         }
-        public Boolean DelWeeklySchedule(string id)
+        public override Boolean DelWeeklySchedule(string id)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
@@ -138,7 +138,7 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public List<WeeklySchedule> GetWeeklySchedules()
+        public override List<WeeklySchedule> GetWeeklySchedules()
         {
             using (var db = new ScheduleContext())
             {
@@ -148,7 +148,7 @@ namespace Schedule
                 return weeklySchedules.ToList();
             }
         }
-        public List<WeeklySchedule> SortWeeklySchedules(string option)
+        public override List<WeeklySchedule> SortWeeklySchedules(string option)
         {
             using (var db = new ScheduleContext())
             {
@@ -171,7 +171,7 @@ namespace Schedule
                 }
             }
         }
-        public Boolean SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
+        public override Boolean SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())

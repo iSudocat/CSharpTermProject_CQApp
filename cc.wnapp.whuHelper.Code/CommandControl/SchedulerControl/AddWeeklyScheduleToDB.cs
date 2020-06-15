@@ -21,7 +21,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 string str = message.Split(')')[1];
                 var scheduleContent = textOp.GetRightText(str, ":");
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
-                if (User.AddWeeklySchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                if (User.AddWeeklySchedule(GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
                 {
                     Replay("【添加成功】");
                 }

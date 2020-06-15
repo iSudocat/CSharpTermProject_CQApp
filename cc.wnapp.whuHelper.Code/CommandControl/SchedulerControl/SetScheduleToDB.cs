@@ -17,7 +17,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
             var scheduleType = textOp.GetMiddleText(message, "(", ")");
             var scheduleContent = textOp.GetRightText(message, ":");
             UserService User = UserService.GetFromEvent(CQEventArgsArgs);
-            if (User.SetSchedule(scheduleID, PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
+            if (User.SetSchedule(scheduleID, GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent))
             {
                 Replay("【修改成功】");
             }

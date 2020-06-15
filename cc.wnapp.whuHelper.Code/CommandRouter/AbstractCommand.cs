@@ -21,7 +21,10 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
         /// </summary>
         public CQEventEventArgs CQEventArgsArgs { get; set; }
 
-
+        /// <summary>
+        /// 指令的执行逻辑
+        /// </summary>
+        /// <returns>0:忽略 1:拦截</returns>
         public abstract int Handle();
     }
 }

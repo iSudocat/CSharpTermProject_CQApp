@@ -20,12 +20,14 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             CommandList.Add(new CommandServiceProvider(EventType, MatchType, MatchStr, ACommand));
         }
 
-        public void Handle(object sender, CQEventEventArgs e)
+        public int Handle(object sender, CQEventEventArgs e)
         {
             foreach (CommandServiceProvider ACommand in CommandList)
             {
-                ACommand.Handle(sender, e);
+                if (ACommand.Handle(sender, e) == 1) return 1;
             }
+
+            return 0;
         }
 
     }

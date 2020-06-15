@@ -4,31 +4,60 @@ using Native.Sdk.Cqp.EventArgs;
 
 namespace cc.wnapp.whuHelper.Code.CommandRouter
 {
+    /// <summary>
+    /// 指令路由判断逻辑
+    /// </summary>
     public class CommandServiceProvider
     {
+        /// <summary>
+        /// 事件类型
+        /// </summary>
         public EventType EventType {get; private set; }
-        public MatchType MatchType {get; private set; }
-        public string MatchStr {get; private set; }
-        public Type ServiceProvider { get; private set; }
 
-        public CommandServiceProvider(EventType EventType, MatchType MatchType, string MatchStr, Type ServiceProvider)
+        /// <summary>
+        /// 匹配模式
+        /// </summary>
+        public MatchType MatchType {get; private set; }
+
+        /// <summary>
+        /// 匹配字符串
+        /// </summary>
+        public string MatchStr {get; private set; }
+
+        /// <summary>
+        /// 指令处理类
+        /// </summary>
+        public Type CommandProvider { get; private set; }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="EventType">事件类型</param>
+        /// <param name="MatchType">匹配模式</param>
+        /// <param name="MatchStr">匹配字符串</param>
+        /// <param name="CommandProvider">处理类</param>
+        public CommandServiceProvider(EventType EventType, MatchType MatchType, string MatchStr, Type CommandProvider)
         {
-            if (ServiceProvider.IsSubclassOf(typeof(AbstractCommand)))
+            if (CommandProvider.IsSubclassOf(typeof(AbstractCommand)))
             {
                 this.EventType = EventType;
                 this.MatchType = MatchType;
                 this.MatchStr = MatchStr;
-                this.ServiceProvider = ServiceProvider;
+                this.CommandProvider = CommandProvider;
             }
             else
             {
-                throw new ArgumentException("ServiceProvier must be the type of AbstractCommand.");
+                throw new ArgumentException("CommandProvider must be the type of AbstractCommand.");
             }
         }
 
-        // CQGroupMessageEventArgs
-        // CQPrivateMessageEventArgs
 
+        /// <summary>
+        /// 路由判断
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns>0:忽略 1:拦截</returns>
         public int Handle(object sender, CQEventEventArgs oe)
         {
             bool Flag = false;
@@ -71,7 +100,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
 
             if (Flag)
             {
-                AbstractCommand Command = (AbstractCommand)System.Activator.CreateInstance(ServiceProvider);
+                AbstractCommand Command = (AbstractCommand)System.Activator.CreateInstance(CommandProvider);
 
                 Command.EventType = EventType;
                 Command.ActualEventType = ActualEventType;

@@ -4,6 +4,9 @@ using Native.Sdk.Cqp.EventArgs;
 
 namespace cc.wnapp.whuHelper.Code.CommandRouter
 {
+    /// <summary>
+    /// 指令路由器
+    /// </summary>
     public class CommandRouter
     {
         private List<CommandServiceProvider> CommandList = new List<CommandServiceProvider>();
@@ -20,6 +23,12 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             CommandList.Add(new CommandServiceProvider(EventType, MatchType, MatchStr, ACommand));
         }
 
+        /// <summary>
+        /// 路由处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public int Handle(object sender, CQEventEventArgs e)
         {
             foreach (CommandServiceProvider ACommand in CommandList)

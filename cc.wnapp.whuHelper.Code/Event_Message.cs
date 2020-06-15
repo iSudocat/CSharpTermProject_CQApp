@@ -28,6 +28,7 @@ namespace cc.wnapp.whuHelper.Code
             // 指令路由
             CQ.CommandRouter.Handle(sender, e);
 
+            return;
 
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;

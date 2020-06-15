@@ -39,11 +39,11 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             {
                 ActualEventType = EventType;
             }
-            else if (oe.GetType().IsSubclassOf(typeof(CQGroupMessageEventArgs)))
+            else if (oe is CQGroupMessageEventArgs)
             {
                 ActualEventType = EventType.GroupMessage;
             }
-            else if (oe.GetType().IsSubclassOf(typeof(CQPrivateMessageEventArgs)))
+            else if (oe is CQPrivateMessageEventArgs)
             {
                 ActualEventType = EventType.PrivateMessage;
             }

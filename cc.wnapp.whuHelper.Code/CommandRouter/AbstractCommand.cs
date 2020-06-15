@@ -22,9 +22,6 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
         public CQEventEventArgs CQEventArgsArgs { get; set; }
 
 
-        public int Handle()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract int Handle();
     }
 }

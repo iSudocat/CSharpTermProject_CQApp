@@ -9,28 +9,28 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
     /// 按序查看群周日程
     /// 命令格式：按序查看群周日程%时间or类型
     /// </summary>
-    public class SortWeeklyScheduleFromDB : GroupMsgEventControl
+    public class SortWeeklyScheduleFromDB : MsgEventControl
     {
         public override int HandleImpl()
         {
             try
             {
                 var option = textOp.GetRightText(message, "%");
-                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                List<WeeklySchedule> weekSchedules = groupUser.SortWeeklySchedules(option);
+                UserService User = UserService.GetFromEvent(CQEventArgsArgs);
+                List<WeeklySchedule> weekSchedules = User.SortWeeklySchedules(option);
                 if (weekSchedules.Count > 0)
                 {
                     foreach (var weeklySchedule in weekSchedules)
                     {
-                        CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), weeklySchedule.DisplaySchedule());
+                        Replay(weeklySchedule.DisplaySchedule());
                     }
                 }
                 else
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【暂无群周日程】");
+                    Replay("【暂无周日程】");
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】");
+                Replay("【格式有误，查看失败】");
             }
             return 0;
         }

@@ -8,22 +8,22 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
     /// 删除群周日程
     /// 命令格式：删除群周日程|日程号
     /// </summary>
-    public class DelWeeklyScheduleFromDB : GroupMsgEventControl
+    public class DelWeeklyScheduleFromDB : MsgEventControl
     {
         public override int HandleImpl()
         {
             try
             {
                 var scheduleID = textOp.GetRightText(message, "|");
-                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                if (groupUser.DelWeeklySchedule(scheduleID))
+                UserService User = UserService.GetFromEvent(CQEventArgsArgs);
+                if (User.DelWeeklySchedule(scheduleID))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【删除成功】");
+                    Replay("【删除成功】");
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，删除失败】");
+                Replay("【格式有误，删除失败】");
             }
             return 0;
         }

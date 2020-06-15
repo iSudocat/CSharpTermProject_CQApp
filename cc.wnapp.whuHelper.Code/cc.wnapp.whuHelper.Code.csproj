@@ -154,6 +154,7 @@
   <ItemGroup>
     <Compile Include="AttenttionHandler.cs" />
     <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
+    <Compile Include="CommandControl\MsgEventControl.cs" />
     <Compile Include="CommandControl\PrivateMsgEventControl.cs" />
     <Compile Include="CommandControl\GroupMsgEventControl.cs" />
     <Compile Include="CommandControl\SchedulerControl\AddScheduleToDB.cs" />

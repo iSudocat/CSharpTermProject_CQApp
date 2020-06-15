@@ -8,7 +8,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
     /// 添加群日程
     /// 命令格式：添加群日程|2020/6/2 18:30:00(日常生活):吃饭 
     /// </summary>
-    public class AddScheduleToDB : GroupMsgEventControl
+    public class AddScheduleToDB : MsgEventControl
     {
         public override int HandleImpl()
         {
@@ -18,15 +18,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 var scheduleType = textOp.GetMiddleText(message, "(", ")");
                 string str = message.Split(')')[1];
                 var scheduleContent = textOp.GetRightText(str, ":");
-                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                if (groupUser.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
+                UserService User = UserService.GetFromEvent(CQEventArgsArgs);
+                if (User.AddSchedule(PrivateMsgProcess.StrToDateTime(dateTime), scheduleType, scheduleContent))
                 {
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【添加成功】");
+                    Replay( "【添加成功】");
                 }
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，添加失败】");
+                Replay("【格式有误，添加失败】");
             }
 
             return 0;

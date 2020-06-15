@@ -1,5 +1,4 @@
-﻿using System.Web.UI.WebControls;
-using Native.Sdk.Cqp.EventArgs;
+﻿using Native.Sdk.Cqp.EventArgs;
 
 namespace cc.wnapp.whuHelper.Code.CommandRouter
 {
@@ -49,7 +48,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             {
                 return CQ.Api.SendGroupMessage(
                     ((CQGroupMessageEventArgs) CQEventArgsArgs).FromGroup,
-                    "[CQ:at,qq="+ ((CQGroupMessageEventArgs)CQEventArgsArgs).FromQQ + "]"+ Msg
+                    "[CQ:at,qq="+ ((CQGroupMessageEventArgs)CQEventArgsArgs).FromQQ + "] "+ Msg
                 ).Id;
             }
             else if (CQEventArgsArgs is CQPrivateMessageEventArgs)

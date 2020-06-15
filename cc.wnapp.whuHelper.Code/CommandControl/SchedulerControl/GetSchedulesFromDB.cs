@@ -8,27 +8,27 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
     /// 查看群日程
     /// 命令格式：查看群日程
     /// </summary>
-    public class GetSchedulesFromDB : GroupMsgEventControl
+    public class GetSchedulesFromDB : MsgEventControl
     {
         public override int HandleImpl()
         {
             try
             {
-                GroupUserService groupUser = new GroupUserService(long.Parse(fromGroup), long.Parse(fromQQ));
-                List<Schedule.Schedule> schedules = groupUser.GetSchedules();
+                UserService User = UserService.GetFromEvent(CQEventArgsArgs);
+                List<Schedule.Schedule> schedules = User.GetSchedules();
                 if (schedules.Count > 0)
                 {
                     foreach (var schedule in schedules)
                     {
-                        CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), schedule.DisplaySchedule());
+                        Replay(schedule.DisplaySchedule());
                     }
                 }
                 else
-                    CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【暂无群日程】");
+                    Replay("【暂无日程】");
             }
             catch (Exception e)
             {
-                CQ.Api.SendGroupMessage(Convert.ToInt64(fromGroup), "【格式有误，查看失败】");
+                Replay("【格式有误，查看失败】");
             }
             return 0;
         }

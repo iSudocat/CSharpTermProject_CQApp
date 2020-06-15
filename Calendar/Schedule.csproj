@@ -91,6 +91,7 @@
     <Compile Include="PersonalUserService.cs" />
     <Compile Include="ScheduleInterface.cs" />
     <Compile Include="ScheduleThread.cs" />
+    <Compile Include="UserService.cs" />
     <Compile Include="WeeklySchedule.cs" />
   </ItemGroup>
   <ItemGroup>

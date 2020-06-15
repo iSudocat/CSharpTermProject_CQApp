@@ -15,6 +15,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.Owin.Hosting;
 using System.Net.Http;
+using cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl;
+using cc.wnapp.whuHelper.Code.CommandRouter;
 using FluentScheduler;
 using Schedule;
 using Tools;
@@ -37,6 +39,8 @@ namespace cc.wnapp.whuHelper.Code
             #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
+            CQ.CommandRouter = new CommandRouter.CommandRouter();
+
             Eas.CQ.Api = e.CQApi;
             Eas.CQ.Log = e.CQLog;
             Schedule.CQ.Api = e.CQApi;
@@ -83,12 +87,16 @@ namespace cc.wnapp.whuHelper.Code
                 PsrTh.Start();
                 #endregion
 
+                // 各种指令注册
+                CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
+
                 e.CQLog.InfoSuccess("初始化", "插件初始化成功。");
             }
             catch (Exception ex)
             {
                 e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
             }
+
         }
     }
 

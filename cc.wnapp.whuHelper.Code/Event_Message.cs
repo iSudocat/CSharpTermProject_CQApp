@@ -17,17 +17,15 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
+            // 指令路由
+            CQ.CommandRouter.Handle(sender, e);
+
+
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
             string fromgroup = e.FromGroup;
 
-            if (msg.StartsWith("添加群日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.AddScheduleToDB);
-                t.Start();
-            }
             if (msg.StartsWith("添加群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
@@ -95,6 +93,10 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
+            // 指令路由
+            CQ.CommandRouter.Handle(sender, e);
+
+
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;

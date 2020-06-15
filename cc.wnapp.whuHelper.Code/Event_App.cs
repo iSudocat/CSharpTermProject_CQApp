@@ -99,9 +99,12 @@ namespace cc.wnapp.whuHelper.Code
 
         }
 
+        /// <summary>
+        /// 指令注册
+        /// </summary>
         private void RegisterCommand()
         {
-            // 各种指令注册
+            
             CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
             CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群周日程", typeof(AddWeeklyScheduleToDB));
             CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群日程", typeof(DelScheduleFromDB));
@@ -112,8 +115,18 @@ namespace cc.wnapp.whuHelper.Code
             CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "查看群周日程", typeof(GetWeeklySchedulesFromDB));
             CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "按序查看群日程", typeof(SortScheduleFromDB));
             CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "按序查看群周日程", typeof(SortWeeklyScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "日程模块", typeof(ScheduleCommand));
 
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "添加日程", typeof(AddScheduleToDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "添加周日程", typeof(AddWeeklyScheduleToDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "删除日程", typeof(DelScheduleFromDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "删除周日程", typeof(DelWeeklyScheduleFromDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "修改日程", typeof(SetScheduleToDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "修改周日程", typeof(SetWeeklyScheduleToDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "查看日程", typeof(GetSchedulesFromDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "查看周日程", typeof(GetWeeklySchedulesFromDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "按序查看日程", typeof(SortScheduleFromDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "按序查看周日程", typeof(SortWeeklyScheduleFromDB));
+            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "日程模块", typeof(ScheduleCommand));
 
             CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "绑定教务系统", typeof(BindEasAccount));
 

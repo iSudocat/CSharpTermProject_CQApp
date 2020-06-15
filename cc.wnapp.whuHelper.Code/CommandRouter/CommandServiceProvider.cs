@@ -29,7 +29,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
         // CQGroupMessageEventArgs
         // CQPrivateMessageEventArgs
 
-        public void Handle(object sender, CQEventEventArgs oe)
+        public int Handle(object sender, CQEventEventArgs oe)
         {
             bool Flag = false;
             EventType ActualEventType;
@@ -47,9 +47,9 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             {
                 ActualEventType = EventType.PrivateMessage;
             }
-            else return;
+            else return 0;
 
-            if ((EventType & ActualEventType) != ActualEventType) return;
+            if ((EventType & ActualEventType) != ActualEventType) return 0;
 
 
             if (e != null)
@@ -77,8 +77,10 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
                 Command.ActualEventType = ActualEventType;
                 Command.MatchType = MatchType;
                 Command.CQEventArgsArgs = oe;
-                Command.Handle();
+                return Command.Handle();
             }
+
+            return 0;
         }
 
     }

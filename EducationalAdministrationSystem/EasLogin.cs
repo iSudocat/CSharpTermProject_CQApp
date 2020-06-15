@@ -207,7 +207,6 @@ namespace Eas
 
         public byte[] GetCaptchaImg()
         {
-
             var client = new RestClient(urls.captcha_url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Host", "bkjw.whu.edu.cn");

@@ -24,7 +24,7 @@ namespace Native.Core
 			unityContainer.RegisterType<IGroupMessage, event_Message>("群消息处理");
 			unityContainer.RegisterType<IPrivateMessage, event_Message>("私聊消息处理");
 			unityContainer.RegisterType<ICQStartup, event_CQStartup>("酷Q启动事件");
-			unityContainer.RegisterType<IAppEnable, cc.wnapp.whuHelper.Code.event_AppStartup>("应用已被启用");
+			unityContainer.RegisterType<IAppEnable, event_AppStartup>("应用已被启用");
 		}
 	}
 }

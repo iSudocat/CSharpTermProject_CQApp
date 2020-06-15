@@ -20,7 +20,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             CommandList.Add(new CommandServiceProvider(EventType, MatchType, MatchStr, ACommand));
         }
 
-        public void Handle(object sender, CQGroupMessageEventArgs e)
+        public void Handle(object sender, CQEventEventArgs e)
         {
             foreach (CommandServiceProvider ACommand in CommandList)
             {
@@ -28,12 +28,5 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             }
         }
 
-        public void Handle(object sender, CQPrivateMessageEventArgs e)
-        {
-            foreach (CommandServiceProvider ACommand in CommandList)
-            {
-                ACommand.Handle(sender, e);
-            }
-        }
     }
 }

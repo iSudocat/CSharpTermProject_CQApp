@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Native.Sdk.Cqp.EventArgs;
 
 namespace cc.wnapp.whuHelper.Code.CommandRouter
@@ -12,60 +13,73 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
 
         public CommandServiceProvider(EventType EventType, MatchType MatchType, string MatchStr, Type ServiceProvider)
         {
-            this.EventType = EventType;
-            this.MatchType = MatchType;
-            this.MatchStr = MatchStr;
-            this.ServiceProvider = ServiceProvider;
+            if (ServiceProvider.IsSubclassOf(typeof(AbstractCommand)))
+            {
+                this.EventType = EventType;
+                this.MatchType = MatchType;
+                this.MatchStr = MatchStr;
+                this.ServiceProvider = ServiceProvider;
+            }
+            else
+            {
+                throw new ArgumentException("ServiceProvier must be the type of AbstractCommand.");
+            }
         }
 
-        public void Handle(object sender, CQGroupMessageEventArgs e)
+        // CQGroupMessageEventArgs
+        // CQPrivateMessageEventArgs
+
+        public void Handle(object sender, CQEventEventArgs oe)
         {
             bool Flag = false;
-            if ((EventType & EventType.GroupMessage) != EventType.GroupMessage) return;
-            if ((MatchType & MatchType.Contains) == MatchType.Contains)
-            {
-                if (((string) e.Message).Contains(MatchStr)) Flag = true ;
-            }
+            EventType ActualEventType;
+            dynamic e = oe;
 
-            if ((MatchType & MatchType.StartsWith) == MatchType.StartsWith)
+            if (oe == null)
             {
-                if (((string)e.Message).StartsWith(MatchStr)) Flag = true;
+                ActualEventType = EventType;
+            }
+            else if (oe.GetType().IsSubclassOf(typeof(CQGroupMessageEventArgs)))
+            {
+                ActualEventType = EventType.GroupMessage;
+            }
+            else if (oe.GetType().IsSubclassOf(typeof(CQPrivateMessageEventArgs)))
+            {
+                ActualEventType = EventType.PrivateMessage;
+            }
+            else return;
+
+            if ((EventType & ActualEventType) != ActualEventType) return;
+
+
+            if (e != null)
+            {
+                if ((MatchType & MatchType.Contains) == MatchType.Contains)
+                {
+                    if (((string) e.Message).Contains(MatchStr)) Flag = true;
+                }
+
+                if ((MatchType & MatchType.StartsWith) == MatchType.StartsWith)
+                {
+                    if (((string) e.Message).StartsWith(MatchStr)) Flag = true;
+                }
+            }
+            else
+            {
+                Flag = true;
             }
 
             if (Flag)
             {
-                AbstractCommand Command = (AbstractCommand)ServiceProvider.Assembly.CreateInstance(ServiceProvider.Assembly.FullName);
+                AbstractCommand Command = (AbstractCommand)System.Activator.CreateInstance(ServiceProvider);
+
                 Command.EventType = EventType;
-                Command.ActualEventType = EventType.GroupMessage;
+                Command.ActualEventType = ActualEventType;
                 Command.MatchType = MatchType;
-                Command.CQEventArgsArgs = e;
+                Command.CQEventArgsArgs = oe;
                 Command.Handle();
             }
         }
 
-        public void Handle(object sender, CQPrivateMessageEventArgs e)
-        {
-            bool Flag = false;
-            if ((EventType & EventType.PrivateMessage) != EventType.PrivateMessage) return;
-            if ((MatchType & MatchType.Contains) == MatchType.Contains)
-            {
-                if (((string)e.Message).Contains(MatchStr)) Flag = true;
-            }
-
-            if ((MatchType & MatchType.StartsWith) == MatchType.StartsWith)
-            {
-                if (((string)e.Message).StartsWith(MatchStr)) Flag = true;
-            }
-
-            if (Flag)
-            {
-                AbstractCommand Command = (AbstractCommand)ServiceProvider.Assembly.CreateInstance(ServiceProvider.Assembly.FullName);
-                Command.EventType = EventType;
-                Command.ActualEventType = EventType.PrivateMessage;
-                Command.MatchType = MatchType;
-                Command.CQEventArgsArgs = e;
-                Command.Handle();
-            }
-        }
     }
 }

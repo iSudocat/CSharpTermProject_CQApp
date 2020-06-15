@@ -1,4 +1,5 @@
-﻿using cc.wnapp.whuHelper.Code.CommandRouter;
+﻿using System;
+using cc.wnapp.whuHelper.Code.CommandRouter;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Model;
 
@@ -9,11 +10,11 @@ namespace cc.wnapp.whuHelper.Code.CommandControl
         public string fromGroup { get; set; }
         public string fromQQ { get; set; }
         public string message { get; set; }
-        public QQ botQQ { get; set; }
+        public string botQQ { get; set; }
 
         public override int Handle()
         {
-            botQQ = CQ.Api.GetLoginQQ();
+            botQQ = Convert.ToString(CQ.Api.GetLoginQQ().Id);
             message = ((CQGroupMessageEventArgs)CQEventArgsArgs).Message;
             fromQQ = ((CQGroupMessageEventArgs)CQEventArgsArgs).FromQQ;
             fromGroup = ((CQGroupMessageEventArgs)CQEventArgsArgs).FromGroup;

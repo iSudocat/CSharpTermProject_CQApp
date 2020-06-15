@@ -153,9 +153,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttenttionHandler.cs" />
+    <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
     <Compile Include="CommandControl\PrivateMsgEventControl.cs" />
     <Compile Include="CommandControl\GroupMsgEventControl.cs" />
     <Compile Include="CommandControl\SchedulerControl\AddScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\AddWeeklyScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\DelScheduleFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\DelWeeklyScheduleFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\GetSchedulesFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\GetWeeklySchedulesFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\ScheduleCommand.cs" />
+    <Compile Include="CommandControl\SchedulerControl\SetScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\SetWeeklyScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\SortScheduleFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\SortWeeklyScheduleFromDB.cs" />
     <Compile Include="CommandRouter\CommandRouter.cs" />
     <Compile Include="CommandRouter\CommandServiceProvider.cs" />
     <Compile Include="CommandRouter\EventType.cs" />
@@ -165,7 +176,6 @@
     <Compile Include="code.cs" />
     <Compile Include="Event_App.cs" />
     <Compile Include="Event_Message.cs" />
-    <Compile Include="GroupMsgProcess.cs" />
     <Compile Include="InitFiles.cs" />
     <Compile Include="PrivateMsgProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

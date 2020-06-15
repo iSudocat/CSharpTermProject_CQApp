@@ -19,74 +19,6 @@ namespace cc.wnapp.whuHelper.Code
         {
             // 指令路由
             CQ.CommandRouter.Handle(sender, e);
-
-
-            QQ BotQQ = CQ.Api.GetLoginQQ();
-            string msg = e.Message;
-            string fromqq = e.FromQQ;
-            string fromgroup = e.FromGroup;
-
-            if (msg.StartsWith("添加群周日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.AddWeeklyScheduleToDB);
-                t.Start();
-            }
-            if (msg.StartsWith("删除群日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.DelScheduleFromDB);
-                t.Start();
-            }
-            if (msg.StartsWith("删除群周日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.DelWeeklyScheduleFromDB);
-                t.Start();
-            }
-            if (msg.StartsWith("修改群日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.SetScheduleToDB);
-                t.Start();
-            }
-            if (msg.StartsWith("修改群周日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.SetWeeklyScheduleToDB);
-                t.Start();
-            }
-            if (msg.StartsWith("查看群日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.GetSchedulesFromDB);
-                t.Start();
-            }
-            if (msg.StartsWith("查看群周日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.GetWeeklySchedulesFromDB);
-                t.Start();
-            }
-            if (msg.StartsWith("按序查看群日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.SortScheduleFromDB);
-                t.Start();
-            }
-            if (msg.StartsWith("按序查看群周日程"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.SortWeeklyScheduleFromDB);
-                t.Start();
-            }
-            if(msg.StartsWith("日程模块"))
-            {
-                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.ScheduleCommand);
-                t.Start();
-            }
-
         }
         /// <summary>
         /// 私聊消息处理
@@ -100,12 +32,6 @@ namespace cc.wnapp.whuHelper.Code
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string msg = e.Message;
             string fromqq = e.FromQQ;
-            if (msg.StartsWith("绑定教务系统"))
-            {
-                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.BindEasAccount);
-                t.Start();
-            }
 
             //查询课程表模块
             if (msg.Contains("课程表"))

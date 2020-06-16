@@ -17,6 +17,10 @@ using System.Text.RegularExpressions;
 using GithubWatcher.OAuthService;
 using System.Data.Entity;
 using ComputeScore;
+using Native.Sdk.Cqp.Model;
+using System.IO;
+using AttentionSpace;
+using System.Data.Entity.Infrastructure;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -211,32 +215,158 @@ namespace cc.wnapp.whuHelper.Code
         #endregion
 
         #region cjq/sgm （关注模块）
-        //检测是否要注册新的关注点
-        public void PrivateAttentionHandler()
+        /// <summary>
+        /// 添加关注点
+        /// 命令格式：添加关注 hhhhh 1525469122
+        /// </summary>
+        public void AddAttention(CQPrivateMessageEventArgs eventArgs)
         {
-            //如果包含“取消关注”、“删除关注”...之类的词语，
-            //      解析出群号和消息内容/只有群号/只有消息内容
-            //      启动AttentionService的Remove线程
+            try
+            {
+                String[] temp = message.Split(' ');
+                String AttentionPoint = temp[1];
+                String GroupNum = temp[2];
+                //添加前先检测：1.群号是否为一串数字；2.该用户和本机器人是否都在群中；
+                //如果不是就抛出异常
+                GroupMemberInfoCollection groupMemberInfoCollection = eventArgs.CQApi.GetGroupMemberList(Convert.ToInt64(GroupNum));
+                int flag = 0;
+                foreach (GroupMemberInfo groupMemberInfo in groupMemberInfoCollection)
+                {
+                    if (groupMemberInfo.QQ.Id.Equals(Convert.ToInt64(fromQQ)))
+                    {
+                        flag += 1;
+                    }
+                    else if (groupMemberInfo.QQ.Id.Equals(Convert.ToInt64(botQQ)))
+                    {
+                        flag += 2;
+                    }
+                }
+                if (flag < 3)
+                    throw new InvalidDataException();
+                AttentionService attentionService = new AttentionService();
+                attentionService.Add(fromQQ, AttentionPoint, GroupNum);
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】添加关注成功！");
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】添加关注的正确格式是 “添加关注 考试（内容） 1525468122（群号）");
+            }
+            catch (DbUpdateException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】数据库更新异常");
+            }
+            catch (FormatException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】群号中只能包含数字");
+            }
+            catch (InvalidDataException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】用户或机器人不在群聊中");
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】无效QQ群号");
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】其他异常\n" + e);
+            }
+        }
+        /// <summary>
+        /// 删除关注点
+        /// 命令格式：删除关注 陈家棋 1525469122
+        /// </summary>
+        public void RemoveAttention()
+        {
 
-            //如果包含“关注”、“监听”、“订阅”...的词语，
-            //      解析出关注的语句和关注的群
-            //      启动AttentionService的Add线程
+            try
+            {
+                String[] temp = message.Split(' ');
+                String AttentionPoint = temp[1];
+                String GroupNum = temp[2];
+                AttentionService attentionService = new AttentionService();
+                attentionService.Remove(fromQQ, AttentionPoint, GroupNum);
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "删除关注成功！");
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "无法删除：没有关注或者不是该群！");
+            }
+        }
 
-            //如果包含 “更改关注”、“更新关注”....的词语，
-            //      解析出两个变更的群号/变更的消息内容
-            //      启动AttentionService的Update线程
+        /// <summary>
+        /// 删除关注点
+        /// 命令格式：更新关注 考试时间 1525469122
+        /// </summary>
+        public void UpdateAttention()
+        {
 
-            //如果包含“查看所有监听”/“查看所有关注”的词语，
-            //      如果其中有群号，则将群号解析出来并传入线程
-            //      启动AttentionService的Get线程
+            try
+            {
+                String[] temp = message.Split(' ');
+                String OldAttentionPoint = temp[1];
+                String NewAttentionPoint = temp[2];
+                String GroupNum = temp[3];
+                AttentionService attentionService = new AttentionService();
+                if (!attentionService.Update(fromQQ, OldAttentionPoint, NewAttentionPoint, GroupNum))
+                {
+                    throw new Exception();
+                }
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "更新关注成功！");
+            }
+            catch (DbUpdateException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【无法更新】没有关注或者不是该群！");
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【无法更新】请按照正确的格式输入\n更新关注 旧关注点 新关注点 群号");
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【无法更新】数据库中没有此项");
+            }
+        }
+
+        /// <summary>
+        /// 查询所有关注点
+        /// 命令格式：查询所有关注点
+        /// </summary>
+        public void GetAllAttention()
+        {
+            try
+            {
+                AttentionService attentionService = new AttentionService();
+                List<Attention> attList = attentionService.QueryAll();
+                String attListInMessage = "";
+                foreach (Attention att in attList)
+                {
+                    attListInMessage += "关注点：" + att.AttentionPoint + "\t群号：" + att.Group + "\n";
+                }
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), attListInMessage);
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【查询失败】\n" + e);
+            }
 
         }
 
-        //检测消息中是否有关注点
-        public void GroupAttentionHandler()
+        /// <summary>
+        /// 查看关注点的命令帮助
+        /// 命令格式：关注点帮助
+        /// </summary>
+        public void AttentionHelp()
         {
-            //创建Attention线程Listen,将三个参数传入
+            String helpMsg = "关注相关的指令格式：\n";
+            helpMsg += "【添加关注】添加关注 关注内容 群号\n";
+            helpMsg += "【删除关注】删除关注 关注内容 群号\n";
+            helpMsg += "【更新关注】更新关注 旧关注点 新关注点 群号\n";
+            helpMsg += "【查看所有关注点】查询关注\n";
+            helpMsg += "【查看帮助】关注点帮助";
+            CQ.Api.SendPrivateMessage(Convert.ToInt32(fromQQ), helpMsg);
         }
+
         public static DateTime StrToDateTime(string dateTime)
         {
             int year = int.Parse(dateTime.Split('/')[0]);

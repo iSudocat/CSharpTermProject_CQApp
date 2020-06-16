@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Schedule;
 using Tools;
 using Eas;
+using AttentionSpace;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -16,8 +17,24 @@ namespace cc.wnapp.whuHelper.Code
         public string message { get; set; }
         public string botQQ { get; set; }
 
+        #region cjq/zgm（关注点监听板块）
+        /// <summary>
+        /// 向订阅者发送提醒
+        /// 命令格式：(无)
+        /// </summary>
+        public void SendAttentionMsg()
+        {
+            AttentionService attentionService = new AttentionService();
+            List<String> listeners = attentionService.Listening(message, fromGroup);
+            foreach (String listener in listeners)
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(listener), "群聊 " + fromGroup + " 中有您关注的消息：" + message);
+            }
+        }
+        #endregion
+
         #region lj/zzq （日程提醒模块）
-        
+
         /// <summary>
         /// 添加群日程
         /// 命令格式：添加群周日程~周数|2020/6/2 18:30:00(日常生活):吃饭 

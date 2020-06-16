@@ -12,7 +12,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ClassSchedule
         public override int HandleImpl()
         {
 
-            if ((!message.Contains("按")) || (message.Contains("查询"))) return 0;
+            if ((!message.Contains("按")) || (!message.Contains("查询"))) return 0;
 
             using (var context = new jwContext())
             {

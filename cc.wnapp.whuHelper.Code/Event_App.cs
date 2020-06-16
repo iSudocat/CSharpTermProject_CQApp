@@ -143,10 +143,29 @@ namespace cc.wnapp.whuHelper.Code
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(QueryScore));
 
-            // TODO 消息监控
-            // MatchType.Any 含义为不管条件均会触发
-            // Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(GroupAttentionHandler));
-            // Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(PrivateAttentionHandler));
+
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.Any, null, typeof(SendAttentionMsg));
+
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "添加关注", typeof(AddAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "添加监听", typeof(AddAttention));
+
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "删除关注", typeof(RemoveAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "删除监听", typeof(RemoveAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "取消关注", typeof(RemoveAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "取消监听", typeof(RemoveAttention));
+
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "修改关注", typeof(UpdateAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "更新关注", typeof(UpdateAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "修改监听", typeof(UpdateAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "更新监听", typeof(UpdateAttention));
+
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询关注", typeof(GetAllAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查找关注", typeof(GetAllAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询监听", typeof(GetAllAttention));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查找监听", typeof(GetAllAttention));
+
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "关注点帮助", typeof(AttentionHelp));
+            
             
         }
     }

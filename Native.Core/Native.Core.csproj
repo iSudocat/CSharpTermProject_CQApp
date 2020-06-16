@@ -205,10 +205,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Attention\Attention.csproj">
-      <Project>{82c08346-1866-427c-a7ae-0be41852c11d}</Project>
-      <Name>Attention</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Calendar\Schedule.csproj">
       <Project>{de02fb93-da23-4d69-8ce7-85ffb929b901}</Project>
       <Name>Schedule</Name>

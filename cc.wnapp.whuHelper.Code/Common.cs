@@ -8,19 +8,17 @@ using System.Threading.Tasks;
 namespace cc.wnapp.whuHelper.Code
 {
 
-    public static class CQ
+    public static class Common
     {
         /// <summary>
-        /// 酷Q接口的封装类
+        /// 指令路由
         /// </summary>
-        public static CQApi Api { get; set; }
+        public static CommandRouter.CommandRouter CommandRouter { get; set; }
 
         /// <summary>
-        ///  酷Q日志的封装类
+        /// 插件是否初始化完成可供运行
         /// </summary>
-        public static CQLog Log { get; set; }
-
-       
+        public static bool IsInitialized { get; set; } = false;
     }
 
 }

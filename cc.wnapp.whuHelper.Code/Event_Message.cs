@@ -17,16 +17,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
-            // 指令路由
-            CQ.CommandRouter.Handle(sender, e);
+            if(Common.IsInitialized == true)
+            {
+                // 指令路由
+                Common.CommandRouter.Handle(sender, e);
+            }
         }
         /// <summary>
         /// 私聊消息处理
         /// </summary>
         public void PrivateMessage(object sender, CQPrivateMessageEventArgs e)
         {
-            // 指令路由
-            CQ.CommandRouter.Handle(sender, e);
+            if (Common.IsInitialized == true)
+            {
+                // 指令路由
+                Common.CommandRouter.Handle(sender, e);
+            }
         }
 
     }

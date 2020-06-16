@@ -158,7 +158,7 @@
     <Compile Include="CommandControl\ClassSchedule\QueryCourseTable.cs" />
     <Compile Include="CommandControl\ClassSchedule\QueryFunction.cs" />
     <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
-    <Compile Include="CommandControl\EducationalAdministrationSystem\ComputeScore.cs" />
+    <Compile Include="CommandControl\ScoreProcess\ComputeScore.cs" />
     <Compile Include="CommandControl\GitHubWatcher\ConnectGithub.cs" />
     <Compile Include="CommandControl\GitHubWatcher\DisconnectGithub.cs" />
     <Compile Include="CommandControl\GitHubWatcher\QueryAuthorisedGithubAccount.cs" />
@@ -187,6 +187,7 @@
     <Compile Include="CommandRouter\MatchType.cs" />
     <Compile Include="CommandRouter\AbstractCommand.cs" />
     <Compile Include="CQ.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="code.cs" />
     <Compile Include="Event_App.cs" />
     <Compile Include="Event_Message.cs" />

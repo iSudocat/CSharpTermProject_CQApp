@@ -12,6 +12,7 @@ using cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl;
 using cc.wnapp.whuHelper.Code.CommandRouter;
 using Schedule;
 using Tools;
+using cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -31,7 +32,7 @@ namespace cc.wnapp.whuHelper.Code
             #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
-            CQ.CommandRouter = new CommandRouter.CommandRouter();
+            Common.CommandRouter = new CommandRouter.CommandRouter();
 
             Eas.CQ.Api = e.CQApi;
             Eas.CQ.Log = e.CQLog;
@@ -82,9 +83,11 @@ namespace cc.wnapp.whuHelper.Code
                 RegisterCommand();
 
                 e.CQLog.InfoSuccess("初始化", "插件初始化成功。");
+                Common.IsInitialized = true;
             }
             catch (Exception ex)
             {
+                Common.IsInitialized = false;
                 e.CQLog.Error("初始化", "插件初始化失败，建议重启再试。错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
             }
 
@@ -96,53 +99,53 @@ namespace cc.wnapp.whuHelper.Code
         private void RegisterCommand()
         {
             
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群周日程", typeof(AddWeeklyScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群日程", typeof(DelScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群周日程", typeof(DelWeeklyScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "修改群日程", typeof(SetScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "修改群周日程", typeof(SetWeeklyScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "查看群日程", typeof(GetSchedulesFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "查看群周日程", typeof(GetWeeklySchedulesFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "按序查看群日程", typeof(SortScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "按序查看群周日程", typeof(SortWeeklyScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群周日程", typeof(AddWeeklyScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群日程", typeof(DelScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群周日程", typeof(DelWeeklyScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "修改群日程", typeof(SetScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "修改群周日程", typeof(SetWeeklyScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "查看群日程", typeof(GetSchedulesFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "查看群周日程", typeof(GetWeeklySchedulesFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "按序查看群日程", typeof(SortScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "按序查看群周日程", typeof(SortWeeklyScheduleFromDB));
 
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "添加日程", typeof(AddScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "添加周日程", typeof(AddWeeklyScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "删除日程", typeof(DelScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "删除周日程", typeof(DelWeeklyScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "修改日程", typeof(SetScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "修改周日程", typeof(SetWeeklyScheduleToDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "查看日程", typeof(GetSchedulesFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "查看周日程", typeof(GetWeeklySchedulesFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "按序查看日程", typeof(SortScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "按序查看周日程", typeof(SortWeeklyScheduleFromDB));
-            CQ.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "日程模块", typeof(ScheduleCommand));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "添加日程", typeof(AddScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "添加周日程", typeof(AddWeeklyScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "删除日程", typeof(DelScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "删除周日程", typeof(DelWeeklyScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "修改日程", typeof(SetScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "修改周日程", typeof(SetWeeklyScheduleToDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "查看日程", typeof(GetSchedulesFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "查看周日程", typeof(GetWeeklySchedulesFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "按序查看日程", typeof(SortScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "按序查看周日程", typeof(SortWeeklyScheduleFromDB));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "日程模块", typeof(ScheduleCommand));
 
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "绑定教务系统", typeof(BindEasAccount));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "绑定教务系统", typeof(BindEasAccount));
 
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTable));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询", typeof(QueryFunction));                // 按..查询
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程", typeof(AddCourseScheduleToDB));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTable));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询", typeof(QueryFunction));                // 按..查询
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程", typeof(AddCourseScheduleToDB));
 
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepository));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有仓库", typeof(QueryRepository));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询仓库", typeof(QueryRepository));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑仓库", typeof(Unsubscribe));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定Github账户", typeof(ConnectGithub));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定github账户", typeof(ConnectGithub));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定GITHUB账户", typeof(ConnectGithub));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有Github账户", typeof(QueryAuthorisedGithubAccount));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询Github账户", typeof(QueryAuthorisedGithubAccount));
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑Github账户", typeof(DisconnectGithub));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepository));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有仓库", typeof(QueryRepository));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询仓库", typeof(QueryRepository));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑仓库", typeof(Unsubscribe));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定Github账户", typeof(ConnectGithub));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定github账户", typeof(ConnectGithub));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定GITHUB账户", typeof(ConnectGithub));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有Github账户", typeof(QueryAuthorisedGithubAccount));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询Github账户", typeof(QueryAuthorisedGithubAccount));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑Github账户", typeof(DisconnectGithub));
 
-            CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(CommandControl.EducationalAdministrationSystem.ComputeScore));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(QueryScore));
 
             // TODO 消息监控
             // MatchType.Any 含义为不管条件均会触发
-            // CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(GroupAttentionHandler));
-            // CQ.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(PrivateAttentionHandler));
+            // Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(GroupAttentionHandler));
+            // Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Any, null, typeof(PrivateAttentionHandler));
             
         }
     }

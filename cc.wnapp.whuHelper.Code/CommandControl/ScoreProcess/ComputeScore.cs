@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ComputeScore;
 using Eas;
 
-namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
+namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
 {    
     
     /// <summary>
@@ -11,7 +11,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
     /// 命令格式：查询成绩 操作1|操作2|操作3
     /// 可选操作：去除公选、去除公必、去除专必、去除专选、去除非本院
     /// </summary>
-    public class ComputeScore : PrivateMsgEventControl
+    public class QueryScore : PrivateMsgEventControl
     {
 
         public override int HandleImpl()

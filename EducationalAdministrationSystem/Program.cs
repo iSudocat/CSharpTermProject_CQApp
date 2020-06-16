@@ -19,7 +19,7 @@ namespace Eas
     {
         static void Main(string[] args)
         {
-
+      
             Console.ReadLine();
         }
 

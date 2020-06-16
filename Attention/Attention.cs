@@ -13,7 +13,7 @@ namespace AttentionSpace
     {
         //消息关注者
         [Key, Column(Order = 0)]
-        public String Noticer { get; set; }
+        public String Listener { get; set; }
 
         //消息群
         [Key, Column(Order = 1)]
@@ -23,9 +23,13 @@ namespace AttentionSpace
         [Key, Column(Order = 2)]
         public String AttentionPoint { get; set; }
 
+        public Attention() 
+        {
+            return;
+        }
         public Attention(String N,String G,String A)
         {
-            Noticer = N;
+            Listener = N;
             Group = G;
             AttentionPoint = A;
         }

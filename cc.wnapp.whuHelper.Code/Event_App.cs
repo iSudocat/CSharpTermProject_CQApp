@@ -20,6 +20,7 @@ using cc.wnapp.whuHelper.Code.CommandRouter;
 using FluentScheduler;
 using Schedule;
 using Tools;
+using AttentionSpace;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -72,6 +73,7 @@ namespace cc.wnapp.whuHelper.Code
                 Eas.InitializeDB.Init();
                 Schedule.InitializeDB.Init();
                 GithubWatcher.Models.InitializeDB.Init();
+                AttentionSpace.InitializeDB.Init();
                 #endregion
 
                 #region 启动GithubWatcher Web服务

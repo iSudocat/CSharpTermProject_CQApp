@@ -26,6 +26,11 @@ namespace cc.wnapp.whuHelper.Code
             string fromqq = e.FromQQ;
             string fromgroup = e.FromGroup;
 
+            {
+                var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.SendAttentionMsg);
+                t.Start();
+            }
             if (msg.StartsWith("添加群周日程"))
             {
                 var mp = new GroupMsgProcess() { fromGroup = fromgroup, fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
@@ -202,12 +207,6 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.ScheduleCommand);
                 t.Start();
             }
-            if (msg.Contains("关注") || msg.Contains("订阅"))
-            {
-                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
-                Thread t = new Thread(mp.PrivateAttentionHandler);
-                t.Start();
-            }
             if (msg.Contains("绑定仓库")) 
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
@@ -249,6 +248,38 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
                 Thread t = new Thread(mp.ComputeScore);
+                t.Start();
+            }
+
+            //关注设定
+            if (msg.Contains("添加关注") || msg.Contains("添加监听"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(() => mp.AddAttention(e));
+                t.Start();
+            }
+            if (msg.Contains("删除关注") || msg.Contains("删除监听") || msg.Contains("取消关注") || msg.Contains("取消监听"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.RemoveAttention);
+                t.Start();
+            }
+            if (msg.Contains("修改关注") || msg.Contains("更新关注") || msg.Contains("修改监听") || msg.Contains("更新监听"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.UpdateAttention);
+                t.Start();
+            }
+            if (msg.Contains("查询关注") || msg.Contains("查找关注") || msg.Contains("查询监听") || msg.Contains("查找监听"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.GetAllAttention);
+                t.Start();
+            }
+            if (msg.Contains("关注点帮助"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.AttentionHelp);
                 t.Start();
             }
         }

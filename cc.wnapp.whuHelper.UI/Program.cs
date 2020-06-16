@@ -1,4 +1,5 @@
-﻿using Native.Sdk.Cqp;
+﻿using cc.wnapp.whuHelper.Code;
+using Native.Sdk.Cqp;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using System;
@@ -32,19 +33,28 @@ namespace cc.wnapp.whuHelper.UI
 
         public void MenuCall(object sender, CQMenuCallEventArgs e)
         {
-            CQ.Api = e.CQApi;
-            CQ.Log = e.CQLog;
-            e.CQLog.Debug("菜单点击事件", $"打开界面-{e.Name}");
-            if (this._mainWindow == null)
+            if (Common.IsInitialized == true)
             {
-                this._mainWindow = new Form1();
-                this._mainWindow.Closing += MainWindow_Closing;
-                this._mainWindow.Show();	// 显示窗体
+                CQ.Api = e.CQApi;
+                CQ.Log = e.CQLog;
+                e.CQLog.Debug("菜单点击事件", $"打开界面-{e.Name}");
+                if (this._mainWindow == null)
+                {
+                    this._mainWindow = new Form1();
+                    this._mainWindow.Closing += MainWindow_Closing;
+                    this._mainWindow.Show();    // 显示窗体
+                }
+                else
+                {
+                    this._mainWindow.Activate();    // 将窗体调制到前台激活
+                }
             }
             else
             {
-                this._mainWindow.Activate();	// 将窗体调制到前台激活
+                MessageBox.Show("插件未初始化成功，建议重启再试。", "发生错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

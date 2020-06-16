@@ -93,8 +93,10 @@ namespace cc.wnapp.whuHelper.UI
             AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
             AllScoredataGridView.RowHeadersVisible = false;
 
+            AllScoredataGridView.Columns[0].Width = 50;
+
             //初始化combobox
-            List<Score> combo = EasOP.GetScores(student.StuID);
+            List <Score> combo = EasOP.GetScores(student.StuID);
             //提取成绩列表中的唯一值
             List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
             CourseName.Insert(0, " ");

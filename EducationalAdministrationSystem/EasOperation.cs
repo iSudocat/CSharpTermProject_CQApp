@@ -158,6 +158,23 @@ namespace Eas
         }
 
         /// <summary>
+        /// 获取当前学期
+        /// </summary>
+        /// <returns>成功返回学期信息（例：2019-2），失败返回空</returns>
+        public static string GetCurrentTerm()
+        {
+            var CurrentDirectory = System.Environment.CurrentDirectory;
+            var Year = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", "Current", "Year", "");
+            var Term = ini.Read(CurrentDirectory + @"\data\app\cc.wnapp.whuHelper\FirstWeekDate.ini", "Current", "Term", "");
+            if (Year != "" && Term != "")
+            {
+                return Year + "-" + Term ;
+            }
+            else return "";
+            
+        }
+
+        /// <summary>
         /// 获取指定学生的学院信息
         /// </summary>
         /// <param name="StuID">学号</param>

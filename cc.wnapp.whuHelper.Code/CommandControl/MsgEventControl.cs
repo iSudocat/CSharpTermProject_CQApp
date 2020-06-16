@@ -8,13 +8,8 @@ namespace cc.wnapp.whuHelper.Code.CommandControl
     /// <summary>
     /// 群指令类型封装
     /// </summary>
-    public abstract class GroupMsgEventControl : AbstractCommand
+    public abstract class MsgEventControl : AbstractCommand
     {
-        /// <summary>
-        /// 消息来源群号
-        /// </summary>
-        public string fromGroup { get; set; }
-
         /// <summary>
         /// 消息来源QQ号
         /// </summary>
@@ -32,10 +27,27 @@ namespace cc.wnapp.whuHelper.Code.CommandControl
 
         public override int Handle()
         {
-            botQQ = Convert.ToString(CQ.Api.GetLoginQQ().Id);
-            message = ((CQGroupMessageEventArgs)CQEventArgsArgs).Message;
-            fromQQ = ((CQGroupMessageEventArgs)CQEventArgsArgs).FromQQ;
-            fromGroup = ((CQGroupMessageEventArgs)CQEventArgsArgs).FromGroup;
+            if (CQEventArgsArgs == null)
+            {
+                return 0;
+            }
+            else if (CQEventArgsArgs is CQGroupMessageEventArgs)
+            {
+                botQQ = Convert.ToString(CQ.Api.GetLoginQQ().Id);
+                message = ((CQGroupMessageEventArgs)CQEventArgsArgs).Message;
+                fromQQ = ((CQGroupMessageEventArgs)CQEventArgsArgs).FromQQ;
+            }
+            else if (CQEventArgsArgs is CQPrivateMessageEventArgs)
+            {
+                botQQ = Convert.ToString(CQ.Api.GetLoginQQ().Id);
+                message = ((CQPrivateMessageEventArgs)CQEventArgsArgs).Message;
+                fromQQ = ((CQPrivateMessageEventArgs)CQEventArgsArgs).FromQQ;
+            }
+            else
+            {
+                return 0;
+            }
+
             return HandleImpl();
         }
 

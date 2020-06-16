@@ -22,6 +22,7 @@ namespace Eas
         public string csrftoken { get; set; }
         public string StuName;
         public string College;
+        public string Term;
         private string CaptchaID;    //用于上报打码平台识别错误的图片ID
 
 
@@ -68,7 +69,6 @@ namespace Eas
                             System.Threading.Thread.Sleep(1000);    //休眠1s后重试请求
                             continue;
                         }
-                        
                     }
                     else
                     {
@@ -142,14 +142,12 @@ namespace Eas
             }
         }
 
-
         public string GetStuName(string res)
         {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(res);
             var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='nameLable']");
             var StuName = nameNode.InnerText.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace(" ", "");
-
             Console.WriteLine("成功获取了StuName：" + StuName);
             return StuName;
         }
@@ -159,7 +157,6 @@ namespace Eas
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(res);
             var College = htmlDoc.DocumentNode.SelectSingleNode("//span[@id='acade']").Attributes["title"].Value;
-
             Console.WriteLine("成功获取了College：" + College);
             return College;
         }

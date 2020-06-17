@@ -26,15 +26,14 @@ namespace Schedule
                 }
                 foreach (var weeklySchedule in weeklySchedules)
                 {
-                    int throughWeek = 0;//经过周数
-                    while (weeklySchedule.WeekSpan > 0)
+                    if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.ToString().Substring(0, weeklySchedule.ScheduleTime.ToString().Length - 3) 
+                        == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
                     {
-                        if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.AddDays(7 * throughWeek).ToString().Substring(0, weeklySchedule.ScheduleTime.ToString().Length - 3) 
-                            == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【周日程提醒】 {weeklySchedule.ScheduleContent}");
+                        if (weeklySchedule.WeekSpan > 0)
                         {
-                            CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【周日程提醒】 {weeklySchedule.ScheduleContent}");
+                            weeklySchedule.ScheduleTime = weeklySchedule.ScheduleTime.AddDays(7);
                             weeklySchedule.WeekSpan--;
-                            throughWeek++;
                         }
                     }
                 }
@@ -59,15 +58,14 @@ namespace Schedule
                 }
                 foreach (var weeklySchedule in weeklySchedules)
                 {
-                    int throughWeek = 0;//经过周数
-                    while (weeklySchedule.WeekSpan > 0)
-                    {
-                        if (weeklySchedule.UserType == 1 && weeklySchedule.ScheduleTime.AddDays(7 * throughWeek).ToString().Substring(0, weeklySchedule.ScheduleTime.ToString().Length - 3)
-                            == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
-                        { 
+                    if (weeklySchedule.UserType == 1 && weeklySchedule.ScheduleTime.ToString().Substring(0, weeklySchedule.ScheduleTime.ToString().Length - 3)
+                        == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
+                    { 
                         CQ.Api.SendGroupMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【群周日程提醒】 {weeklySchedule.ScheduleContent}");
-                        weeklySchedule.WeekSpan--;
-                        throughWeek++;
+                        if (weeklySchedule.WeekSpan > 0)
+                        {
+                            weeklySchedule.ScheduleTime = weeklySchedule.ScheduleTime.AddDays(7);
+                            weeklySchedule.WeekSpan--;
                         }
                     }
                 }                

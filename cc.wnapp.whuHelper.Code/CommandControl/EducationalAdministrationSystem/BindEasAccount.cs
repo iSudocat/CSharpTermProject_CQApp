@@ -26,13 +26,14 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
                     {
                         jwxt.LoginSys();
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【登录成功】\n", jwxt.College, " ", jwxt.StuName);
-
-                        EasGetCourse jwcourse = new EasGetCourse();
-                        //将Course信息存储到数据库中
-                        jwcourse.GetCourse(jwxt);
-
                         ini.Write(AppDirectory + @"\配置.ini", fromQQ, "学号", StuID);
                         ini.Write(AppDirectory + @"\配置.ini", fromQQ, "密码", DESTool.Encrypt(Password, "jw*1"));
+
+                        EasGetCourse jwcourse = new EasGetCourse();
+                        jwcourse.GetCourse(jwxt);
+                        EasGetScore jwScore = new EasGetScore();
+                        jwScore.GetScore(jwxt);
+
                         break;
                     }
                     else

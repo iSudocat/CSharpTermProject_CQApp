@@ -6,7 +6,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
 {
     /// <summary>
     /// 修改群周日程
-    /// 命令格式：修改群周日程~周数-日程编号|2020/6/2 18:30(日常生活):吃饭 
+    /// 命令格式：修改群周日程 日程序号 2020/6/2 18:30 吃饭 周数
     /// </summary>
     public class SetWeeklyScheduleToDB : MsgEventControl
     {
@@ -14,16 +14,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
         {
             try
             {
-                var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "-"));
-                var scheduleID = textOp.GetMiddleText(message, "-", "|");
-                var dateTime = textOp.GetMiddleText(message, "|", "(");
-                var scheduleType = textOp.GetMiddleText(message, "(", ")");
-                string str = message.Split(')')[1];
-                var scheduleContent = textOp.GetRightText(str, ":");
+                var str = message.Split(' ');
+                var index = Convert.ToInt32(str[1]);
+                var dateTime = str[2] + " " + str[3];
+                var scheduleContent = str[4];
+                var weekSpan = Convert.ToInt32(str[5]);
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
                 if (GlobalHelper.StrToDateTime(dateTime).CompareTo(DateTime.Now) > 0)
                 {
-                    if (User.SetWeeklySchedule(scheduleID, GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                    if (User.SetWeeklySchedule(index, GlobalHelper.StrToDateTime(dateTime),scheduleContent, weekSpan))
                     {
                     Reply("【修改成功】");
                     }

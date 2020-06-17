@@ -184,8 +184,6 @@
     <Compile Include="CommandControl\SchedulerControl\ScheduleCommand.cs" />
     <Compile Include="CommandControl\SchedulerControl\SetScheduleToDB.cs" />
     <Compile Include="CommandControl\SchedulerControl\SetWeeklyScheduleToDB.cs" />
-    <Compile Include="CommandControl\SchedulerControl\SortScheduleFromDB.cs" />
-    <Compile Include="CommandControl\SchedulerControl\SortWeeklyScheduleFromDB.cs" />
     <Compile Include="CommandRouter\CommandRouter.cs" />
     <Compile Include="CommandRouter\CommandServiceProvider.cs" />
     <Compile Include="CommandRouter\EventType.cs" />

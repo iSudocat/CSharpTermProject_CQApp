@@ -6,16 +6,14 @@ namespace Schedule
 {
     public abstract class UserService
     {
-        public abstract Boolean AddSchedule(DateTime dt, string st, string sc);
-        public abstract Boolean DelSchedule(string id);
+        public abstract Boolean AddSchedule(DateTime dt,string sc);
+        public abstract Boolean DelSchedule(int index);
         public abstract List<Schedule> GetSchedules();
-        public abstract List<Schedule> SortSchedules(string option);
-        public abstract Boolean SetSchedule(string id, DateTime dt, string st, string sc);
-        public abstract Boolean AddWeeklySchedule(DateTime dt, string st, string sc, int weekSpan);
-        public abstract Boolean DelWeeklySchedule(string id);
+        public abstract Boolean SetSchedule(int index, DateTime dt,string sc);
+        public abstract Boolean AddWeeklySchedule(DateTime dt, string sc, int weekSpan);
+        public abstract Boolean DelWeeklySchedule(int index);
         public abstract List<WeeklySchedule> GetWeeklySchedules();
-        public abstract List<WeeklySchedule> SortWeeklySchedules(string option);
-        public abstract Boolean SetWeeklySchedule(string id, DateTime dt, string st, string sc, int weekSpan);
+        public abstract Boolean SetWeeklySchedule(int index, DateTime dt, string sc,int weekSpan);
 
         public static UserService GetFromEvent(CQEventEventArgs CQEventArgsArgs)
         {

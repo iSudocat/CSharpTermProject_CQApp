@@ -92,6 +92,7 @@
     <Compile Include="AttentionContext.cs" />
     <Compile Include="Attention.cs" />
     <Compile Include="AttentionService.cs" />
+    <Compile Include="ListenerInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

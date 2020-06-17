@@ -29,25 +29,28 @@ namespace Schedule
             else { return false; }
         }
         //增加群日程需要权限
-        public override Boolean AddSchedule(DateTime dt, string st, string sc)
+        public override Boolean AddSchedule(DateTime dt, string sc)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
             {
-                Schedule schedule = new Schedule(GroupQQ, 1, dt, st, sc);
+                Schedule schedule = new Schedule(GroupQQ, 1, dt, sc);
                 db.Schedules.Add(schedule);
                 db.SaveChanges();
                 return true;
             }
         }
         //删除群日程需要权限
-        public override Boolean DelSchedule(string id)
+        public override Boolean DelSchedule(int index)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
             {
-                var schedule = db.Schedules.SingleOrDefault(s => s.UserQQ==GroupQQ
-                && s.UserType == 1 && s.ScheduleID.Equals(id));
+                var schedules = from s in db.Schedules
+                                where s.UserQQ == GroupQQ && s.UserType == 1
+                                orderby s.ScheduleTime
+                                select s;
+                var schedule = schedules.ToList().ElementAt(index);
                 if (schedule != null)
                 {
                     db.Schedules.Remove(schedule);
@@ -63,47 +66,26 @@ namespace Schedule
             using (var db = new ScheduleContext())
             {
                 var schedules = from s in db.Schedules
-                                where s.UserQQ==GroupQQ && s.UserType == 1
+                                where s.UserQQ == GroupQQ && s.UserType == 1
+                                orderby s.ScheduleTime
                                 select s;
                 return schedules.ToList();
             }
         }
-        //排序查看群日程无需权限
-        public override List<Schedule> SortSchedules(string option)
-        {
-            using (var db = new ScheduleContext())
-            {
-                switch (option)
-                {
-                    case "时间":
-                        var schedules1 = from s in db.Schedules
-                                         where s.UserQQ==GroupQQ && s.UserType == 1
-                                         orderby s.ScheduleTime
-                                         select s;
-                        return schedules1.ToList();
-                    case "类型":
-                        var schedules2 = from s in db.Schedules
-                                         where s.UserQQ==GroupQQ && s.UserType == 1
-                                         orderby s.ScheduleType
-                                         select s;
-                        return schedules2.ToList();
-                    default:
-                        throw new InvalidSortException("错误的分类依据！");
-                }
-            }
-        }
         //修改群日程需要权限
-        public override Boolean SetSchedule(string id, DateTime dt, string st, string sc)
+        public override Boolean SetSchedule(int index, DateTime dt, string sc)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
             {
-                var schedule = db.Schedules.SingleOrDefault(s => s.UserQQ==GroupQQ
-                && s.UserType == 1 && s.ScheduleID.Equals(id));
+                var schedules = from s in db.Schedules
+                                where s.UserQQ == GroupQQ && s.UserType == 1
+                                orderby s.ScheduleTime
+                                select s;
+                var schedule = schedules.ToList().ElementAt(index);
                 if (schedule != null)
                 {
                     schedule.ScheduleTime = dt;
-                    schedule.ScheduleType = st;
                     schedule.ScheduleContent = sc;
                     db.SaveChanges();
                     return true;
@@ -111,24 +93,27 @@ namespace Schedule
                 else { return false; }
             }
         }
-        public override Boolean AddWeeklySchedule(DateTime dt, string st, string sc,int weekSpan)
+        public override Boolean AddWeeklySchedule(DateTime dt, string sc,int weekSpan)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
             {
-                WeeklySchedule weeklySchedule = new WeeklySchedule(GroupQQ, 1, dt, st, sc, weekSpan);
+                WeeklySchedule weeklySchedule = new WeeklySchedule(GroupQQ, 1, dt, sc, weekSpan);
                 db.WeeklySchedules.Add(weeklySchedule);
                 db.SaveChanges();
                 return true;
             }
         }
-        public override Boolean DelWeeklySchedule(string id)
+        public override Boolean DelWeeklySchedule(int index)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
             {
-                var weeklySchedule = db.WeeklySchedules.SingleOrDefault(s => s.UserQQ==GroupQQ
-                && s.UserType == 1 && s.ScheduleID.Equals(id));
+                var weeklySchedules = from s in db.WeeklySchedules
+                                      where s.UserQQ == GroupQQ && s.UserType == 1
+                                      orderby s.ScheduleTime
+                                      select s;
+                var weeklySchedule = weeklySchedules.ToList().ElementAt(index);
                 if (weeklySchedule != null)
                 {
                     db.WeeklySchedules.Remove(weeklySchedule);
@@ -144,44 +129,24 @@ namespace Schedule
             {
                 var weeklySchedules = from s in db.WeeklySchedules
                                 where s.UserQQ == GroupQQ && s.UserType == 1
+                                orderby s.ScheduleTime
                                 select s;
                 return weeklySchedules.ToList();
             }
         }
-        public override List<WeeklySchedule> SortWeeklySchedules(string option)
-        {
-            using (var db = new ScheduleContext())
-            {
-                switch (option)
-                {
-                    case "时间":
-                        var weeklySchedules1 = from s in db.WeeklySchedules
-                                         where s.UserQQ == GroupQQ && s.UserType == 1
-                                         orderby s.ScheduleTime
-                                         select s;
-                        return weeklySchedules1.ToList();
-                    case "类型":
-                        var weeklySchedules2 = from s in db.WeeklySchedules
-                                         where s.UserQQ == GroupQQ && s.UserType == 1
-                                         orderby s.ScheduleType
-                                         select s;
-                        return weeklySchedules2.ToList();
-                    default:
-                        throw new InvalidSortException("错误的分类依据！");
-                }
-            }
-        }
-        public override Boolean SetWeeklySchedule(string id, DateTime dt, string st, string sc,int weekSpan)
+        public override Boolean SetWeeklySchedule(int index, DateTime dt, string sc,int weekSpan)
         {
             if (!IfPowerful()) return false;
             using (var db = new ScheduleContext())
             {
-                var weeklySchedule = db.WeeklySchedules.SingleOrDefault(s => s.UserQQ == GroupQQ
-                && s.UserType == 1 && s.ScheduleID.Equals(id));
+                var weeklySchedules = from s in db.WeeklySchedules
+                                      where s.UserQQ == GroupQQ && s.UserType == 1
+                                      orderby s.ScheduleTime
+                                      select s;
+                var weeklySchedule = weeklySchedules.ToList().ElementAt(index);
                 if (weeklySchedule != null)
                 {
                     weeklySchedule.ScheduleTime = dt;
-                    weeklySchedule.ScheduleType = st;
                     weeklySchedule.ScheduleContent = sc;
                     weeklySchedule.WeekSpan = weekSpan;
                     db.SaveChanges();

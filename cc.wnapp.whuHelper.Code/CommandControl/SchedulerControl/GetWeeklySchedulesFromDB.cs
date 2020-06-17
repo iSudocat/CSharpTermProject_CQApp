@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Schedule;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
@@ -18,10 +19,14 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 List<WeeklySchedule> weeklySchedules = User.GetWeeklySchedules();
                 if (weeklySchedules.Count > 0)
                 {
-                    foreach (var weeklySchedule in weeklySchedules)
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("\r\n");
+                    for (int i = 0; i < weeklySchedules.Count - 1; i++)
                     {
-                        Reply(weeklySchedule.DisplaySchedule());
+                        sb.Append(i + ":" + weeklySchedules[i].ScheduleTime + " " + weeklySchedules[i].ScheduleContent +" "+weeklySchedules[i].WeekSpan+ "周\r\n");
                     }
+                    sb.Append(weeklySchedules.Count - 1 + ":" + weeklySchedules[weeklySchedules.Count - 1].ScheduleTime + " " + weeklySchedules[weeklySchedules.Count - 1].ScheduleContent+weeklySchedules[weeklySchedules.Count-1].WeekSpan+"周");
+                    Reply(sb.ToString());
                 }
                 else
                     Reply("【暂无周日程】");

@@ -6,7 +6,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
 {
     /// <summary>
     /// 删除群日程
-    /// 命令格式：删除群日程|日程号
+    /// 命令格式：删除群日程 日程序号
     /// </summary>
     public class DelScheduleFromDB : MsgEventControl
     { 
@@ -15,9 +15,10 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
 
             try
             {
-                var scheduleID = textOp.GetRightText(message, "|");
+                var str = message.Split(' ');
+                var index = Convert.ToInt32(str[1]);
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
-                if (User.DelSchedule(scheduleID))
+                if (User.DelSchedule(index))
                 {
                     Reply("【删除成功】");
                 }

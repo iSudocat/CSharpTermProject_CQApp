@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Schedule;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
@@ -18,10 +19,14 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 List<Schedule.Schedule> schedules = User.GetSchedules();
                 if (schedules.Count > 0)
                 {
-                    foreach (var schedule in schedules)
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("日程信息：\r\n");
+                    for(int i = 0; i < schedules.Count-1; i++)
                     {
-                        Reply(schedule.DisplaySchedule());
+                        sb.Append(i + ": " + schedules[i].ScheduleTime + " " + schedules[i].ScheduleContent+"\r\n");
                     }
+                    sb.Append(schedules.Count-1 + ": " + schedules[schedules.Count-1].ScheduleTime + " " + schedules[schedules.Count-1].ScheduleContent);
+                    Reply(sb.ToString());
                 }
                 else
                     Reply("【暂无日程】");

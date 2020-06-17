@@ -10,7 +10,6 @@ using cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher;
 using cc.wnapp.whuHelper.Code.CommandControl.Notification;
 using cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl;
 using cc.wnapp.whuHelper.Code.CommandRouter;
-using Schedule;
 using Tools;
 using cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess;
 
@@ -52,13 +51,16 @@ namespace cc.wnapp.whuHelper.Code
                 {
                     IF.InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件", true);
                     ini.Write(e.CQApi.AppDirectory + @"\配置.ini", "重初始化", "日程", "");
+                    e.CQLog.Warning("初始化", "日程数据库文件重初始化完成");
                 }
                 else
                 {
                     IF.InitFiles(e.CQApi.AppDirectory, "ScheduleDB.db", "日程数据库文件");
                 }  
                 IF.InitFiles(e.CQApi.AppDirectory, "GithubWatcher.db", "Git数据库文件");
+                IF.InitFiles(e.CQApi.AppDirectory, "Attentions.db", "关注数据库文件");
                 IF.InitFiles(e.CQApi.AppDirectory, "FirstWeekDate.ini", "周起始日期文件", true);
+
                 #endregion
 
                 #region 数据库与EF框架初始化
@@ -75,9 +77,9 @@ namespace cc.wnapp.whuHelper.Code
                 #endregion
 
                 #region 启动Schedule线程
-                Thread GsrTh = new Thread(ScheduleThread.GroupScheduleRemind);
+                Thread GsrTh = new Thread(Schedule.ScheduleThread.GroupScheduleRemind);
                 GsrTh.Start();
-                Thread PsrTh = new Thread(ScheduleThread.PrivateScheduleRemind);
+                Thread PsrTh = new Thread(Schedule.ScheduleThread.PrivateScheduleRemind);
                 PsrTh.Start();
                 #endregion
 
@@ -124,6 +126,8 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "日程模块", typeof(ScheduleCommand));
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "绑定教务系统", typeof(BindEasAccount));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新课程", typeof(UpdateCourseDB));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新成绩", typeof(UpdateScoreDB));
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTable));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));

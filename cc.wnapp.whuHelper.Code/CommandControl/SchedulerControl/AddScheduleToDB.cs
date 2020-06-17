@@ -21,12 +21,12 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
                 if (User.AddSchedule(GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent))
                 {
-                    Replay( "【添加成功】");
+                    Reply( "【添加成功】");
                 }
             }
             catch (Exception e)
             {
-                Replay("【格式有误，添加失败】");
+                Reply("【格式有误，添加失败】");
             }
 
             return 0;

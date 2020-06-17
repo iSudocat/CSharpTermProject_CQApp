@@ -21,7 +21,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
             UserService User = UserService.GetFromEvent(CQEventArgsArgs);
             if (User.SetWeeklySchedule(scheduleID, GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
             {
-                Replay("【修改成功】");
+                Reply("【修改成功】");
             }
             return 0;
         }

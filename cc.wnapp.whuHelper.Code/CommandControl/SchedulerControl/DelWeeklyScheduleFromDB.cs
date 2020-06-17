@@ -18,12 +18,12 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
                 if (User.DelWeeklySchedule(scheduleID))
                 {
-                    Replay("【删除成功】");
+                    Reply("【删除成功】");
                 }
             }
             catch (Exception e)
             {
-                Replay("【格式有误，删除失败】");
+                Reply("【格式有误，删除失败】");
             }
             return 0;
         }

@@ -193,16 +193,26 @@ namespace Eas
 
 
         /// <summary>
-        /// 更新指定学生的成绩信息 请注意捕获异常
+        /// 更新指定学生的成绩信息 失败将抛出异常
         /// </summary>
         /// <param name="StuQQ">学生QQ</param>
-        /// <returns>成功返回true 失败将抛出异常 请注意捕获UpdataErrorException</returns>
-        public static bool UpdateScore(string StuQQ)
+        public static void UpdateScore(string StuQQ)
         {
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string AppDirectory = CQ.Api.AppDirectory;
-            string StuID = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "学号", "");
-            string Pw = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "密码", "");
+            string StuID;
+            string Pw;
+            if (ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "") == StuQQ)  //是主人
+            {
+                StuID = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
+                Pw = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1"); 
+            }
+            else
+            {
+                StuID = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "学号", "");
+                Pw = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", StuQQ, "密码", ""), "jw*1");
+            }
+            
             if (StuID == "" || Pw == "")
             {
                 throw new UpdataErrorException("当前QQ未绑定教务系统账户。");
@@ -214,16 +224,11 @@ namespace Eas
                 {
                     EasGetScore jwscore = new EasGetScore();
                     jwscore.GetScore(jwxt);
-                    return true;
-                }
-                else
-                {
-                    return false;
                 }
             }
             catch (Exception ex)
             {
-                if (ex.Message == "密码错误")
+                if (ex.Message == "用户名/密码错误")
                 {
                     throw new UpdataErrorException("用户名或密码错误。");
                 }
@@ -233,22 +238,33 @@ namespace Eas
                 }
                 else
                 {
-                    throw new UpdataErrorException("发生未知错误。");
+                    CQ.Log.Error("发生错误", "错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
+                    throw new UpdataErrorException("发生未知错误，请联系机器人主人。");
                 }
             }
         }
 
         /// <summary>
-        /// 更新指定学生的课程信息 请注意捕获异常
+        /// 更新指定学生的课程信息 失败将抛出异常
         /// </summary>
         /// <param name="StuQQ">学生QQ</param>
-        /// <returns>成功返回true 失败将抛出异常 请注意捕获UpdataErrorException</returns>
-        public static bool UpdateCourse(string StuQQ)
+        public static void UpdateCourse(string StuQQ)
         {
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string AppDirectory = CQ.Api.AppDirectory;
-            string StuID = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "学号", "");
-            string Pw = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "密码", "");
+            string Pw;
+            string StuID;
+            if (ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "") == StuQQ)  //是主人
+            {
+                StuID = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
+                Pw = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1");
+            }
+            else
+            {
+                StuID = ini.Read(AppDirectory + @"\配置.ini", StuQQ, "学号", "");
+                Pw = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", StuQQ, "密码", ""), "jw*1");
+                
+            }
             if (StuID == "" || Pw == "")
             {
                 throw new UpdataErrorException("当前QQ未绑定教务系统账户。");
@@ -260,16 +276,11 @@ namespace Eas
                 {
                     EasGetCourse jwcourse = new EasGetCourse();
                     jwcourse.GetCourse(jwxt);
-                    return true;
-                }
-                else
-                {
-                    return false;
                 }
             }
             catch (Exception ex)
             {
-                if (ex.Message == "密码错误")
+                if (ex.Message == "用户名/密码错误")
                 {
                     throw new UpdataErrorException("用户名或密码错误。");
                 }
@@ -279,7 +290,9 @@ namespace Eas
                 }
                 else
                 {
+                    CQ.Log.Error("发生错误", "错误信息：" + ex.GetType().ToString() + " " + ex.Message + "\n" + ex.StackTrace);
                     throw new UpdataErrorException("发生未知错误。");
+
                 }
             }
         }

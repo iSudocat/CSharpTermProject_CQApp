@@ -16,6 +16,10 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Notification
             {
                 AttentionService attentionService = new AttentionService();
                 List<Attention> attList = attentionService.QueryAll();
+                if (attList.Count == 0) 
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【查询成功】\n当前没有关注记录");
+                }
                 String attListInMessage = "";
                 foreach (Attention att in attList)
                 {

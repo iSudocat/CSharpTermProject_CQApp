@@ -18,7 +18,7 @@ using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using Native.Sdk.Cqp.Model;
 using Tools;
-
+using AttentionSpace;
 
 namespace cc.wnapp.whuHelper.UI
 {
@@ -36,11 +36,11 @@ namespace cc.wnapp.whuHelper.UI
         }
         
         private void Form1_Load(object sender, EventArgs e)
-        {
-
+        {   
             tab1Init();
             tab2Init();
             tab3Init();
+            tab4Init();
         }
 
         private void tab1Init()
@@ -109,8 +109,21 @@ namespace cc.wnapp.whuHelper.UI
             comboBoxCreditNum.DataSource = Credit;
             comboBoxYear.DataSource = Year;
             comboBoxTerm.DataSource = Term;
-            
-         
+        }
+
+        private void tab4Init() 
+        {
+            type_comboBox.SelectedIndex = 0;
+            AttentionService attentionService = new AttentionService();
+            bindingSource_attention.DataSource = attentionService.Attentions;
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+            attentionDataGridView.DataSource = bindingSource_attention;
+            allAttentionUserDataGridView.DataSource = bindingSource_attentionUser;
+            attentionDataGridView.Columns[0].HeaderText = "关注者QQ";
+            attentionDataGridView.Columns[1].HeaderText = "关注群号";
+            attentionDataGridView.Columns[2].HeaderText = "关注内容";
+            //allAttentionUserDataGridView.Columns[0].HeaderText = "关注者QQ";
+            //allAttentionUserDataGridView.Columns[1].HeaderText = "关注数量";
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -277,6 +290,7 @@ namespace cc.wnapp.whuHelper.UI
         {
             return dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
         }
+
         private void queryButton_Click(object sender, EventArgs e)
         {
             //QueryAllCourses();
@@ -487,7 +501,6 @@ namespace cc.wnapp.whuHelper.UI
             return GetSelect;
         }
 		
-		
 		private void ExportButton_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
@@ -529,7 +542,71 @@ namespace cc.wnapp.whuHelper.UI
             bindingSource_StuScore.ResetBindings(false);
         }
 
+        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+            
+        }
 
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void search_attention_buttom_Click(object sender, EventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            int index = type_comboBox.SelectedIndex;
+            String searchText = textBox1.Text;
+            switch (index) 
+            {
+                case 0:
+                    bindingSource_attention.DataSource=attentionService.Query(searchText, "", "");
+                    break;
+                case 1:
+                    bindingSource_attention.DataSource = attentionService.Query("", "", searchText);
+                    break;
+                case 2:
+                    bindingSource_attention.DataSource = attentionService.Query("", searchText, "");
+                    break;
+                default:
+                    bindingSource_attention.DataSource = attentionService.QueryAll();
+                    break;
+            }
+        }
+
+        private void remove_attention_buttom_Click(object sender, EventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            int index = type_comboBox.SelectedIndex;
+            String searchText = textBox1.Text;
+            if (attentionDataGridView.CurrentRow != null) 
+            {
+                String l = attentionDataGridView.CurrentRow.Cells[0].Value.ToString();
+                String g = attentionDataGridView.CurrentRow.Cells[1].Value.ToString();
+                String a = attentionDataGridView.CurrentRow.Cells[2].Value.ToString();
+                attentionService.Remove(l, a, g);
+                switch (index)
+                {
+                    case 0:
+                        bindingSource_attention.DataSource = attentionService.Query(searchText, "", "");
+                        break;
+                    case 1:
+                        bindingSource_attention.DataSource = attentionService.Query("", "", searchText);
+                        break;
+                    case 2:
+                        bindingSource_attention.DataSource = attentionService.Query("", searchText, "");
+                        break;
+                    default:
+                        bindingSource_attention.DataSource = attentionService.QueryAll();
+                        break;
+                }
+            }
+        }
+
+        private void bindingSource_attentionUser_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
 
         //测试时使用
         //private void courseDataGridView_SelectionChanged(object sender, EventArgs e)

@@ -73,6 +73,19 @@
             this.School = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botQQq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.courseDataGridView = new System.Windows.Forms.DataGridView();
+            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.queryButton = new System.Windows.Forms.Button();
             this.queryTextBox = new System.Windows.Forms.TextBox();
@@ -99,31 +112,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonSelectNoGX = new System.Windows.Forms.Button();
-            this.buttonSelectNoGB = new System.Windows.Forms.Button();
-            this.buttonSelectDepart = new System.Windows.Forms.Button();
-            this.buttonSelectNoZX = new System.Windows.Forms.Button();
-            this.buttonSelectNoZB = new System.Windows.Forms.Button();
-            this.buttonSelectNo = new System.Windows.Forms.Button();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -137,6 +125,32 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonSelectNoGX = new System.Windows.Forms.Button();
+            this.buttonSelectNoGB = new System.Windows.Forms.Button();
+            this.buttonSelectDepart = new System.Windows.Forms.Button();
+            this.buttonSelectNoZX = new System.Windows.Forms.Button();
+            this.buttonSelectNoZB = new System.Windows.Forms.Button();
+            this.buttonSelectNo = new System.Windows.Forms.Button();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.attentionDataGridView = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.remove_attention_buttom = new System.Windows.Forms.Button();
+            this.search_attention_buttom = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.type_comboBox = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.bindingSource_attention = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource_attentionUser = new System.Windows.Forms.BindingSource(this.components);
+            this.allAttentionUserDataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -155,8 +169,20 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllScoredataGridView)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.attentionDataGridView)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StuScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Courses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_attention)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_attentionUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.allAttentionUserDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -168,7 +194,7 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(845, 541);
+            this.tabControl1.Size = new System.Drawing.Size(831, 531);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -180,10 +206,10 @@
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.dataGridView_StuList);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 40);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(837, 508);
+            this.tabPage1.Size = new System.Drawing.Size(823, 487);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "账号管理";
             // 
@@ -218,7 +244,7 @@
             this.label_sr3.Location = new System.Drawing.Point(174, 49);
             this.label_sr3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_sr3.Name = "label_sr3";
-            this.label_sr3.Size = new System.Drawing.Size(37, 20);
+            this.label_sr3.Size = new System.Drawing.Size(65, 32);
             this.label_sr3.TabIndex = 26;
             this.label_sr3.Text = "分钟";
             // 
@@ -226,7 +252,7 @@
             // 
             this.tb_ReminderTime.Location = new System.Drawing.Point(111, 46);
             this.tb_ReminderTime.Name = "tb_ReminderTime";
-            this.tb_ReminderTime.Size = new System.Drawing.Size(56, 26);
+            this.tb_ReminderTime.Size = new System.Drawing.Size(56, 40);
             this.tb_ReminderTime.TabIndex = 25;
             this.tb_ReminderTime.TextChanged += new System.EventHandler(this.tb_ReminderTime_TextChanged);
             // 
@@ -237,7 +263,7 @@
             this.label_sr2.Location = new System.Drawing.Point(13, 49);
             this.label_sr2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_sr2.Name = "label_sr2";
-            this.label_sr2.Size = new System.Drawing.Size(93, 20);
+            this.label_sr2.Size = new System.Drawing.Size(165, 32);
             this.label_sr2.TabIndex = 24;
             this.label_sr2.Text = "基础检测间隔";
             // 
@@ -268,7 +294,7 @@
             this.label_sr1.Location = new System.Drawing.Point(13, 9);
             this.label_sr1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_sr1.Name = "label_sr1";
-            this.label_sr1.Size = new System.Drawing.Size(135, 20);
+            this.label_sr1.Size = new System.Drawing.Size(240, 32);
             this.label_sr1.TabIndex = 20;
             this.label_sr1.Text = "本人新出成绩提醒：";
             // 
@@ -299,7 +325,7 @@
             this.label2.Location = new System.Drawing.Point(198, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 20);
+            this.label2.Size = new System.Drawing.Size(215, 32);
             this.label2.TabIndex = 3;
             this.label2.Text = "教务系统信息列表";
             // 
@@ -334,6 +360,7 @@
             this.QQ.MinimumWidth = 6;
             this.QQ.Name = "QQ";
             this.QQ.ReadOnly = true;
+            this.QQ.Width = 200;
             // 
             // StuID
             // 
@@ -351,6 +378,7 @@
             this.StuName.MinimumWidth = 6;
             this.StuName.Name = "StuName";
             this.StuName.ReadOnly = true;
+            this.StuName.Width = 200;
             // 
             // College
             // 
@@ -381,7 +409,6 @@
             this.panel1.Controls.Add(this.tb_QQ);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(4, 5);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(826, 40);
             this.panel1.TabIndex = 1;
@@ -401,7 +428,7 @@
             this.tb_jwPw.Location = new System.Drawing.Point(480, 4);
             this.tb_jwPw.Name = "tb_jwPw";
             this.tb_jwPw.PasswordChar = '*';
-            this.tb_jwPw.Size = new System.Drawing.Size(119, 26);
+            this.tb_jwPw.Size = new System.Drawing.Size(119, 40);
             this.tb_jwPw.TabIndex = 11;
             this.tb_jwPw.TextChanged += new System.EventHandler(this.tb_jwPw_TextChanged);
             // 
@@ -412,7 +439,7 @@
             this.label4.Location = new System.Drawing.Point(380, 7);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 20);
+            this.label4.Size = new System.Drawing.Size(165, 32);
             this.label4.TabIndex = 10;
             this.label4.Text = "教务系统密码";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -421,7 +448,7 @@
             // 
             this.tb_StuID.Location = new System.Drawing.Point(238, 4);
             this.tb_StuID.Name = "tb_StuID";
-            this.tb_StuID.Size = new System.Drawing.Size(119, 26);
+            this.tb_StuID.Size = new System.Drawing.Size(119, 40);
             this.tb_StuID.TabIndex = 9;
             this.tb_StuID.TextChanged += new System.EventHandler(this.tb_StuID_TextChanged);
             // 
@@ -432,7 +459,7 @@
             this.label3.Location = new System.Drawing.Point(194, 7);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 20);
+            this.label3.Size = new System.Drawing.Size(65, 32);
             this.label3.TabIndex = 8;
             this.label3.Text = "学号";
             // 
@@ -440,7 +467,7 @@
             // 
             this.tb_QQ.Location = new System.Drawing.Point(70, 4);
             this.tb_QQ.Name = "tb_QQ";
-            this.tb_QQ.Size = new System.Drawing.Size(108, 26);
+            this.tb_QQ.Size = new System.Drawing.Size(108, 40);
             this.tb_QQ.TabIndex = 1;
             this.tb_QQ.TextChanged += new System.EventHandler(this.tb_QQ_TextChanged);
             // 
@@ -451,7 +478,7 @@
             this.label1.Location = new System.Drawing.Point(4, 7);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.Size = new System.Drawing.Size(105, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "本人QQ";
             // 
@@ -462,19 +489,19 @@
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 40);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(837, 508);
+            this.tabPage2.Size = new System.Drawing.Size(823, 487);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "课程表管理";
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(3, 483);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 462);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(831, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(817, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -488,7 +515,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(3, 410);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(831, 70);
+            this.groupBox3.Size = new System.Drawing.Size(817, 70);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
@@ -551,7 +578,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(3, 64);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(831, 346);
+            this.groupBox2.Size = new System.Drawing.Size(817, 346);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "学生课程详情";
@@ -661,396 +688,6 @@
             this.courseDataGridView.Size = new System.Drawing.Size(580, 307);
             this.courseDataGridView.TabIndex = 1;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.queryButton);
-            this.groupBox1.Controls.Add(this.queryTextBox);
-            this.groupBox1.Controls.Add(this.queryComboBox);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(831, 61);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "查询课程";
-            // 
-            // queryButton
-            // 
-            this.queryButton.Location = new System.Drawing.Point(619, 23);
-            this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(123, 29);
-            this.queryButton.TabIndex = 2;
-            this.queryButton.Text = "查询";
-            this.queryButton.UseVisualStyleBackColor = true;
-            this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
-            // 
-            // queryTextBox
-            // 
-            this.queryTextBox.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.queryTextBox.Location = new System.Drawing.Point(239, 23);
-            this.queryTextBox.Name = "queryTextBox";
-            this.queryTextBox.Size = new System.Drawing.Size(347, 29);
-            this.queryTextBox.TabIndex = 1;
-            // 
-            // queryComboBox
-            // 
-            this.queryComboBox.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.queryComboBox.FormattingEnabled = true;
-            this.queryComboBox.Items.AddRange(new object[] {
-            "全部课程",
-            "按课程号查询",
-            "按课程名查询",
-            "按学分查询",
-            "按授课学院查询",
-            "按专业查询",
-            "按授课教师查询"});
-            this.queryComboBox.Location = new System.Drawing.Point(6, 23);
-            this.queryComboBox.Name = "queryComboBox";
-            this.queryComboBox.Size = new System.Drawing.Size(201, 29);
-            this.queryComboBox.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.groupBox7);
-            this.tabPage3.Controls.Add(this.groupBox6);
-            this.tabPage3.Controls.Add(this.groupBox5);
-            this.tabPage3.Controls.Add(this.groupBox4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(837, 508);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "成绩管理";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.comboBoxYear);
-            this.groupBox7.Controls.Add(this.label11);
-            this.groupBox7.Controls.Add(this.comboBoxCreditNum);
-            this.groupBox7.Controls.Add(this.comboBoxCourseName);
-            this.groupBox7.Controls.Add(this.comboBoxTerm);
-            this.groupBox7.Controls.Add(this.label10);
-            this.groupBox7.Controls.Add(this.label9);
-            this.groupBox7.Controls.Add(this.label8);
-            this.groupBox7.Controls.Add(this.buttonSearch);
-            this.groupBox7.Location = new System.Drawing.Point(7, 159);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(831, 55);
-            this.groupBox7.TabIndex = 3;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "查询";
-            // 
-            // comboBoxYear
-            // 
-            this.comboBoxYear.FormattingEnabled = true;
-            this.comboBoxYear.Location = new System.Drawing.Point(89, 17);
-            this.comboBoxYear.Name = "comboBoxYear";
-            this.comboBoxYear.Size = new System.Drawing.Size(107, 28);
-            this.comboBoxYear.TabIndex = 19;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(37, 22);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 20);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "学年";
-            // 
-            // comboBoxCreditNum
-            // 
-            this.comboBoxCreditNum.FormattingEnabled = true;
-            this.comboBoxCreditNum.Location = new System.Drawing.Point(622, 18);
-            this.comboBoxCreditNum.Name = "comboBoxCreditNum";
-            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 28);
-            this.comboBoxCreditNum.TabIndex = 17;
-            // 
-            // comboBoxCourseName
-            // 
-            this.comboBoxCourseName.FormattingEnabled = true;
-            this.comboBoxCourseName.Location = new System.Drawing.Point(439, 18);
-            this.comboBoxCourseName.Name = "comboBoxCourseName";
-            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 28);
-            this.comboBoxCourseName.TabIndex = 16;
-            // 
-            // comboBoxTerm
-            // 
-            this.comboBoxTerm.FormattingEnabled = true;
-            this.comboBoxTerm.Location = new System.Drawing.Point(256, 18);
-            this.comboBoxTerm.Name = "comboBoxTerm";
-            this.comboBoxTerm.Size = new System.Drawing.Size(107, 28);
-            this.comboBoxTerm.TabIndex = 15;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(552, 21);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(51, 20);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "学分数";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(369, 21);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 20);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "课程名";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(204, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 20);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "学期";
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Location = new System.Drawing.Point(744, 18);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(75, 31);
-            this.buttonSearch.TabIndex = 7;
-            this.buttonSearch.Text = "查询";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.buttonCompute);
-            this.groupBox6.Controls.Add(this.labelCreditAll);
-            this.groupBox6.Controls.Add(this.label7);
-            this.groupBox6.Controls.Add(this.labelAverage);
-            this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Controls.Add(this.labelGPA);
-            this.groupBox6.Controls.Add(this.buttonRestore);
-            this.groupBox6.Controls.Add(this.label5);
-            this.groupBox6.Location = new System.Drawing.Point(6, 6);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(828, 65);
-            this.groupBox6.TabIndex = 2;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "计算结果";
-            // 
-            // buttonCompute
-            // 
-            this.buttonCompute.Location = new System.Drawing.Point(708, 19);
-            this.buttonCompute.Name = "buttonCompute";
-            this.buttonCompute.Size = new System.Drawing.Size(75, 31);
-            this.buttonCompute.TabIndex = 6;
-            this.buttonCompute.Text = "计算";
-            this.buttonCompute.UseVisualStyleBackColor = true;
-            this.buttonCompute.Click += new System.EventHandler(this.buttonCompute_Click);
-            // 
-            // labelCreditAll
-            // 
-            this.labelCreditAll.AutoSize = true;
-            this.labelCreditAll.Location = new System.Drawing.Point(450, 26);
-            this.labelCreditAll.Name = "labelCreditAll";
-            this.labelCreditAll.Size = new System.Drawing.Size(28, 20);
-            this.labelCreditAll.TabIndex = 5;
-            this.labelCreditAll.Text = "0.0";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(344, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 20);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "所选学分：";
-            // 
-            // labelAverage
-            // 
-            this.labelAverage.AutoSize = true;
-            this.labelAverage.Location = new System.Drawing.Point(267, 26);
-            this.labelAverage.Name = "labelAverage";
-            this.labelAverage.Size = new System.Drawing.Size(28, 20);
-            this.labelAverage.TabIndex = 3;
-            this.labelAverage.Text = "0.0";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(189, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 20);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "平均分：";
-            // 
-            // labelGPA
-            // 
-            this.labelGPA.AutoSize = true;
-            this.labelGPA.Location = new System.Drawing.Point(99, 26);
-            this.labelGPA.Name = "labelGPA";
-            this.labelGPA.Size = new System.Drawing.Size(28, 20);
-            this.labelGPA.TabIndex = 1;
-            this.labelGPA.Text = "0.0";
-            // 
-            // buttonRestore
-            // 
-            this.buttonRestore.Location = new System.Drawing.Point(604, 19);
-            this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(75, 31);
-            this.buttonRestore.TabIndex = 8;
-            this.buttonRestore.Text = "复位";
-            this.buttonRestore.UseVisualStyleBackColor = true;
-            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 20);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "GPA：";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.AllScoredataGridView);
-            this.groupBox5.Location = new System.Drawing.Point(6, 209);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(828, 296);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "分数详情";
-            // 
-            // AllScoredataGridView
-            // 
-            this.AllScoredataGridView.AllowUserToAddRows = false;
-            this.AllScoredataGridView.AllowUserToDeleteRows = false;
-            this.AllScoredataGridView.AllowUserToResizeRows = false;
-            this.AllScoredataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AllScoredataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column6,
-            this.Column5,
-            this.Column11,
-            this.Column7,
-            this.Column8,
-            this.Column9,
-            this.Column10,
-            this.Column12,
-            this.Column13});
-            this.AllScoredataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllScoredataGridView.Location = new System.Drawing.Point(3, 22);
-            this.AllScoredataGridView.MultiSelect = false;
-            this.AllScoredataGridView.Name = "AllScoredataGridView";
-            this.AllScoredataGridView.ReadOnly = true;
-            this.AllScoredataGridView.RowHeadersWidth = 51;
-            this.AllScoredataGridView.RowTemplate.Height = 27;
-            this.AllScoredataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AllScoredataGridView.Size = new System.Drawing.Size(822, 271);
-            this.AllScoredataGridView.TabIndex = 0;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.buttonSelectNoGX);
-            this.groupBox4.Controls.Add(this.buttonSelectNoGB);
-            this.groupBox4.Controls.Add(this.buttonSelectDepart);
-            this.groupBox4.Controls.Add(this.buttonSelectNoZX);
-            this.groupBox4.Controls.Add(this.buttonSelectNoZB);
-            this.groupBox4.Controls.Add(this.buttonSelectNo);
-            this.groupBox4.Controls.Add(this.buttonSelectAll);
-            this.groupBox4.Location = new System.Drawing.Point(6, 77);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(828, 81);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "操作";
-            // 
-            // buttonSelectNoGX
-            // 
-            this.buttonSelectNoGX.Location = new System.Drawing.Point(583, 30);
-            this.buttonSelectNoGX.Name = "buttonSelectNoGX";
-            this.buttonSelectNoGX.Size = new System.Drawing.Size(96, 31);
-            this.buttonSelectNoGX.TabIndex = 15;
-            this.buttonSelectNoGX.Text = "去除公选";
-            this.buttonSelectNoGX.UseVisualStyleBackColor = true;
-            this.buttonSelectNoGX.Click += new System.EventHandler(this.buttonSelectNoGX_Click);
-            // 
-            // buttonSelectNoGB
-            // 
-            this.buttonSelectNoGB.Location = new System.Drawing.Point(465, 30);
-            this.buttonSelectNoGB.Name = "buttonSelectNoGB";
-            this.buttonSelectNoGB.Size = new System.Drawing.Size(98, 31);
-            this.buttonSelectNoGB.TabIndex = 14;
-            this.buttonSelectNoGB.Text = "去除公必";
-            this.buttonSelectNoGB.UseVisualStyleBackColor = true;
-            this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
-            // 
-            // buttonSelectDepart
-            // 
-            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
-            this.buttonSelectDepart.Name = "buttonSelectDepart";
-            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
-            this.buttonSelectDepart.TabIndex = 13;
-            this.buttonSelectDepart.Text = "去除非本院";
-            this.buttonSelectDepart.UseVisualStyleBackColor = true;
-            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
-            // 
-            // buttonSelectNoZX
-            // 
-            this.buttonSelectNoZX.Location = new System.Drawing.Point(348, 30);
-            this.buttonSelectNoZX.Name = "buttonSelectNoZX";
-            this.buttonSelectNoZX.Size = new System.Drawing.Size(92, 31);
-            this.buttonSelectNoZX.TabIndex = 12;
-            this.buttonSelectNoZX.Text = "去除专选";
-            this.buttonSelectNoZX.UseVisualStyleBackColor = true;
-            this.buttonSelectNoZX.Click += new System.EventHandler(this.buttonSelectNoZX_Click);
-            // 
-            // buttonSelectNoZB
-            // 
-            this.buttonSelectNoZB.Location = new System.Drawing.Point(234, 30);
-            this.buttonSelectNoZB.Name = "buttonSelectNoZB";
-            this.buttonSelectNoZB.Size = new System.Drawing.Size(90, 31);
-            this.buttonSelectNoZB.TabIndex = 11;
-            this.buttonSelectNoZB.Text = "去除专必";
-            this.buttonSelectNoZB.UseVisualStyleBackColor = true;
-            this.buttonSelectNoZB.Click += new System.EventHandler(this.buttonSelectNoZB_Click);
-            // 
-            // buttonSelectNo
-            // 
-            this.buttonSelectNo.Location = new System.Drawing.Point(125, 30);
-            this.buttonSelectNo.Name = "buttonSelectNo";
-            this.buttonSelectNo.Size = new System.Drawing.Size(88, 31);
-            this.buttonSelectNo.TabIndex = 10;
-            this.buttonSelectNo.Text = "全不选";
-            this.buttonSelectNo.UseVisualStyleBackColor = true;
-            this.buttonSelectNo.Click += new System.EventHandler(this.buttonSelectNo_Click);
-            // 
-            // buttonSelectAll
-            // 
-            this.buttonSelectAll.Location = new System.Drawing.Point(22, 30);
-            this.buttonSelectAll.Name = "buttonSelectAll";
-            this.buttonSelectAll.Size = new System.Drawing.Size(85, 31);
-            this.buttonSelectAll.TabIndex = 9;
-            this.buttonSelectAll.Text = "全选";
-            this.buttonSelectAll.UseVisualStyleBackColor = true;
-            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(837, 508);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "关注管理";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // bindingSource_Courses
-            // 
-            this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
-            // 
             // LessonNum
             // 
             this.LessonNum.DataPropertyName = "LessonNum";
@@ -1076,6 +713,7 @@
             this.LessonType.MinimumWidth = 6;
             this.LessonType.Name = "LessonType";
             this.LessonType.ReadOnly = true;
+            this.LessonType.Width = 200;
             // 
             // LearnType
             // 
@@ -1170,6 +808,296 @@
             this.S.Visible = false;
             this.S.Width = 125;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.queryButton);
+            this.groupBox1.Controls.Add(this.queryTextBox);
+            this.groupBox1.Controls.Add(this.queryComboBox);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(817, 61);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "查询课程";
+            // 
+            // queryButton
+            // 
+            this.queryButton.Location = new System.Drawing.Point(619, 23);
+            this.queryButton.Name = "queryButton";
+            this.queryButton.Size = new System.Drawing.Size(123, 29);
+            this.queryButton.TabIndex = 2;
+            this.queryButton.Text = "查询";
+            this.queryButton.UseVisualStyleBackColor = true;
+            this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
+            // 
+            // queryTextBox
+            // 
+            this.queryTextBox.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.queryTextBox.Location = new System.Drawing.Point(239, 23);
+            this.queryTextBox.Name = "queryTextBox";
+            this.queryTextBox.Size = new System.Drawing.Size(347, 44);
+            this.queryTextBox.TabIndex = 1;
+            // 
+            // queryComboBox
+            // 
+            this.queryComboBox.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.queryComboBox.FormattingEnabled = true;
+            this.queryComboBox.Items.AddRange(new object[] {
+            "全部课程",
+            "按课程号查询",
+            "按课程名查询",
+            "按学分查询",
+            "按授课学院查询",
+            "按专业查询",
+            "按授课教师查询"});
+            this.queryComboBox.Location = new System.Drawing.Point(6, 23);
+            this.queryComboBox.Name = "queryComboBox";
+            this.queryComboBox.Size = new System.Drawing.Size(201, 44);
+            this.queryComboBox.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox7);
+            this.tabPage3.Controls.Add(this.groupBox6);
+            this.tabPage3.Controls.Add(this.groupBox5);
+            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 40);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(823, 487);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "成绩管理";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.comboBoxYear);
+            this.groupBox7.Controls.Add(this.label11);
+            this.groupBox7.Controls.Add(this.comboBoxCreditNum);
+            this.groupBox7.Controls.Add(this.comboBoxCourseName);
+            this.groupBox7.Controls.Add(this.comboBoxTerm);
+            this.groupBox7.Controls.Add(this.label10);
+            this.groupBox7.Controls.Add(this.label9);
+            this.groupBox7.Controls.Add(this.label8);
+            this.groupBox7.Controls.Add(this.buttonSearch);
+            this.groupBox7.Location = new System.Drawing.Point(7, 159);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(831, 55);
+            this.groupBox7.TabIndex = 3;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "查询";
+            // 
+            // comboBoxYear
+            // 
+            this.comboBoxYear.FormattingEnabled = true;
+            this.comboBoxYear.Location = new System.Drawing.Point(89, 17);
+            this.comboBoxYear.Name = "comboBoxYear";
+            this.comboBoxYear.Size = new System.Drawing.Size(107, 39);
+            this.comboBoxYear.TabIndex = 19;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(37, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 32);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "学年";
+            // 
+            // comboBoxCreditNum
+            // 
+            this.comboBoxCreditNum.FormattingEnabled = true;
+            this.comboBoxCreditNum.Location = new System.Drawing.Point(622, 18);
+            this.comboBoxCreditNum.Name = "comboBoxCreditNum";
+            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 39);
+            this.comboBoxCreditNum.TabIndex = 17;
+            // 
+            // comboBoxCourseName
+            // 
+            this.comboBoxCourseName.FormattingEnabled = true;
+            this.comboBoxCourseName.Location = new System.Drawing.Point(439, 18);
+            this.comboBoxCourseName.Name = "comboBoxCourseName";
+            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 39);
+            this.comboBoxCourseName.TabIndex = 16;
+            // 
+            // comboBoxTerm
+            // 
+            this.comboBoxTerm.FormattingEnabled = true;
+            this.comboBoxTerm.Location = new System.Drawing.Point(256, 18);
+            this.comboBoxTerm.Name = "comboBoxTerm";
+            this.comboBoxTerm.Size = new System.Drawing.Size(107, 39);
+            this.comboBoxTerm.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(552, 21);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(90, 32);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "学分数";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(369, 21);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 32);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "课程名";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(204, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 32);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "学期";
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(744, 18);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 31);
+            this.buttonSearch.TabIndex = 7;
+            this.buttonSearch.Text = "查询";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.buttonCompute);
+            this.groupBox6.Controls.Add(this.labelCreditAll);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.labelAverage);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.labelGPA);
+            this.groupBox6.Controls.Add(this.buttonRestore);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Location = new System.Drawing.Point(6, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(828, 65);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "计算结果";
+            // 
+            // buttonCompute
+            // 
+            this.buttonCompute.Location = new System.Drawing.Point(708, 19);
+            this.buttonCompute.Name = "buttonCompute";
+            this.buttonCompute.Size = new System.Drawing.Size(75, 31);
+            this.buttonCompute.TabIndex = 6;
+            this.buttonCompute.Text = "计算";
+            this.buttonCompute.UseVisualStyleBackColor = true;
+            this.buttonCompute.Click += new System.EventHandler(this.buttonCompute_Click);
+            // 
+            // labelCreditAll
+            // 
+            this.labelCreditAll.AutoSize = true;
+            this.labelCreditAll.Location = new System.Drawing.Point(450, 26);
+            this.labelCreditAll.Name = "labelCreditAll";
+            this.labelCreditAll.Size = new System.Drawing.Size(51, 32);
+            this.labelCreditAll.TabIndex = 5;
+            this.labelCreditAll.Text = "0.0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(344, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(140, 32);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "所选学分：";
+            // 
+            // labelAverage
+            // 
+            this.labelAverage.AutoSize = true;
+            this.labelAverage.Location = new System.Drawing.Point(267, 26);
+            this.labelAverage.Name = "labelAverage";
+            this.labelAverage.Size = new System.Drawing.Size(51, 32);
+            this.labelAverage.TabIndex = 3;
+            this.labelAverage.Text = "0.0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(189, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 32);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "平均分：";
+            // 
+            // labelGPA
+            // 
+            this.labelGPA.AutoSize = true;
+            this.labelGPA.Location = new System.Drawing.Point(99, 26);
+            this.labelGPA.Name = "labelGPA";
+            this.labelGPA.Size = new System.Drawing.Size(51, 32);
+            this.labelGPA.TabIndex = 1;
+            this.labelGPA.Text = "0.0";
+            // 
+            // buttonRestore
+            // 
+            this.buttonRestore.Location = new System.Drawing.Point(604, 19);
+            this.buttonRestore.Name = "buttonRestore";
+            this.buttonRestore.Size = new System.Drawing.Size(75, 31);
+            this.buttonRestore.TabIndex = 8;
+            this.buttonRestore.Text = "复位";
+            this.buttonRestore.UseVisualStyleBackColor = true;
+            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(28, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 32);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "GPA：";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.AllScoredataGridView);
+            this.groupBox5.Location = new System.Drawing.Point(6, 209);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(828, 296);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "分数详情";
+            // 
+            // AllScoredataGridView
+            // 
+            this.AllScoredataGridView.AllowUserToAddRows = false;
+            this.AllScoredataGridView.AllowUserToDeleteRows = false;
+            this.AllScoredataGridView.AllowUserToResizeRows = false;
+            this.AllScoredataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AllScoredataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column6,
+            this.Column5,
+            this.Column11,
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column12,
+            this.Column13});
+            this.AllScoredataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllScoredataGridView.Location = new System.Drawing.Point(3, 36);
+            this.AllScoredataGridView.MultiSelect = false;
+            this.AllScoredataGridView.Name = "AllScoredataGridView";
+            this.AllScoredataGridView.ReadOnly = true;
+            this.AllScoredataGridView.RowHeadersWidth = 51;
+            this.AllScoredataGridView.RowTemplate.Height = 27;
+            this.AllScoredataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.AllScoredataGridView.Size = new System.Drawing.Size(822, 257);
+            this.AllScoredataGridView.TabIndex = 0;
+            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "LessonName";
@@ -1186,6 +1114,7 @@
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 200;
             // 
             // Column3
             // 
@@ -1288,12 +1217,253 @@
             this.Column13.Visible = false;
             this.Column13.Width = 125;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.buttonSelectNoGX);
+            this.groupBox4.Controls.Add(this.buttonSelectNoGB);
+            this.groupBox4.Controls.Add(this.buttonSelectDepart);
+            this.groupBox4.Controls.Add(this.buttonSelectNoZX);
+            this.groupBox4.Controls.Add(this.buttonSelectNoZB);
+            this.groupBox4.Controls.Add(this.buttonSelectNo);
+            this.groupBox4.Controls.Add(this.buttonSelectAll);
+            this.groupBox4.Location = new System.Drawing.Point(6, 77);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(828, 81);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "操作";
+            // 
+            // buttonSelectNoGX
+            // 
+            this.buttonSelectNoGX.Location = new System.Drawing.Point(583, 30);
+            this.buttonSelectNoGX.Name = "buttonSelectNoGX";
+            this.buttonSelectNoGX.Size = new System.Drawing.Size(96, 31);
+            this.buttonSelectNoGX.TabIndex = 15;
+            this.buttonSelectNoGX.Text = "去除公选";
+            this.buttonSelectNoGX.UseVisualStyleBackColor = true;
+            this.buttonSelectNoGX.Click += new System.EventHandler(this.buttonSelectNoGX_Click);
+            // 
+            // buttonSelectNoGB
+            // 
+            this.buttonSelectNoGB.Location = new System.Drawing.Point(465, 30);
+            this.buttonSelectNoGB.Name = "buttonSelectNoGB";
+            this.buttonSelectNoGB.Size = new System.Drawing.Size(98, 31);
+            this.buttonSelectNoGB.TabIndex = 14;
+            this.buttonSelectNoGB.Text = "去除公必";
+            this.buttonSelectNoGB.UseVisualStyleBackColor = true;
+            this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
+            // 
+            // buttonSelectDepart
+            // 
+            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
+            this.buttonSelectDepart.Name = "buttonSelectDepart";
+            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
+            this.buttonSelectDepart.TabIndex = 13;
+            this.buttonSelectDepart.Text = "去除非本院";
+            this.buttonSelectDepart.UseVisualStyleBackColor = true;
+            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
+            // 
+            // buttonSelectNoZX
+            // 
+            this.buttonSelectNoZX.Location = new System.Drawing.Point(348, 30);
+            this.buttonSelectNoZX.Name = "buttonSelectNoZX";
+            this.buttonSelectNoZX.Size = new System.Drawing.Size(92, 31);
+            this.buttonSelectNoZX.TabIndex = 12;
+            this.buttonSelectNoZX.Text = "去除专选";
+            this.buttonSelectNoZX.UseVisualStyleBackColor = true;
+            this.buttonSelectNoZX.Click += new System.EventHandler(this.buttonSelectNoZX_Click);
+            // 
+            // buttonSelectNoZB
+            // 
+            this.buttonSelectNoZB.Location = new System.Drawing.Point(234, 30);
+            this.buttonSelectNoZB.Name = "buttonSelectNoZB";
+            this.buttonSelectNoZB.Size = new System.Drawing.Size(90, 31);
+            this.buttonSelectNoZB.TabIndex = 11;
+            this.buttonSelectNoZB.Text = "去除专必";
+            this.buttonSelectNoZB.UseVisualStyleBackColor = true;
+            this.buttonSelectNoZB.Click += new System.EventHandler(this.buttonSelectNoZB_Click);
+            // 
+            // buttonSelectNo
+            // 
+            this.buttonSelectNo.Location = new System.Drawing.Point(125, 30);
+            this.buttonSelectNo.Name = "buttonSelectNo";
+            this.buttonSelectNo.Size = new System.Drawing.Size(88, 31);
+            this.buttonSelectNo.TabIndex = 10;
+            this.buttonSelectNo.Text = "全不选";
+            this.buttonSelectNo.UseVisualStyleBackColor = true;
+            this.buttonSelectNo.Click += new System.EventHandler(this.buttonSelectNo_Click);
+            // 
+            // buttonSelectAll
+            // 
+            this.buttonSelectAll.Location = new System.Drawing.Point(22, 30);
+            this.buttonSelectAll.Name = "buttonSelectAll";
+            this.buttonSelectAll.Size = new System.Drawing.Size(85, 31);
+            this.buttonSelectAll.TabIndex = 9;
+            this.buttonSelectAll.Text = "全选";
+            this.buttonSelectAll.UseVisualStyleBackColor = true;
+            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.splitContainer1);
+            this.tabPage4.Controls.Add(this.panel3);
+            this.tabPage4.Location = new System.Drawing.Point(4, 40);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(823, 487);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "关注管理";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 77);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox8);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox9);
+            this.splitContainer1.Size = new System.Drawing.Size(817, 407);
+            this.splitContainer1.SplitterDistance = 271;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.allAttentionUserDataGridView);
+            this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox8.Location = new System.Drawing.Point(0, 0);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(271, 407);
+            this.groupBox8.TabIndex = 0;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "用户列表";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.attentionDataGridView);
+            this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox9.Location = new System.Drawing.Point(0, 0);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(542, 407);
+            this.groupBox9.TabIndex = 0;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "关注点列表";
+            // 
+            // attentionDataGridView
+            // 
+            this.attentionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.attentionDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.attentionDataGridView.Location = new System.Drawing.Point(3, 36);
+            this.attentionDataGridView.Name = "attentionDataGridView";
+            this.attentionDataGridView.RowHeadersWidth = 82;
+            this.attentionDataGridView.RowTemplate.Height = 37;
+            this.attentionDataGridView.Size = new System.Drawing.Size(536, 368);
+            this.attentionDataGridView.TabIndex = 0;
+            this.attentionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.remove_attention_buttom);
+            this.panel3.Controls.Add(this.search_attention_buttom);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.type_comboBox);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(817, 74);
+            this.panel3.TabIndex = 0;
+            // 
+            // remove_attention_buttom
+            // 
+            this.remove_attention_buttom.Location = new System.Drawing.Point(675, 17);
+            this.remove_attention_buttom.Name = "remove_attention_buttom";
+            this.remove_attention_buttom.Size = new System.Drawing.Size(119, 45);
+            this.remove_attention_buttom.TabIndex = 7;
+            this.remove_attention_buttom.Text = "移除";
+            this.remove_attention_buttom.UseVisualStyleBackColor = true;
+            this.remove_attention_buttom.Click += new System.EventHandler(this.remove_attention_buttom_Click);
+            // 
+            // search_attention_buttom
+            // 
+            this.search_attention_buttom.Location = new System.Drawing.Point(557, 17);
+            this.search_attention_buttom.Name = "search_attention_buttom";
+            this.search_attention_buttom.Size = new System.Drawing.Size(112, 44);
+            this.search_attention_buttom.TabIndex = 6;
+            this.search_attention_buttom.Text = "查询";
+            this.search_attention_buttom.UseVisualStyleBackColor = true;
+            this.search_attention_buttom.Click += new System.EventHandler(this.search_attention_buttom_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(265, 24);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(115, 32);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "查询内容";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(386, 21);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(165, 40);
+            this.textBox1.TabIndex = 3;
+            // 
+            // type_comboBox
+            // 
+            this.type_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.type_comboBox.FormattingEnabled = true;
+            this.type_comboBox.Items.AddRange(new object[] {
+            "关注者QQ",
+            "关注群号",
+            "关注点"});
+            this.type_comboBox.Location = new System.Drawing.Point(125, 23);
+            this.type_comboBox.Name = "type_comboBox";
+            this.type_comboBox.Size = new System.Drawing.Size(134, 39);
+            this.type_comboBox.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 24);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(115, 32);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "查询类型";
+            // 
+            // bindingSource_attention
+            // 
+            this.bindingSource_attention.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            // 
+            // bindingSource_attentionUser
+            // 
+            this.bindingSource_attentionUser.Position = 0;
+            this.bindingSource_attentionUser.CurrentChanged += new System.EventHandler(this.bindingSource_attentionUser_CurrentChanged);
+            // 
+            // allAttentionUserDataGridView
+            // 
+            this.allAttentionUserDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.allAttentionUserDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.allAttentionUserDataGridView.Location = new System.Drawing.Point(3, 36);
+            this.allAttentionUserDataGridView.Name = "allAttentionUserDataGridView";
+            this.allAttentionUserDataGridView.RowHeadersWidth = 82;
+            this.allAttentionUserDataGridView.RowTemplate.Height = 37;
+            this.allAttentionUserDataGridView.Size = new System.Drawing.Size(265, 368);
+            this.allAttentionUserDataGridView.TabIndex = 0;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(843, 539);
+            this.ClientSize = new System.Drawing.Size(798, 522);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -1325,8 +1495,21 @@
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.AllScoredataGridView)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.attentionDataGridView)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StuScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Courses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_attention)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource_attentionUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.allAttentionUserDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1441,6 +1624,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox type_comboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.BindingSource bindingSource_attention;
+        private System.Windows.Forms.BindingSource bindingSource_attentionUser;
+        private System.Windows.Forms.Button remove_attention_buttom;
+        private System.Windows.Forms.Button search_attention_buttom;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.DataGridView attentionDataGridView;
+        private System.Windows.Forms.DataGridView allAttentionUserDataGridView;
     }
 }
 

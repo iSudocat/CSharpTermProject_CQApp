@@ -25,11 +25,11 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 {
                     if (User.AddWeeklySchedule(GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
                     {
-                        Replay("【添加成功】");
+                        Reply("【添加成功】");
                     }
                 }
                 else
-                    Replay("【添加失败】日程时间已过，无法提醒");
+                    Reply("【添加失败】日程时间已过，无法提醒");
             }
             catch (Exception e)
             {

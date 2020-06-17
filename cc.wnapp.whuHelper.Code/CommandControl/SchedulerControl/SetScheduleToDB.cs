@@ -23,15 +23,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 {
                     if (User.SetSchedule(scheduleID, GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent))
                     {
-                        Replay("【修改成功】");
+                        Reply("【修改成功】");
                     }
                 }
                 else
-                    Replay("【修改失败】日程时间已过，无法提醒");
+                    Reply("【修改失败】日程时间已过，无法提醒");
             }
             catch(Exception e)
             {
-                Replay("【格式有误，修改失败】");
+                Reply("【格式有误，修改失败】");
             }
             return 0;
         }

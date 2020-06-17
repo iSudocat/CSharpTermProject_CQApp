@@ -7,7 +7,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
 
     /// <summary>
     /// 添加群日程
-    /// 命令格式：添加群周日程~周数|2020/6/2 18:30:00(日常生活):吃饭 
+    /// 命令格式：添加群周日程~周数|2020/6/2 18:30(日常生活):吃饭 
     /// </summary>
     public class AddWeeklyScheduleToDB : MsgEventControl
     {
@@ -21,10 +21,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 string str = message.Split(')')[1];
                 var scheduleContent = textOp.GetRightText(str, ":");
                 UserService User = UserService.GetFromEvent(CQEventArgsArgs);
-                if (User.AddWeeklySchedule(GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                if (GlobalHelper.StrToDateTime(dateTime).CompareTo(DateTime.Now) > 0)
                 {
-                    Replay("【添加成功】");
+                    if (User.AddWeeklySchedule(GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                    {
+                        Replay("【添加成功】");
+                    }
                 }
+                else
+                    Replay("【添加失败】日程时间已过，无法提醒");
             }
             catch (Exception e)
             {

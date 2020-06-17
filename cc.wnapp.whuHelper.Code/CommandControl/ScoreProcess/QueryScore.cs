@@ -20,7 +20,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
         {
             string StuID = EasOP.GetStuID(fromQQ);
             Regex regex = new Regex(@"[0-9]{4}");
-            Regex regexTerm = new Regex(@"第?[123一二三]?学期?"); //可以匹配1,2,3,一,二,三,第x学期
+            Regex regexTerm = new Regex(@"第+[123一二三]+学+期+"); //可以匹配1,2,3,一,二,三,第x学期
             Regex regexAny = new Regex(@"[A-Za-z0-9\u4e00-\u9fa5]+"); //匹配课程名
             if (StuID != "")
             {
@@ -29,16 +29,18 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                 int isIlegal = 0;
                 bool flag = false;
                 string msg = message.Replace(" ", "");     //去除空格
-                StringBuilder str = new StringBuilder();
-                str.AppendFormat(padRightEx("课程名", 10) + padRightEx("学分", 5) + padRightEx("成绩", 5), Environment.NewLine);
+                string str;
+                str = padRightEx("课程名", 30) + padRightEx("学分", 6) + padRightEx("成绩", 6) + "\n";
                 //无额外操作，直接返回总成绩
                 if (msg == "查询成绩")
                 {
                     foreach (Score temp in Slist)
                     {
-                        str.AppendFormat(padRightEx(temp.LessonName, 10) + padRightEx(temp.Credit, 5) + padRightEx(temp.Mark, 5), Environment.NewLine);
+                        str += padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
+                        /* str.Append(padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6));
+                         str.Append(Environment.NewLine);*/
                     }
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\n"+str.ToString());
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\n"+str);
                 }
                 //存在操作
                 else
@@ -48,18 +50,20 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                         string msg1 = msg.Substring(4);
                         string[] msgprocess = msg1.Split('|');
                         bool isCourseFlag = false;
+                        int isCourse = 0;
                         List<Score> SlistCourse = new List<Score>();
                         for (int i = 0; i < msgprocess.Length; i++)
                         {
                             isIlegal = 0;
                             string msgtemp = msgprocess[i];
-                            if (regexAny.IsMatch(msgtemp) && (i == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
+                            if (regexAny.IsMatch(msgtemp) && (isCourse == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
                             {
                                 Score temp = ScoreService.onlyThisCourse(Slist, msgtemp);
                                 if (temp != null)
                                 {
                                     SlistCourse.Add(temp);
                                     isCourseFlag = true;
+                                    isCourse++;
                                     continue;
                                 }
                             }
@@ -114,9 +118,11 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                             Slist = SlistCourse;
                         foreach (Score temp in Slist)
                         {
-                            str.AppendFormat(padRightEx(temp.LessonName, 10) + padRightEx(temp.Credit, 5) + padRightEx(temp.Mark, 5), Environment.NewLine);
+                            str += padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
+                            /*str.Append(padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6));
+                            str.Append(Environment.NewLine);*/
                         }
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\n" + str.ToString());
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\n" + str);
                     }
                     catch (Exception e)
                     {
@@ -153,7 +159,8 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                 }
                
             }
-            string w = str.PadRight(totalByteCount - dcount);
+            int p = Math.Max(0, totalByteCount - dcount);
+            string w = str.PadRight(p);
             return w;
         }
     }

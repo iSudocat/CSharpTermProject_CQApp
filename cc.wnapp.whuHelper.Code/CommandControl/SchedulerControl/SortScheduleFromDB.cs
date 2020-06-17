@@ -22,15 +22,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 {
                     foreach (var schedule in schedules)
                     {
-                        Replay(schedule.DisplaySchedule());
+                        Reply(schedule.DisplaySchedule());
                     }
                 }
                 else
-                    Replay("【暂无日程】");
+                    Reply("【暂无日程】");
             }
             catch (Exception e)
             {
-                Replay("【格式有误，查看失败】");
+                Reply("【格式有误，查看失败】");
             }
             return 0;
         }

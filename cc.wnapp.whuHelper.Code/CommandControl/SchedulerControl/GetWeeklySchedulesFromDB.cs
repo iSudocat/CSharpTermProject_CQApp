@@ -20,15 +20,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                 {
                     foreach (var weeklySchedule in weeklySchedules)
                     {
-                        Replay(weeklySchedule.DisplaySchedule());
+                        Reply(weeklySchedule.DisplaySchedule());
                     }
                 }
                 else
-                    Replay("【暂无周日程】");
+                    Reply("【暂无周日程】");
             }
             catch (Exception e)
             {
-                Replay("【格式有误，查看失败】");
+                Reply("【格式有误，查看失败】");
             }
             return 0;
         }

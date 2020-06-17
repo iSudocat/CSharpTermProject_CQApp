@@ -23,7 +23,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
                              "查看周日程\n" +
                              "按序查看日程%时间or类型\n" +
                              "按序查看周日程%时间or类型";
-            Replay(Command);
+            Reply(Command);
             return 0;
         }
     }

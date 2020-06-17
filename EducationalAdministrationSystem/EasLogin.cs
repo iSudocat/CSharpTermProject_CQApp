@@ -60,20 +60,20 @@ namespace Eas
                         
                         if (i == TryNum)
                         {
-                            Console.WriteLine("验证码错误，已到达最大尝试上限。");
+                            //Console.WriteLine("验证码错误，已到达最大尝试上限。");
                             throw ex;
                         }
                         else
                         {
-                            Console.WriteLine("验证码错误，准备重试。");
+                            //Console.WriteLine("验证码错误，准备重试。");
                             System.Threading.Thread.Sleep(1000);    //休眠1s后重试请求
                             continue;
                         }
+                        
                     }
                     else
                     {
                         throw ex;
-
                     }
                 }
             }

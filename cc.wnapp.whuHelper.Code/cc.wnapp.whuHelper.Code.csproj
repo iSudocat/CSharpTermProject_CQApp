@@ -157,6 +157,8 @@
     <Compile Include="CommandControl\ClassSchedule\QueryCourseTable.cs" />
     <Compile Include="CommandControl\ClassSchedule\QueryFunction.cs" />
     <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
+    <Compile Include="CommandControl\EducationalAdministrationSystem\UpdateScoreDB.cs" />
+    <Compile Include="CommandControl\EducationalAdministrationSystem\UpdateCourseDB.cs" />
     <Compile Include="CommandControl\Notification\AddAttention.cs" />
     <Compile Include="CommandControl\Notification\AttentionHelp.cs" />
     <Compile Include="CommandControl\Notification\GetAllAttention.cs" />

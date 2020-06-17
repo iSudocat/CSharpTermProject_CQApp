@@ -38,7 +38,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
         /// <returns>0:忽略 1:拦截</returns>
         public abstract int Handle();
 
-        public int Replay(string Msg)
+        public int Reply(string Msg)
         {
             if (CQEventArgsArgs == null)
             {
@@ -53,7 +53,7 @@ namespace cc.wnapp.whuHelper.Code.CommandRouter
             }
             else if (CQEventArgsArgs is CQPrivateMessageEventArgs)
             {
-                return CQ.Api.SendGroupMessage(
+                return CQ.Api.SendPrivateMessage(
                     ((CQPrivateMessageEventArgs)CQEventArgsArgs).FromQQ,
                     Msg
                 ).Id;

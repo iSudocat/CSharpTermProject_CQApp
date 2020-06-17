@@ -4,13 +4,12 @@ using Tools;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
 {
+    /// <summary>
+    /// 绑定教务系统账号命令处理函数
+    /// 命令格式：绑定教务系统 学号|密码
+    /// </summary>
     public class BindEasAccount : PrivateMsgEventControl
     {
-
-        /// <summary>
-        /// 绑定教务系统账号命令处理函数
-        /// 命令格式：绑定教务系统 学号|密码
-        /// </summary>
         public override int HandleImpl()
         {
             string msg = message.Replace(" ", "");     //去除空格

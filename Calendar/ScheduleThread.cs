@@ -20,7 +20,8 @@ namespace Schedule
                 List<WeeklySchedule> weeklySchedules = ScheduleInterface.GetGlobalWeeklySchedules();
                 foreach (var schedule in schedules)
                 {
-                    if (schedule.UserType == 0 && schedule.ScheduleTime.ToString() == DateTime.Now.ToString())
+                    if (schedule.UserType == 0 && schedule.ScheduleTime.ToString().Substring(0, schedule.ScheduleTime.ToString().Length-3) 
+                        == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length-3))  //只判断到分钟级别
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(schedule.UserQQ.ToString()), $"【日程提醒】 {schedule.ScheduleContent}");
                 }
                 foreach (var weeklySchedule in weeklySchedules)
@@ -28,7 +29,8 @@ namespace Schedule
                     int throughWeek = 0;//经过周数
                     while (weeklySchedule.WeekSpan > 0)
                     {
-                        if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.AddDays(7 * throughWeek).ToString() == DateTime.Now.ToString())
+                        if (weeklySchedule.UserType == 0 && weeklySchedule.ScheduleTime.AddDays(7 * throughWeek).ToString().Substring(0, weeklySchedule.ScheduleTime.ToString().Length - 3) 
+                            == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
                         {
                             CQ.Api.SendPrivateMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【周日程提醒】 {weeklySchedule.ScheduleContent}");
                             weeklySchedule.WeekSpan--;
@@ -36,7 +38,7 @@ namespace Schedule
                         }
                     }
                 }
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(60000);
             }
         }
 
@@ -51,7 +53,8 @@ namespace Schedule
                 List<WeeklySchedule> weeklySchedules = ScheduleInterface.GetGlobalWeeklySchedules();
                 foreach (var schedule in schedules)
                 {
-                    if (schedule.UserType == 1 && schedule.ScheduleTime.ToString()==DateTime.Now.ToString())
+                    if (schedule.UserType == 1 && schedule.ScheduleTime.ToString().Substring(0, schedule.ScheduleTime.ToString().Length - 3)
+                        == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
                         CQ.Api.SendGroupMessage(Convert.ToInt64(schedule.UserQQ.ToString()), $"【群日程提醒】 {schedule.ScheduleContent}");
                 }
                 foreach (var weeklySchedule in weeklySchedules)
@@ -59,7 +62,8 @@ namespace Schedule
                     int throughWeek = 0;//经过周数
                     while (weeklySchedule.WeekSpan > 0)
                     {
-                        if (weeklySchedule.UserType == 1 && weeklySchedule.ScheduleTime.AddDays(7 * throughWeek).ToString() == DateTime.Now.ToString())
+                        if (weeklySchedule.UserType == 1 && weeklySchedule.ScheduleTime.AddDays(7 * throughWeek).ToString().Substring(0, weeklySchedule.ScheduleTime.ToString().Length - 3)
+                            == DateTime.Now.ToString().Substring(0, DateTime.Now.ToString().Length - 3))
                         { 
                         CQ.Api.SendGroupMessage(Convert.ToInt64(weeklySchedule.UserQQ.ToString()), $"【群周日程提醒】 {weeklySchedule.ScheduleContent}");
                         weeklySchedule.WeekSpan--;
@@ -67,7 +71,7 @@ namespace Schedule
                         }
                     }
                 }                
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(60000);
             }
         }
     }

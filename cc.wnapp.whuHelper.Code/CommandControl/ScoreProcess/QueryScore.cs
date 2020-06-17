@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using ComputeScore;
 using Eas;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
 {
 
     /// <summary>
-    /// 计算成绩处理函数，需要绑定
-    /// 命令格式：计算成绩 操作1|操作2|操作3
-    /// 可选操作：去除公选、去除公必、去除专必、去除专选、去除非本院、20XX、第n学期、课程名（课程名如果多个返回多个选中的课程，其他条件不取）
+    /// 查询成绩处理函数，需要绑定
+    /// 命令格式：查询成绩 操作1|操作2|操作3
+    /// 可选操作：去除公选、去除公必、去除专必、去除专选、去除非本院、20XX、第n学期、课程名
     /// </summary>
-    public class ComputeScore : PrivateMsgEventControl
+    public class QueryScore : PrivateMsgEventControl
     {
 
         public override int HandleImpl()
@@ -28,11 +29,16 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                 int isIlegal = 0;
                 bool flag = false;
                 string msg = message.Replace(" ", "");     //去除空格
+                StringBuilder str = new StringBuilder();
+                str.AppendFormat(padRightEx("课程名", 10) + padRightEx("学分", 5) + padRightEx("成绩", 5), Environment.NewLine);
                 //无额外操作，直接返回总成绩
-                if (msg == "计算成绩")
+                if (msg == "查询成绩")
                 {
-                    StuGPA = ScoreService.AllCredit(Slist);
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【GPA信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
+                    foreach (Score temp in Slist)
+                    {
+                        str.AppendFormat(padRightEx(temp.LessonName, 10) + padRightEx(temp.Credit, 5) + padRightEx(temp.Mark, 5), Environment.NewLine);
+                    }
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\n"+str.ToString());
                 }
                 //存在操作
                 else
@@ -47,7 +53,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                         {
                             isIlegal = 0;
                             string msgtemp = msgprocess[i];
-                            if(regexAny.IsMatch(msgtemp) && (i == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
+                            if (regexAny.IsMatch(msgtemp) && (i == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
                             {
                                 Score temp = ScoreService.onlyThisCourse(Slist, msgtemp);
                                 if (temp != null)
@@ -106,8 +112,11 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                         }
                         if (isCourseFlag)
                             Slist = SlistCourse;
-                        StuGPA = ScoreService.Compute(Slist);
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【GPA信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
+                        foreach (Score temp in Slist)
+                        {
+                            str.AppendFormat(padRightEx(temp.LessonName, 10) + padRightEx(temp.Credit, 5) + padRightEx(temp.Mark, 5), Environment.NewLine);
+                        }
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\n" + str.ToString());
                     }
                     catch (Exception e)
                     {
@@ -130,6 +139,22 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
             }
 
             return 0;
+        }
+
+        private static string padRightEx(string str,int totalByteCount)
+        {
+            Encoding coding = Encoding.GetEncoding("gb2312");
+            int dcount = 0;
+            foreach(char ch in str.ToCharArray())
+            {
+                if(coding.GetByteCount(ch.ToString()) == 2)
+                {
+                    dcount++;
+                }
+               
+            }
+            string w = str.PadRight(totalByteCount - dcount);
+            return w;
         }
     }
 }

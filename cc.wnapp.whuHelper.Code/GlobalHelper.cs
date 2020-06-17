@@ -12,7 +12,7 @@ namespace cc.wnapp.whuHelper.Code
             string theRest = dateTime.Split('/')[2].Split(' ')[1];
             int hour = int.Parse(theRest.Split(':')[0]);
             int minute = int.Parse(theRest.Split(':')[1]);
-            int second = int.Parse(theRest.Split(':')[2]);
+            int second = 0;
             return new DateTime(year, month, day, hour, minute, second);
         }
     }

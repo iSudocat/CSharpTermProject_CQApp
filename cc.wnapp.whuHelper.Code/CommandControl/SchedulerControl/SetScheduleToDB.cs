@@ -12,14 +12,26 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl
     {
         public override int HandleImpl()
         {
-            var scheduleID = textOp.GetMiddleText(message, "-", "|");
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            var scheduleContent = textOp.GetRightText(message, ":");
-            UserService User = UserService.GetFromEvent(CQEventArgsArgs);
-            if (User.SetSchedule(scheduleID, GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent))
+            try
             {
-                Reply("【修改成功】");
+                var scheduleID = textOp.GetMiddleText(message, "-", "|");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                var scheduleContent = textOp.GetRightText(message, ":");
+                UserService User = UserService.GetFromEvent(CQEventArgsArgs);
+                if (GlobalHelper.StrToDateTime(dateTime).CompareTo(DateTime.Now) > 0)
+                {
+                    if (User.SetSchedule(scheduleID, GlobalHelper.StrToDateTime(dateTime), scheduleType, scheduleContent))
+                    {
+                        Replay("【修改成功】");
+                    }
+                }
+                else
+                    Replay("【修改失败】日程时间已过，无法提醒");
+            }
+            catch(Exception e)
+            {
+                Replay("【格式有误，修改失败】");
             }
             return 0;
         }

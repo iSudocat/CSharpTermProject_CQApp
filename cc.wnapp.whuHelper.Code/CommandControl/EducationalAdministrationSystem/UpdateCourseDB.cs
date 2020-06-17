@@ -8,6 +8,10 @@ using static Eas.EasOP;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
 {
+    /// <summary>
+    /// 更新课程信息
+    /// 命令格式：更新课程
+    /// </summary>
     public class UpdateCourseDB : PrivateMsgEventControl
     {
         public override int HandleImpl()

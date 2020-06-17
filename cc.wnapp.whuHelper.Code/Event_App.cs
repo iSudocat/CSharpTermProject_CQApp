@@ -145,7 +145,8 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询Github账户", typeof(QueryAuthorisedGithubAccount));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑Github账户", typeof(DisconnectGithub));
 
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(QueryScore));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "计算成绩", typeof(CommandControl.ScoreProcess.ComputeScore));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(CommandControl.ScoreProcess.QueryScore));
 
 
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.Any, null, typeof(SendAttentionMsg));

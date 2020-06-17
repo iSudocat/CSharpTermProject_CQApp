@@ -164,6 +164,7 @@
     <Compile Include="CommandControl\Notification\GetAllAttention.cs" />
     <Compile Include="CommandControl\Notification\RemoveAttention.cs" />
     <Compile Include="CommandControl\Notification\UpdateAttention.cs" />
+    <Compile Include="CommandControl\ScoreProcess\QueryScore.cs" />
     <Compile Include="CommandControl\ScoreProcess\ComputeScore.cs" />
     <Compile Include="CommandControl\GitHubWatcher\ConnectGithub.cs" />
     <Compile Include="CommandControl\GitHubWatcher\DisconnectGithub.cs" />

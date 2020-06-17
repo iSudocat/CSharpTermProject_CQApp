@@ -167,6 +167,18 @@ namespace ComputeScore
         }
 
         /// <summary>
+        /// 获取指定学生的GPA信息，只查某一科目的成绩
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static Score onlyThisCourse(List<Score> Slist, string Name)
+        {
+            Score temp = new Score();
+            temp = Slist.FirstOrDefault(p => p.LessonName == Name);
+            return temp;
+        }
+
+        /// <summary>
         /// 给定成绩列表算出GPA,为UI计算的时候使用
         /// </summary>
         /// <param name="Slist">成绩列表</param>

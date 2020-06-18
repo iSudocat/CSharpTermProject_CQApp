@@ -42,18 +42,20 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                         string msg1 = msg.Substring(4);
                         string[] msgprocess = msg1.Split('|');
                         bool isCourseFlag = false;
+                        int isCourse = 0;
                         List<Score> SlistCourse = new List<Score>();
                         for (int i = 0; i < msgprocess.Length; i++)
                         {
                             isIlegal = 0;
                             string msgtemp = msgprocess[i];
-                            if(regexAny.IsMatch(msgtemp) && (i == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
+                            if(regexAny.IsMatch(msgtemp) && (isCourse == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
                             {
                                 Score temp = ScoreService.onlyThisCourse(Slist, msgtemp);
                                 if (temp != null)
                                 {
                                     SlistCourse.Add(temp);
                                     isCourseFlag = true;
+                                    isCourse++;
                                     continue;
                                 }
                             }

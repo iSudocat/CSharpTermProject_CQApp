@@ -73,6 +73,19 @@
             this.School = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botQQq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.courseDataGridView = new System.Windows.Forms.DataGridView();
+            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.queryButton = new System.Windows.Forms.Button();
             this.queryTextBox = new System.Windows.Forms.TextBox();
@@ -99,6 +112,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSelectNoGX = new System.Windows.Forms.Button();
             this.buttonSelectNoGB = new System.Windows.Forms.Button();
@@ -130,32 +156,6 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.bindingSource_attention = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource_attentionUser = new System.Windows.Forms.BindingSource(this.components);
-            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -227,7 +227,7 @@
             this.panel2.Controls.Add(this.btn_CloseScoreReminder);
             this.panel2.Controls.Add(this.btn_OpenScoreReminder);
             this.panel2.Controls.Add(this.label_sr1);
-            this.panel2.Location = new System.Drawing.Point(542, 82);
+            this.panel2.Location = new System.Drawing.Point(563, 82);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(267, 180);
             this.panel2.TabIndex = 22;
@@ -305,7 +305,7 @@
             // 
             // btn_refreshMainList
             // 
-            this.btn_refreshMainList.Location = new System.Drawing.Point(7, 441);
+            this.btn_refreshMainList.Location = new System.Drawing.Point(7, 458);
             this.btn_refreshMainList.Name = "btn_refreshMainList";
             this.btn_refreshMainList.Size = new System.Drawing.Size(60, 29);
             this.btn_refreshMainList.TabIndex = 18;
@@ -315,7 +315,7 @@
             // 
             // btn_DelJWSelect
             // 
-            this.btn_DelJWSelect.Location = new System.Drawing.Point(74, 441);
+            this.btn_DelJWSelect.Location = new System.Drawing.Point(74, 458);
             this.btn_DelJWSelect.Name = "btn_DelJWSelect";
             this.btn_DelJWSelect.Size = new System.Drawing.Size(137, 29);
             this.btn_DelJWSelect.TabIndex = 15;
@@ -354,7 +354,7 @@
             this.dataGridView_StuList.RowHeadersWidth = 51;
             this.dataGridView_StuList.RowTemplate.Height = 23;
             this.dataGridView_StuList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_StuList.Size = new System.Drawing.Size(529, 353);
+            this.dataGridView_StuList.Size = new System.Drawing.Size(529, 370);
             this.dataGridView_StuList.TabIndex = 2;
             this.dataGridView_StuList.SelectionChanged += new System.EventHandler(this.dataGridView_StuList_SelectionChanged);
             // 
@@ -525,7 +525,7 @@
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(518, 27);
+            this.refreshButton.Location = new System.Drawing.Point(518, 25);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(145, 34);
             this.refreshButton.TabIndex = 3;
@@ -546,7 +546,7 @@
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(345, 27);
+            this.updateButton.Location = new System.Drawing.Point(345, 25);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(145, 34);
             this.updateButton.TabIndex = 2;
@@ -556,7 +556,7 @@
             // 
             // delButton
             // 
-            this.delButton.Location = new System.Drawing.Point(175, 27);
+            this.delButton.Location = new System.Drawing.Point(175, 25);
             this.delButton.Name = "delButton";
             this.delButton.Size = new System.Drawing.Size(145, 34);
             this.delButton.TabIndex = 1;
@@ -566,7 +566,7 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(6, 27);
+            this.addButton.Location = new System.Drawing.Point(6, 25);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(145, 34);
             this.addButton.TabIndex = 0;
@@ -688,8 +688,128 @@
             this.courseDataGridView.RowHeadersWidth = 51;
             this.courseDataGridView.RowTemplate.Height = 23;
             this.courseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.courseDataGridView.Size = new System.Drawing.Size(580, 307);
+            this.courseDataGridView.Size = new System.Drawing.Size(596, 307);
             this.courseDataGridView.TabIndex = 1;
+            // 
+            // LessonNum
+            // 
+            this.LessonNum.DataPropertyName = "LessonNum";
+            this.LessonNum.HeaderText = "课头号";
+            this.LessonNum.MinimumWidth = 6;
+            this.LessonNum.Name = "LessonNum";
+            this.LessonNum.ReadOnly = true;
+            this.LessonNum.Width = 110;
+            // 
+            // LessonName
+            // 
+            this.LessonName.DataPropertyName = "LessonName";
+            this.LessonName.HeaderText = "课程名";
+            this.LessonName.MinimumWidth = 6;
+            this.LessonName.Name = "LessonName";
+            this.LessonName.ReadOnly = true;
+            this.LessonName.Width = 125;
+            // 
+            // LessonType
+            // 
+            this.LessonType.DataPropertyName = "LessonType";
+            this.LessonType.HeaderText = "课程类型";
+            this.LessonType.MinimumWidth = 6;
+            this.LessonType.Name = "LessonType";
+            this.LessonType.ReadOnly = true;
+            this.LessonType.Width = 110;
+            // 
+            // LearnType
+            // 
+            this.LearnType.DataPropertyName = "LearninType";
+            this.LearnType.HeaderText = "学习类型";
+            this.LearnType.MinimumWidth = 6;
+            this.LearnType.Name = "LearnType";
+            this.LearnType.ReadOnly = true;
+            this.LearnType.Visible = false;
+            this.LearnType.Width = 80;
+            // 
+            // TeachingCollege
+            // 
+            this.TeachingCollege.DataPropertyName = "TeachingCollege";
+            this.TeachingCollege.HeaderText = "授课学院";
+            this.TeachingCollege.MinimumWidth = 6;
+            this.TeachingCollege.Name = "TeachingCollege";
+            this.TeachingCollege.ReadOnly = true;
+            this.TeachingCollege.Width = 125;
+            // 
+            // Teacher
+            // 
+            this.Teacher.DataPropertyName = "Teacher";
+            this.Teacher.HeaderText = "授课教师";
+            this.Teacher.MinimumWidth = 6;
+            this.Teacher.Name = "Teacher";
+            this.Teacher.ReadOnly = true;
+            this.Teacher.Width = 90;
+            // 
+            // Dept
+            // 
+            this.Dept.DataPropertyName = "Specialty";
+            this.Dept.HeaderText = "专业";
+            this.Dept.MinimumWidth = 6;
+            this.Dept.Name = "Dept";
+            this.Dept.ReadOnly = true;
+            this.Dept.Width = 125;
+            // 
+            // Credit
+            // 
+            this.Credit.DataPropertyName = "Credit";
+            this.Credit.HeaderText = "学分";
+            this.Credit.MinimumWidth = 6;
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            this.Credit.Width = 60;
+            // 
+            // LearningHours
+            // 
+            this.LearningHours.DataPropertyName = "LessonHours";
+            this.LearningHours.HeaderText = "学时";
+            this.LearningHours.MinimumWidth = 6;
+            this.LearningHours.Name = "LearningHours";
+            this.LearningHours.ReadOnly = true;
+            this.LearningHours.Width = 70;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "上课时间";
+            this.Time.MinimumWidth = 6;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 280;
+            // 
+            // Note
+            // 
+            this.Note.DataPropertyName = "Note";
+            this.Note.HeaderText = "备注";
+            this.Note.MinimumWidth = 6;
+            this.Note.Name = "Note";
+            this.Note.ReadOnly = true;
+            this.Note.Width = 125;
+            // 
+            // SID
+            // 
+            this.SID.DataPropertyName = "StuID";
+            this.SID.HeaderText = "学生学号";
+            this.SID.MinimumWidth = 6;
+            this.SID.Name = "SID";
+            this.SID.ReadOnly = true;
+            this.SID.Visible = false;
+            this.SID.Width = 125;
+            // 
+            // S
+            // 
+            this.S.DataPropertyName = "Student";
+            this.S.HeaderText = "学生姓名";
+            this.S.MinimumWidth = 6;
+            this.S.Name = "S";
+            this.S.ReadOnly = true;
+            this.S.Visible = false;
+            this.S.Width = 125;
             // 
             // groupBox1
             // 
@@ -980,6 +1100,125 @@
             this.AllScoredataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AllScoredataGridView.Size = new System.Drawing.Size(835, 258);
             this.AllScoredataGridView.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "LessonName";
+            this.Column1.HeaderText = "课程名";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "LessonType";
+            this.Column2.HeaderText = "课程类型";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 110;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "GeneralLessonType";
+            this.Column3.HeaderText = "通识类型";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 90;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "LessonAttribute";
+            this.Column4.HeaderText = "属性";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 65;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "TeacherName";
+            this.Column6.HeaderText = "老师";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 70;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Credit";
+            this.Column5.HeaderText = "学分";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 65;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "Mark";
+            this.Column11.HeaderText = "成绩";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 65;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "TeachingCollege";
+            this.Column7.HeaderText = "授课学院";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 125;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "LearningType";
+            this.Column8.HeaderText = "学习类型";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 70;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "Year";
+            this.Column9.HeaderText = "学年";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 65;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "Term";
+            this.Column10.HeaderText = "学期";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 65;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "StuID";
+            this.Column12.HeaderText = "StuID";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Visible = false;
+            this.Column12.Width = 125;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "Student";
+            this.Column13.HeaderText = "Student";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Visible = false;
+            this.Column13.Width = 125;
             // 
             // groupBox4
             // 
@@ -1282,251 +1521,12 @@
             // 
             this.bindingSource_attentionUser.CurrentChanged += new System.EventHandler(this.bindingSource_attentionUser_CurrentChanged);
             // 
-            // LessonNum
-            // 
-            this.LessonNum.DataPropertyName = "LessonNum";
-            this.LessonNum.HeaderText = "课头号";
-            this.LessonNum.MinimumWidth = 6;
-            this.LessonNum.Name = "LessonNum";
-            this.LessonNum.ReadOnly = true;
-            this.LessonNum.Width = 110;
-            // 
-            // LessonName
-            // 
-            this.LessonName.DataPropertyName = "LessonName";
-            this.LessonName.HeaderText = "课程名";
-            this.LessonName.MinimumWidth = 6;
-            this.LessonName.Name = "LessonName";
-            this.LessonName.ReadOnly = true;
-            this.LessonName.Width = 125;
-            // 
-            // LessonType
-            // 
-            this.LessonType.DataPropertyName = "LessonType";
-            this.LessonType.HeaderText = "课程类型";
-            this.LessonType.MinimumWidth = 6;
-            this.LessonType.Name = "LessonType";
-            this.LessonType.ReadOnly = true;
-            this.LessonType.Width = 110;
-            // 
-            // LearnType
-            // 
-            this.LearnType.DataPropertyName = "LearninType";
-            this.LearnType.HeaderText = "学习类型";
-            this.LearnType.MinimumWidth = 6;
-            this.LearnType.Name = "LearnType";
-            this.LearnType.ReadOnly = true;
-            this.LearnType.Visible = false;
-            this.LearnType.Width = 80;
-            // 
-            // TeachingCollege
-            // 
-            this.TeachingCollege.DataPropertyName = "TeachingCollege";
-            this.TeachingCollege.HeaderText = "授课学院";
-            this.TeachingCollege.MinimumWidth = 6;
-            this.TeachingCollege.Name = "TeachingCollege";
-            this.TeachingCollege.ReadOnly = true;
-            this.TeachingCollege.Width = 125;
-            // 
-            // Teacher
-            // 
-            this.Teacher.DataPropertyName = "Teacher";
-            this.Teacher.HeaderText = "授课教师";
-            this.Teacher.MinimumWidth = 6;
-            this.Teacher.Name = "Teacher";
-            this.Teacher.ReadOnly = true;
-            this.Teacher.Width = 90;
-            // 
-            // Dept
-            // 
-            this.Dept.DataPropertyName = "Specialty";
-            this.Dept.HeaderText = "专业";
-            this.Dept.MinimumWidth = 6;
-            this.Dept.Name = "Dept";
-            this.Dept.ReadOnly = true;
-            this.Dept.Width = 125;
-            // 
-            // Credit
-            // 
-            this.Credit.DataPropertyName = "Credit";
-            this.Credit.HeaderText = "学分";
-            this.Credit.MinimumWidth = 6;
-            this.Credit.Name = "Credit";
-            this.Credit.ReadOnly = true;
-            this.Credit.Width = 60;
-            // 
-            // LearningHours
-            // 
-            this.LearningHours.DataPropertyName = "LessonHours";
-            this.LearningHours.HeaderText = "学时";
-            this.LearningHours.MinimumWidth = 6;
-            this.LearningHours.Name = "LearningHours";
-            this.LearningHours.ReadOnly = true;
-            this.LearningHours.Width = 70;
-            // 
-            // Time
-            // 
-            this.Time.DataPropertyName = "Time";
-            this.Time.HeaderText = "上课时间";
-            this.Time.MinimumWidth = 6;
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Width = 280;
-            // 
-            // Note
-            // 
-            this.Note.DataPropertyName = "Note";
-            this.Note.HeaderText = "备注";
-            this.Note.MinimumWidth = 6;
-            this.Note.Name = "Note";
-            this.Note.ReadOnly = true;
-            this.Note.Width = 125;
-            // 
-            // SID
-            // 
-            this.SID.DataPropertyName = "StuID";
-            this.SID.HeaderText = "学生学号";
-            this.SID.MinimumWidth = 6;
-            this.SID.Name = "SID";
-            this.SID.ReadOnly = true;
-            this.SID.Visible = false;
-            this.SID.Width = 125;
-            // 
-            // S
-            // 
-            this.S.DataPropertyName = "Student";
-            this.S.HeaderText = "学生姓名";
-            this.S.MinimumWidth = 6;
-            this.S.Name = "S";
-            this.S.ReadOnly = true;
-            this.S.Visible = false;
-            this.S.Width = 125;
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "Student";
-            this.Column13.HeaderText = "Student";
-            this.Column13.MinimumWidth = 6;
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Visible = false;
-            this.Column13.Width = 125;
-            // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "StuID";
-            this.Column12.HeaderText = "StuID";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Visible = false;
-            this.Column12.Width = 125;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "Term";
-            this.Column10.HeaderText = "学期";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 65;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "Year";
-            this.Column9.HeaderText = "学年";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 65;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "LearningType";
-            this.Column8.HeaderText = "学习类型";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 70;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "TeachingCollege";
-            this.Column7.HeaderText = "授课学院";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 125;
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "Mark";
-            this.Column11.HeaderText = "成绩";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 65;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Credit";
-            this.Column5.HeaderText = "学分";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 65;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "TeacherName";
-            this.Column6.HeaderText = "老师";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 70;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "LessonAttribute";
-            this.Column4.HeaderText = "属性";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 65;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "GeneralLessonType";
-            this.Column3.HeaderText = "通识类型";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 90;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "LessonType";
-            this.Column2.HeaderText = "课程类型";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 110;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "LessonName";
-            this.Column1.HeaderText = "课程名";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 125;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(859, 531);
+            this.ClientSize = new System.Drawing.Size(859, 528);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

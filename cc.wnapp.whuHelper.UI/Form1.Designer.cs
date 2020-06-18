@@ -73,19 +73,6 @@
             this.School = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botQQq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.courseDataGridView = new System.Windows.Forms.DataGridView();
-            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.queryButton = new System.Windows.Forms.Button();
             this.queryTextBox = new System.Windows.Forms.TextBox();
@@ -112,19 +99,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSelectNoGX = new System.Windows.Forms.Button();
             this.buttonSelectNoGB = new System.Windows.Forms.Button();
@@ -137,8 +111,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.allAttentionUserDataGridView = new System.Windows.Forms.DataGridView();
+            this.关注者QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.关注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.attentionDataGridView = new System.Windows.Forms.DataGridView();
+            this.关注所在群号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.关注信息 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.关注者 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.remove_attention_buttom = new System.Windows.Forms.Button();
             this.search_attention_buttom = new System.Windows.Forms.Button();
@@ -151,11 +130,32 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.bindingSource_attention = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource_attentionUser = new System.Windows.Forms.BindingSource(this.components);
-            this.关注者QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注所在群号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注信息 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注者 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -691,126 +691,6 @@
             this.courseDataGridView.Size = new System.Drawing.Size(580, 307);
             this.courseDataGridView.TabIndex = 1;
             // 
-            // LessonNum
-            // 
-            this.LessonNum.DataPropertyName = "LessonNum";
-            this.LessonNum.HeaderText = "课头号";
-            this.LessonNum.MinimumWidth = 6;
-            this.LessonNum.Name = "LessonNum";
-            this.LessonNum.ReadOnly = true;
-            this.LessonNum.Width = 110;
-            // 
-            // LessonName
-            // 
-            this.LessonName.DataPropertyName = "LessonName";
-            this.LessonName.HeaderText = "课程名";
-            this.LessonName.MinimumWidth = 6;
-            this.LessonName.Name = "LessonName";
-            this.LessonName.ReadOnly = true;
-            this.LessonName.Width = 125;
-            // 
-            // LessonType
-            // 
-            this.LessonType.DataPropertyName = "LessonType";
-            this.LessonType.HeaderText = "课程类型";
-            this.LessonType.MinimumWidth = 6;
-            this.LessonType.Name = "LessonType";
-            this.LessonType.ReadOnly = true;
-            this.LessonType.Width = 200;
-            // 
-            // LearnType
-            // 
-            this.LearnType.DataPropertyName = "LearninType";
-            this.LearnType.HeaderText = "学习类型";
-            this.LearnType.MinimumWidth = 6;
-            this.LearnType.Name = "LearnType";
-            this.LearnType.ReadOnly = true;
-            this.LearnType.Visible = false;
-            this.LearnType.Width = 80;
-            // 
-            // TeachingCollege
-            // 
-            this.TeachingCollege.DataPropertyName = "TeachingCollege";
-            this.TeachingCollege.HeaderText = "授课学院";
-            this.TeachingCollege.MinimumWidth = 6;
-            this.TeachingCollege.Name = "TeachingCollege";
-            this.TeachingCollege.ReadOnly = true;
-            this.TeachingCollege.Width = 125;
-            // 
-            // Teacher
-            // 
-            this.Teacher.DataPropertyName = "Teacher";
-            this.Teacher.HeaderText = "授课教师";
-            this.Teacher.MinimumWidth = 6;
-            this.Teacher.Name = "Teacher";
-            this.Teacher.ReadOnly = true;
-            this.Teacher.Width = 90;
-            // 
-            // Dept
-            // 
-            this.Dept.DataPropertyName = "Specialty";
-            this.Dept.HeaderText = "专业";
-            this.Dept.MinimumWidth = 6;
-            this.Dept.Name = "Dept";
-            this.Dept.ReadOnly = true;
-            this.Dept.Width = 125;
-            // 
-            // Credit
-            // 
-            this.Credit.DataPropertyName = "Credit";
-            this.Credit.HeaderText = "学分";
-            this.Credit.MinimumWidth = 6;
-            this.Credit.Name = "Credit";
-            this.Credit.ReadOnly = true;
-            this.Credit.Width = 60;
-            // 
-            // LearningHours
-            // 
-            this.LearningHours.DataPropertyName = "LessonHours";
-            this.LearningHours.HeaderText = "学时";
-            this.LearningHours.MinimumWidth = 6;
-            this.LearningHours.Name = "LearningHours";
-            this.LearningHours.ReadOnly = true;
-            this.LearningHours.Width = 70;
-            // 
-            // Time
-            // 
-            this.Time.DataPropertyName = "Time";
-            this.Time.HeaderText = "上课时间";
-            this.Time.MinimumWidth = 6;
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Width = 280;
-            // 
-            // Note
-            // 
-            this.Note.DataPropertyName = "Note";
-            this.Note.HeaderText = "备注";
-            this.Note.MinimumWidth = 6;
-            this.Note.Name = "Note";
-            this.Note.ReadOnly = true;
-            this.Note.Width = 125;
-            // 
-            // SID
-            // 
-            this.SID.DataPropertyName = "StuID";
-            this.SID.HeaderText = "学生学号";
-            this.SID.MinimumWidth = 6;
-            this.SID.Name = "SID";
-            this.SID.ReadOnly = true;
-            this.SID.Visible = false;
-            this.SID.Width = 125;
-            // 
-            // S
-            // 
-            this.S.DataPropertyName = "Student";
-            this.S.HeaderText = "学生姓名";
-            this.S.MinimumWidth = 6;
-            this.S.Name = "S";
-            this.S.ReadOnly = true;
-            this.S.Visible = false;
-            this.S.Width = 125;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.queryButton);
@@ -1101,125 +981,6 @@
             this.AllScoredataGridView.Size = new System.Drawing.Size(835, 258);
             this.AllScoredataGridView.TabIndex = 0;
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "LessonName";
-            this.Column1.HeaderText = "课程名";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "LessonType";
-            this.Column2.HeaderText = "课程类型";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 200;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "GeneralLessonType";
-            this.Column3.HeaderText = "通识类型";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 90;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "LessonAttribute";
-            this.Column4.HeaderText = "属性";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 65;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "TeacherName";
-            this.Column6.HeaderText = "老师";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 70;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Credit";
-            this.Column5.HeaderText = "学分";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 65;
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "Mark";
-            this.Column11.HeaderText = "成绩";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 65;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "TeachingCollege";
-            this.Column7.HeaderText = "授课学院";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 125;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "LearningType";
-            this.Column8.HeaderText = "学习类型";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 70;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "Year";
-            this.Column9.HeaderText = "学年";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 65;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "Term";
-            this.Column10.HeaderText = "学期";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 65;
-            // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "StuID";
-            this.Column12.HeaderText = "StuID";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Visible = false;
-            this.Column12.Width = 125;
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "Student";
-            this.Column13.HeaderText = "Student";
-            this.Column13.MinimumWidth = 6;
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Visible = false;
-            this.Column13.Width = 125;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.buttonSelectNoGX);
@@ -1368,6 +1129,22 @@
             this.allAttentionUserDataGridView.Size = new System.Drawing.Size(274, 393);
             this.allAttentionUserDataGridView.TabIndex = 0;
             // 
+            // 关注者QQ
+            // 
+            this.关注者QQ.DataPropertyName = "Listener";
+            this.关注者QQ.HeaderText = "关注者QQ";
+            this.关注者QQ.Name = "关注者QQ";
+            this.关注者QQ.ReadOnly = true;
+            this.关注者QQ.Width = 120;
+            // 
+            // 关注数量
+            // 
+            this.关注数量.DataPropertyName = "Count";
+            this.关注数量.HeaderText = "关注数量";
+            this.关注数量.Name = "关注数量";
+            this.关注数量.ReadOnly = true;
+            this.关注数量.Width = 90;
+            // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.attentionDataGridView);
@@ -1400,6 +1177,30 @@
             this.attentionDataGridView.Size = new System.Drawing.Size(557, 393);
             this.attentionDataGridView.TabIndex = 0;
             this.attentionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
+            // 关注所在群号
+            // 
+            this.关注所在群号.DataPropertyName = "Group";
+            this.关注所在群号.HeaderText = "群号";
+            this.关注所在群号.Name = "关注所在群号";
+            this.关注所在群号.ReadOnly = true;
+            this.关注所在群号.Width = 120;
+            // 
+            // 关注信息
+            // 
+            this.关注信息.DataPropertyName = "AttentionPoint";
+            this.关注信息.HeaderText = "关注信息";
+            this.关注信息.Name = "关注信息";
+            this.关注信息.ReadOnly = true;
+            this.关注信息.Width = 400;
+            // 
+            // 关注者
+            // 
+            this.关注者.DataPropertyName = "Listener";
+            this.关注者.HeaderText = "关注者";
+            this.关注者.Name = "关注者";
+            this.关注者.ReadOnly = true;
+            this.关注者.Visible = false;
             // 
             // panel3
             // 
@@ -1481,45 +1282,244 @@
             // 
             this.bindingSource_attentionUser.CurrentChanged += new System.EventHandler(this.bindingSource_attentionUser_CurrentChanged);
             // 
-            // 关注者QQ
+            // LessonNum
             // 
-            this.关注者QQ.DataPropertyName = "Listener";
-            this.关注者QQ.HeaderText = "关注者QQ";
-            this.关注者QQ.Name = "关注者QQ";
-            this.关注者QQ.ReadOnly = true;
-            this.关注者QQ.Width = 120;
+            this.LessonNum.DataPropertyName = "LessonNum";
+            this.LessonNum.HeaderText = "课头号";
+            this.LessonNum.MinimumWidth = 6;
+            this.LessonNum.Name = "LessonNum";
+            this.LessonNum.ReadOnly = true;
+            this.LessonNum.Width = 110;
             // 
-            // 关注数量
+            // LessonName
             // 
-            this.关注数量.DataPropertyName = "Count";
-            this.关注数量.HeaderText = "关注数量";
-            this.关注数量.Name = "关注数量";
-            this.关注数量.ReadOnly = true;
-            this.关注数量.Width = 90;
+            this.LessonName.DataPropertyName = "LessonName";
+            this.LessonName.HeaderText = "课程名";
+            this.LessonName.MinimumWidth = 6;
+            this.LessonName.Name = "LessonName";
+            this.LessonName.ReadOnly = true;
+            this.LessonName.Width = 125;
             // 
-            // 关注所在群号
+            // LessonType
             // 
-            this.关注所在群号.DataPropertyName = "Group";
-            this.关注所在群号.HeaderText = "群号";
-            this.关注所在群号.Name = "关注所在群号";
-            this.关注所在群号.ReadOnly = true;
-            this.关注所在群号.Width = 120;
+            this.LessonType.DataPropertyName = "LessonType";
+            this.LessonType.HeaderText = "课程类型";
+            this.LessonType.MinimumWidth = 6;
+            this.LessonType.Name = "LessonType";
+            this.LessonType.ReadOnly = true;
+            this.LessonType.Width = 110;
             // 
-            // 关注信息
+            // LearnType
             // 
-            this.关注信息.DataPropertyName = "AttentionPoint";
-            this.关注信息.HeaderText = "关注信息";
-            this.关注信息.Name = "关注信息";
-            this.关注信息.ReadOnly = true;
-            this.关注信息.Width = 400;
+            this.LearnType.DataPropertyName = "LearninType";
+            this.LearnType.HeaderText = "学习类型";
+            this.LearnType.MinimumWidth = 6;
+            this.LearnType.Name = "LearnType";
+            this.LearnType.ReadOnly = true;
+            this.LearnType.Visible = false;
+            this.LearnType.Width = 80;
             // 
-            // 关注者
+            // TeachingCollege
             // 
-            this.关注者.DataPropertyName = "Listener";
-            this.关注者.HeaderText = "关注者";
-            this.关注者.Name = "关注者";
-            this.关注者.ReadOnly = true;
-            this.关注者.Visible = false;
+            this.TeachingCollege.DataPropertyName = "TeachingCollege";
+            this.TeachingCollege.HeaderText = "授课学院";
+            this.TeachingCollege.MinimumWidth = 6;
+            this.TeachingCollege.Name = "TeachingCollege";
+            this.TeachingCollege.ReadOnly = true;
+            this.TeachingCollege.Width = 125;
+            // 
+            // Teacher
+            // 
+            this.Teacher.DataPropertyName = "Teacher";
+            this.Teacher.HeaderText = "授课教师";
+            this.Teacher.MinimumWidth = 6;
+            this.Teacher.Name = "Teacher";
+            this.Teacher.ReadOnly = true;
+            this.Teacher.Width = 90;
+            // 
+            // Dept
+            // 
+            this.Dept.DataPropertyName = "Specialty";
+            this.Dept.HeaderText = "专业";
+            this.Dept.MinimumWidth = 6;
+            this.Dept.Name = "Dept";
+            this.Dept.ReadOnly = true;
+            this.Dept.Width = 125;
+            // 
+            // Credit
+            // 
+            this.Credit.DataPropertyName = "Credit";
+            this.Credit.HeaderText = "学分";
+            this.Credit.MinimumWidth = 6;
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            this.Credit.Width = 60;
+            // 
+            // LearningHours
+            // 
+            this.LearningHours.DataPropertyName = "LessonHours";
+            this.LearningHours.HeaderText = "学时";
+            this.LearningHours.MinimumWidth = 6;
+            this.LearningHours.Name = "LearningHours";
+            this.LearningHours.ReadOnly = true;
+            this.LearningHours.Width = 70;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "上课时间";
+            this.Time.MinimumWidth = 6;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 280;
+            // 
+            // Note
+            // 
+            this.Note.DataPropertyName = "Note";
+            this.Note.HeaderText = "备注";
+            this.Note.MinimumWidth = 6;
+            this.Note.Name = "Note";
+            this.Note.ReadOnly = true;
+            this.Note.Width = 125;
+            // 
+            // SID
+            // 
+            this.SID.DataPropertyName = "StuID";
+            this.SID.HeaderText = "学生学号";
+            this.SID.MinimumWidth = 6;
+            this.SID.Name = "SID";
+            this.SID.ReadOnly = true;
+            this.SID.Visible = false;
+            this.SID.Width = 125;
+            // 
+            // S
+            // 
+            this.S.DataPropertyName = "Student";
+            this.S.HeaderText = "学生姓名";
+            this.S.MinimumWidth = 6;
+            this.S.Name = "S";
+            this.S.ReadOnly = true;
+            this.S.Visible = false;
+            this.S.Width = 125;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "Student";
+            this.Column13.HeaderText = "Student";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Visible = false;
+            this.Column13.Width = 125;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "StuID";
+            this.Column12.HeaderText = "StuID";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Visible = false;
+            this.Column12.Width = 125;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "Term";
+            this.Column10.HeaderText = "学期";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 65;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "Year";
+            this.Column9.HeaderText = "学年";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 65;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "LearningType";
+            this.Column8.HeaderText = "学习类型";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 70;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "TeachingCollege";
+            this.Column7.HeaderText = "授课学院";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 125;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "Mark";
+            this.Column11.HeaderText = "成绩";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 65;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Credit";
+            this.Column5.HeaderText = "学分";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 65;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "TeacherName";
+            this.Column6.HeaderText = "老师";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 70;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "LessonAttribute";
+            this.Column4.HeaderText = "属性";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 65;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "GeneralLessonType";
+            this.Column3.HeaderText = "通识类型";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 90;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "LessonType";
+            this.Column2.HeaderText = "课程类型";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 110;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "LessonName";
+            this.Column1.HeaderText = "课程名";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 125;
             // 
             // Form1
             // 
@@ -1661,6 +1661,25 @@
 		private System.Windows.Forms.ComboBox comboBoxCreditNum;
         private System.Windows.Forms.ComboBox comboBoxCourseName;
         private System.Windows.Forms.ComboBox comboBoxYear;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox type_comboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.BindingSource bindingSource_attention;
+        private System.Windows.Forms.BindingSource bindingSource_attentionUser;
+        private System.Windows.Forms.Button remove_attention_buttom;
+        private System.Windows.Forms.Button search_attention_buttom;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.DataGridView attentionDataGridView;
+        private System.Windows.Forms.DataGridView allAttentionUserDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 关注者QQ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 关注数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 关注所在群号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 关注信息;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 关注者;
         private System.Windows.Forms.DataGridViewTextBoxColumn LessonNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn LessonName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LessonType;
@@ -1687,25 +1706,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox type_comboBox;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.BindingSource bindingSource_attention;
-        private System.Windows.Forms.BindingSource bindingSource_attentionUser;
-        private System.Windows.Forms.Button remove_attention_buttom;
-        private System.Windows.Forms.Button search_attention_buttom;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.DataGridView attentionDataGridView;
-        private System.Windows.Forms.DataGridView allAttentionUserDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 关注者QQ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 关注数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 关注所在群号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 关注信息;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 关注者;
     }
 }
 

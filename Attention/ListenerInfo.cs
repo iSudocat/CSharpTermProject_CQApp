@@ -8,9 +8,9 @@ namespace AttentionSpace
 {
     public class ListenerInfo
     {
-        public String Listener;
+        public String Listener { get; set; }
 
-        public int Count;
+        public int Count { get; set; }
 
         public ListenerInfo(String l, int c)
         {

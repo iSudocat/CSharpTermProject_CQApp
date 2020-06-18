@@ -119,11 +119,6 @@ namespace cc.wnapp.whuHelper.UI
             bindingSource_attentionUser.DataSource = attentionService.Listeners;
             attentionDataGridView.DataSource = bindingSource_attention;
             allAttentionUserDataGridView.DataSource = bindingSource_attentionUser;
-            attentionDataGridView.Columns[0].HeaderText = "关注者QQ";
-            attentionDataGridView.Columns[1].HeaderText = "关注群号";
-            attentionDataGridView.Columns[2].HeaderText = "关注内容";
-            //allAttentionUserDataGridView.Columns[0].HeaderText = "关注者QQ";
-            //allAttentionUserDataGridView.Columns[1].HeaderText = "关注数量";
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)

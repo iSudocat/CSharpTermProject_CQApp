@@ -63,7 +63,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Notification
             }
             catch (Exception e)
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】其他异常\n" + e.Message);
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加失败】\n" + e.Message);
             }
 
             return 0;

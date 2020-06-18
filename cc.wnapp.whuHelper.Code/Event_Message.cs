@@ -245,6 +245,13 @@ namespace cc.wnapp.whuHelper.Code
                 Thread t = new Thread(mp.DisconnectGithub);
                 t.Start();
             }
+			
+			if (msg.Contains("查询成绩"))
+            {
+                var mp = new PrivateMsgProcess() { fromQQ = fromqq, message = msg, botQQ = Convert.ToString(BotQQ.Id) };
+                Thread t = new Thread(mp.ComputeScore);
+                t.Start();
+            }
         }
 
     }

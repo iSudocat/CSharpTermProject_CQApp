@@ -98,6 +98,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CourseService\CourseFunction.csproj">
+      <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
+      <Name>CourseFunction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EducationalAdministrationSystem\EducationalAdministrationSystem.csproj">
       <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
       <Name>EducationalAdministrationSystem</Name>

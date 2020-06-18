@@ -16,6 +16,7 @@ using GithubWatcher.Models;
 using System.Text.RegularExpressions;
 using GithubWatcher.OAuthService;
 using System.Data.Entity;
+using ComputeScore;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -237,7 +238,7 @@ namespace cc.wnapp.whuHelper.Code
             PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
             if (personalUser.AddCourseSchedule())
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【导入成功】\n");
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【导入成功】");
             }
         }
         /// <summary>
@@ -246,14 +247,21 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddScheduleToDB()
         {
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.AddSchedule(StrToDateTime(dateTime), scheduleType, scheduleContent))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.AddSchedule(StrToDateTime(dateTime), scheduleType, scheduleContent))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】");
             }
         }
 
@@ -263,15 +271,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void AddWeeklyScheduleToDB()
         {
-            var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":"); ;
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.AddWeeklySchedule(StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】\n");
+                var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "|"));
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":"); ;
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.AddWeeklySchedule(StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【添加成功】");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，添加失败】");
             }
         }
 
@@ -281,11 +296,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void DelScheduleFromDB()
         {
-            var scheduleID = textOp.GetRightText(message, "|");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.DelSchedule(scheduleID))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
+                var scheduleID = textOp.GetRightText(message, "|");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.DelSchedule(scheduleID))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】");
             }
         }
         /// <summary>
@@ -294,11 +316,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void DelWeeklyScheduleFromDB()
         {
-            var scheduleID = textOp.GetRightText(message, "|");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.DelWeeklySchedule(scheduleID))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】\n");
+                var scheduleID = textOp.GetRightText(message, "|");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.DelWeeklySchedule(scheduleID))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除成功】");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，删除失败】");
             }
         }
         /// <summary>
@@ -307,15 +336,22 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SetScheduleToDB()
         {
-            var scheduleID = textOp.GetMiddleText(message, "-", "|");
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.SetSchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
+                var scheduleID = textOp.GetMiddleText(message, "-", "|");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.SetSchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】");
             }
         }
         /// <summary>
@@ -324,16 +360,23 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SetWeeklyScheduleToDB()
         {
-            var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "-"));
-            var scheduleID = textOp.GetMiddleText(message, "-", "|");
-            var dateTime = textOp.GetMiddleText(message, "|", "(");
-            var scheduleType = textOp.GetMiddleText(message, "(", ")");
-            string str = message.Split(')')[1];
-            var scheduleContent = textOp.GetRightText(str, ":");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            if (personalUser.SetWeeklySchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】\n");
+                var weekSpan = int.Parse(textOp.GetMiddleText(message, "~", "-"));
+                var scheduleID = textOp.GetMiddleText(message, "-", "|");
+                var dateTime = textOp.GetMiddleText(message, "|", "(");
+                var scheduleType = textOp.GetMiddleText(message, "(", ")");
+                string str = message.Split(')')[1];
+                var scheduleContent = textOp.GetRightText(str, ":");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                if (personalUser.SetWeeklySchedule(scheduleID, StrToDateTime(dateTime), scheduleType, scheduleContent, weekSpan))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【修改成功】");
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，修改失败】");
             }
         }
 
@@ -343,10 +386,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetSchedulesFromDB()
         {
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (var schedule in personalUser.GetSchedules())
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (var schedule in personalUser.GetSchedules())
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule());
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -355,10 +405,17 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void GetWeeklySchedulesFromDB()
         {
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (WeeklySchedule weeklySchedule in personalUser.GetWeeklySchedules())
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (WeeklySchedule weeklySchedule in personalUser.GetWeeklySchedules())
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule());
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -367,11 +424,18 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SortScheduleFromDB()
         {
-            var option = textOp.GetRightText(message, "%");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (var schedule in personalUser.SortSchedules(option))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule(), "\n");
+                var option = textOp.GetRightText(message, "%");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (var schedule in personalUser.SortSchedules(option))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), schedule.DisplaySchedule());
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
         /// <summary>
@@ -380,14 +444,21 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void SortWeeklyScheduleFromDB()
         {
-            var option = textOp.GetRightText(message, "%");
-            PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
-            foreach (WeeklySchedule weeklySchedule in personalUser.SortWeeklySchedules(option))
+            try
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule(), "\n");
+                var option = textOp.GetRightText(message, "%");
+                PersonalUserService personalUser = new PersonalUserService(long.Parse(fromQQ));
+                foreach (WeeklySchedule weeklySchedule in personalUser.SortWeeklySchedules(option))
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), weeklySchedule.DisplaySchedule());
+                }
+            }
+            catch (Exception e)
+            {
+                CQ.Api.SendGroupMessage(Convert.ToInt64(fromQQ), "【格式有误，查看失败】");
             }
         }
-		/// <summary>
+        /// <summary>
         /// 查看日程模块命令格式
         /// 命令格式：日程模块
         /// </summary>
@@ -404,7 +475,7 @@ namespace cc.wnapp.whuHelper.Code
                 "查看周日程\n" +
                 "查看日程%时间or类型\n" +
                 "查看周日程%时间or类型";
-            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), Command, "\n");
+            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), Command);
         }
 
         /// <summary>
@@ -492,7 +563,7 @@ namespace cc.wnapp.whuHelper.Code
                     CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "无法同时绑定多个仓库，请输入“绑定仓库#仓库名称#”以绑定仓库！");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "绑定错误：" + e.Message);
                 return;
@@ -507,7 +578,7 @@ namespace cc.wnapp.whuHelper.Code
             {
                 var query = context.RepositorySubscriptions.Where(p => p.QQ == fromQQ).OrderBy(p => p.RepositoryName);
 
-                if (query.Count() == 0) 
+                if (query.Count() == 0)
                 {
                     CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何仓库，输入“绑定仓库#仓库名称#”以绑定仓库！");
                     return;
@@ -516,7 +587,7 @@ namespace cc.wnapp.whuHelper.Code
                 string message = "您绑定的仓库有：";
                 int i = 0;
 
-                foreach(var subscription in query)
+                foreach (var subscription in query)
                 {
                     i++;
                     message = message + $"\n{i}. " + subscription.RepositoryName;
@@ -534,7 +605,7 @@ namespace cc.wnapp.whuHelper.Code
             string pattern = @"解绑仓库#(?<repository>[\S]+)#";
             MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
 
-            if (matches.Count == 1) 
+            if (matches.Count == 1)
             {
                 using (var context = new GithubWatcherContext())
                 {
@@ -545,7 +616,7 @@ namespace cc.wnapp.whuHelper.Code
                     }
 
                     var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository);
-                    if (query == null) 
+                    if (query == null)
                     {
                         CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您尚未绑定该仓库！");
                     }
@@ -557,7 +628,7 @@ namespace cc.wnapp.whuHelper.Code
                     }
                 }
             }
-            else if(matches.Count==0)
+            else if (matches.Count == 0)
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个仓库呢？可以输入“查询仓库”查看您已绑定的仓库清单！然后您可以通过输入“解绑仓库#仓库名称#”与您不关注的仓库取消绑定哦！");
             }
@@ -581,7 +652,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public void QueryAuthorisedGithubAccount()
         {
-            using (var context = new GithubWatcherContext()) 
+            using (var context = new GithubWatcherContext())
             {
                 var query = context.GithubBindings.Where(p => p.QQ == fromQQ).OrderBy(p => p.GithubUserName);
 
@@ -632,13 +703,13 @@ namespace cc.wnapp.whuHelper.Code
 
                         // 删除仓库信息
                         var repositories = context.RepositoryInformations.Where(s => s.GithubUserName == account);
-                        foreach(var repository in repositories)
+                        foreach (var repository in repositories)
                         {
                             context.RepositoryInformations.Remove(repository);
 
                             // 如果仓库已订阅，也一并删除
                             var subscription = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == repository.Repository);
-                            if (subscription != null) 
+                            if (subscription != null)
                             {
                                 context.RepositorySubscriptions.Remove(subscription);
                             }
@@ -657,6 +728,82 @@ namespace cc.wnapp.whuHelper.Code
             {
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个Github账户取消绑定！输入“解绑Github账户#账户名称#”与Github账户取消绑定！");
             }
+        }
+
+        /// <summary>
+        /// 查询成绩处理函数，需要绑定
+        /// 命令格式：查询成绩 操作1|操作2|操作3
+        /// 可选操作：去除公选、去除公必、去除专必、去除专选、去除非本院
+        /// </summary>
+        public void ComputeScore()
+        {
+            string StuID = jwOp.GetStuID(fromQQ);
+            if (StuID != "")
+            {
+                List<Score> Slist = jwOp.GetScores(StuID);
+                GPAInfo StuGPA;
+                int isIlegal = 0;
+                bool flag = false;
+                string msg = message.Replace(" ", "");     //去除空格
+                //无额外操作，直接返回总成绩
+                if (msg == "查询成绩")
+                {
+                    StuGPA = ScoreService.AllCredit(Slist);
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
+                }
+                //存在操作
+                else
+                {
+                    string msg1 = msg.Substring(4);
+                    string[] msgprocess = msg1.Split('|');
+                    for (int i = 0; i < msgprocess.Length; i++)
+                    {
+                        isIlegal = 0;
+                        string msgtemp = msgprocess[i];
+                        if (msgtemp == "去除公选")
+                        {
+                            Slist = ScoreService.noGongXuan(Slist);
+                            isIlegal++;
+                        }
+                        if (msgtemp == "去除公必")
+                        {
+                            Slist = ScoreService.noGongBi(Slist);
+                            isIlegal++;
+                        }
+                        if (msgtemp == "去除专选")
+                        {
+                            Slist = ScoreService.noZhuanXuan(Slist);
+                            isIlegal++;
+                        }
+                        if (msgtemp == "去除专必")
+                        {
+                            Slist = ScoreService.noZhuanBi(Slist);
+                            isIlegal++;
+                        }
+                        if (msgtemp == "去除非本院")
+                        {
+                            Slist = ScoreService.onlyDepartment(Slist, jwOp.GetCollege(StuID));
+                            isIlegal++;
+                        }
+                        if (isIlegal == 0)
+                        {
+                            flag = true;
+                        }
+                        if (i == msgprocess.Length - 1 && flag == true)
+                        {
+                            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【存在非法指令】\n非法指令已被跳过，请检查后重新输入。");
+                        }
+                    }
+                    StuGPA = ScoreService.Compute(Slist);
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), $"【成绩信息】\nGPA：{StuGPA.GPA}\n平均分：{StuGPA.AverageScore}\n所选学分：{StuGPA.CreditSum}");
+                }
+
+            }
+            else
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【未绑定教务系统】\n请先绑定教务系统，格式：绑定教务系统 学号|密码");
+            }
+
         }
     }
 }

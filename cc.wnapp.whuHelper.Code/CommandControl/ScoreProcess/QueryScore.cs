@@ -30,13 +30,15 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                 bool flag = false;
                 string msg = message.Replace(" ", "");     //去除空格
                 string str;
-                str = padRightEx("课程名", 30) + padRightEx("学分", 6) + padRightEx("成绩", 6) + "\n";
+                str = padRightEx("课程名", 8) + padRightEx("学分", 6) + padRightEx("成绩", 6) + "\n";
+                //str = string.Format("{0,30}", "课程名") + string.Format("{0,6}", "学分") + string.Format("{0,6}", "成绩") + "\n";
                 //无额外操作，直接返回总成绩
                 if (msg == "查询成绩")
                 {
                     foreach (Score temp in Slist)
                     {
-                        str += padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
+                        //str += string.Format("{0,30}", temp.LessonName) + string.Format("{0,6}", temp.Credit) + string.Format("{0,6}", temp.Mark) + "\n";
+                        str += padRightEx(temp.LessonName, 36) + "\n" + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
                         /* str.Append(padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6));
                          str.Append(Environment.NewLine);*/
                     }
@@ -118,7 +120,8 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                             Slist = SlistCourse;
                         foreach (Score temp in Slist)
                         {
-                            str += padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
+                            //str += string.Format("{0,30}", temp.LessonName) + string.Format("{0,6}", temp.Credit) + string.Format("{0,6}", temp.Mark) + "\n";
+                            str += padRightEx(temp.LessonName, 36) + "\n" + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
                             /*str.Append(padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6));
                             str.Append(Environment.NewLine);*/
                         }

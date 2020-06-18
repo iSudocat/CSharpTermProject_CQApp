@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attention", "Attention\Atte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeScore", "ComputeScore\ComputeScore.csproj", "{BF3C91D0-65C7-40A2-BC0C-4CC59C7B3EA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedule", "Calendar\Schedule.csproj", "{DE02FB93-DA23-4D69-8CE7-85FFB929B901}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedule", "Schedule\Schedule.csproj", "{DE02FB93-DA23-4D69-8CE7-85FFB929B901}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseFunction", "CourseService\CourseFunction.csproj", "{545676BF-2459-453C-A3A5-042DF3E943B4}"
 EndProject

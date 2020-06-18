@@ -443,7 +443,10 @@ namespace cc.wnapp.whuHelper.UI
                 if (AllScoredataGridView.CurrentRow != null)
                 {
                     String Department = EasOP.GetCollege(tb_StuID.Text);
-                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department)
+                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department
+                        &&
+                        (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修"
+                        || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业教育选修"))
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";

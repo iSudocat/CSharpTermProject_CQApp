@@ -12,7 +12,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
         public override int HandleImpl()
         {
             GithubConnector githubConnector = new GithubConnector();
-            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "请点击下方链接以绑定Github账户\n" + githubConnector.Authorize(fromQQ));
+            Reply("请点击下方链接以绑定Github账户\n" + githubConnector.Authorize(fromQQ));
             return 0;
         }
     }

@@ -133,7 +133,8 @@ namespace ComputeScore
         /// <returns>返回计算后的GPA</returns>
         public static List<Score> onlyDepartment(List<Score> Slist,string department)
         {
-           // List<Score> Slist = jwOp.GetScores(StuID);
+            // List<Score> Slist = jwOp.GetScores(StuID);
+            Slist = Slist.Where(p => p.LessonType == "专业必修" || p.LessonType == "专业教育必修").ToList();
             Slist = Slist.Where(p => p.TeachingCollege == department).ToList();
             return Slist;
         }

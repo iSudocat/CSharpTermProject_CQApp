@@ -64,7 +64,15 @@ namespace cc.wnapp.whuHelper.Code
                 e.CQLog.Warning("初始化", "Git数据库文件重初始化完成");
             }
         }
+        public class MenuInitAtt : IMenuCall
+        {
+            public void MenuCall(object sender, CQMenuCallEventArgs e)
+            {
+                e.CQLog.Debug("菜单点击事件", $"点击菜单-{e.Name}");
+                IF.InitFiles(e.CQApi.AppDirectory, "Attentions.db", "关注数据库文件", true);
+                e.CQLog.Warning("初始化", "关注数据库文件重初始化完成");
+            }
+        }
 
-       
     }
 }

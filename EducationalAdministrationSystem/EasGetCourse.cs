@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using RestSharp;
 using HtmlAgilityPack;
 
-namespace jwxt
+namespace Eas
 {
     public class EasGetCourse
     {

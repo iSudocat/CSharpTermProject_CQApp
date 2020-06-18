@@ -1,6 +1,6 @@
 ﻿using Native.Sdk.Cqp;
 
-namespace jwxt
+namespace Eas
 {
 
     public static class CQ

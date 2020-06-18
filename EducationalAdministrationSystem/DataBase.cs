@@ -16,7 +16,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Mapping;
 using System.Data.Entity.Core.Metadata.Edm;
 
-namespace jwxt
+namespace Eas
 {
 
     [DbConfigurationType(typeof(DbCommon.SQLiteConfiguration))]

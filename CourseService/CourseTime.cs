@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using jwxt;
+using Eas;
 using NPOI.SS.Formula.Functions;
 
 namespace CourseFunction
@@ -78,9 +78,9 @@ namespace CourseFunction
 
         public static DateTime WeekdayDate(string weekday)
         {
-            int year = int.Parse(jwOp.GetFirstWeekDate().Split('-')[0]);
-            int month = int.Parse(jwOp.GetFirstWeekDate().Split('-')[1]);
-            int day = int.Parse(jwOp.GetFirstWeekDate().Split('-')[2]);
+            int year = int.Parse(EasOP.GetFirstWeekDate().Split('-')[0]);
+            int month = int.Parse(EasOP.GetFirstWeekDate().Split('-')[1]);
+            int day = int.Parse(EasOP.GetFirstWeekDate().Split('-')[2]);
             switch (weekday)
             {
                 case "Mon":

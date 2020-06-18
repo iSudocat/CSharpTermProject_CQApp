@@ -13,12 +13,12 @@ using System.Windows.Forms;
 using ComputeScore;
 using CourseFunction;
 using FluentScheduler;
-using jwxt;
+using Eas;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using Native.Sdk.Cqp.Model;
 using Tools;
-
+using AttentionSpace;
 
 namespace cc.wnapp.whuHelper.UI
 {
@@ -32,24 +32,22 @@ namespace cc.wnapp.whuHelper.UI
         public Form1()
         {
             InitializeComponent();
-            
         }
         
         private void Form1_Load(object sender, EventArgs e)
-        {
-
+        {   
             tab1Init();
             tab2Init();
             tab3Init();
+            tab4Init();
         }
 
         private void tab1Init()
         {
             BotQQ = CQ.Api.GetLoginQQ();
 
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
-
             stuDataGridView.DataSource = bindingSource_StudentDB;
 
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
@@ -71,44 +69,63 @@ namespace cc.wnapp.whuHelper.UI
 
         private void tab2Init()
         {
-            Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-            courseDataGridView.DataSource = bindingSource_Courses;
+            //MessageBox.Show(bindingSource_StudentDB.Count.ToString());
+            if (bindingSource_StudentDB.Count != 0)
+            {
+                Student student = bindingSource_StudentDB.Current as Student;
+                bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+                courseDataGridView.DataSource = bindingSource_Courses;
+            }
         }
 
         private void tab3Init()
         {
-            Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_StuScore.DataSource = jwOp.GetScores(student.StuID);
-            AllScoredataGridView.DataSource = bindingSource_StuScore;
+            if (bindingSource_StudentDB.Count != 0)
+            {
+                Student student = bindingSource_StudentDB.Current as Student;
+                bindingSource_StuScore.DataSource = EasOP.GetScores(student.StuID);
+                AllScoredataGridView.DataSource = bindingSource_StuScore;
 
-            //防止列乱序
-            AllScoredataGridView.AutoGenerateColumns = false;
-            //为DataGridView增加可选框
-            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
-            checkBoxColumn.Name = "select";
-            //列名
-            checkBoxColumn.HeaderText = "选择";
-            //第一列插入checkbox
-            AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
-            AllScoredataGridView.RowHeadersVisible = false;
+                //防止列乱序
+                AllScoredataGridView.AutoGenerateColumns = false;
+                //为DataGridView增加可选框
+                DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+                checkBoxColumn.Name = "select";
+                //列名
+                checkBoxColumn.HeaderText = "选择";
+                //第一列插入checkbox
+                AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
+                AllScoredataGridView.RowHeadersVisible = false;
 
-            //初始化combobox
-            List<Score> combo = jwOp.GetScores(student.StuID);
-            //提取成绩列表中的唯一值
-            List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
-            CourseName.Insert(0, " ");
-            List<String> Credit = combo.Select(x => x.Credit).Distinct().ToList();
-            Credit.Insert(0, " ");
-            List<String> Year = combo.Select(x => x.Year).Distinct().ToList();
-            Year.Insert(0, " ");
-            List<String> Term = new List<string>{ " ", "1", "2" };
-            comboBoxCourseName.DataSource = CourseName;
-            comboBoxCreditNum.DataSource = Credit;
-            comboBoxYear.DataSource = Year;
-            comboBoxTerm.DataSource = Term;
-            
-         
+                AllScoredataGridView.Columns[0].Width = 50;
+
+                //初始化combobox
+                List <Score> combo = EasOP.GetScores(student.StuID);
+                //提取成绩列表中的唯一值
+                List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
+                CourseName.Insert(0, " ");
+                List<String> Credit = combo.Select(x => x.Credit).Distinct().ToList();
+                Credit.Insert(0, " ");
+                List<String> Year = combo.Select(x => x.Year).Distinct().ToList();
+                Year.Insert(0, " ");
+                List<String> Term = new List<string>{ " ", "1", "2" };
+                comboBoxCourseName.DataSource = CourseName;
+                comboBoxCreditNum.DataSource = Credit;
+                comboBoxYear.DataSource = Year;
+                comboBoxTerm.DataSource = Term;
+            }
+        }
+
+		private void tab4Init() 
+        {
+            type_comboBox.SelectedIndex = 0;
+            AttentionService attentionService = new AttentionService();
+            String listener = attentionService.Listeners.First().Listener.ToString();
+            bindingSource_attention.DataSource = attentionService.Query(listener,"","");
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+            attentionDataGridView.DataSource = bindingSource_attention;
+            allAttentionUserDataGridView.DataSource = bindingSource_attentionUser;
+            bindingSource_attentionUser.ResetBindings(true);
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -143,15 +160,14 @@ namespace cc.wnapp.whuHelper.UI
                     EasGetCourse jwcourse = new EasGetCourse();
                     jwcourse.GetCourse(jwxt);
                     MessageBox.Show(jwxt.StuName + " " + jwxt.College, "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+                    bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
                     dataGridView_StuList.DataSource = bindingSource_StudentDB;
 
                     //课程表 数据绑定
                     stuDataGridView.DataSource = bindingSource_StudentDB;
 
-                    Student student = bindingSource_StudentDB.Current as Student;
-                    bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-                    courseDataGridView.DataSource = bindingSource_Courses;
+                    tab2Init();
+                    tab3Init();
 
                 }
             }
@@ -173,14 +189,14 @@ namespace cc.wnapp.whuHelper.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            jwOp.DeleteStu(CurrentStuID_jw);
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            EasOP.DeleteStu(CurrentStuID_jw);
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
         private void btn_refreshMainList_Click(object sender, EventArgs e)
         {
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
@@ -228,10 +244,27 @@ namespace cc.wnapp.whuHelper.UI
             label_sr1.Text = "本人新出成绩提醒：已关闭";
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
-            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
-            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+            Student student = bindingSource_StudentDB.Current as Student;
+            Course course = new Course();
+            CourseDetail courseDetailForm = new CourseDetail(student.StuID);
+
+            using (jwContext context = new jwContext())
+            {
+                if (courseDetailForm.ShowDialog() == DialogResult.OK)
+                {
+                    course = courseDetailForm.course;
+
+                    MessageBox.Show(course.ToString());
+                    context.Courses.Add(course);
+                    context.SaveChanges();
+                }
+            }
+            QueryAllCourses();
+
+            //bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
+            //dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
 
@@ -275,6 +308,7 @@ namespace cc.wnapp.whuHelper.UI
         {
             return dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
         }
+
         private void queryButton_Click(object sender, EventArgs e)
         {
             //QueryAllCourses();
@@ -324,29 +358,7 @@ namespace cc.wnapp.whuHelper.UI
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
-            Student student = bindingSource_StudentDB.Current as Student;
-            Course course = CourseService.QueryByLessonNum(courseID, student.StuID).FirstOrDefault();
-
-            MessageBox.Show(course.LessonNum);
-            try
-            {
-                var time = CourseTime.ParseClassTime(course);
-                if (time == null)
-                {
-                    MessageBox.Show("出现错误", "查询失败");
-                }
-                else
-                {
-                    DateTime dt = (DateTime)time[0][0];
-                    MessageBox.Show(dt.ToString() + $"结束{time[0][2]}");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            QueryAllCourses();
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)
@@ -440,7 +452,7 @@ namespace cc.wnapp.whuHelper.UI
             {
                 if (AllScoredataGridView.CurrentRow != null)
                 {
-                    String Department = jwOp.GetCollege(tb_StuID.Text);
+                    String Department = EasOP.GetCollege(tb_StuID.Text);
                     if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department)
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
                     else
@@ -452,7 +464,7 @@ namespace cc.wnapp.whuHelper.UI
         private void buttonRestore_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_StuScore.DataSource = jwOp.GetScores(student.StuID);
+            bindingSource_StuScore.DataSource = EasOP.GetScores(student.StuID);
         }
 
         private void buttonCompute_Click(object sender, EventArgs e)
@@ -485,7 +497,6 @@ namespace cc.wnapp.whuHelper.UI
             return GetSelect;
         }
 		
-		
 		private void ExportButton_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
@@ -495,7 +506,7 @@ namespace cc.wnapp.whuHelper.UI
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
-            List<Score> temp = jwOp.GetScores(student.StuID);
+            List<Score> temp = EasOP.GetScores(student.StuID);
             String CourseName = comboBoxCourseName.SelectedItem.ToString();
             String Year = comboBoxYear.SelectedItem.ToString();
             String Term = comboBoxTerm.SelectedItem.ToString();
@@ -527,7 +538,73 @@ namespace cc.wnapp.whuHelper.UI
             bindingSource_StuScore.ResetBindings(false);
         }
 
+        private void search_attention_buttom_Click(object sender, EventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            int index = type_comboBox.SelectedIndex;
+            String searchText = textBox1.Text;
+            String currentListener;
+            if (allAttentionUserDataGridView.CurrentRow != null)
+            {
+                currentListener = allAttentionUserDataGridView.CurrentRow.Cells[0].Value.ToString();
+            }
+            else 
+            {
+                currentListener = attentionService.Listeners.First().ToString();
+            }
+            switch (index) 
+            {
+                case 0:
+                    if (searchText == "")
+                    {
+                        bindingSource_attention.DataSource = attentionService.Query(currentListener, "", "");
+                    }
+                    else 
+                    {
+                        bindingSource_attention.DataSource = attentionService.Query(searchText, "", "");
+                    }
+                    break;
+                case 1:
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, "", searchText);
+                    break;
+                case 2:
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, searchText, "");
+                    break;
+                default:
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, "", "");
+                    break;
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+        }
 
+        private void remove_attention_buttom_Click(object sender, EventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            if (attentionDataGridView.CurrentRow != null)
+            {
+                String listener = attentionDataGridView.CurrentRow.Cells[0].Value.ToString();
+                String group = attentionDataGridView.CurrentRow.Cells[1].Value.ToString();
+                String attention = attentionDataGridView.CurrentRow.Cells[2].Value.ToString();
+                attentionService.Remove(listener, attention, group);
+                search_attention_buttom_Click(sender, e);
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+        }
+
+        private void allAttentionUserDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            if (allAttentionUserDataGridView.CurrentRow != null) 
+            {
+                
+                String listener = allAttentionUserDataGridView.CurrentRow.Cells[0].Value.ToString();
+                bindingSource_attention.DataSource = attentionService.Query(listener, "", "");
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+        }
 
         //测试时使用
         //private void courseDataGridView_SelectionChanged(object sender, EventArgs e)

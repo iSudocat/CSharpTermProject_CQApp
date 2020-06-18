@@ -152,20 +152,57 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttenttionHandler.cs" />
+    <Compile Include="CommandControl\ClassSchedule\AddCourseScheduleToDB.cs" />
+    <Compile Include="CommandControl\ClassSchedule\FunctionMenu.cs" />
+    <Compile Include="CommandControl\ClassSchedule\QueryCourseTable.cs" />
+    <Compile Include="CommandControl\ClassSchedule\QueryFunction.cs" />
+    <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
+    <Compile Include="CommandControl\EducationalAdministrationSystem\UpdateScoreDB.cs" />
+    <Compile Include="CommandControl\EducationalAdministrationSystem\UpdateCourseDB.cs" />
+    <Compile Include="CommandControl\Notification\AddAttention.cs" />
+    <Compile Include="CommandControl\Notification\AttentionHelp.cs" />
+    <Compile Include="CommandControl\Notification\GetAllAttention.cs" />
+    <Compile Include="CommandControl\Notification\RemoveAttention.cs" />
+    <Compile Include="CommandControl\Notification\UpdateAttention.cs" />
+    <Compile Include="CommandControl\ScoreProcess\QueryScore.cs" />
+    <Compile Include="CommandControl\ScoreProcess\ComputeScore.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\ConnectGithub.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\DisconnectGithub.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\QueryAuthorisedGithubAccount.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\QueryRepository.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\SubscribeRepository.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\Unsubscribe.cs" />
+    <Compile Include="CommandControl\MsgEventControl.cs" />
+    <Compile Include="CommandControl\Notification\SendAttentionMsg.cs" />
+    <Compile Include="CommandControl\PrivateMsgEventControl.cs" />
+    <Compile Include="CommandControl\GroupMsgEventControl.cs" />
+    <Compile Include="CommandControl\SchedulerControl\AddScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\AddWeeklyScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\DelScheduleFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\DelWeeklyScheduleFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\GetSchedulesFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\GetWeeklySchedulesFromDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\ScheduleCommand.cs" />
+    <Compile Include="CommandControl\SchedulerControl\SetScheduleToDB.cs" />
+    <Compile Include="CommandControl\SchedulerControl\SetWeeklyScheduleToDB.cs" />
+    <Compile Include="CommandRouter\CommandRouter.cs" />
+    <Compile Include="CommandRouter\CommandServiceProvider.cs" />
+    <Compile Include="CommandRouter\EventType.cs" />
+    <Compile Include="CommandRouter\MatchType.cs" />
+    <Compile Include="CommandRouter\AbstractCommand.cs" />
     <Compile Include="CQ.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="code.cs" />
     <Compile Include="Event_App.cs" />
     <Compile Include="Event_Message.cs" />
-    <Compile Include="GroupMsgProcess.cs" />
     <Compile Include="InitFiles.cs" />
-    <Compile Include="PrivateMsgProcess.cs" />
+    <Compile Include="GlobalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Calendar\Schedule.csproj">
-      <Project>{de02fb93-da23-4d69-8ce7-85ffb929b901}</Project>
-      <Name>Schedule</Name>
+    <ProjectReference Include="..\Attention\Attention.csproj">
+      <Project>{82c08346-1866-427c-a7ae-0be41852c11d}</Project>
+      <Name>Attention</Name>
     </ProjectReference>
     <ProjectReference Include="..\CourseService\CourseFunction.csproj">
       <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
@@ -187,6 +224,10 @@
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Schedule\Schedule.csproj">
+      <Project>{de02fb93-da23-4d69-8ce7-85ffb929b901}</Project>
+      <Name>Schedule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
       <Name>Tools</Name>
@@ -196,6 +237,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

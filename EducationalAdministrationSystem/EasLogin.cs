@@ -10,7 +10,7 @@ using HtmlAgilityPack;
 using System.Globalization;
 using Tools;
 
-namespace jwxt
+namespace Eas
 {
     public class EasLogin
     {
@@ -22,6 +22,7 @@ namespace jwxt
         public string csrftoken { get; set; }
         public string StuName;
         public string College;
+        public string Term;
         private string CaptchaID;    //用于上报打码平台识别错误的图片ID
 
 
@@ -59,12 +60,12 @@ namespace jwxt
                         
                         if (i == TryNum)
                         {
-                            Console.WriteLine("验证码错误，已到达最大尝试上限。");
+                            //Console.WriteLine("验证码错误，已到达最大尝试上限。");
                             throw ex;
                         }
                         else
                         {
-                            Console.WriteLine("验证码错误，准备重试。");
+                            //Console.WriteLine("验证码错误，准备重试。");
                             System.Threading.Thread.Sleep(1000);    //休眠1s后重试请求
                             continue;
                         }
@@ -73,7 +74,6 @@ namespace jwxt
                     else
                     {
                         throw ex;
-
                     }
                 }
             }
@@ -142,14 +142,12 @@ namespace jwxt
             }
         }
 
-
         public string GetStuName(string res)
         {
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(res);
             var nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='nameLable']");
             var StuName = nameNode.InnerText.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace(" ", "");
-
             Console.WriteLine("成功获取了StuName：" + StuName);
             return StuName;
         }
@@ -159,7 +157,6 @@ namespace jwxt
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(res);
             var College = htmlDoc.DocumentNode.SelectSingleNode("//span[@id='acade']").Attributes["title"].Value;
-
             Console.WriteLine("成功获取了College：" + College);
             return College;
         }
@@ -207,7 +204,6 @@ namespace jwxt
 
         public byte[] GetCaptchaImg()
         {
-
             var client = new RestClient(urls.captcha_url);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Host", "bkjw.whu.edu.cn");

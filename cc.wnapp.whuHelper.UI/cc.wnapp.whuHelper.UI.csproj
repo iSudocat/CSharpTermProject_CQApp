@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CourseDetail.resx">
+      <DependentUpon>CourseDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +135,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Attention\Attention.csproj">
+      <Project>{82c08346-1866-427c-a7ae-0be41852c11d}</Project>
+      <Name>Attention</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cc.wnapp.whuHelper.Code\cc.wnapp.whuHelper.Code.csproj">
+      <Project>{1a356d6f-1c6e-49c2-854f-b06c5941c061}</Project>
+      <Name>cc.wnapp.whuHelper.Code</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ComputeScore\ComputeScore.csproj">
       <Project>{bf3c91d0-65c7-40a2-bc0c-4cc59c7b3ea4}</Project>
       <Name>ComputeScore</Name>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using jwxt;
+using Eas;
 
 namespace ComputeScore
 {
@@ -127,7 +127,7 @@ namespace ComputeScore
 
 
         /// <summary>
-        /// 获取指定学生的GPA信息，只算计算机学院课程
+        /// 获取指定学生的GPA信息
         /// </summary>
         /// <param name="StuID">学号</param>
         /// <returns>返回计算后的GPA</returns>
@@ -136,6 +136,71 @@ namespace ComputeScore
            // List<Score> Slist = jwOp.GetScores(StuID);
             Slist = Slist.Where(p => p.TeachingCollege == department).ToList();
             return Slist;
+        }
+
+        /// <summary>
+        /// 获取指定学生的GPA信息，只查某一学年的成绩
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static List<Score> onlyThisYear(List<Score> Slist, string Year)
+        {
+            // List<Score> Slist = jwOp.GetScores(StuID);
+            Slist = Slist.Where(p => p.Year == Year).ToList();
+            if (Slist.Count == 0)
+                throw new Exception("学年不存在");
+            return Slist;
+        }
+
+        /// <summary>
+        /// 获取指定学生的GPA信息，只查某一学期的成绩
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static List<Score> onlyThisTerm(List<Score> Slist, string Term)
+        {
+            // List<Score> Slist = jwOp.GetScores(StuID);
+            Slist = Slist.Where(p => p.Term == Term).ToList();
+            if (Slist.Count == 0)
+                throw new Exception("学期不存在");
+            return Slist;
+        }
+
+        /// <summary>
+        /// 获取指定学生的GPA信息，只查某一科目的成绩
+        /// </summary>
+        /// <param name="StuID">学号</param>
+        /// <returns>返回计算后的GPA</returns>
+        public static List<Score> onlyThisCourse(List<Score> Slist, string Name)
+        {
+            List<Score> temp = new List<Score>();
+            //temp = Slist.FirstOrDefault(p => p.LessonName == Name);
+            foreach(Score p in Slist)
+            {
+                if(IsMatch(p.LessonName,Name))
+                {
+                    temp.Add(p);
+                }
+            }    
+            return temp;
+        }
+
+        /// <summary>
+        /// 判断查询的字符是否模糊匹配于课程名
+        /// </summary>
+        /// <param name="LessonName">课程名</param>
+        /// <param name="Msg">查询消息</param>
+        /// <returns>true false</returns>
+        private static bool IsMatch(string LessonName,string Msg)
+        {
+            int distance = LevenshteinDistance.ComputeDistance(LessonName, Msg);
+            int nameLength = LessonName.Length;
+            int MsgLength = Msg.Length;
+            int equal = nameLength - distance;
+            if (equal == MsgLength)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>

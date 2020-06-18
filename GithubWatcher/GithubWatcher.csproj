@@ -540,9 +540,11 @@
     <Compile Include="Models\GithubBinding.cs" />
     <Compile Include="Models\GithubWatcherContext.cs" />
     <Compile Include="Models\InitializeDB.cs" />
+    <Compile Include="Models\OAuthConfig.cs" />
     <Compile Include="Models\PayloadRecord.cs" />
     <Compile Include="Models\RepositoryInformation.cs" />
     <Compile Include="Models\RepositorySubscription.cs" />
+    <Compile Include="OAuthService\OAuthConfigService.cs" />
     <Compile Include="OAuthService\WebhookConfig.cs" />
     <Compile Include="OAuthService\WebhookData.cs" />
     <Compile Include="OAuthService\Encryption.cs" />
@@ -550,6 +552,7 @@
     <Compile Include="OAuthService\GithubRepositoryInfo.cs" />
     <Compile Include="OAuthService\GithubUserInfo.cs" />
     <Compile Include="OAuthService\HttpService.cs" />
+    <Compile Include="OAuthService\WebhookResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\CQ.cs" />
     <Compile Include="Responder\GitHubResponder.cs" />

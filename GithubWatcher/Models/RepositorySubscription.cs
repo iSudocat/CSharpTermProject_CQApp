@@ -16,6 +16,11 @@ namespace GithubWatcher.Models
         [Key, Column(Order = 1)]
         public string QQ { get; set; }
         public string Secret { get; set; }    //多对一关联
+        [Required]
+        public string WebhookId { get; set; }
+        [Required]
+        public string WebhookName { get; set; }
+        
 
         public override string ToString()
         {

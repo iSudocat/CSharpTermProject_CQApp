@@ -17,7 +17,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
 
                 if (query.Count() == 0)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何仓库，输入“绑定仓库#仓库名称#”以绑定仓库！");
+                    Reply("您目前尚未绑定任何仓库，输入“绑定仓库#仓库名称#”以绑定仓库！");
                     return 0;
                 }
 
@@ -29,7 +29,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                     i++;
                     message = message + $"\n{i}. " + subscription.RepositoryName;
                 }
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
+                Reply(message);
             }
 
             return 0;

@@ -576,7 +576,7 @@ namespace cc.wnapp.whuHelper.UI
                     break;
             }
             bindingSource_attentionUser.ResetBindings(true);
-            //bindingSource_attentionUser.DataSource = attentionService.Listeners;
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
         }
 
         private void remove_attention_buttom_Click(object sender, EventArgs e)
@@ -591,7 +591,7 @@ namespace cc.wnapp.whuHelper.UI
                 search_attention_buttom_Click(sender, e);
             }
             bindingSource_attentionUser.ResetBindings(true);
-            //bindingSource_attentionUser.DataSource = attentionService.Listeners;
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
         }
 
         private void allAttentionUserDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -604,8 +604,7 @@ namespace cc.wnapp.whuHelper.UI
                 bindingSource_attention.DataSource = attentionService.Query(listener, "", "");
             }
             bindingSource_attentionUser.ResetBindings(true);
-            //bindingSource_attentionUser.DataSource = attentionService.Listeners;
-
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
         }
 
         //测试时使用

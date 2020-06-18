@@ -52,6 +52,7 @@ namespace AttentionSpace
         public void UpdateListeners() 
         {
             Boolean same = false;
+            Listeners = new List<ListenerInfo>();
             foreach (Attention att in Attentions)
             {
                 same = false;
@@ -74,6 +75,8 @@ namespace AttentionSpace
         //添加关注
         public void Add(String SourceQQ, String Attention, String GroupNum)
         {
+            if (Attention.Contains(" "))
+                throw new Exception("不允许输入空格和空字符串");
             using (var dbcontext = new AttentionContext())
             {
                 Attention newatt = new Attention(SourceQQ, GroupNum, Attention);

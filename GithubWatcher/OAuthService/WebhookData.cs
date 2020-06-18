@@ -14,7 +14,7 @@ namespace GithubWatcher.OAuthService
 
         public WebhookData()
         {
-            Name = "WHU Helper Robot";
+            Name = "web";
             Active = true;
             Events = new List<string> { "push", "pull_request", "issues", "issue_comment", "create" };
             Config = new WebhookConfig();

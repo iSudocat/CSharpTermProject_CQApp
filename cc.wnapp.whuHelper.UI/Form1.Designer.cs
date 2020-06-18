@@ -60,11 +60,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.ExportButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.stuDataGridView = new System.Windows.Forms.DataGridView();
             this.QQNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -510,11 +509,10 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.refreshButton);
-            this.groupBox3.Controls.Add(this.ExportButton);
+            this.groupBox3.Controls.Add(this.addButton);
             this.groupBox3.Controls.Add(this.updateButton);
             this.groupBox3.Controls.Add(this.delButton);
-            this.groupBox3.Controls.Add(this.addButton);
+            this.groupBox3.Controls.Add(this.exportButton);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(3, 410);
             this.groupBox3.Name = "groupBox3";
@@ -523,26 +521,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
             // 
-            // refreshButton
+            // addButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(518, 25);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(145, 34);
-            this.refreshButton.TabIndex = 3;
-            this.refreshButton.Text = "刷新课程";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            // 
-            // ExportButton
-            // 
-            this.ExportButton.BackColor = System.Drawing.SystemColors.Window;
-            this.ExportButton.Location = new System.Drawing.Point(518, 27);
-            this.ExportButton.Name = "ExportButton";
-            this.ExportButton.Size = new System.Drawing.Size(145, 34);
-            this.ExportButton.TabIndex = 3;
-            this.ExportButton.Text = "导出课程";
-            this.ExportButton.UseVisualStyleBackColor = false;
-            this.ExportButton.Click += new System.EventHandler(this.exportButton_Click);
+            this.addButton.Location = new System.Drawing.Point(6, 27);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(145, 34);
+            this.addButton.TabIndex = 3;
+            this.addButton.Text = "添加课程";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // updateButton
             // 
@@ -564,15 +551,15 @@
             this.delButton.UseVisualStyleBackColor = true;
             this.delButton.Click += new System.EventHandler(this.delButton_Click);
             // 
-            // addButton
+            // exportButton
             // 
-            this.addButton.Location = new System.Drawing.Point(6, 25);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(145, 34);
-            this.addButton.TabIndex = 0;
-            this.addButton.Text = "导出课程";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.ExportButton_Click);
+            this.exportButton.Location = new System.Drawing.Point(519, 27);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(145, 34);
+            this.exportButton.TabIndex = 0;
+            this.exportButton.Text = "导出课程";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // groupBox2
             // 
@@ -716,7 +703,6 @@
             this.LessonType.MinimumWidth = 6;
             this.LessonType.Name = "LessonType";
             this.LessonType.ReadOnly = true;
-            this.LessonType.Width = 110;
             // 
             // LearnType
             // 
@@ -810,6 +796,7 @@
             this.S.ReadOnly = true;
             this.S.Visible = false;
             this.S.Width = 125;
+            
             // 
             // groupBox1
             // 
@@ -1601,11 +1588,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button delButton;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView stuDataGridView;
-        private System.Windows.Forms.Button refreshButton;
-        private System.Windows.Forms.Button ExportButton;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -1704,6 +1689,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.Button addButton;
     }
 }
 

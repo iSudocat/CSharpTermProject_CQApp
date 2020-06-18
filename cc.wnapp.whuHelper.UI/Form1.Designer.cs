@@ -365,7 +365,6 @@
             this.QQ.MinimumWidth = 6;
             this.QQ.Name = "QQ";
             this.QQ.ReadOnly = true;
-            this.QQ.Width = 200;
             // 
             // StuID
             // 
@@ -383,7 +382,6 @@
             this.StuName.MinimumWidth = 6;
             this.StuName.Name = "StuName";
             this.StuName.ReadOnly = true;
-            this.StuName.Width = 200;
             // 
             // College
             // 

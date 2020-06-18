@@ -30,5 +30,6 @@ namespace GithubWatcher.Models
         public DbSet<RepositorySubscription> RepositorySubscriptions { get; set; }  // 用户绑定记录
         public DbSet<GithubBinding> GithubBindings { get; set; }    // 用户绑定Github账户记录
         public DbSet<RepositoryInformation> RepositoryInformations { get; set; }    // 仓库信息记录
+        public DbSet<OAuthConfig> OAuthConfigs { get; set; }    // OAuthConfig信息
     }
 }

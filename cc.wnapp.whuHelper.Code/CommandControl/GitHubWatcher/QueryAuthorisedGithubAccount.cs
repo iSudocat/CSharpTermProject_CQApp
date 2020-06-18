@@ -18,7 +18,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
 
                 if (query.Count() == 0)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您目前尚未绑定任何Github账户，输入“绑定Github账户”以进行绑定！");
+                    Reply("您目前尚未绑定任何Github账户，输入“绑定Github账户”以进行绑定！");
                     return 0;
                 }
 
@@ -30,7 +30,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                     i++;
                     message = message + $"\n{i}. " + account.GithubUserName;
                 }
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), message);
+                Reply(message);
             }
 
             return 0;

@@ -60,11 +60,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.ExportButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.stuDataGridView = new System.Windows.Forms.DataGridView();
             this.QQNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +72,19 @@
             this.School = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botQQq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.courseDataGridView = new System.Windows.Forms.DataGridView();
+            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.queryButton = new System.Windows.Forms.Button();
             this.queryTextBox = new System.Windows.Forms.TextBox();
@@ -99,31 +111,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AllScoredataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonSelectNoGX = new System.Windows.Forms.Button();
-            this.buttonSelectNoGB = new System.Windows.Forms.Button();
-            this.buttonSelectDepart = new System.Windows.Forms.Button();
-            this.buttonSelectNoZX = new System.Windows.Forms.Button();
-            this.buttonSelectNoZB = new System.Windows.Forms.Button();
-            this.buttonSelectNo = new System.Windows.Forms.Button();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.LessonNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LessonType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TeachingCollege = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Credit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LearningHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -137,6 +124,18 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonSelectNoGX = new System.Windows.Forms.Button();
+            this.buttonSelectNoGB = new System.Windows.Forms.Button();
+            this.buttonSelectDepart = new System.Windows.Forms.Button();
+            this.buttonSelectNoZX = new System.Windows.Forms.Button();
+            this.buttonSelectNoZB = new System.Windows.Forms.Button();
+            this.buttonSelectNo = new System.Windows.Forms.Button();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bindingSource_StuScore = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource_Courses = new System.Windows.Forms.BindingSource(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -480,11 +479,10 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.refreshButton);
-            this.groupBox3.Controls.Add(this.ExportButton);
+            this.groupBox3.Controls.Add(this.addButton);
             this.groupBox3.Controls.Add(this.updateButton);
             this.groupBox3.Controls.Add(this.delButton);
-            this.groupBox3.Controls.Add(this.addButton);
+            this.groupBox3.Controls.Add(this.exportButton);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(3, 410);
             this.groupBox3.Name = "groupBox3";
@@ -493,26 +491,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
             // 
-            // refreshButton
+            // addButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(518, 27);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(145, 34);
-            this.refreshButton.TabIndex = 3;
-            this.refreshButton.Text = "刷新课程";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            // 
-            // ExportButton
-            // 
-            this.ExportButton.BackColor = System.Drawing.SystemColors.Window;
-            this.ExportButton.Location = new System.Drawing.Point(518, 27);
-            this.ExportButton.Name = "ExportButton";
-            this.ExportButton.Size = new System.Drawing.Size(145, 34);
-            this.ExportButton.TabIndex = 3;
-            this.ExportButton.Text = "导出课程";
-            this.ExportButton.UseVisualStyleBackColor = false;
-            this.ExportButton.Click += new System.EventHandler(this.exportButton_Click);
+            this.addButton.Location = new System.Drawing.Point(6, 27);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(145, 34);
+            this.addButton.TabIndex = 3;
+            this.addButton.Text = "添加课程";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // updateButton
             // 
@@ -534,15 +521,15 @@
             this.delButton.UseVisualStyleBackColor = true;
             this.delButton.Click += new System.EventHandler(this.delButton_Click);
             // 
-            // addButton
+            // exportButton
             // 
-            this.addButton.Location = new System.Drawing.Point(6, 27);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(145, 34);
-            this.addButton.TabIndex = 0;
-            this.addButton.Text = "导出课程";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.ExportButton_Click);
+            this.exportButton.Location = new System.Drawing.Point(519, 27);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(145, 34);
+            this.exportButton.TabIndex = 0;
+            this.exportButton.Text = "导出课程";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // groupBox2
             // 
@@ -660,6 +647,125 @@
             this.courseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.courseDataGridView.Size = new System.Drawing.Size(580, 307);
             this.courseDataGridView.TabIndex = 1;
+            // 
+            // LessonNum
+            // 
+            this.LessonNum.DataPropertyName = "LessonNum";
+            this.LessonNum.HeaderText = "课头号";
+            this.LessonNum.MinimumWidth = 6;
+            this.LessonNum.Name = "LessonNum";
+            this.LessonNum.ReadOnly = true;
+            this.LessonNum.Width = 110;
+            // 
+            // LessonName
+            // 
+            this.LessonName.DataPropertyName = "LessonName";
+            this.LessonName.HeaderText = "课程名";
+            this.LessonName.MinimumWidth = 6;
+            this.LessonName.Name = "LessonName";
+            this.LessonName.ReadOnly = true;
+            this.LessonName.Width = 125;
+            // 
+            // LessonType
+            // 
+            this.LessonType.DataPropertyName = "LessonType";
+            this.LessonType.HeaderText = "课程类型";
+            this.LessonType.MinimumWidth = 6;
+            this.LessonType.Name = "LessonType";
+            this.LessonType.ReadOnly = true;
+            // 
+            // LearnType
+            // 
+            this.LearnType.DataPropertyName = "LearninType";
+            this.LearnType.HeaderText = "学习类型";
+            this.LearnType.MinimumWidth = 6;
+            this.LearnType.Name = "LearnType";
+            this.LearnType.ReadOnly = true;
+            this.LearnType.Visible = false;
+            this.LearnType.Width = 80;
+            // 
+            // TeachingCollege
+            // 
+            this.TeachingCollege.DataPropertyName = "TeachingCollege";
+            this.TeachingCollege.HeaderText = "授课学院";
+            this.TeachingCollege.MinimumWidth = 6;
+            this.TeachingCollege.Name = "TeachingCollege";
+            this.TeachingCollege.ReadOnly = true;
+            this.TeachingCollege.Width = 125;
+            // 
+            // Teacher
+            // 
+            this.Teacher.DataPropertyName = "Teacher";
+            this.Teacher.HeaderText = "授课教师";
+            this.Teacher.MinimumWidth = 6;
+            this.Teacher.Name = "Teacher";
+            this.Teacher.ReadOnly = true;
+            this.Teacher.Width = 90;
+            // 
+            // Dept
+            // 
+            this.Dept.DataPropertyName = "Specialty";
+            this.Dept.HeaderText = "专业";
+            this.Dept.MinimumWidth = 6;
+            this.Dept.Name = "Dept";
+            this.Dept.ReadOnly = true;
+            this.Dept.Width = 125;
+            // 
+            // Credit
+            // 
+            this.Credit.DataPropertyName = "Credit";
+            this.Credit.HeaderText = "学分";
+            this.Credit.MinimumWidth = 6;
+            this.Credit.Name = "Credit";
+            this.Credit.ReadOnly = true;
+            this.Credit.Width = 60;
+            // 
+            // LearningHours
+            // 
+            this.LearningHours.DataPropertyName = "LessonHours";
+            this.LearningHours.HeaderText = "学时";
+            this.LearningHours.MinimumWidth = 6;
+            this.LearningHours.Name = "LearningHours";
+            this.LearningHours.ReadOnly = true;
+            this.LearningHours.Width = 70;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "上课时间";
+            this.Time.MinimumWidth = 6;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            this.Time.Width = 280;
+            // 
+            // Note
+            // 
+            this.Note.DataPropertyName = "Note";
+            this.Note.HeaderText = "备注";
+            this.Note.MinimumWidth = 6;
+            this.Note.Name = "Note";
+            this.Note.ReadOnly = true;
+            this.Note.Width = 125;
+            // 
+            // SID
+            // 
+            this.SID.DataPropertyName = "StuID";
+            this.SID.HeaderText = "学生学号";
+            this.SID.MinimumWidth = 6;
+            this.SID.Name = "SID";
+            this.SID.ReadOnly = true;
+            this.SID.Visible = false;
+            this.SID.Width = 125;
+            // 
+            // S
+            // 
+            this.S.DataPropertyName = "Student";
+            this.S.HeaderText = "学生姓名";
+            this.S.MinimumWidth = 6;
+            this.S.Name = "S";
+            this.S.ReadOnly = true;
+            this.S.Visible = false;
+            this.S.Width = 125;
             // 
             // groupBox1
             // 
@@ -951,225 +1057,6 @@
             this.AllScoredataGridView.Size = new System.Drawing.Size(822, 271);
             this.AllScoredataGridView.TabIndex = 0;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.buttonSelectNoGX);
-            this.groupBox4.Controls.Add(this.buttonSelectNoGB);
-            this.groupBox4.Controls.Add(this.buttonSelectDepart);
-            this.groupBox4.Controls.Add(this.buttonSelectNoZX);
-            this.groupBox4.Controls.Add(this.buttonSelectNoZB);
-            this.groupBox4.Controls.Add(this.buttonSelectNo);
-            this.groupBox4.Controls.Add(this.buttonSelectAll);
-            this.groupBox4.Location = new System.Drawing.Point(6, 77);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(828, 81);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "操作";
-            // 
-            // buttonSelectNoGX
-            // 
-            this.buttonSelectNoGX.Location = new System.Drawing.Point(583, 30);
-            this.buttonSelectNoGX.Name = "buttonSelectNoGX";
-            this.buttonSelectNoGX.Size = new System.Drawing.Size(96, 31);
-            this.buttonSelectNoGX.TabIndex = 15;
-            this.buttonSelectNoGX.Text = "去除公选";
-            this.buttonSelectNoGX.UseVisualStyleBackColor = true;
-            this.buttonSelectNoGX.Click += new System.EventHandler(this.buttonSelectNoGX_Click);
-            // 
-            // buttonSelectNoGB
-            // 
-            this.buttonSelectNoGB.Location = new System.Drawing.Point(465, 30);
-            this.buttonSelectNoGB.Name = "buttonSelectNoGB";
-            this.buttonSelectNoGB.Size = new System.Drawing.Size(98, 31);
-            this.buttonSelectNoGB.TabIndex = 14;
-            this.buttonSelectNoGB.Text = "去除公必";
-            this.buttonSelectNoGB.UseVisualStyleBackColor = true;
-            this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
-            // 
-            // buttonSelectDepart
-            // 
-            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
-            this.buttonSelectDepart.Name = "buttonSelectDepart";
-            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
-            this.buttonSelectDepart.TabIndex = 13;
-            this.buttonSelectDepart.Text = "去除非本院";
-            this.buttonSelectDepart.UseVisualStyleBackColor = true;
-            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
-            // 
-            // buttonSelectNoZX
-            // 
-            this.buttonSelectNoZX.Location = new System.Drawing.Point(348, 30);
-            this.buttonSelectNoZX.Name = "buttonSelectNoZX";
-            this.buttonSelectNoZX.Size = new System.Drawing.Size(92, 31);
-            this.buttonSelectNoZX.TabIndex = 12;
-            this.buttonSelectNoZX.Text = "去除专选";
-            this.buttonSelectNoZX.UseVisualStyleBackColor = true;
-            this.buttonSelectNoZX.Click += new System.EventHandler(this.buttonSelectNoZX_Click);
-            // 
-            // buttonSelectNoZB
-            // 
-            this.buttonSelectNoZB.Location = new System.Drawing.Point(234, 30);
-            this.buttonSelectNoZB.Name = "buttonSelectNoZB";
-            this.buttonSelectNoZB.Size = new System.Drawing.Size(90, 31);
-            this.buttonSelectNoZB.TabIndex = 11;
-            this.buttonSelectNoZB.Text = "去除专必";
-            this.buttonSelectNoZB.UseVisualStyleBackColor = true;
-            this.buttonSelectNoZB.Click += new System.EventHandler(this.buttonSelectNoZB_Click);
-            // 
-            // buttonSelectNo
-            // 
-            this.buttonSelectNo.Location = new System.Drawing.Point(125, 30);
-            this.buttonSelectNo.Name = "buttonSelectNo";
-            this.buttonSelectNo.Size = new System.Drawing.Size(88, 31);
-            this.buttonSelectNo.TabIndex = 10;
-            this.buttonSelectNo.Text = "全不选";
-            this.buttonSelectNo.UseVisualStyleBackColor = true;
-            this.buttonSelectNo.Click += new System.EventHandler(this.buttonSelectNo_Click);
-            // 
-            // buttonSelectAll
-            // 
-            this.buttonSelectAll.Location = new System.Drawing.Point(22, 30);
-            this.buttonSelectAll.Name = "buttonSelectAll";
-            this.buttonSelectAll.Size = new System.Drawing.Size(85, 31);
-            this.buttonSelectAll.TabIndex = 9;
-            this.buttonSelectAll.Text = "全选";
-            this.buttonSelectAll.UseVisualStyleBackColor = true;
-            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(837, 508);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "关注管理";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // bindingSource_Courses
-            // 
-            this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
-            // 
-            // LessonNum
-            // 
-            this.LessonNum.DataPropertyName = "LessonNum";
-            this.LessonNum.HeaderText = "课头号";
-            this.LessonNum.MinimumWidth = 6;
-            this.LessonNum.Name = "LessonNum";
-            this.LessonNum.ReadOnly = true;
-            this.LessonNum.Width = 110;
-            // 
-            // LessonName
-            // 
-            this.LessonName.DataPropertyName = "LessonName";
-            this.LessonName.HeaderText = "课程名";
-            this.LessonName.MinimumWidth = 6;
-            this.LessonName.Name = "LessonName";
-            this.LessonName.ReadOnly = true;
-            this.LessonName.Width = 125;
-            // 
-            // LessonType
-            // 
-            this.LessonType.DataPropertyName = "LessonType";
-            this.LessonType.HeaderText = "课程类型";
-            this.LessonType.MinimumWidth = 6;
-            this.LessonType.Name = "LessonType";
-            this.LessonType.ReadOnly = true;
-            // 
-            // LearnType
-            // 
-            this.LearnType.DataPropertyName = "LearninType";
-            this.LearnType.HeaderText = "学习类型";
-            this.LearnType.MinimumWidth = 6;
-            this.LearnType.Name = "LearnType";
-            this.LearnType.ReadOnly = true;
-            this.LearnType.Visible = false;
-            this.LearnType.Width = 80;
-            // 
-            // TeachingCollege
-            // 
-            this.TeachingCollege.DataPropertyName = "TeachingCollege";
-            this.TeachingCollege.HeaderText = "授课学院";
-            this.TeachingCollege.MinimumWidth = 6;
-            this.TeachingCollege.Name = "TeachingCollege";
-            this.TeachingCollege.ReadOnly = true;
-            this.TeachingCollege.Width = 125;
-            // 
-            // Teacher
-            // 
-            this.Teacher.DataPropertyName = "Teacher";
-            this.Teacher.HeaderText = "授课教师";
-            this.Teacher.MinimumWidth = 6;
-            this.Teacher.Name = "Teacher";
-            this.Teacher.ReadOnly = true;
-            this.Teacher.Width = 90;
-            // 
-            // Dept
-            // 
-            this.Dept.DataPropertyName = "Specialty";
-            this.Dept.HeaderText = "专业";
-            this.Dept.MinimumWidth = 6;
-            this.Dept.Name = "Dept";
-            this.Dept.ReadOnly = true;
-            this.Dept.Width = 125;
-            // 
-            // Credit
-            // 
-            this.Credit.DataPropertyName = "Credit";
-            this.Credit.HeaderText = "学分";
-            this.Credit.MinimumWidth = 6;
-            this.Credit.Name = "Credit";
-            this.Credit.ReadOnly = true;
-            this.Credit.Width = 60;
-            // 
-            // LearningHours
-            // 
-            this.LearningHours.DataPropertyName = "LessonHours";
-            this.LearningHours.HeaderText = "学时";
-            this.LearningHours.MinimumWidth = 6;
-            this.LearningHours.Name = "LearningHours";
-            this.LearningHours.ReadOnly = true;
-            this.LearningHours.Width = 70;
-            // 
-            // Time
-            // 
-            this.Time.DataPropertyName = "Time";
-            this.Time.HeaderText = "上课时间";
-            this.Time.MinimumWidth = 6;
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
-            this.Time.Width = 280;
-            // 
-            // Note
-            // 
-            this.Note.DataPropertyName = "Note";
-            this.Note.HeaderText = "备注";
-            this.Note.MinimumWidth = 6;
-            this.Note.Name = "Note";
-            this.Note.ReadOnly = true;
-            this.Note.Width = 125;
-            // 
-            // SID
-            // 
-            this.SID.DataPropertyName = "StuID";
-            this.SID.HeaderText = "学生学号";
-            this.SID.MinimumWidth = 6;
-            this.SID.Name = "SID";
-            this.SID.ReadOnly = true;
-            this.SID.Visible = false;
-            this.SID.Width = 125;
-            // 
-            // S
-            // 
-            this.S.DataPropertyName = "Student";
-            this.S.HeaderText = "学生姓名";
-            this.S.MinimumWidth = 6;
-            this.S.Name = "S";
-            this.S.ReadOnly = true;
-            this.S.Visible = false;
-            this.S.Width = 125;
-            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "LessonName";
@@ -1288,6 +1175,106 @@
             this.Column13.Visible = false;
             this.Column13.Width = 125;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.buttonSelectNoGX);
+            this.groupBox4.Controls.Add(this.buttonSelectNoGB);
+            this.groupBox4.Controls.Add(this.buttonSelectDepart);
+            this.groupBox4.Controls.Add(this.buttonSelectNoZX);
+            this.groupBox4.Controls.Add(this.buttonSelectNoZB);
+            this.groupBox4.Controls.Add(this.buttonSelectNo);
+            this.groupBox4.Controls.Add(this.buttonSelectAll);
+            this.groupBox4.Location = new System.Drawing.Point(6, 77);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(828, 81);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "操作";
+            // 
+            // buttonSelectNoGX
+            // 
+            this.buttonSelectNoGX.Location = new System.Drawing.Point(583, 30);
+            this.buttonSelectNoGX.Name = "buttonSelectNoGX";
+            this.buttonSelectNoGX.Size = new System.Drawing.Size(96, 31);
+            this.buttonSelectNoGX.TabIndex = 15;
+            this.buttonSelectNoGX.Text = "去除公选";
+            this.buttonSelectNoGX.UseVisualStyleBackColor = true;
+            this.buttonSelectNoGX.Click += new System.EventHandler(this.buttonSelectNoGX_Click);
+            // 
+            // buttonSelectNoGB
+            // 
+            this.buttonSelectNoGB.Location = new System.Drawing.Point(465, 30);
+            this.buttonSelectNoGB.Name = "buttonSelectNoGB";
+            this.buttonSelectNoGB.Size = new System.Drawing.Size(98, 31);
+            this.buttonSelectNoGB.TabIndex = 14;
+            this.buttonSelectNoGB.Text = "去除公必";
+            this.buttonSelectNoGB.UseVisualStyleBackColor = true;
+            this.buttonSelectNoGB.Click += new System.EventHandler(this.buttonSelectNoGB_Click);
+            // 
+            // buttonSelectDepart
+            // 
+            this.buttonSelectDepart.Location = new System.Drawing.Point(708, 30);
+            this.buttonSelectDepart.Name = "buttonSelectDepart";
+            this.buttonSelectDepart.Size = new System.Drawing.Size(112, 31);
+            this.buttonSelectDepart.TabIndex = 13;
+            this.buttonSelectDepart.Text = "去除非本院";
+            this.buttonSelectDepart.UseVisualStyleBackColor = true;
+            this.buttonSelectDepart.Click += new System.EventHandler(this.buttonSelectCS_Click);
+            // 
+            // buttonSelectNoZX
+            // 
+            this.buttonSelectNoZX.Location = new System.Drawing.Point(348, 30);
+            this.buttonSelectNoZX.Name = "buttonSelectNoZX";
+            this.buttonSelectNoZX.Size = new System.Drawing.Size(92, 31);
+            this.buttonSelectNoZX.TabIndex = 12;
+            this.buttonSelectNoZX.Text = "去除专选";
+            this.buttonSelectNoZX.UseVisualStyleBackColor = true;
+            this.buttonSelectNoZX.Click += new System.EventHandler(this.buttonSelectNoZX_Click);
+            // 
+            // buttonSelectNoZB
+            // 
+            this.buttonSelectNoZB.Location = new System.Drawing.Point(234, 30);
+            this.buttonSelectNoZB.Name = "buttonSelectNoZB";
+            this.buttonSelectNoZB.Size = new System.Drawing.Size(90, 31);
+            this.buttonSelectNoZB.TabIndex = 11;
+            this.buttonSelectNoZB.Text = "去除专必";
+            this.buttonSelectNoZB.UseVisualStyleBackColor = true;
+            this.buttonSelectNoZB.Click += new System.EventHandler(this.buttonSelectNoZB_Click);
+            // 
+            // buttonSelectNo
+            // 
+            this.buttonSelectNo.Location = new System.Drawing.Point(125, 30);
+            this.buttonSelectNo.Name = "buttonSelectNo";
+            this.buttonSelectNo.Size = new System.Drawing.Size(88, 31);
+            this.buttonSelectNo.TabIndex = 10;
+            this.buttonSelectNo.Text = "全不选";
+            this.buttonSelectNo.UseVisualStyleBackColor = true;
+            this.buttonSelectNo.Click += new System.EventHandler(this.buttonSelectNo_Click);
+            // 
+            // buttonSelectAll
+            // 
+            this.buttonSelectAll.Location = new System.Drawing.Point(22, 30);
+            this.buttonSelectAll.Name = "buttonSelectAll";
+            this.buttonSelectAll.Size = new System.Drawing.Size(85, 31);
+            this.buttonSelectAll.TabIndex = 9;
+            this.buttonSelectAll.Text = "全选";
+            this.buttonSelectAll.UseVisualStyleBackColor = true;
+            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(837, 508);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "关注管理";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // bindingSource_Courses
+            // 
+            this.bindingSource_Courses.DataSource = this.bindingSource_StudentDB;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1357,11 +1344,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button delButton;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView stuDataGridView;
-        private System.Windows.Forms.Button refreshButton;
-        private System.Windows.Forms.Button ExportButton;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -1441,6 +1426,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.Button addButton;
     }
 }
 

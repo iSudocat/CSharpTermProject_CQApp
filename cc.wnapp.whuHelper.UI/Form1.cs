@@ -32,7 +32,6 @@ namespace cc.wnapp.whuHelper.UI
         public Form1()
         {
             InitializeComponent();
-            
         }
         
         private void Form1_Load(object sender, EventArgs e)
@@ -49,7 +48,6 @@ namespace cc.wnapp.whuHelper.UI
 
             bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
-
             stuDataGridView.DataSource = bindingSource_StudentDB;
 
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
@@ -71,47 +69,54 @@ namespace cc.wnapp.whuHelper.UI
 
         private void tab2Init()
         {
-            Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-            courseDataGridView.DataSource = bindingSource_Courses;
+            //MessageBox.Show(bindingSource_StudentDB.Count.ToString());
+            if (bindingSource_StudentDB.Count != 0)
+            {
+                Student student = bindingSource_StudentDB.Current as Student;
+                bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
+                courseDataGridView.DataSource = bindingSource_Courses;
+            }
         }
 
         private void tab3Init()
         {
-            Student student = bindingSource_StudentDB.Current as Student;
-            bindingSource_StuScore.DataSource = EasOP.GetScores(student.StuID);
-            AllScoredataGridView.DataSource = bindingSource_StuScore;
+            if (bindingSource_StudentDB.Count != 0)
+            {
+                Student student = bindingSource_StudentDB.Current as Student;
+                bindingSource_StuScore.DataSource = EasOP.GetScores(student.StuID);
+                AllScoredataGridView.DataSource = bindingSource_StuScore;
 
-            //防止列乱序
-            AllScoredataGridView.AutoGenerateColumns = false;
-            //为DataGridView增加可选框
-            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
-            checkBoxColumn.Name = "select";
-            //列名
-            checkBoxColumn.HeaderText = "选择";
-            //第一列插入checkbox
-            AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
-            AllScoredataGridView.RowHeadersVisible = false;
+                //防止列乱序
+                AllScoredataGridView.AutoGenerateColumns = false;
+                //为DataGridView增加可选框
+                DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+                checkBoxColumn.Name = "select";
+                //列名
+                checkBoxColumn.HeaderText = "选择";
+                //第一列插入checkbox
+                AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
+                AllScoredataGridView.RowHeadersVisible = false;
 
-            AllScoredataGridView.Columns[0].Width = 50;
+                AllScoredataGridView.Columns[0].Width = 50;
 
-            //初始化combobox
-            List <Score> combo = EasOP.GetScores(student.StuID);
-            //提取成绩列表中的唯一值
-            List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
-            CourseName.Insert(0, " ");
-            List<String> Credit = combo.Select(x => x.Credit).Distinct().ToList();
-            Credit.Insert(0, " ");
-            List<String> Year = combo.Select(x => x.Year).Distinct().ToList();
-            Year.Insert(0, " ");
-            List<String> Term = new List<string>{ " ", "1", "2" };
-            comboBoxCourseName.DataSource = CourseName;
-            comboBoxCreditNum.DataSource = Credit;
-            comboBoxYear.DataSource = Year;
-            comboBoxTerm.DataSource = Term;
+                //初始化combobox
+                List <Score> combo = EasOP.GetScores(student.StuID);
+                //提取成绩列表中的唯一值
+                List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
+                CourseName.Insert(0, " ");
+                List<String> Credit = combo.Select(x => x.Credit).Distinct().ToList();
+                Credit.Insert(0, " ");
+                List<String> Year = combo.Select(x => x.Year).Distinct().ToList();
+                Year.Insert(0, " ");
+                List<String> Term = new List<string>{ " ", "1", "2" };
+                comboBoxCourseName.DataSource = CourseName;
+                comboBoxCreditNum.DataSource = Credit;
+                comboBoxYear.DataSource = Year;
+                comboBoxTerm.DataSource = Term;
+            }
         }
 
-        private void tab4Init() 
+		private void tab4Init() 
         {
             type_comboBox.SelectedIndex = 0;
             AttentionService attentionService = new AttentionService();
@@ -161,9 +166,8 @@ namespace cc.wnapp.whuHelper.UI
                     //课程表 数据绑定
                     stuDataGridView.DataSource = bindingSource_StudentDB;
 
-                    Student student = bindingSource_StudentDB.Current as Student;
-                    bindingSource_Courses.DataSource = CourseService.GetCourses(student.StuID);
-                    courseDataGridView.DataSource = bindingSource_Courses;
+                    tab2Init();
+                    tab3Init();
 
                 }
             }
@@ -240,10 +244,27 @@ namespace cc.wnapp.whuHelper.UI
             label_sr1.Text = "本人新出成绩提醒：已关闭";
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
-            bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
-            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+            Student student = bindingSource_StudentDB.Current as Student;
+            Course course = new Course();
+            CourseDetail courseDetailForm = new CourseDetail(student.StuID);
+
+            using (jwContext context = new jwContext())
+            {
+                if (courseDetailForm.ShowDialog() == DialogResult.OK)
+                {
+                    course = courseDetailForm.course;
+
+                    MessageBox.Show(course.ToString());
+                    context.Courses.Add(course);
+                    context.SaveChanges();
+                }
+            }
+            QueryAllCourses();
+
+            //bindingSource_StudentDB.DataSource = EasOP.GetAll(Convert.ToString(BotQQ.Id));
+            //dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
 
@@ -337,29 +358,7 @@ namespace cc.wnapp.whuHelper.UI
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
-            Student student = bindingSource_StudentDB.Current as Student;
-            Course course = CourseService.QueryByLessonNum(courseID, student.StuID).FirstOrDefault();
-
-            MessageBox.Show(course.LessonNum);
-            try
-            {
-                var time = CourseTime.ParseClassTime(course);
-                if (time == null)
-                {
-                    MessageBox.Show("出现错误", "查询失败");
-                }
-                else
-                {
-                    DateTime dt = (DateTime)time[0][0];
-                    MessageBox.Show(dt.ToString() + $"结束{time[0][2]}");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            QueryAllCourses();
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)

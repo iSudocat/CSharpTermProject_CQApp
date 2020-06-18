@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace cc.wnapp.whuHelper.UI
         
         private void Form1_Load(object sender, EventArgs e)
         {
+
             tab1Init();
             tab2Init();
             tab3Init();
@@ -46,8 +48,8 @@ namespace cc.wnapp.whuHelper.UI
             BotQQ = CQ.Api.GetLoginQQ();
 
             bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
-
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
+
             stuDataGridView.DataSource = bindingSource_StudentDB;
 
             tb_QQ.Text = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
@@ -55,6 +57,16 @@ namespace cc.wnapp.whuHelper.UI
             if(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "") != "")
                 tb_jwPw.Text = DESTool.Decrypt(ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", ""), "jw*1");
             
+            if(ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "") == "真")
+            {
+                label_sr1.Text = "本人新出成绩提醒：已开启";
+            }
+            else
+            {
+                label_sr1.Text = "本人新出成绩提醒：已关闭";
+            }
+
+            tb_ReminderTime.Text = ini.Read(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", "");
         }
 
         private void tab2Init()
@@ -79,7 +91,24 @@ namespace cc.wnapp.whuHelper.UI
             checkBoxColumn.HeaderText = "选择";
             //第一列插入checkbox
             AllScoredataGridView.Columns.Insert(0, checkBoxColumn);
-            AllScoredataGridView.RowHeadersVisible = false;//???
+            AllScoredataGridView.RowHeadersVisible = false;
+
+            //初始化combobox
+            List<Score> combo = jwOp.GetScores(student.StuID);
+            //提取成绩列表中的唯一值
+            List<String> CourseName = combo.Select(x => x.LessonName).Distinct().ToList();
+            CourseName.Insert(0, " ");
+            List<String> Credit = combo.Select(x => x.Credit).Distinct().ToList();
+            Credit.Insert(0, " ");
+            List<String> Year = combo.Select(x => x.Year).Distinct().ToList();
+            Year.Insert(0, " ");
+            List<String> Term = new List<string>{ " ", "1", "2" };
+            comboBoxCourseName.DataSource = CourseName;
+            comboBoxCreditNum.DataSource = Credit;
+            comboBoxYear.DataSource = Year;
+            comboBoxTerm.DataSource = Term;
+            
+         
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -87,7 +116,6 @@ namespace cc.wnapp.whuHelper.UI
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "QQ", tb_QQ.Text);
         }
 
-       
         private void tb_StuID_TextChanged(object sender, EventArgs e)
         {
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "学号", tb_StuID.Text);
@@ -96,6 +124,11 @@ namespace cc.wnapp.whuHelper.UI
         private void tb_jwPw_TextChanged(object sender, EventArgs e)
         {
             ini.Write(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", DESTool.Encrypt(tb_jwPw.Text, "jw*1"));
+        }
+
+        private void tb_ReminderTime_TextChanged(object sender, EventArgs e)
+        {
+            ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "间隔", tb_ReminderTime.Text);
         }
 
         private void btn_jwlogin_Click(object sender, EventArgs e)
@@ -145,6 +178,13 @@ namespace cc.wnapp.whuHelper.UI
             dataGridView_StuList.DataSource = bindingSource_StudentDB;
         }
 
+        private void btn_refreshMainList_Click(object sender, EventArgs e)
+        {
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+        }
+
+
         private void dataGridView_StuList_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView_StuList.CurrentRow != null)
@@ -153,7 +193,46 @@ namespace cc.wnapp.whuHelper.UI
             }
         }
 
+        private void btn_OpenScoreReminder_Click(object sender, EventArgs e)
+        {
+            string QQ = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "QQ", "");
+            string StuID = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "学号", "");
+            string Pw = ini.Read(AppDirectory + @"\配置.ini", "主人信息", "教务系统密码", "");
+            if (QQ == "" || StuID == "" || Pw == "")
+            {
+                MessageBox.Show("本人部分信息为空，请先完成填写后再尝试开启。", "开启成绩提醒失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else if(tb_ReminderTime.Text == "")
+            {
+                MessageBox.Show("基础检测间隔为空，请先完成填写后再尝试开启。", "开启成绩提醒失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var rand =  new Random();
+                var sign = (rand.Next(0, 2) == 0 ? 1 : -1);
+                var baseTime = Convert.ToInt32(tb_ReminderTime.Text);   //基础时间
+                var floatTime = sign * rand.Next(0, Convert.ToInt32(0.1 * baseTime) + 1);   //±10%的浮动时间
+                var time = baseTime + floatTime;
+                CQ.Log.Debug("延时", Convert.ToString(time));
+                JobManager.AddJob<ScoreReminder>(s => s.ToRunNow().AndEvery(time).Minutes());
+                ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "真");
+                label_sr1.Text = "本人新出成绩提醒：已开启";
+            }
+            
+        }
 
+        private void btn_CloseScoreReminder_Click(object sender, EventArgs e)
+        {
+            JobManager.Stop();
+            JobManager.RemoveAllJobs();
+            ini.Write(AppDirectory + @"\配置.ini", "成绩提醒", "启动", "假");
+            label_sr1.Text = "本人新出成绩提醒：已关闭";
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            bindingSource_StudentDB.DataSource = jwOp.GetAll(Convert.ToString(BotQQ.Id));
+            dataGridView_StuList.DataSource = bindingSource_StudentDB;
+        }
 
 
         private void QueryAllCourses()
@@ -177,10 +256,10 @@ namespace cc.wnapp.whuHelper.UI
             //courseDataGridView.DataSource = bindingSource_Courses;
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void exportButton_Click(object sender, EventArgs e)
         {
-            QueryAllCourses();
-            bindingSource_Courses.ResetBindings(false);
+            Student student = bindingSource_StudentDB.Current as Student;
+            CourseTableExport.ExportExcel(student.StuID);
         }
 
         private void stuDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -225,6 +304,7 @@ namespace cc.wnapp.whuHelper.UI
                     bindingSource_Courses.DataSource = CourseService.QueryByTeacher(queryTextBox.Text, stuID);
                     break;
             }
+            #region 废弃代码
             //StringBuilder stringBuilder = new StringBuilder();
             //for (int i = 0; i < bindingSource_Courses.Count; i++)
             //{
@@ -233,6 +313,7 @@ namespace cc.wnapp.whuHelper.UI
             //}
 
             //MessageBox.Show(stringBuilder.ToString());
+            #endregion
             bindingSource_Courses.ResetBindings(true);
         }
 
@@ -243,7 +324,29 @@ namespace cc.wnapp.whuHelper.UI
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            string courseID = courseDataGridView.CurrentRow.Cells[0].Value.ToString();
+            Student student = bindingSource_StudentDB.Current as Student;
+            Course course = CourseService.QueryByLessonNum(courseID, student.StuID).FirstOrDefault();
 
+            MessageBox.Show(course.LessonNum);
+            try
+            {
+                var time = CourseTime.ParseClassTime(course);
+                if (time == null)
+                {
+                    MessageBox.Show("出现错误", "查询失败");
+                }
+                else
+                {
+                    DateTime dt = (DateTime)time[0][0];
+                    MessageBox.Show(dt.ToString() + $"结束{time[0][2]}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)
@@ -270,7 +373,7 @@ namespace cc.wnapp.whuHelper.UI
 
         private void buttonSelectNoZB_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < AllScoredataGridView.Rows.Count - 1; i++)
+            for (int i = 0; i < AllScoredataGridView.Rows.Count - 1; i++)
             {
                 if(AllScoredataGridView.CurrentRow != null)
                 {
@@ -291,7 +394,8 @@ namespace cc.wnapp.whuHelper.UI
                 if (AllScoredataGridView.CurrentRow != null)
                 {
                     //LessonType可能是第二个
-                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修")
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修"
+                        || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业教育选修")
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
@@ -321,7 +425,8 @@ namespace cc.wnapp.whuHelper.UI
                 if (AllScoredataGridView.CurrentRow != null)
                 {
                     //LessonType可能是第二个
-                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共选修")
+                    if (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "公共选修"
+                        || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "通识教育选修")
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
@@ -379,10 +484,47 @@ namespace cc.wnapp.whuHelper.UI
             }
             return GetSelect;
         }
-
-        private void button2_Click(object sender, EventArgs e)
+		
+		
+		private void ExportButton_Click(object sender, EventArgs e)
         {
-            JobManager.Initialize(new ScoreReminder());
+            Student student = bindingSource_StudentDB.Current as Student;
+            CourseTableExport.ExportExcel(student.StuID);
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            Student student = bindingSource_StudentDB.Current as Student;
+            List<Score> temp = jwOp.GetScores(student.StuID);
+            String CourseName = comboBoxCourseName.SelectedItem.ToString();
+            String Year = comboBoxYear.SelectedItem.ToString();
+            String Term = comboBoxTerm.SelectedItem.ToString();
+            String Credit = comboBoxCreditNum.SelectedItem.ToString();
+            if (CourseName != " ")
+            {
+                Score Course = temp.FirstOrDefault(p => p.LessonName == CourseName);
+                bindingSource_StuScore.DataSource = Course;
+                bindingSource_StuScore.ResetBindings(false);
+                return;
+            }
+
+            if (Credit != " ")
+            {
+                temp = temp.Where(p => p.Credit == Credit).OrderBy(p => p.Year).ThenBy(p => p.Term).ToList();
+            }
+
+            if (Year != " ")
+            {
+                temp = temp.Where(p => p.Year == Year).OrderBy(p => p.Term).ThenBy(p => p.Credit).ToList();
+            }
+
+            if (Term != " ")
+            {
+                temp = temp.Where(p => p.Term == Term).OrderBy(p => p.Year).ThenBy(p => p.Credit).ToList();
+            }
+
+            bindingSource_StuScore.DataSource = temp;
+            bindingSource_StuScore.ResetBindings(false);
         }
 
 

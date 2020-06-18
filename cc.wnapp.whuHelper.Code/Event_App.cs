@@ -16,6 +16,7 @@ using System.Web.Routing;
 using Microsoft.Owin.Hosting;
 using System.Net.Http;
 using FluentScheduler;
+using Schedule;
 using Tools;
 
 namespace cc.wnapp.whuHelper.Code

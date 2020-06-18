@@ -17,14 +17,60 @@ namespace AttentionSpace
         //关注列表
         public List<Attention> Attentions;//绑定UI
 
+        //监听者列表
+        public List<ListenerInfo> Listeners;
+
+        //构造函数
         public AttentionService() 
         {
+            Boolean same = false;
             using (var dbcontext = new AttentionContext()) 
             {
                 this.Attentions = dbcontext.Attentions.ToList();
             }
             this.MatchType = "Approximate";
+            this.Listeners = new List<ListenerInfo>();
+            foreach (Attention att in Attentions)
+            {
+                same = false;
+                foreach (ListenerInfo listenerInfo in Listeners)
+                {
+                    if (listenerInfo.Listener.Equals(att.Listener))
+                    {
+                        same = true;
+                        listenerInfo.Count++;
+                        break;
+                    }
+                }
+                if (!same)
+                {
+                    this.Listeners.Add(new ListenerInfo(att.Listener, 1));
+                }
+            }
         }
+
+        public void UpdateListeners() 
+        {
+            Boolean same = false;
+            foreach (Attention att in Attentions)
+            {
+                same = false;
+                foreach (ListenerInfo listenerInfo in Listeners)
+                {
+                    if (listenerInfo.Listener.Equals(att.Listener))
+                    {
+                        same = true;
+                        listenerInfo.Count++;
+                        break;
+                    }
+                }
+                if (!same)
+                {
+                    this.Listeners.Add(new ListenerInfo(att.Listener, 1));
+                }
+            }
+        }
+
         //添加关注
         public void Add(String SourceQQ, String Attention, String GroupNum)
         {
@@ -35,6 +81,7 @@ namespace AttentionSpace
                 dbcontext.SaveChanges();
                 this.Attentions = QueryAll();
             }
+            UpdateListeners();
         }
 
         //删除关注
@@ -48,6 +95,7 @@ namespace AttentionSpace
                     dbcontext.Attentions.Remove(temp);
                     dbcontext.SaveChanges();
                     this.Attentions = QueryAll();
+                    UpdateListeners();
                     return true;
                 }
                 else
@@ -80,10 +128,7 @@ namespace AttentionSpace
         {
             using (var dbcontext = new AttentionContext())
             {
-                var queryall = dbcontext.Attentions;
-                if (queryall != null)
-                    return queryall.ToList();
-                else throw new Exception("没有监听事件");
+                return dbcontext.Attentions.ToList();
             }
         }
 

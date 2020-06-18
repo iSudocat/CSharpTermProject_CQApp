@@ -15,6 +15,11 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
             string msg = message.Replace(" ", "");     //去除空格
             var StuID = textOp.GetMiddleText(msg, "绑定教务系统", "|");
             var Password = textOp.GetRightText(msg, "|");
+            if (StuID == "" || Password == "")
+            {
+                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "命令格式错误，请检查输入信息。\n命令格式：绑定教务系统 学号|密码");
+                return 1;
+            }
             EasLogin jwxt = new EasLogin(botQQ, fromQQ, StuID, Password, 3);
             string AppDirectory = CQ.Api.AppDirectory;
             for (int i = 0; i <= jwxt.TryNum; i++)

@@ -19,8 +19,24 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.EducationalAdministrationSystem
             try
             {
                 Reply("正在尝试更新成绩数据……");
-                EasOP.UpdateScore(fromQQ);
-                Reply("更新成功！");
+                var sList = EasOP.UpdateScore(fromQQ);
+                string re = "";
+                if (sList.Count != 0)
+                {
+                    foreach (var s in sList)
+                    {
+                        re = re + "\n课程：" + s.LessonName + "\n成绩：" + s.Mark + "\n——————————";
+                    }
+                }
+                if (re != "")
+                {
+                    Reply("更新成功，新出成绩如下：" + re);
+                }
+                else
+                {
+                    Reply("更新成功，当前没有新出成绩。");
+                }
+                
                 return 1;
             }
             catch(UpdataErrorException ex)

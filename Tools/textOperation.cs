@@ -18,20 +18,35 @@ namespace Tools
             }
             catch
             {
-                return "发现异常错误！";
+                return "";
             }
         }
 
         public static string GetLeftText(string str, string s)  //取出左边文本
         {
-            string t = str.Substring(0, str.IndexOf(s));
-            return t;
+            try
+            {
+                string t = str.Substring(0, str.IndexOf(s));
+                return t;
+            }
+            catch
+            {
+                return "";
+            }
+
         }
 
         public static string GetRightText(string str, string s)     //取出右边文本
         {
-            string t = str.Substring(str.IndexOf(s) + 1, str.Length - str.Substring(0, str.IndexOf(s)).Length - 1);
-            return t;
+            try
+            {
+                string t = str.Substring(str.IndexOf(s) + 1, str.Length - str.Substring(0, str.IndexOf(s)).Length - 1);
+                return t;
+            }
+            catch
+            {
+                return "";
+            }
         }
     }
 }

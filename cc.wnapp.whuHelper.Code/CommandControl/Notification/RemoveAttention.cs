@@ -18,8 +18,14 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Notification
                 String AttentionPoint = temp[1];
                 String GroupNum = temp[2];
                 AttentionService attentionService = new AttentionService();
-                attentionService.Remove(fromQQ, AttentionPoint, GroupNum);
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "删除关注成功！");
+                if (attentionService.Remove(fromQQ, AttentionPoint, GroupNum)) 
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "删除关注成功！");
+                }
+                else 
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【删除失败】只能删除已关注内容");
+                }
             }
             catch (Exception e)
             {

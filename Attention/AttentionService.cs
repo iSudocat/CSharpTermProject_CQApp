@@ -72,10 +72,16 @@ namespace AttentionSpace
             }
         }
 
+        private Boolean AddCheck(String Attention) 
+        {
+
+            return true;
+        }
+
         //添加关注
         public void Add(String SourceQQ, String Attention, String GroupNum)
         {
-            if (Attention.Contains(" "))
+            if (Attention.Contains(" ")||Attention.Equals(""))
                 throw new Exception("不允许输入空格和空字符串");
             using (var dbcontext = new AttentionContext())
             {

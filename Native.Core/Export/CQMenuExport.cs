@@ -71,6 +71,15 @@ namespace Native.App.Export
 				Menu_MenuInitGitHandler += AppData.UnityContainer.Resolve<IMenuCall> ("重置Git提醒数据库").MenuCall;	
 			}	
 			
+			/*	
+			 * Name: 重置关注数据库	
+			 * Function: _MenuInitAtt	
+			 */	
+			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("重置关注数据库"))	
+			{	
+				Menu_MenuInitAttHandler += AppData.UnityContainer.Resolve<IMenuCall> ("重置关注数据库").MenuCall;	
+			}	
+			
 		}	
 		#endregion	
 		
@@ -135,6 +144,22 @@ namespace Native.App.Export
 			{	
 				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "重置Git提醒数据库", "_MenuInitGit");	
 				Menu_MenuInitGitHandler (typeof (CQMenuExport), args);	
+			}	
+			return 0;	
+		}	
+		
+		/*	
+		 * Name: 重置关注数据库	
+		 * Function: _MenuInitAtt	
+		 */	
+		public static event EventHandler<CQMenuCallEventArgs> Menu_MenuInitAttHandler;	
+		[DllExport (ExportName = "_MenuInitAtt", CallingConvention = CallingConvention.StdCall)]	
+		public static int Menu_MenuInitAtt ()	
+		{	
+			if (Menu_MenuInitAttHandler != null)	
+			{	
+				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "重置关注数据库", "_MenuInitAtt");	
+				Menu_MenuInitAttHandler (typeof (CQMenuExport), args);	
 			}	
 			return 0;	
 		}	

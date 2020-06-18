@@ -20,6 +20,7 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         public static CQLog Log { get; set; }
 
+       
     }
 
 }

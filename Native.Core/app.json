@@ -133,6 +133,10 @@
 		{
 			"name": "重置Git提醒数据库", //菜单名称
 			"function": "_MenuInitGit" //菜单对应函数
+		},
+		{
+			"name": "重置关注数据库", //菜单名称
+			"function": "_MenuInitAtt" //菜单对应函数
 		}
 	],
 	"status": [ // 悬浮窗状态（见 com.example.status 样例）

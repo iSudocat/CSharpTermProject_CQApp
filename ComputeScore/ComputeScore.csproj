@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="miniScore.cs" />
     <Compile Include="GPAInfo.cs" />
     <Compile Include="ScoreService.cs" />

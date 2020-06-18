@@ -21,10 +21,11 @@ namespace Native.Core
 			unityContainer.RegisterType<IMenuCall, MenuInitEas>("重置教务系统数据库");
 			unityContainer.RegisterType<IMenuCall, MenuInitSch>("重置日程数据库");
 			unityContainer.RegisterType<IMenuCall, MenuInitGit>("重置Git提醒数据库");
+			unityContainer.RegisterType<IMenuCall, MenuInitAtt>("重置关注数据库");
 			unityContainer.RegisterType<IGroupMessage, event_Message>("群消息处理");
 			unityContainer.RegisterType<IPrivateMessage, event_Message>("私聊消息处理");
 			unityContainer.RegisterType<ICQStartup, event_CQStartup>("酷Q启动事件");
-			unityContainer.RegisterType<IAppEnable, cc.wnapp.whuHelper.Code.event_AppStartup>("应用已被启用");
+			unityContainer.RegisterType<IAppEnable, event_AppStartup>("应用已被启用");
 		}
 	}
 }

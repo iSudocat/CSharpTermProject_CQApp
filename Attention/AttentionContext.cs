@@ -18,7 +18,7 @@ namespace AttentionSpace
     public class AttentionContext : DbContext
     {
         public static string CurrentDirectory = "";
-        public AttentionContext() : base(new SQLiteConnection(@"Data Source=" + CurrentDirectory + @"\attentions.db;"), false)
+        public AttentionContext() : base(new SQLiteConnection(@"Data Source=" + CurrentDirectory + @"\Attentions.db;"), false)
         {
 
         }

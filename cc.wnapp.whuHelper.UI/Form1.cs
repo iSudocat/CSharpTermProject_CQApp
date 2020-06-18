@@ -115,10 +115,12 @@ namespace cc.wnapp.whuHelper.UI
         {
             type_comboBox.SelectedIndex = 0;
             AttentionService attentionService = new AttentionService();
-            bindingSource_attention.DataSource = attentionService.Attentions;
+            String listener = attentionService.Listeners.First().Listener.ToString();
+            bindingSource_attention.DataSource = attentionService.Query(listener,"","");
             bindingSource_attentionUser.DataSource = attentionService.Listeners;
             attentionDataGridView.DataSource = bindingSource_attention;
             allAttentionUserDataGridView.DataSource = bindingSource_attentionUser;
+            bindingSource_attentionUser.ResetBindings(true);
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -537,69 +539,72 @@ namespace cc.wnapp.whuHelper.UI
             bindingSource_StuScore.ResetBindings(false);
         }
 
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
         private void search_attention_buttom_Click(object sender, EventArgs e)
         {
             AttentionService attentionService = new AttentionService();
             int index = type_comboBox.SelectedIndex;
             String searchText = textBox1.Text;
+            String currentListener;
+            if (allAttentionUserDataGridView.CurrentRow != null)
+            {
+                currentListener = allAttentionUserDataGridView.CurrentRow.Cells[0].Value.ToString();
+            }
+            else 
+            {
+                currentListener = attentionService.Listeners.First().ToString();
+            }
             switch (index) 
             {
                 case 0:
-                    bindingSource_attention.DataSource=attentionService.Query(searchText, "", "");
+                    if (searchText == "")
+                    {
+                        bindingSource_attention.DataSource = attentionService.Query(currentListener, "", "");
+                    }
+                    else 
+                    {
+                        bindingSource_attention.DataSource = attentionService.Query(searchText, "", "");
+                    }
                     break;
                 case 1:
-                    bindingSource_attention.DataSource = attentionService.Query("", "", searchText);
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, "", searchText);
                     break;
                 case 2:
-                    bindingSource_attention.DataSource = attentionService.Query("", searchText, "");
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, searchText, "");
                     break;
                 default:
-                    bindingSource_attention.DataSource = attentionService.QueryAll();
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, "", "");
                     break;
             }
+            bindingSource_attentionUser.ResetBindings(true);
+            //bindingSource_attentionUser.DataSource = attentionService.Listeners;
         }
 
         private void remove_attention_buttom_Click(object sender, EventArgs e)
         {
             AttentionService attentionService = new AttentionService();
-            int index = type_comboBox.SelectedIndex;
-            String searchText = textBox1.Text;
-            if (attentionDataGridView.CurrentRow != null) 
+            if (attentionDataGridView.CurrentRow != null)
             {
-                String l = attentionDataGridView.CurrentRow.Cells[0].Value.ToString();
-                String g = attentionDataGridView.CurrentRow.Cells[1].Value.ToString();
-                String a = attentionDataGridView.CurrentRow.Cells[2].Value.ToString();
-                attentionService.Remove(l, a, g);
-                switch (index)
-                {
-                    case 0:
-                        bindingSource_attention.DataSource = attentionService.Query(searchText, "", "");
-                        break;
-                    case 1:
-                        bindingSource_attention.DataSource = attentionService.Query("", "", searchText);
-                        break;
-                    case 2:
-                        bindingSource_attention.DataSource = attentionService.Query("", searchText, "");
-                        break;
-                    default:
-                        bindingSource_attention.DataSource = attentionService.QueryAll();
-                        break;
-                }
+                String listener = attentionDataGridView.CurrentRow.Cells[0].Value.ToString();
+                String group = attentionDataGridView.CurrentRow.Cells[1].Value.ToString();
+                String attention = attentionDataGridView.CurrentRow.Cells[2].Value.ToString();
+                attentionService.Remove(listener, attention, group);
+                search_attention_buttom_Click(sender, e);
             }
+            bindingSource_attentionUser.ResetBindings(true);
+            //bindingSource_attentionUser.DataSource = attentionService.Listeners;
         }
 
-        private void bindingSource_attentionUser_CurrentChanged(object sender, EventArgs e)
+        private void allAttentionUserDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            AttentionService attentionService = new AttentionService();
+            if (allAttentionUserDataGridView.CurrentRow != null) 
+            {
+                
+                String listener = allAttentionUserDataGridView.CurrentRow.Cells[0].Value.ToString();
+                bindingSource_attention.DataSource = attentionService.Query(listener, "", "");
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            //bindingSource_attentionUser.DataSource = attentionService.Listeners;
 
         }
 

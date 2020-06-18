@@ -137,8 +137,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.allAttentionUserDataGridView = new System.Windows.Forms.DataGridView();
+            this.关注者QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.关注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.attentionDataGridView = new System.Windows.Forms.DataGridView();
+            this.关注所在群号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.关注信息 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.关注者 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.remove_attention_buttom = new System.Windows.Forms.Button();
             this.search_attention_buttom = new System.Windows.Forms.Button();
@@ -151,11 +156,6 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.bindingSource_attention = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource_attentionUser = new System.Windows.Forms.BindingSource(this.components);
-            this.关注者QQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注所在群号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注信息 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.关注者 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_StudentDB)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -211,10 +211,10 @@
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.dataGridView_StuList);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 40);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(853, 498);
+            this.tabPage1.Size = new System.Drawing.Size(853, 487);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "账号管理";
             // 
@@ -249,7 +249,7 @@
             this.label_sr3.Location = new System.Drawing.Point(174, 49);
             this.label_sr3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_sr3.Name = "label_sr3";
-            this.label_sr3.Size = new System.Drawing.Size(37, 20);
+            this.label_sr3.Size = new System.Drawing.Size(65, 32);
             this.label_sr3.TabIndex = 26;
             this.label_sr3.Text = "分钟";
             // 
@@ -257,7 +257,7 @@
             // 
             this.tb_ReminderTime.Location = new System.Drawing.Point(111, 46);
             this.tb_ReminderTime.Name = "tb_ReminderTime";
-            this.tb_ReminderTime.Size = new System.Drawing.Size(56, 26);
+            this.tb_ReminderTime.Size = new System.Drawing.Size(56, 40);
             this.tb_ReminderTime.TabIndex = 25;
             this.tb_ReminderTime.TextChanged += new System.EventHandler(this.tb_ReminderTime_TextChanged);
             // 
@@ -268,7 +268,7 @@
             this.label_sr2.Location = new System.Drawing.Point(13, 49);
             this.label_sr2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_sr2.Name = "label_sr2";
-            this.label_sr2.Size = new System.Drawing.Size(93, 20);
+            this.label_sr2.Size = new System.Drawing.Size(165, 32);
             this.label_sr2.TabIndex = 24;
             this.label_sr2.Text = "基础检测间隔";
             // 
@@ -299,7 +299,7 @@
             this.label_sr1.Location = new System.Drawing.Point(13, 9);
             this.label_sr1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_sr1.Name = "label_sr1";
-            this.label_sr1.Size = new System.Drawing.Size(135, 20);
+            this.label_sr1.Size = new System.Drawing.Size(240, 32);
             this.label_sr1.TabIndex = 20;
             this.label_sr1.Text = "本人新出成绩提醒：";
             // 
@@ -330,7 +330,7 @@
             this.label2.Location = new System.Drawing.Point(198, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 20);
+            this.label2.Size = new System.Drawing.Size(215, 32);
             this.label2.TabIndex = 3;
             this.label2.Text = "教务系统信息列表";
             // 
@@ -433,7 +433,7 @@
             this.tb_jwPw.Location = new System.Drawing.Point(480, 4);
             this.tb_jwPw.Name = "tb_jwPw";
             this.tb_jwPw.PasswordChar = '*';
-            this.tb_jwPw.Size = new System.Drawing.Size(119, 26);
+            this.tb_jwPw.Size = new System.Drawing.Size(119, 40);
             this.tb_jwPw.TabIndex = 11;
             this.tb_jwPw.TextChanged += new System.EventHandler(this.tb_jwPw_TextChanged);
             // 
@@ -444,7 +444,7 @@
             this.label4.Location = new System.Drawing.Point(380, 7);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 20);
+            this.label4.Size = new System.Drawing.Size(165, 32);
             this.label4.TabIndex = 10;
             this.label4.Text = "教务系统密码";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -453,7 +453,7 @@
             // 
             this.tb_StuID.Location = new System.Drawing.Point(238, 4);
             this.tb_StuID.Name = "tb_StuID";
-            this.tb_StuID.Size = new System.Drawing.Size(119, 26);
+            this.tb_StuID.Size = new System.Drawing.Size(119, 40);
             this.tb_StuID.TabIndex = 9;
             this.tb_StuID.TextChanged += new System.EventHandler(this.tb_StuID_TextChanged);
             // 
@@ -464,7 +464,7 @@
             this.label3.Location = new System.Drawing.Point(194, 7);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 20);
+            this.label3.Size = new System.Drawing.Size(65, 32);
             this.label3.TabIndex = 8;
             this.label3.Text = "学号";
             // 
@@ -472,7 +472,7 @@
             // 
             this.tb_QQ.Location = new System.Drawing.Point(70, 4);
             this.tb_QQ.Name = "tb_QQ";
-            this.tb_QQ.Size = new System.Drawing.Size(108, 26);
+            this.tb_QQ.Size = new System.Drawing.Size(108, 40);
             this.tb_QQ.TabIndex = 1;
             this.tb_QQ.TextChanged += new System.EventHandler(this.tb_QQ_TextChanged);
             // 
@@ -483,7 +483,7 @@
             this.label1.Location = new System.Drawing.Point(4, 7);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.Size = new System.Drawing.Size(105, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "本人QQ";
             // 
@@ -494,17 +494,17 @@
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 40);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(853, 498);
+            this.tabPage2.Size = new System.Drawing.Size(853, 487);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "课程表管理";
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(3, 473);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 462);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(847, 22);
             this.statusStrip1.TabIndex = 5;
@@ -841,7 +841,7 @@
             this.queryTextBox.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.queryTextBox.Location = new System.Drawing.Point(239, 23);
             this.queryTextBox.Name = "queryTextBox";
-            this.queryTextBox.Size = new System.Drawing.Size(347, 29);
+            this.queryTextBox.Size = new System.Drawing.Size(347, 44);
             this.queryTextBox.TabIndex = 1;
             // 
             // queryComboBox
@@ -858,7 +858,7 @@
             "按授课教师查询"});
             this.queryComboBox.Location = new System.Drawing.Point(6, 23);
             this.queryComboBox.Name = "queryComboBox";
-            this.queryComboBox.Size = new System.Drawing.Size(201, 29);
+            this.queryComboBox.Size = new System.Drawing.Size(201, 44);
             this.queryComboBox.TabIndex = 0;
             // 
             // tabPage3
@@ -867,10 +867,10 @@
             this.tabPage3.Controls.Add(this.groupBox6);
             this.tabPage3.Controls.Add(this.groupBox5);
             this.tabPage3.Controls.Add(this.groupBox4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 40);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(853, 498);
+            this.tabPage3.Size = new System.Drawing.Size(853, 487);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "成绩管理";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -898,7 +898,7 @@
             this.comboBoxYear.FormattingEnabled = true;
             this.comboBoxYear.Location = new System.Drawing.Point(65, 17);
             this.comboBoxYear.Name = "comboBoxYear";
-            this.comboBoxYear.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxYear.Size = new System.Drawing.Size(107, 39);
             this.comboBoxYear.TabIndex = 19;
             // 
             // label11
@@ -906,7 +906,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(22, 21);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 20);
+            this.label11.Size = new System.Drawing.Size(65, 32);
             this.label11.TabIndex = 18;
             this.label11.Text = "学年";
             // 
@@ -915,7 +915,7 @@
             this.comboBoxCreditNum.FormattingEnabled = true;
             this.comboBoxCreditNum.Location = new System.Drawing.Point(609, 18);
             this.comboBoxCreditNum.Name = "comboBoxCreditNum";
-            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxCreditNum.Size = new System.Drawing.Size(107, 39);
             this.comboBoxCreditNum.TabIndex = 17;
             // 
             // comboBoxCourseName
@@ -923,7 +923,7 @@
             this.comboBoxCourseName.FormattingEnabled = true;
             this.comboBoxCourseName.Location = new System.Drawing.Point(424, 18);
             this.comboBoxCourseName.Name = "comboBoxCourseName";
-            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxCourseName.Size = new System.Drawing.Size(107, 39);
             this.comboBoxCourseName.TabIndex = 16;
             // 
             // comboBoxTerm
@@ -931,7 +931,7 @@
             this.comboBoxTerm.FormattingEnabled = true;
             this.comboBoxTerm.Location = new System.Drawing.Point(238, 18);
             this.comboBoxTerm.Name = "comboBoxTerm";
-            this.comboBoxTerm.Size = new System.Drawing.Size(107, 28);
+            this.comboBoxTerm.Size = new System.Drawing.Size(107, 39);
             this.comboBoxTerm.TabIndex = 15;
             // 
             // label10
@@ -939,7 +939,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(551, 22);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(51, 20);
+            this.label10.Size = new System.Drawing.Size(90, 32);
             this.label10.TabIndex = 11;
             this.label10.Text = "学分数";
             // 
@@ -948,7 +948,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(366, 22);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 20);
+            this.label9.Size = new System.Drawing.Size(90, 32);
             this.label9.TabIndex = 10;
             this.label9.Text = "课程名";
             // 
@@ -957,7 +957,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(193, 21);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 20);
+            this.label8.Size = new System.Drawing.Size(65, 32);
             this.label8.TabIndex = 9;
             this.label8.Text = "学期";
             // 
@@ -1003,7 +1003,7 @@
             this.labelCreditAll.AutoSize = true;
             this.labelCreditAll.Location = new System.Drawing.Point(450, 26);
             this.labelCreditAll.Name = "labelCreditAll";
-            this.labelCreditAll.Size = new System.Drawing.Size(28, 20);
+            this.labelCreditAll.Size = new System.Drawing.Size(51, 32);
             this.labelCreditAll.TabIndex = 5;
             this.labelCreditAll.Text = "0.0";
             // 
@@ -1012,7 +1012,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(344, 26);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 20);
+            this.label7.Size = new System.Drawing.Size(140, 32);
             this.label7.TabIndex = 4;
             this.label7.Text = "所选学分：";
             // 
@@ -1021,7 +1021,7 @@
             this.labelAverage.AutoSize = true;
             this.labelAverage.Location = new System.Drawing.Point(267, 26);
             this.labelAverage.Name = "labelAverage";
-            this.labelAverage.Size = new System.Drawing.Size(28, 20);
+            this.labelAverage.Size = new System.Drawing.Size(51, 32);
             this.labelAverage.TabIndex = 3;
             this.labelAverage.Text = "0.0";
             // 
@@ -1030,7 +1030,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(189, 26);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 20);
+            this.label6.Size = new System.Drawing.Size(115, 32);
             this.label6.TabIndex = 2;
             this.label6.Text = "平均分：";
             // 
@@ -1039,7 +1039,7 @@
             this.labelGPA.AutoSize = true;
             this.labelGPA.Location = new System.Drawing.Point(99, 26);
             this.labelGPA.Name = "labelGPA";
-            this.labelGPA.Size = new System.Drawing.Size(28, 20);
+            this.labelGPA.Size = new System.Drawing.Size(51, 32);
             this.labelGPA.TabIndex = 1;
             this.labelGPA.Text = "0.0";
             // 
@@ -1058,7 +1058,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(28, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 20);
+            this.label5.Size = new System.Drawing.Size(92, 32);
             this.label5.TabIndex = 0;
             this.label5.Text = "GPA：";
             // 
@@ -1093,14 +1093,14 @@
             this.Column12,
             this.Column13});
             this.AllScoredataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllScoredataGridView.Location = new System.Drawing.Point(3, 22);
+            this.AllScoredataGridView.Location = new System.Drawing.Point(3, 36);
             this.AllScoredataGridView.MultiSelect = false;
             this.AllScoredataGridView.Name = "AllScoredataGridView";
             this.AllScoredataGridView.ReadOnly = true;
             this.AllScoredataGridView.RowHeadersWidth = 51;
             this.AllScoredataGridView.RowTemplate.Height = 27;
             this.AllScoredataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AllScoredataGridView.Size = new System.Drawing.Size(835, 258);
+            this.AllScoredataGridView.Size = new System.Drawing.Size(835, 244);
             this.AllScoredataGridView.TabIndex = 0;
             // 
             // Column1
@@ -1312,10 +1312,10 @@
             // 
             this.tabPage4.Controls.Add(this.splitContainer1);
             this.tabPage4.Controls.Add(this.panel3);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 40);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(853, 498);
+            this.tabPage4.Size = new System.Drawing.Size(853, 487);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "关注管理";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1333,7 +1333,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox9);
-            this.splitContainer1.Size = new System.Drawing.Size(847, 418);
+            this.splitContainer1.Size = new System.Drawing.Size(847, 407);
             this.splitContainer1.SplitterDistance = 280;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -1343,7 +1343,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(0, 0);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(280, 418);
+            this.groupBox8.Size = new System.Drawing.Size(280, 407);
             this.groupBox8.TabIndex = 0;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "用户列表";
@@ -1369,6 +1369,25 @@
             this.allAttentionUserDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.allAttentionUserDataGridView.Size = new System.Drawing.Size(274, 393);
             this.allAttentionUserDataGridView.TabIndex = 0;
+            this.allAttentionUserDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allAttentionUserDataGridView_CellClick);
+            // 
+            // 关注者QQ
+            // 
+            this.关注者QQ.DataPropertyName = "Listener";
+            this.关注者QQ.HeaderText = "关注者QQ";
+            this.关注者QQ.MinimumWidth = 9;
+            this.关注者QQ.Name = "关注者QQ";
+            this.关注者QQ.ReadOnly = true;
+            this.关注者QQ.Width = 120;
+            // 
+            // 关注数量
+            // 
+            this.关注数量.DataPropertyName = "Count";
+            this.关注数量.HeaderText = "关注数量";
+            this.关注数量.MinimumWidth = 9;
+            this.关注数量.Name = "关注数量";
+            this.关注数量.ReadOnly = true;
+            this.关注数量.Width = 90;
             // 
             // groupBox9
             // 
@@ -1376,7 +1395,7 @@
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox9.Location = new System.Drawing.Point(0, 0);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(563, 418);
+            this.groupBox9.Size = new System.Drawing.Size(563, 407);
             this.groupBox9.TabIndex = 0;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "关注点列表";
@@ -1401,7 +1420,34 @@
             this.attentionDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.attentionDataGridView.Size = new System.Drawing.Size(557, 393);
             this.attentionDataGridView.TabIndex = 0;
-            this.attentionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
+            // 关注所在群号
+            // 
+            this.关注所在群号.DataPropertyName = "Group";
+            this.关注所在群号.HeaderText = "群号";
+            this.关注所在群号.MinimumWidth = 9;
+            this.关注所在群号.Name = "关注所在群号";
+            this.关注所在群号.ReadOnly = true;
+            this.关注所在群号.Width = 120;
+            // 
+            // 关注信息
+            // 
+            this.关注信息.DataPropertyName = "AttentionPoint";
+            this.关注信息.HeaderText = "关注信息";
+            this.关注信息.MinimumWidth = 9;
+            this.关注信息.Name = "关注信息";
+            this.关注信息.ReadOnly = true;
+            this.关注信息.Width = 400;
+            // 
+            // 关注者
+            // 
+            this.关注者.DataPropertyName = "Listener";
+            this.关注者.HeaderText = "关注者";
+            this.关注者.MinimumWidth = 9;
+            this.关注者.Name = "关注者";
+            this.关注者.ReadOnly = true;
+            this.关注者.Visible = false;
+            this.关注者.Width = 175;
             // 
             // panel3
             // 
@@ -1442,7 +1488,7 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(261, 24);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 20);
+            this.label13.Size = new System.Drawing.Size(115, 32);
             this.label13.TabIndex = 4;
             this.label13.Text = "查询内容";
             // 
@@ -1450,7 +1496,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(332, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(165, 26);
+            this.textBox1.Size = new System.Drawing.Size(165, 40);
             this.textBox1.TabIndex = 3;
             // 
             // type_comboBox
@@ -1463,7 +1509,7 @@
             "关注点"});
             this.type_comboBox.Location = new System.Drawing.Point(86, 21);
             this.type_comboBox.Name = "type_comboBox";
-            this.type_comboBox.Size = new System.Drawing.Size(134, 28);
+            this.type_comboBox.Size = new System.Drawing.Size(134, 39);
             this.type_comboBox.TabIndex = 2;
             // 
             // label12
@@ -1471,61 +1517,13 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(15, 24);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 20);
+            this.label12.Size = new System.Drawing.Size(115, 32);
             this.label12.TabIndex = 1;
             this.label12.Text = "查询类型";
             // 
-            // bindingSource_attention
-            // 
-            this.bindingSource_attention.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
-            // bindingSource_attentionUser
-            // 
-            this.bindingSource_attentionUser.CurrentChanged += new System.EventHandler(this.bindingSource_attentionUser_CurrentChanged);
-            // 
-            // 关注者QQ
-            // 
-            this.关注者QQ.DataPropertyName = "Listener";
-            this.关注者QQ.HeaderText = "关注者QQ";
-            this.关注者QQ.Name = "关注者QQ";
-            this.关注者QQ.ReadOnly = true;
-            this.关注者QQ.Width = 120;
-            // 
-            // 关注数量
-            // 
-            this.关注数量.DataPropertyName = "Count";
-            this.关注数量.HeaderText = "关注数量";
-            this.关注数量.Name = "关注数量";
-            this.关注数量.ReadOnly = true;
-            this.关注数量.Width = 90;
-            // 
-            // 关注所在群号
-            // 
-            this.关注所在群号.DataPropertyName = "Group";
-            this.关注所在群号.HeaderText = "群号";
-            this.关注所在群号.Name = "关注所在群号";
-            this.关注所在群号.ReadOnly = true;
-            this.关注所在群号.Width = 120;
-            // 
-            // 关注信息
-            // 
-            this.关注信息.DataPropertyName = "AttentionPoint";
-            this.关注信息.HeaderText = "关注信息";
-            this.关注信息.Name = "关注信息";
-            this.关注信息.ReadOnly = true;
-            this.关注信息.Width = 400;
-            // 
-            // 关注者
-            // 
-            this.关注者.DataPropertyName = "Listener";
-            this.关注者.HeaderText = "关注者";
-            this.关注者.Name = "关注者";
-            this.关注者.ReadOnly = true;
-            this.关注者.Visible = false;
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(859, 531);

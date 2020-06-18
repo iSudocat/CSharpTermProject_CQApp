@@ -16,7 +16,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Notification
             helpMsg += "【更新关注】更新关注 旧关注点 新关注点 群号\n";
             helpMsg += "【查看所有关注点】查询关注\n";
             helpMsg += "【查看帮助】关注点帮助";
-            CQ.Api.SendPrivateMessage(Convert.ToInt32(fromQQ), helpMsg);
+            CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), helpMsg);
 
             return 0;
         }

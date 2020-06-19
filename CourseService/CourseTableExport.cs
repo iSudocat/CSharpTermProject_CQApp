@@ -105,8 +105,13 @@ namespace CourseFunction
                     sheet2.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(courseBegin, courseEnd, weekDay, weekDay));
                 }
             }
-            
-            using (FileStream fs = File.OpenWrite(CQ.Api.AppDirectory + $@"Export\{stuID}CourseTable.xlsx"))
+
+            if (!Directory.Exists(CQ.Api.AppDirectory + @"Export"))
+            {
+                Directory.CreateDirectory(CQ.Api.AppDirectory + @"Export");
+            }
+
+            using (FileStream fs = File.OpenWrite(CQ.Api.AppDirectory + $@"Export\{stuID}CourseTable.xls"))
             {
                 excelBook.Write(fs);
             }

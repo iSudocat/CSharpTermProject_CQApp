@@ -154,7 +154,6 @@
   <ItemGroup>
     <Compile Include="CommandControl\ClassSchedule\AddCourseScheduleToDB.cs" />
     <Compile Include="CommandControl\ClassSchedule\DownloadCourseTable.cs" />
-    <Compile Include="CommandControl\ClassSchedule\FunctionMenu.cs" />
     <Compile Include="CommandControl\ClassSchedule\QueryCourseTable.cs" />
     <Compile Include="CommandControl\ClassSchedule\QueryFunction.cs" />
     <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
@@ -163,8 +162,14 @@
     <Compile Include="CommandControl\GitHubWatcher\QueryRepositoryGroup.cs" />
     <Compile Include="CommandControl\GitHubWatcher\SubscribeRepositoryGroup.cs" />
     <Compile Include="CommandControl\GitHubWatcher\UnsubscribeGroup.cs" />
+    <Compile Include="CommandControl\Menu\GitMenu.cs" />
+    <Compile Include="CommandControl\Menu\AttMenu.cs" />
+    <Compile Include="CommandControl\Menu\CourseMenu.cs" />
+    <Compile Include="CommandControl\Menu\ScoreMenu.cs" />
+    <Compile Include="CommandControl\Menu\SchMenu.cs" />
+    <Compile Include="CommandControl\Menu\EasMenu.cs" />
+    <Compile Include="CommandControl\Menu\MainMenu.cs" />
     <Compile Include="CommandControl\Notification\AddAttention.cs" />
-    <Compile Include="CommandControl\Notification\AttentionHelp.cs" />
     <Compile Include="CommandControl\Notification\GetAllAttention.cs" />
     <Compile Include="CommandControl\Notification\RemoveAttention.cs" />
     <Compile Include="CommandControl\Notification\UpdateAttention.cs" />
@@ -186,7 +191,6 @@
     <Compile Include="CommandControl\SchedulerControl\DelWeeklyScheduleFromDB.cs" />
     <Compile Include="CommandControl\SchedulerControl\GetSchedulesFromDB.cs" />
     <Compile Include="CommandControl\SchedulerControl\GetWeeklySchedulesFromDB.cs" />
-    <Compile Include="CommandControl\SchedulerControl\ScheduleCommand.cs" />
     <Compile Include="CommandControl\SchedulerControl\SetScheduleToDB.cs" />
     <Compile Include="CommandControl\SchedulerControl\SetWeeklyScheduleToDB.cs" />
     <Compile Include="CommandRouter\CommandRouter.cs" />

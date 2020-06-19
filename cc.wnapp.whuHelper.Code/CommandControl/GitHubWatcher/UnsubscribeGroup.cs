@@ -32,7 +32,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                         repository = match.Groups["repository"].Value;
                     }
 
-                    var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository && p.Type == "群组绑定");
+                    var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository && p.Type == "群组绑定" && p.GroupQQ == fromGroup);
                     if (query == null)
                     {
                         Reply("抱歉，该群尚未绑定该仓库！");

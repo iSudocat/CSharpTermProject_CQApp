@@ -23,7 +23,10 @@ namespace Eas
         public string Note { get; set; }
         public override string ToString()
         {
-            return $"{LessonNum} {LessonName} {LessonType} {LearninType} {TeachingCollege} {Teacher} {Specialty} {Credit} {LessonHours} {Time}\n";
+            string temp = "";
+            temp += $"{LessonName}\n" +
+                $"{Time}";
+            return temp;
         }
 
         [Required]

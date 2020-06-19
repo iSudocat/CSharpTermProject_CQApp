@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CosOperation;
+using CourseFunction;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.ClassSchedule
 {
@@ -18,6 +19,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ClassSchedule
                 student = context.Students.Where(s => s.QQ == fromQQ).FirstOrDefault();
             }
 
+            CourseTableExport.ExportExcel(student.StuID);
             string downloadUrl = "";
             downloadUrl = CosOp.UploadFile($"{student.StuID}CourseTable.xlsx", CQ.Api.AppDirectory + $@"Export\{student.StuID}CourseTable.xlsx");
             CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "请前往下面网址下载Excel课程表：\n" + downloadUrl);

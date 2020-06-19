@@ -106,6 +106,11 @@ namespace CourseFunction
                 }
             }
             
+            if (!Directory.Exists(CQ.Api.AppDirectory + @"Export"))
+            {
+                Directory.CreateDirectory(CQ.Api.AppDirectory + @"Export");
+            }
+
             using (FileStream fs = File.OpenWrite(CQ.Api.AppDirectory + $@"Export\{stuID}CourseTable.xlsx"))
             {
                 excelBook.Write(fs);

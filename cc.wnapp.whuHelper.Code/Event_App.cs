@@ -101,7 +101,6 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         private void RegisterCommand()
         {
-            
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群周日程", typeof(AddWeeklyScheduleToDB));
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群日程", typeof(DelScheduleFromDB));

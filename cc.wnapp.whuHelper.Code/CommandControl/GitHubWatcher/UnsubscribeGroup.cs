@@ -3,17 +3,22 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using GithubWatcher.Models;
 using GithubWatcher.OAuthService;
+using Native.Sdk.Cqp.Enum;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
 {
-    /// <summary>
-    /// 取消绑定Git仓库
-    /// 命令格式：解绑仓库#仓库名称#
-    /// </summary>
-    public class Unsubscribe : PrivateMsgEventControl
+    class UnsubscribeGroup:GroupMsgEventControl
     {
         public override int HandleImpl()
         {
+            // 首先判断是群主或管理员
+            var memberType = CQ.Api.GetGroupMemberInfo(Convert.ToInt64(fromGroup), Convert.ToInt64(fromQQ)).MemberType;
+            if (!(memberType == QQGroupMemberType.Creator || memberType == QQGroupMemberType.Manage))
+            {
+                Reply("您不是群主或管理员，没有权限进行仓库操作！");
+                return 0;
+            }
+
             string pattern = @"解绑仓库#(?<repository>[\S]+)#";
             MatchCollection matches = Regex.Matches(message, pattern, RegexOptions.IgnoreCase);
 
@@ -27,10 +32,10 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                         repository = match.Groups["repository"].Value;
                     }
 
-                    var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository);
+                    var query = context.RepositorySubscriptions.FirstOrDefault(p => p.QQ == fromQQ && p.RepositoryName == repository && p.Type == "群组绑定");
                     if (query == null)
                     {
-                        Reply("抱歉，您尚未绑定该仓库！");
+                        Reply("抱歉，该群尚未绑定该仓库！");
                     }
                     else
                     {
@@ -41,7 +46,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                         githubConnector.DeleteWebhook(githubBinding.AccessToken, query.WebhookId, repository);  // 删除webhook
                         context.RepositorySubscriptions.Remove(query);  // 数据库中删除记录
                         context.SaveChanges();
-                        Reply("您已与仓库" + repository + "取消绑定！");
+                        Reply("仓库" + repository + "已与该群取消绑定！");
                     }
                 }
             }

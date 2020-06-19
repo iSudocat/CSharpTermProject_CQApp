@@ -159,6 +159,9 @@
     <Compile Include="CommandControl\EducationalAdministrationSystem\BindEasAccount.cs" />
     <Compile Include="CommandControl\EducationalAdministrationSystem\UpdateScoreDB.cs" />
     <Compile Include="CommandControl\EducationalAdministrationSystem\UpdateCourseDB.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\QueryRepositoryGroup.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\SubscribeRepositoryGroup.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\UnsubscribeGroup.cs" />
     <Compile Include="CommandControl\Notification\AddAttention.cs" />
     <Compile Include="CommandControl\Notification\AttentionHelp.cs" />
     <Compile Include="CommandControl\Notification\GetAllAttention.cs" />
@@ -169,9 +172,9 @@
     <Compile Include="CommandControl\GitHubWatcher\ConnectGithub.cs" />
     <Compile Include="CommandControl\GitHubWatcher\DisconnectGithub.cs" />
     <Compile Include="CommandControl\GitHubWatcher\QueryAuthorisedGithubAccount.cs" />
-    <Compile Include="CommandControl\GitHubWatcher\QueryRepository.cs" />
-    <Compile Include="CommandControl\GitHubWatcher\SubscribeRepository.cs" />
-    <Compile Include="CommandControl\GitHubWatcher\Unsubscribe.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\QueryRepositoryPrivate.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\SubscribeRepositoryPrivate.cs" />
+    <Compile Include="CommandControl\GitHubWatcher\UnsubscribePrivate.cs" />
     <Compile Include="CommandControl\MsgEventControl.cs" />
     <Compile Include="CommandControl\Notification\SendAttentionMsg.cs" />
     <Compile Include="CommandControl\PrivateMsgEventControl.cs" />

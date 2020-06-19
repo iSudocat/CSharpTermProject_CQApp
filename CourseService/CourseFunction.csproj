@@ -93,9 +93,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseDownload.cs" />
     <Compile Include="CourseService.cs" />
     <Compile Include="CourseTableExport.cs" />
     <Compile Include="CourseTime.cs" />
+    <Compile Include="CQ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,6 +109,10 @@
     <ProjectReference Include="..\EducationalAdministrationSystem\EducationalAdministrationSystem.csproj">
       <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
       <Name>EducationalAdministrationSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
+      <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
+      <Name>Native.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

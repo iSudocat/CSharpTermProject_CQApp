@@ -106,7 +106,7 @@ namespace CourseFunction
                 }
             }
             
-            using (FileStream fs = File.OpenWrite(@"C:\Users\Administrator\Desktop\CourseTable.xlsx"))
+            using (FileStream fs = File.OpenWrite(CQ.Api.AppDirectory + $@"Export\{stuID}CourseTable.xlsx"))
             {
                 excelBook.Write(fs);
             }

@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandControl\ClassSchedule\AddCourseScheduleToDB.cs" />
+    <Compile Include="CommandControl\ClassSchedule\DownloadCourseTable.cs" />
     <Compile Include="CommandControl\ClassSchedule\FunctionMenu.cs" />
     <Compile Include="CommandControl\ClassSchedule\QueryCourseTable.cs" />
     <Compile Include="CommandControl\ClassSchedule\QueryFunction.cs" />

@@ -39,6 +39,8 @@ namespace cc.wnapp.whuHelper.Code
             GithubWatcher.Shared.CQ.Log = e.CQLog;
             CosOperation.CQ.Api = e.CQApi;
             CosOperation.CQ.Log = e.CQLog;
+            CourseFunction.CQ.Api = e.CQApi;
+            CourseFunction.CQ.Log = e.CQLog;
             #endregion
 
             try
@@ -127,10 +129,12 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新课程", typeof(UpdateCourseDB));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新成绩", typeof(UpdateScoreDB));
 
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTable));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "展示课程表", typeof(QueryCourseTableByWeekTable));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询", typeof(QueryFunction));                // 按..查询
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程", typeof(AddCourseScheduleToDB));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "下载课程表", typeof(DownloadCourseTable));
+
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepository));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有仓库", typeof(QueryRepository));

@@ -115,7 +115,14 @@ namespace GithubWatcher.Controllers
                 }
                 catch(Exception e)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "错误：" + e.Message + "，请联系管理员QQ：2426837192！");
+                    if (e.Message.Contains("基础连接已经关闭: 发送时发生错误"))
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您的访问过于频繁，请稍后再试！"); 
+                    }
+                    else
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "错误：" + e.Message + "请联系管理员QQ：2426837192！");
+                    }
                     return BadRequest(e.Message);
                 }
             }

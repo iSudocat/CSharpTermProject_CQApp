@@ -147,6 +147,10 @@
       <Project>{bf3c91d0-65c7-40a2-bc0c-4cc59c7b3ea4}</Project>
       <Name>ComputeScore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CosOperation\CosOperation.csproj">
+      <Project>{ed842ffc-6d7c-429a-b48b-4d88738ec2bc}</Project>
+      <Name>CosOperation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CourseService\CourseFunction.csproj">
       <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
       <Name>CourseFunction</Name>

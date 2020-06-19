@@ -15,12 +15,19 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Notification
             try
             {
                 AttentionService attentionService = new AttentionService();
-                List<Attention> attList = attentionService.QueryAll();
-                String attListInMessage = "";
+                List<Attention> attList = attentionService.Query(fromQQ,"","");
+                if (attList.Count == 0) 
+                {
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "【查询成功】\n当前没有关注记录");
+                    return 0;
+                }
+                String attListInMessage = "关注点：\n";
                 foreach (Attention att in attList)
                 {
-                    attListInMessage += "关注点：" + att.AttentionPoint + "\t群号：" + att.Group + "\n";
+                    String groupName=CQ.Api.GetGroupInfo(Convert.ToInt64(att.Group)).Name;
+                    attListInMessage += att.AttentionPoint + "\t群：" + groupName+"("+att.Group + ")\n";
                 }
+                attListInMessage=attListInMessage.Substring(0, attListInMessage.Length - 2);
                 CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), attListInMessage);
             }
             catch (Exception e)

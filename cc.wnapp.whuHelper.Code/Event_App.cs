@@ -31,14 +31,14 @@ namespace cc.wnapp.whuHelper.Code
             #region 传出CQApi与CQLog供外部调用
             CQ.Api = e.CQApi;
             CQ.Log = e.CQLog;
-            Common.CommandRouter = new CommandRouter.CommandRouter();
-
             Eas.CQ.Api = e.CQApi;
             Eas.CQ.Log = e.CQLog;
             Schedule.CQ.Api = e.CQApi;
             Schedule.CQ.Log = e.CQLog;
             GithubWatcher.Shared.CQ.Api = e.CQApi;
             GithubWatcher.Shared.CQ.Log = e.CQLog;
+            CosOperation.CQ.Api = e.CQApi;
+            CosOperation.CQ.Log = e.CQLog;
             #endregion
 
             try
@@ -83,6 +83,8 @@ namespace cc.wnapp.whuHelper.Code
                 PsrTh.Start();
                 #endregion
 
+
+                Common.CommandRouter = new CommandRouter.CommandRouter();
                 RegisterCommand();
 
                 e.CQLog.InfoSuccess("初始化", "插件初始化成功。");
@@ -135,8 +137,6 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询仓库", typeof(QueryRepository));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑仓库", typeof(Unsubscribe));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定Github账户", typeof(ConnectGithub));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定github账户", typeof(ConnectGithub));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定GITHUB账户", typeof(ConnectGithub));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有Github账户", typeof(QueryAuthorisedGithubAccount));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询Github账户", typeof(QueryAuthorisedGithubAccount));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑Github账户", typeof(DisconnectGithub));

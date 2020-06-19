@@ -115,7 +115,7 @@ namespace GithubWatcher.Controllers
                 }
                 catch(Exception e)
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "错误：" + e.Message);
+                    CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "错误：" + e.Message + "，请联系管理员QQ：2426837192！");
                     return BadRequest(e.Message);
                 }
             }

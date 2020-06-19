@@ -29,7 +29,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                     var query = context.GithubBindings.FirstOrDefault(p => p.QQ == fromQQ && p.GithubUserName == account);
                     if (query == null)
                     {
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您尚未绑定该Github账户！");
+                        Reply("抱歉，您尚未绑定该Github账户！");
                     }
                     else
                     {
@@ -50,17 +50,17 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                         }
 
                         context.SaveChanges();
-                        CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您已与Github账户" + account + "取消绑定！");
+                        Reply("您已与Github账户" + account + "取消绑定！");
                     }
                 }
             }
             else if (matches.Count == 0)
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "您想要与取消绑定哪个Github账户呢？可以输入“查询Github账户”查看您已绑定的Github账户！然后您可以通过输入“解绑Github账户#账户名称#”与Github账户取消绑定哦！");
+                Reply("您想要与取消绑定哪个Github账户呢？可以输入“查询Github账户”查看您已绑定的Github账户！然后您可以通过输入“解绑Github账户#账户名称#”与Github账户取消绑定哦！");
             }
             else
             {
-                CQ.Api.SendPrivateMessage(Convert.ToInt64(fromQQ), "抱歉，您一次只能够与一个Github账户取消绑定！输入“解绑Github账户#账户名称#”与Github账户取消绑定！");
+                Reply("抱歉，您一次只能够与一个Github账户取消绑定！输入“解绑Github账户#账户名称#”与Github账户取消绑定！");
             }
 
             return 0;

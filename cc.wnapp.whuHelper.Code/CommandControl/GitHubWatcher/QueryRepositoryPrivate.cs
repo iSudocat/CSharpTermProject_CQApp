@@ -7,7 +7,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
     /// <summary>
     /// 查询Git仓库
     /// </summary>
-    public class QueryRepository : PrivateMsgEventControl
+    public class QueryRepositoryPrivate : PrivateMsgEventControl
     {
         public override int HandleImpl()
         {
@@ -27,7 +27,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                 foreach (var subscription in query)
                 {
                     i++;
-                    message = message + $"\n{i}. " + subscription.RepositoryName;
+                    message = message + $"\n{i}. " + subscription.RepositoryName + "  " + subscription.Type;
                 }
                 Reply(message);
             }

@@ -20,6 +20,9 @@ namespace GithubWatcher.Models
         public string WebhookId { get; set; }
         [Required]
         public string WebhookName { get; set; }
+        [Required]
+        public string Type { get; set; }
+        public string GroupQQ { get; set; }
         
 
         public override string ToString()

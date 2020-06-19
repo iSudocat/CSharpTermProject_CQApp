@@ -73,7 +73,7 @@ namespace cc.wnapp.whuHelper.Code
                 #endregion
 
                 #region 启动GithubWatcher Web服务
-                var githubWatcherUrl = "http://localhost:44395/";   // run commend: ngrok http -host-header=localhost 44395
+                var githubWatcherUrl = "http://localhost:44395/";   // run commend: ngrok http -host-header=localhost 44395     120.77.154.219:330
                 WebApp.Start<Startup>(url: githubWatcherUrl);
                 
                 #endregion
@@ -105,7 +105,6 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         private void RegisterCommand()
         {
-            
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群周日程", typeof(AddWeeklyScheduleToDB));
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群日程", typeof(DelScheduleFromDB));
@@ -136,14 +135,18 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "下载课程表", typeof(DownloadCourseTable));
 
 
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepository));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有仓库", typeof(QueryRepository));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询仓库", typeof(QueryRepository));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑仓库", typeof(Unsubscribe));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepositoryPrivate));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有仓库", typeof(QueryRepositoryPrivate));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询仓库", typeof(QueryRepositoryPrivate));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑仓库", typeof(UnsubscribePrivate));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定Github账户", typeof(ConnectGithub));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "所有Github账户", typeof(QueryAuthorisedGithubAccount));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询Github账户", typeof(QueryAuthorisedGithubAccount));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "解绑Github账户", typeof(DisconnectGithub));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepositoryGroup));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.Contains, "所有仓库", typeof(QueryRepositoryGroup));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.Contains, "查询仓库", typeof(QueryRepositoryGroup));
+            Common.CommandRouter.Add(EventType.GroupMessage, MatchType.Contains, "解绑仓库", typeof(UnsubscribeGroup));
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "计算成绩", typeof(CommandControl.ScoreProcess.ComputeScore));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询成绩", typeof(CommandControl.ScoreProcess.QueryScore));

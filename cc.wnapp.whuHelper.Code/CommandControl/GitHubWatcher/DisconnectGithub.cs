@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using GithubWatcher.Models;
+using GithubWatcher.OAuthService;
 
 namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
 {
@@ -45,6 +46,9 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                             var subscription = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == repository.Repository);
                             if (subscription != null)
                             {
+                                var githubConnector = new GithubConnector();
+                                githubConnector.DeleteWebhook(query.AccessToken, subscription.WebhookId, repository.Repository);  // 删除webhook
+
                                 context.RepositorySubscriptions.Remove(subscription);
                             }
                         }

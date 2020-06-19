@@ -10,7 +10,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
     /// 绑定Git仓库
     /// 命令格式：绑定仓库#仓库名称#
     /// </summary>
-    public class SubscribeRepository : PrivateMsgEventControl
+    public class SubscribeRepositoryPrivate : PrivateMsgEventControl
     {
         public override int HandleImpl()
         {
@@ -51,7 +51,6 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                             return 0;
                         }
 
-
                         var subscription =
                             context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == repository);
                         if (subscription == null) //确保表中不存在此项记录
@@ -81,6 +80,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                             newSubscription.RepositoryName = repository;
                             newSubscription.WebhookId = webhookInfo.Id;
                             newSubscription.WebhookName = webhookInfo.Name;
+                            newSubscription.Type = "私人绑定";
 
                             context.RepositorySubscriptions.Add(newSubscription);
                             context.SaveChanges();
@@ -89,9 +89,9 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                         }
                         else
                         {
-                            if(subscription.QQ==fromQQ)
+                            if (subscription.QQ == fromQQ) 
                             {
-                                Reply("您已绑定此仓库！");
+                                Reply("您已绑定此仓库，目前暂不支持同时进行私人绑定和群组绑定！");
                             }
                             else
                             {

@@ -190,9 +190,16 @@ namespace GithubWatcher.Controllers
 
                 var user = context.RepositorySubscriptions.FirstOrDefault(s => s.RepositoryName == payload.Repository.FullName);
 
-                if(user!=null)
+                if (user != null) 
                 {
-                    CQ.Api.SendPrivateMessage(Convert.ToInt64(user.QQ), msg);
+                    if (user.Type == "私人绑定")
+                    {
+                        CQ.Api.SendPrivateMessage(Convert.ToInt64(user.QQ), msg);
+                    }
+                    else if (user.Type == "群组绑定") 
+                    {
+                        CQ.Api.SendGroupMessage(Convert.ToInt64(user.GroupQQ), msg);
+                    }
                 }
 
                 return Ok(msg);

@@ -18,7 +18,7 @@ using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using Native.Sdk.Cqp.Model;
 using Tools;
-
+using AttentionSpace;
 
 namespace cc.wnapp.whuHelper.UI
 {
@@ -35,11 +35,11 @@ namespace cc.wnapp.whuHelper.UI
         }
         
         private void Form1_Load(object sender, EventArgs e)
-        {
-
+        {   
             tab1Init();
             tab2Init();
             tab3Init();
+            tab4Init();
         }
 
         private void tab1Init()
@@ -114,6 +114,18 @@ namespace cc.wnapp.whuHelper.UI
                 comboBoxYear.DataSource = Year;
                 comboBoxTerm.DataSource = Term;
             }
+        }
+
+		private void tab4Init() 
+        {
+            type_comboBox.SelectedIndex = 0;
+            AttentionService attentionService = new AttentionService();
+            String listener = attentionService.Listeners.First().Listener.ToString();
+            bindingSource_attention.DataSource = attentionService.Query(listener,"","");
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+            attentionDataGridView.DataSource = bindingSource_attention;
+            allAttentionUserDataGridView.DataSource = bindingSource_attentionUser;
+            bindingSource_attentionUser.ResetBindings(true);
         }
 
         private void tb_QQ_TextChanged(object sender, EventArgs e)
@@ -296,6 +308,7 @@ namespace cc.wnapp.whuHelper.UI
         {
             return dataGridView_StuList.CurrentRow.Cells[1].Value.ToString();
         }
+
         private void queryButton_Click(object sender, EventArgs e)
         {
             //QueryAllCourses();
@@ -440,7 +453,10 @@ namespace cc.wnapp.whuHelper.UI
                 if (AllScoredataGridView.CurrentRow != null)
                 {
                     String Department = EasOP.GetCollege(tb_StuID.Text);
-                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department)
+                    if (AllScoredataGridView.Rows[i].Cells["Column7"].Value.ToString() == Department
+                        &&
+                        (AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业选修"
+                        || AllScoredataGridView.Rows[i].Cells["Column2"].Value.ToString() == "专业教育选修"))
                         AllScoredataGridView.Rows[i].Cells[0].Value = "True";
                     else
                         AllScoredataGridView.Rows[i].Cells[0].Value = "False";
@@ -484,7 +500,6 @@ namespace cc.wnapp.whuHelper.UI
             return GetSelect;
         }
 		
-		
 		private void ExportButton_Click(object sender, EventArgs e)
         {
             Student student = bindingSource_StudentDB.Current as Student;
@@ -526,7 +541,73 @@ namespace cc.wnapp.whuHelper.UI
             bindingSource_StuScore.ResetBindings(false);
         }
 
+        private void search_attention_buttom_Click(object sender, EventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            int index = type_comboBox.SelectedIndex;
+            String searchText = textBox1.Text;
+            String currentListener;
+            if (allAttentionUserDataGridView.CurrentRow != null)
+            {
+                currentListener = allAttentionUserDataGridView.CurrentRow.Cells[0].Value.ToString();
+            }
+            else 
+            {
+                currentListener = attentionService.Listeners.First().ToString();
+            }
+            switch (index) 
+            {
+                case 0:
+                    if (searchText == "")
+                    {
+                        bindingSource_attention.DataSource = attentionService.Query(currentListener, "", "");
+                    }
+                    else 
+                    {
+                        bindingSource_attention.DataSource = attentionService.Query(searchText, "", "");
+                    }
+                    break;
+                case 1:
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, "", searchText);
+                    break;
+                case 2:
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, searchText, "");
+                    break;
+                default:
+                    bindingSource_attention.DataSource = attentionService.Query(currentListener, "", "");
+                    break;
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+        }
 
+        private void remove_attention_buttom_Click(object sender, EventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            if (attentionDataGridView.CurrentRow != null)
+            {
+                String listener = attentionDataGridView.CurrentRow.Cells[0].Value.ToString();
+                String group = attentionDataGridView.CurrentRow.Cells[1].Value.ToString();
+                String attention = attentionDataGridView.CurrentRow.Cells[2].Value.ToString();
+                attentionService.Remove(listener, attention, group);
+                search_attention_buttom_Click(sender, e);
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+        }
+
+        private void allAttentionUserDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            AttentionService attentionService = new AttentionService();
+            if (allAttentionUserDataGridView.CurrentRow != null) 
+            {
+                
+                String listener = allAttentionUserDataGridView.CurrentRow.Cells[0].Value.ToString();
+                bindingSource_attention.DataSource = attentionService.Query(listener, "", "");
+            }
+            bindingSource_attentionUser.ResetBindings(true);
+            bindingSource_attentionUser.DataSource = attentionService.Listeners;
+        }
 
         //测试时使用
         //private void courseDataGridView_SelectionChanged(object sender, EventArgs e)

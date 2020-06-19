@@ -204,9 +204,9 @@
       <Project>{82c08346-1866-427c-a7ae-0be41852c11d}</Project>
       <Name>Attention</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Calendar\Schedule.csproj">
-      <Project>{de02fb93-da23-4d69-8ce7-85ffb929b901}</Project>
-      <Name>Schedule</Name>
+    <ProjectReference Include="..\CosOperation\CosOperation.csproj">
+      <Project>{ed842ffc-6d7c-429a-b48b-4d88738ec2bc}</Project>
+      <Name>CosOperation</Name>
     </ProjectReference>
     <ProjectReference Include="..\CourseService\CourseFunction.csproj">
       <Project>{545676bf-2459-453c-a3a5-042df3e943b4}</Project>
@@ -227,6 +227,10 @@
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
       <Name>Native.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedule\Schedule.csproj">
+      <Project>{de02fb93-da23-4d69-8ce7-85ffb929b901}</Project>
+      <Name>Schedule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tools\Tools.csproj">
       <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>

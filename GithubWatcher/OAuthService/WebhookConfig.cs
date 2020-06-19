@@ -13,7 +13,8 @@ namespace GithubWatcher.OAuthService
         public string InsecureSsl { get; set; }
         public WebhookConfig()
         {
-            Url = "http://3fa164385d3d.ngrok.io/api/GithubWatcher";
+            var oauthConfig = OAuthConfigService.GetOAuthConfig();
+            Url = oauthConfig.WebhookUrl;
             ContentType = "json";
             InsecureSsl = "0";
         }

@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF3C91D0-65C7-40A2-BC0C-4CC59C7B3EA4}</ProjectGuid>
+    <ProjectGuid>{ED842FFC-6D7C-429A-B48B-4D88738EC2BC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ComputeScore</RootNamespace>
-    <AssemblyName>ComputeScore</AssemblyName>
+    <RootNamespace>CosOperation</RootNamespace>
+    <AssemblyName>CosOperation</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,6 +55,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="COSXML, Version=5.4.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tencent.QCloud.Cos.Sdk.5.4.11\lib\netstandard2.0\COSXML.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,20 +68,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LevenshteinDistance.cs" />
-    <Compile Include="miniScore.cs" />
-    <Compile Include="GPAInfo.cs" />
-    <Compile Include="ScoreService.cs" />
+    <Compile Include="CosOp.cs" />
+    <Compile Include="CQ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EducationalAdministrationSystem\EducationalAdministrationSystem.csproj">
-      <Project>{707d635b-4512-4fd0-abdf-d786687ce655}</Project>
-      <Name>EducationalAdministrationSystem</Name>
+    <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
+      <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
+      <Name>Native.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{0ca93eb9-4e25-46c6-94d2-0f97137a1606}</Project>
+      <Name>Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

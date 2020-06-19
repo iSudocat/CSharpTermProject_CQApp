@@ -25,18 +25,21 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
             if (StuID != "")
             {
                 List<Score> Slist = EasOP.GetScores(StuID);
+                List<Score> SlistTemp = EasOP.GetScores(StuID);//用于查询单科使用
                 GPAInfo StuGPA;
                 int isIlegal = 0;
                 bool flag = false;
                 string msg = message.Replace(" ", "");     //去除空格
                 string str;
-                str = padRightEx("课程名", 30) + padRightEx("学分", 6) + padRightEx("成绩", 6) + "\n";
+                str = padRightEx("课程名", 8) + padRightEx("学分", 6) + padRightEx("成绩", 6) + "\n";
+                //str = string.Format("{0,30}", "课程名") + string.Format("{0,6}", "学分") + string.Format("{0,6}", "成绩") + "\n";
                 //无额外操作，直接返回总成绩
                 if (msg == "查询成绩")
                 {
                     foreach (Score temp in Slist)
                     {
-                        str += padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
+                        //str += string.Format("{0,30}", temp.LessonName) + string.Format("{0,6}", temp.Credit) + string.Format("{0,6}", temp.Mark) + "\n";
+                        str += padRightEx(temp.LessonName, 36) + "\n" + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
                         /* str.Append(padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6));
                          str.Append(Environment.NewLine);*/
                     }
@@ -58,10 +61,10 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                             string msgtemp = msgprocess[i];
                             if (regexAny.IsMatch(msgtemp) && (isCourse == 0 || isCourseFlag))//处理操作中有课程名，若为课程名，则其他去除公选的操作不考虑
                             {
-                                Score temp = ScoreService.onlyThisCourse(Slist, msgtemp);
-                                if (temp != null)
+                                List<Score> temp = ScoreService.onlyThisCourse(SlistTemp, msgtemp);
+                                if (temp.Count != 0)
                                 {
-                                    SlistCourse.Add(temp);
+                                    SlistCourse.AddRange(temp);
                                     isCourseFlag = true;
                                     isCourse++;
                                     continue;
@@ -118,7 +121,8 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess
                             Slist = SlistCourse;
                         foreach (Score temp in Slist)
                         {
-                            str += padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
+                            //str += string.Format("{0,30}", temp.LessonName) + string.Format("{0,6}", temp.Credit) + string.Format("{0,6}", temp.Mark) + "\n";
+                            str += padRightEx(temp.LessonName, 36) + "\n" + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6) + "\n";
                             /*str.Append(padRightEx(temp.LessonName, 30) + padRightEx(temp.Credit, 6) + padRightEx(temp.Mark, 6));
                             str.Append(Environment.NewLine);*/
                         }

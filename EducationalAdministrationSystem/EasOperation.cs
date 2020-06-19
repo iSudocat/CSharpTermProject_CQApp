@@ -192,11 +192,13 @@ namespace Eas
         }
 
 
+
         /// <summary>
         /// 更新指定学生的成绩信息 失败将抛出异常
         /// </summary>
         /// <param name="StuQQ">学生QQ</param>
-        public static void UpdateScore(string StuQQ)
+        /// <returns>新成绩列表</returns>
+        public static List<Score> UpdateScore(string StuQQ)
         {
             QQ BotQQ = CQ.Api.GetLoginQQ();
             string AppDirectory = CQ.Api.AppDirectory;
@@ -222,8 +224,12 @@ namespace Eas
             {
                 if (jwxt.TryLogin() == true)
                 {
-                    EasGetScore jwscore = new EasGetScore();
-                    jwscore.GetScore(jwxt);
+                    EasGetNewScore jwscore = new EasGetNewScore();
+                    return jwscore.GetNewScore(jwxt);
+                }
+                else
+                {
+                    return new List<Score>();   //空列表
                 }
             }
             catch (Exception ex)

@@ -7,7 +7,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ClassSchedule
     {
         /// <summary>
         /// 导入课程提醒
-        /// 命令格式：导入课程
+        /// 命令格式：导入课程提醒
         /// </summary>
         public override int HandleImpl()
         {

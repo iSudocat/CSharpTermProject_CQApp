@@ -12,6 +12,7 @@ using cc.wnapp.whuHelper.Code.CommandControl.SchedulerControl;
 using cc.wnapp.whuHelper.Code.CommandRouter;
 using Tools;
 using cc.wnapp.whuHelper.Code.CommandControl.ScoreProcess;
+using cc.wnapp.whuHelper.Code.CommandControl.Menu;
 
 namespace cc.wnapp.whuHelper.Code
 {
@@ -105,6 +106,14 @@ namespace cc.wnapp.whuHelper.Code
         /// </summary>
         private void RegisterCommand()
         {
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "武大助手", typeof(MainMenu));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "教务菜单", typeof(EasMenu));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "日程菜单", typeof(SchMenu));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "课程菜单", typeof(CourseMenu));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "成绩菜单", typeof(ScoreMenu));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "关注菜单", typeof(AttMenu));
+            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "Git菜单", typeof(GitMenu));
+
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群日程", typeof(AddScheduleToDB));
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "添加群周日程", typeof(AddWeeklyScheduleToDB));
             Common.CommandRouter.Add(EventType.GroupMessage, MatchType.StartsWith, "删除群日程", typeof(DelScheduleFromDB));
@@ -122,17 +131,16 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "修改周日程", typeof(SetWeeklyScheduleToDB));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "查看日程", typeof(GetSchedulesFromDB));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "查看周日程", typeof(GetWeeklySchedulesFromDB));
-            Common.CommandRouter.Add(EventType.GroupMessage | EventType.PrivateMessage, MatchType.StartsWith, "日程模块", typeof(ScheduleCommand));
+            
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "绑定教务系统", typeof(BindEasAccount));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新课程", typeof(UpdateCourseDB));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新成绩", typeof(UpdateScoreDB));
 
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "展示课程表", typeof(QueryCourseTableByWeekTable));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "展示课表", typeof(QueryCourseTableByWeekTable));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询", typeof(QueryFunction));                // 按..查询
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程", typeof(AddCourseScheduleToDB));
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "下载课程表", typeof(DownloadCourseTable));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程提醒", typeof(AddCourseScheduleToDB));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "下载课表", typeof(DownloadCourseTable));
 
 
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "绑定仓库", typeof(SubscribeRepositoryPrivate));
@@ -172,7 +180,6 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询监听", typeof(GetAllAttention));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查找监听", typeof(GetAllAttention));
 
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "关注点帮助", typeof(AttentionHelp));
             
             
         }

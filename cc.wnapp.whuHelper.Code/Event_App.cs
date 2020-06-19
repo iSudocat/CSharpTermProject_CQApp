@@ -125,7 +125,7 @@ namespace cc.wnapp.whuHelper.Code
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新课程", typeof(UpdateCourseDB));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "更新成绩", typeof(UpdateScoreDB));
 
-            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTable));
+            Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表", typeof(QueryCourseTableByWeekTable));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "课程表菜单", typeof(FunctionMenu));
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.Contains, "查询", typeof(QueryFunction));                // 按..查询
             Common.CommandRouter.Add(EventType.PrivateMessage, MatchType.StartsWith, "导入课程", typeof(AddCourseScheduleToDB));

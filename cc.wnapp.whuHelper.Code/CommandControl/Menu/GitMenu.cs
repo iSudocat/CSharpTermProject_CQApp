@@ -17,11 +17,11 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Menu
                 "[CQ:emoji,id=128310]查询Github账户\n" +
                 "[CQ:emoji,id=128310]解绑Github账户#[账户名]#\n" +
                 "[CQ:emoji,id=128310]绑定仓库#[仓库名]#\n" +
-                "[CQ:emoji,id=128310]查询仓库#[仓库名]#\n" +
+                "[CQ:emoji,id=128310]查询仓库\n" +
                 "[CQ:emoji,id=128310]解绑仓库#[仓库名]#\n" +
                 "－群聊命令(管理可用)－\n" +
                 "[CQ:emoji,id=128310]绑定仓库#[仓库名]#\n" +
-                "[CQ:emoji,id=128310]查询仓库#[仓库名]#\n" +
+                "[CQ:emoji,id=128310]查询仓库\n" +
                 "[CQ:emoji,id=128310]解绑仓库#[仓库名]#\n" +
                 "[CQ:emoji,id=10024]      Whu Helper       [CQ:emoji,id=10024]";
             Reply(re);

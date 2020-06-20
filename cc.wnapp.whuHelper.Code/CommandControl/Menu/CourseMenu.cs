@@ -15,6 +15,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.Menu
                 "－－－ 私聊命令 －－－\n" +
                 "[CQ:emoji,id=128310]展示课表\n" +
                 "[CQ:emoji,id=128310]下载课表\n" +
+                "[CQ:emoji,id=128310]导入课程提醒\n" +
                 "[CQ:emoji,id=128310]按课头号查询|查询内容\n" +
                 "[CQ:emoji,id=128310]按课程名查询|查询内容\n" +
                 "[CQ:emoji,id=128310]按学分查询|查询内容\n" +

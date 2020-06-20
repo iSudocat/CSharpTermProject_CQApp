@@ -19,6 +19,7 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.ClassSchedule
                 student = context.Students.Where(s => s.QQ == fromQQ).FirstOrDefault();
             }
 
+            CourseTableExport.ExportExcel(student.StuID);
             string downloadUrl = "";
             CourseTableExport.ExportExcel(student.StuID);
             downloadUrl = CosOp.UploadFile($"{student.StuID}CourseTable.xls", CQ.Api.AppDirectory + $@"Export\{student.StuID}CourseTable.xls");

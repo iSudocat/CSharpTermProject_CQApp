@@ -1,9 +1,9 @@
 # CQ机器人插件：武大助手（WhuHelper）
-![GitHub top language](https://img.shields.io/github/languages/top/i***REMOVED***/CSharpTermProject_CQApp?color=00a03e)
-![GitHub](https://img.shields.io/github/license/i***REMOVED***/CSharpTermProject_CQApp)
-![GitHub repo size](https://img.shields.io/github/repo-size/i***REMOVED***/CSharpTermProject_CQApp)
-![GitHub contributors](https://img.shields.io/github/contributors/i***REMOVED***/CSharpTermProject_CQApp?color=ffb549)
-![GitHub last commit](https://img.shields.io/github/last-commit/i***REMOVED***/CSharpTermProject_CQApp?color=ff585d)
+![GitHub top language](https://img.shields.io/github/languages/top/iSudocat/CSharpTermProject_CQApp?color=00a03e)
+![GitHub](https://img.shields.io/github/license/iSudocat/CSharpTermProject_CQApp)
+![GitHub repo size](https://img.shields.io/github/repo-size/iSudocat/CSharpTermProject_CQApp)
+![GitHub contributors](https://img.shields.io/github/contributors/iSudocat/CSharpTermProject_CQApp?color=ffb549)
+![GitHub last commit](https://img.shields.io/github/last-commit/iSudocat/CSharpTermProject_CQApp?color=ff585d)
 
 ## 系统环境
 * Windows 7 / Windows Server 2012 或更高版本
@@ -24,12 +24,20 @@
 * [点击查看](Build.md)
 
 ## 使用提示
-1. 本插件使用SQLite数据库，所有数据库文件将在启用插件进行初始化时自动下载（路径位于 CQ根目录\data\app\cc.wnapp.whuHelper）。
-2. 本插件所需的所有dll文件也将在启用插件进行初始化时自动下载（路径位于 CQ根目录）。
-3. 当插件出现数据库相关错误时，除尝试修改数据库外，您也可尝试自行重置数据库（插件设置菜单 - 重置xx数据库）[**警告**：重置数据库将丢失现有数据库的所有数据]。
+1. 本插件使用SQLite数据库，在原始设计中，所有数据库文件将在启用插件进行初始化时自动下载（存储路径位于 CQ根目录\data\app\cc.wnapp.whuHelper）。
+ * 出于安全考虑，下载链接已经移除。如果您需要此功能，需要自行配置下载链接。
+ * 相关文件存放在仓库的[Important]Dependent Files文件夹中。
+2. 在原始设计中，本插件所需的所有dll文件也将在启用插件进行初始化时自动下载（存储路径位于 CQ根目录）。
+ * 出于安全考虑，下载链接已经移除。如果您需要此功能，需要自行配置下载链接。
+ * 相关文件存放在仓库的[Important]Dependent Files文件夹中。
+3. 当插件出现数据库相关错误时，除尝试修改数据库外，您也可尝试自行重置数据库（点击插件设置菜单 - 重置xx数据库）[**警告**：重置数据库将丢失现有数据库的所有数据]。
 4. 教务系统登录所需的验证码识别，打码平台接入[超人代码](http://www.chaorendama.com/)，您需要自行注册该平台，并修改插件中的平台账户信息才可正常使用。
-5. 如需使用Git监工功能，您需要自行在GitHub创建第三方访问程序，并根据实际情况修改代码中的OAuth配置信息和配置Git数据库中的链接信息。
-6. 本插件为期末大作业，开发者们忙于赶DDL（危），难免仍存有部分bug，还请包涵。
+ * 出于安全考虑，代码中的这些原始信息已经移除。
+5. 如需使用Git监工功能，您需要自行在GitHub创建第三方访问程序，并根据实际情况修改代码中的OAuth配置信息，并对Git数据库中的链接信息进行配置。
+ * 出于安全考虑，代码中和数据库中的这些原始信息已经移除。
+6. 课程表导出下载功能使用了腾讯云对象存储COS，如需使用，您必须自行注册腾讯云相关服务，并根据自身情况配置该部分信息。
+ * 出于安全考虑，代码中和数据库中的这些原始信息已经移除。
+7. 本插件为期末大作业，开发者们忙于赶DDL（危），难免仍存有部分bug，还请包涵。
 
 ## 注意事项
 1. **禁止**在酷Q社区擅自发布本应用。

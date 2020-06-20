@@ -122,6 +122,10 @@ namespace cc.wnapp.whuHelper.Code.CommandControl.GitHubWatcher
                 {
                     Reply("这可能是由于该仓库中已存在相同Webhook造成的，请手动删除后重试！");
                 }
+                else if (e.Message.Contains("基础连接已经关闭: 发送时发生错误")) 
+                {
+                    Reply("您的访问过于频繁，请稍后再试！");
+                }    
 
                 return 0;
             }
